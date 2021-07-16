@@ -1,0 +1,15 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-swipeguide-dev-125345-authRole",
+      "UnauthRoleArn": "arn:aws:iam::914346668773:role/amplify-swipeguide-dev-125345-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::914346668773:role/amplify-swipeguide-dev-125345-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-swipeguide-dev-125345-deployment",
+      "UnauthRoleName": "amplify-swipeguide-dev-125345-unauthRole",
+      "StackName": "amplify-swipeguide-dev-125345",
+      "StackId": "arn:aws:cloudformation:us-east-1:914346668773:stack/amplify-swipeguide-dev-125345/6332c660-e656-11eb-b636-0ad6df532df1",
+      "AmplifyAppId": "d4szxr11wkcnn"
+    }
+  }
+}
