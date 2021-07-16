@@ -1,3 +1,16 @@
+type Student @model {
+  name: String!
+}
+
+type Talk @model {
+  id: ID!
+  clientId: ID
+  name: String!
+  description: String!
+  speakerName: String!
+  speakerBio: String!
+}
+
 type Operator @model {
   name: String!
 }

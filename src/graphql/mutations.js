@@ -1,6 +1,96 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const createStudent = /* GraphQL */ `
+  mutation CreateStudent(
+    $input: CreateStudentInput!
+    $condition: ModelStudentConditionInput
+  ) {
+    createStudent(input: $input, condition: $condition) {
+      id
+      name
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateStudent = /* GraphQL */ `
+  mutation UpdateStudent(
+    $input: UpdateStudentInput!
+    $condition: ModelStudentConditionInput
+  ) {
+    updateStudent(input: $input, condition: $condition) {
+      id
+      name
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteStudent = /* GraphQL */ `
+  mutation DeleteStudent(
+    $input: DeleteStudentInput!
+    $condition: ModelStudentConditionInput
+  ) {
+    deleteStudent(input: $input, condition: $condition) {
+      id
+      name
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createTalk = /* GraphQL */ `
+  mutation CreateTalk(
+    $input: CreateTalkInput!
+    $condition: ModelTalkConditionInput
+  ) {
+    createTalk(input: $input, condition: $condition) {
+      id
+      clientId
+      name
+      description
+      speakerName
+      speakerBio
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateTalk = /* GraphQL */ `
+  mutation UpdateTalk(
+    $input: UpdateTalkInput!
+    $condition: ModelTalkConditionInput
+  ) {
+    updateTalk(input: $input, condition: $condition) {
+      id
+      clientId
+      name
+      description
+      speakerName
+      speakerBio
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteTalk = /* GraphQL */ `
+  mutation DeleteTalk(
+    $input: DeleteTalkInput!
+    $condition: ModelTalkConditionInput
+  ) {
+    deleteTalk(input: $input, condition: $condition) {
+      id
+      clientId
+      name
+      description
+      speakerName
+      speakerBio
+      createdAt
+      updatedAt
+    }
+  }
+`;
 export const createOperator = /* GraphQL */ `
   mutation CreateOperator(
     $input: CreateOperatorInput!

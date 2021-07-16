@@ -1,6 +1,68 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const getStudent = /* GraphQL */ `
+  query GetStudent($id: ID!) {
+    getStudent(id: $id) {
+      id
+      name
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listStudents = /* GraphQL */ `
+  query ListStudents(
+    $filter: ModelStudentFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listStudents(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        name
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const getTalk = /* GraphQL */ `
+  query GetTalk($id: ID!) {
+    getTalk(id: $id) {
+      id
+      clientId
+      name
+      description
+      speakerName
+      speakerBio
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listTalks = /* GraphQL */ `
+  query ListTalks(
+    $filter: ModelTalkFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listTalks(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        clientId
+        name
+        description
+        speakerName
+        speakerBio
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
 export const getOperator = /* GraphQL */ `
   query GetOperator($id: ID!) {
     getOperator(id: $id) {
