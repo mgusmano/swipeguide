@@ -1,6 +1,33 @@
-type Student @model {
-  name: String!
+type Operator @model {
+  id: ID!
+  operatorName: String!
+  certifications: [Certification!]! @connection(keyName: "byOperator", fields: ["id"])
 }
+
+type Skill @model {
+  id: ID!
+  skillName: String!
+  certifications: [Certification] @connection(keyName: "bySkill", fields: ["id"])
+}
+
+type Score @model {
+  p: String!
+  s: String!
+}
+
+type Certification @model @key(name: "byOperator", fields: ["operatorID"])  @key(name: "bySkill", fields: ["skillID"]){
+  id: ID!
+  operatorID: ID!
+  operator: Operator @connection(fields: ["operatorID"])
+  skillID: ID!
+  skill: Skill @connection(fields: ["skillID"])
+  meta: String!
+  data: String!
+}
+
+
+
+
 
 type Talk @model {
   id: ID!
@@ -11,9 +38,7 @@ type Talk @model {
   speakerBio: String!
 }
 
-type Operator @model {
-  name: String!
-}
+
 
 type Blog @model {
   id: ID!

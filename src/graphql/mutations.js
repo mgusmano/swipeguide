@@ -1,40 +1,223 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const createStudent = /* GraphQL */ `
-  mutation CreateStudent(
-    $input: CreateStudentInput!
-    $condition: ModelStudentConditionInput
+export const createOperator = /* GraphQL */ `
+  mutation CreateOperator(
+    $input: CreateOperatorInput!
+    $condition: ModelOperatorConditionInput
   ) {
-    createStudent(input: $input, condition: $condition) {
+    createOperator(input: $input, condition: $condition) {
       id
-      name
+      operatorName
+      certifications {
+        nextToken
+      }
       createdAt
       updatedAt
     }
   }
 `;
-export const updateStudent = /* GraphQL */ `
-  mutation UpdateStudent(
-    $input: UpdateStudentInput!
-    $condition: ModelStudentConditionInput
+export const updateOperator = /* GraphQL */ `
+  mutation UpdateOperator(
+    $input: UpdateOperatorInput!
+    $condition: ModelOperatorConditionInput
   ) {
-    updateStudent(input: $input, condition: $condition) {
+    updateOperator(input: $input, condition: $condition) {
       id
-      name
+      operatorName
+      certifications {
+        nextToken
+      }
       createdAt
       updatedAt
     }
   }
 `;
-export const deleteStudent = /* GraphQL */ `
-  mutation DeleteStudent(
-    $input: DeleteStudentInput!
-    $condition: ModelStudentConditionInput
+export const deleteOperator = /* GraphQL */ `
+  mutation DeleteOperator(
+    $input: DeleteOperatorInput!
+    $condition: ModelOperatorConditionInput
   ) {
-    deleteStudent(input: $input, condition: $condition) {
+    deleteOperator(input: $input, condition: $condition) {
       id
-      name
+      operatorName
+      certifications {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createSkill = /* GraphQL */ `
+  mutation CreateSkill(
+    $input: CreateSkillInput!
+    $condition: ModelSkillConditionInput
+  ) {
+    createSkill(input: $input, condition: $condition) {
+      id
+      skillName
+      certifications {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateSkill = /* GraphQL */ `
+  mutation UpdateSkill(
+    $input: UpdateSkillInput!
+    $condition: ModelSkillConditionInput
+  ) {
+    updateSkill(input: $input, condition: $condition) {
+      id
+      skillName
+      certifications {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteSkill = /* GraphQL */ `
+  mutation DeleteSkill(
+    $input: DeleteSkillInput!
+    $condition: ModelSkillConditionInput
+  ) {
+    deleteSkill(input: $input, condition: $condition) {
+      id
+      skillName
+      certifications {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createScore = /* GraphQL */ `
+  mutation CreateScore(
+    $input: CreateScoreInput!
+    $condition: ModelScoreConditionInput
+  ) {
+    createScore(input: $input, condition: $condition) {
+      id
+      p
+      s
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateScore = /* GraphQL */ `
+  mutation UpdateScore(
+    $input: UpdateScoreInput!
+    $condition: ModelScoreConditionInput
+  ) {
+    updateScore(input: $input, condition: $condition) {
+      id
+      p
+      s
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteScore = /* GraphQL */ `
+  mutation DeleteScore(
+    $input: DeleteScoreInput!
+    $condition: ModelScoreConditionInput
+  ) {
+    deleteScore(input: $input, condition: $condition) {
+      id
+      p
+      s
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createCertification = /* GraphQL */ `
+  mutation CreateCertification(
+    $input: CreateCertificationInput!
+    $condition: ModelCertificationConditionInput
+  ) {
+    createCertification(input: $input, condition: $condition) {
+      id
+      operatorID
+      operator {
+        id
+        operatorName
+        createdAt
+        updatedAt
+      }
+      skillID
+      skill {
+        id
+        skillName
+        createdAt
+        updatedAt
+      }
+      meta
+      data
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateCertification = /* GraphQL */ `
+  mutation UpdateCertification(
+    $input: UpdateCertificationInput!
+    $condition: ModelCertificationConditionInput
+  ) {
+    updateCertification(input: $input, condition: $condition) {
+      id
+      operatorID
+      operator {
+        id
+        operatorName
+        createdAt
+        updatedAt
+      }
+      skillID
+      skill {
+        id
+        skillName
+        createdAt
+        updatedAt
+      }
+      meta
+      data
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteCertification = /* GraphQL */ `
+  mutation DeleteCertification(
+    $input: DeleteCertificationInput!
+    $condition: ModelCertificationConditionInput
+  ) {
+    deleteCertification(input: $input, condition: $condition) {
+      id
+      operatorID
+      operator {
+        id
+        operatorName
+        createdAt
+        updatedAt
+      }
+      skillID
+      skill {
+        id
+        skillName
+        createdAt
+        updatedAt
+      }
+      meta
+      data
       createdAt
       updatedAt
     }
@@ -86,45 +269,6 @@ export const deleteTalk = /* GraphQL */ `
       description
       speakerName
       speakerBio
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const createOperator = /* GraphQL */ `
-  mutation CreateOperator(
-    $input: CreateOperatorInput!
-    $condition: ModelOperatorConditionInput
-  ) {
-    createOperator(input: $input, condition: $condition) {
-      id
-      name
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const updateOperator = /* GraphQL */ `
-  mutation UpdateOperator(
-    $input: UpdateOperatorInput!
-    $condition: ModelOperatorConditionInput
-  ) {
-    updateOperator(input: $input, condition: $condition) {
-      id
-      name
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const deleteOperator = /* GraphQL */ `
-  mutation DeleteOperator(
-    $input: DeleteOperatorInput!
-    $condition: ModelOperatorConditionInput
-  ) {
-    deleteOperator(input: $input, condition: $condition) {
-      id
-      name
       createdAt
       updatedAt
     }

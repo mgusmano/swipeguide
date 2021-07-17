@@ -1,26 +1,133 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const getStudent = /* GraphQL */ `
-  query GetStudent($id: ID!) {
-    getStudent(id: $id) {
+export const getOperator = /* GraphQL */ `
+  query GetOperator($id: ID!) {
+    getOperator(id: $id) {
       id
-      name
+      operatorName
+      certifications {
+        nextToken
+      }
       createdAt
       updatedAt
     }
   }
 `;
-export const listStudents = /* GraphQL */ `
-  query ListStudents(
-    $filter: ModelStudentFilterInput
+export const listOperators = /* GraphQL */ `
+  query ListOperators(
+    $filter: ModelOperatorFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    listStudents(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    listOperators(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        name
+        operatorName
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const getSkill = /* GraphQL */ `
+  query GetSkill($id: ID!) {
+    getSkill(id: $id) {
+      id
+      skillName
+      certifications {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listSkills = /* GraphQL */ `
+  query ListSkills(
+    $filter: ModelSkillFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listSkills(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        skillName
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const getScore = /* GraphQL */ `
+  query GetScore($id: ID!) {
+    getScore(id: $id) {
+      id
+      p
+      s
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listScores = /* GraphQL */ `
+  query ListScores(
+    $filter: ModelScoreFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listScores(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        p
+        s
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const getCertification = /* GraphQL */ `
+  query GetCertification($id: ID!) {
+    getCertification(id: $id) {
+      id
+      operatorID
+      operator {
+        id
+        operatorName
+        createdAt
+        updatedAt
+      }
+      skillID
+      skill {
+        id
+        skillName
+        createdAt
+        updatedAt
+      }
+      meta
+      data
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listCertifications = /* GraphQL */ `
+  query ListCertifications(
+    $filter: ModelCertificationFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listCertifications(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        operatorID
+        skillID
+        meta
+        data
         createdAt
         updatedAt
       }
@@ -56,33 +163,6 @@ export const listTalks = /* GraphQL */ `
         description
         speakerName
         speakerBio
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
-  }
-`;
-export const getOperator = /* GraphQL */ `
-  query GetOperator($id: ID!) {
-    getOperator(id: $id) {
-      id
-      name
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const listOperators = /* GraphQL */ `
-  query ListOperators(
-    $filter: ModelOperatorFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listOperators(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        name
         createdAt
         updatedAt
       }
