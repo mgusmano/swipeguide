@@ -1,0 +1,35 @@
+{
+  "paths": [
+    {
+      "name": "/misc",
+      "lambdaFunction": "miscfunction",
+      "privacy": {
+        "open": true
+      },
+      "policyResourceName": "/misc"
+    }
+  ],
+  "resourceName": "miscapi",
+  "apiName": "miscapi",
+  "functionArns": [
+    {
+      "lambdaFunction": "miscfunction"
+    }
+  ],
+  "privacy": {
+    "auth": 0,
+    "unauth": 0,
+    "authRoleName": "amplify-swipeguide-dev-125345-authRole",
+    "unAuthRoleName": "amplify-swipeguide-dev-125345-unauthRole"
+  },
+  "dependsOn": [
+    {
+      "category": "function",
+      "resourceName": "miscfunction",
+      "attributes": [
+        "Name",
+        "Arn"
+      ]
+    }
+  ]
+}

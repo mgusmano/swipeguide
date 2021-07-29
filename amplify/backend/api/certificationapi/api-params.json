@@ -1,0 +1,35 @@
+{
+  "paths": [
+    {
+      "name": "/certification",
+      "lambdaFunction": "certificationfunction",
+      "privacy": {
+        "open": true
+      },
+      "policyResourceName": "/certification"
+    }
+  ],
+  "resourceName": "certificationapi",
+  "apiName": "certificationapi",
+  "functionArns": [
+    {
+      "lambdaFunction": "certificationfunction"
+    }
+  ],
+  "privacy": {
+    "auth": 0,
+    "unauth": 0,
+    "authRoleName": "amplify-swipeguide-dev-125345-authRole",
+    "unAuthRoleName": "amplify-swipeguide-dev-125345-unauthRole"
+  },
+  "dependsOn": [
+    {
+      "category": "function",
+      "resourceName": "certificationfunction",
+      "attributes": [
+        "Name",
+        "Arn"
+      ]
+    }
+  ]
+}

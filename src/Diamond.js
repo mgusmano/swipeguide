@@ -91,7 +91,7 @@ export const Diamond = ({meta, data, boxSize, padding}) => {
         <PathX key={s} d={d} style={{fill:color,stroke:color,fillOpacity:f,strokeWidth:pieStrokeWidth}}/>
       )
     })}
-    {status === 'started' & meta.trainer === true &&
+    {status === 'started' && meta.trainer === true &&
     <>
     <TextX textAnchor="middle" alignmentBaseline="middle" fontSize={(130-padding)} fill="black" x ={'0'} y ={(diamondSize/4)} width={(44-padding)} height={(40-padding)} strokeWidth="1" stroke="black">T</TextX>
     <CircleX cx={0} cy={0} r={radius} stroke="blue" strokeWidth={(40-padding)} fillOpacity="0.0" />

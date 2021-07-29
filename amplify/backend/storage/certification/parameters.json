@@ -1,0 +1,7 @@
+{
+    "tableName": "certification",
+    "partitionKeyName": "id",
+    "partitionKeyType": "N",
+    "sortKeyName": "certificationName",
+    "sortKeyType": "S"
+}

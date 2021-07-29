@@ -5,12 +5,8 @@ import { API, graphqlOperation } from 'aws-amplify'
 
 import { listSkills } from './graphql/queries'
 import { createSkill, updateSkill, deleteSkill } from './graphql/mutations'
-
 import { listOperators} from './graphql/queries'
 import { createOperator, deleteOperator } from './graphql/mutations'
-
-//import { createScore } from './graphql/mutations'
-
 import { listCertifications} from './graphql/queries'
 import { createCertification, deleteCertification, updateCertification } from './graphql/mutations'
 
@@ -43,28 +39,36 @@ function App() {
     const result = await API.graphql(graphqlOperation(listCertifications))
     setTimeout(function(){
 
-      setCertifications(result.data.listCertifications.items)
+      setCertifications(result.data.listCertifications.items.sort((a, b) => (a.id > b.id) ? 1 : -1))
     }, 100);
 
   }
 
   async function getDataSkills() {
     const skillData = await API.graphql(graphqlOperation(listSkills))
-    //console.log(skillData.data.listSkills.items)
-    setSkills(skillData.data.listSkills.items)
+    var o = skillData.data.listSkills.items.sort((a, b) => (a.id > b.id) ? 1 : -1)
+    console.log(o)
+    setSkills(o)
+  }
+
+  async function getDataOperators() {
+    const operatorData = await API.graphql(graphqlOperation(listOperators,{type: 'id',sortDirection: 'ASC'}))
+    var o = operatorData.data.listOperators.items.sort((a, b) => (a.id > b.id) ? 1 : -1)
+    console.log(o)
+    setOperators(o)
   }
 
   async function onClickAddAllSkills() {
     var skillsX = [
       {skillID:10,line:'S',skillName:'Core Loading'},
       {skillID:20,line:'S',skillName:'Phase Paper Insertion (VW)'},
-      // {skillID:30,line:'S',skillName:'Lead Wire Setting'},
-      // {skillID:40,line:'S',skillName:'Neutral Tube Insertion'},
-      // {skillID:50,line:'S',skillName:'Neutral Crimp'},
-      // {skillID:60,line:'S',skillName:'Pre-Lacing'},
-      // {skillID:70,line:'S',skillName:'Lacing'},
-      // {skillID:80,line:'S',skillName:'Lead Terminal Crimp'},
-      // {skillID:90,line:'S',skillName:'Lead Wire Forming'},
+      {skillID:30,line:'S',skillName:'Lead Wire Setting'},
+      {skillID:40,line:'S',skillName:'Neutral Tube Insertion'},
+      {skillID:50,line:'S',skillName:'Neutral Crimp'},
+      {skillID:60,line:'S',skillName:'Pre-Lacing'},
+      {skillID:70,line:'S',skillName:'Lacing'},
+      {skillID:80,line:'S',skillName:'Lead Terminal Crimp'},
+      {skillID:90,line:'S',skillName:'Lead Wire Forming'},
     ]
     Promise.allSettled(skillsX.map((item, i) => {
       return API.graphql(graphqlOperation(createSkill, { input: {id: i+1, skillName: item.skillName} }))
@@ -89,23 +93,20 @@ function App() {
     })
   }
 
-  async function getDataOperators() {
-    const operatorData = await API.graphql(graphqlOperation(listOperators))
-    setOperators(operatorData.data.listOperators.items)
-  }
+
 
   async function onClickAddAllOperators() {
     var operatorsX = [
       {operatorID:1,operatorName:'Joe Smith'},
       {operatorID:2,operatorName:'Marc Ester'},
-      // {operatorID:3,operatorName:'Ted White'},
-      // {operatorID:4,operatorName:'Betty Green'},
-      // {operatorID:5,operatorName:'Bob Jones'},
-      // {operatorID:6,operatorName:'Frank Davis'},
-      // {operatorID:7,operatorName:'Jane Johnson'},
-      // {operatorID:8,operatorName:'Mary Bird'},
-      // {operatorID:9,operatorName:'Zoya Lee'},
-      // {operatorID:10,operatorName:'Joe Adams'},
+      {operatorID:3,operatorName:'Ted White'},
+      {operatorID:4,operatorName:'Betty Green'},
+      {operatorID:5,operatorName:'Bob Jones'},
+      {operatorID:6,operatorName:'Frank Davis'},
+      {operatorID:7,operatorName:'Jane Johnson'},
+      {operatorID:8,operatorName:'Mary Bird'},
+      {operatorID:9,operatorName:'Zoya Lee'},
+      //{operatorID:10,operatorName:'Joe Adams'},
     ]
     Promise.allSettled(operatorsX.map((item,i) => {
       //var i = id+1;setId(i);
@@ -123,7 +124,6 @@ function App() {
   async function onClickDeleteAllOperators() {
     Promise.allSettled(operators.map(item => {
       return API.graphql(graphqlOperation(deleteOperator, { input: {id: item.id } } ))
-      //return API.graphql(graphqlOperation(deleteOperator, { input: {id: item.id} } ))
     }))
     .then((results) => {
       results.forEach((result) => {
@@ -137,15 +137,36 @@ function App() {
   async function onClickAddAllCertifications() {
     console.log('onClickAddAllCertifications')
     var id = 1;
+    skills.map((skill, s) => {
+      console.log(skill)
+      operators.map(async (operator,o) => {
+        var c = {
+          id: id,
+          skillID: skill.id,
+          operatorID: operator.id,
+          meta: `{"status":"not started","start":"${greendate}","trainer":"false"}`,
+          data: `[{"p":25,"s":0},{"p":50,"s":0},{"p":75,"s":0},{"p":100,"s":0}]`
+        }
+        id++;
+        console.log('create',c)
+        await API.graphql(graphqlOperation(createCertification, { input: c }))
+      })
+    })
+    getDataCertifications()
+
+
+
+return
 
     Promise.allSettled(skills.map((skill, s) => {
+      console.log(skill)
       return operators.map((operator,o) => {
         var c = {
           id: id,
           skillID: skill.id,
           operatorID: operator.id,
-          meta: `{"status":"started","start":"${greendate}","trainer":"true"}`,
-          data: `[{"p":25,"s":1},{"p":50,"s":1},{"p":75,"s":1},{"p":100,"s":1}]`
+          meta: `{"status":"not started","start":"${greendate}","trainer":"false"}`,
+          data: `[{"p":25,"s":0},{"p":50,"s":0},{"p":75,"s":0},{"p":100,"s":0}]`
         }
         id++;
         console.log('create',c)
@@ -231,8 +252,40 @@ function App() {
     console.log(certification,skill,operator)
   }
 
-  const onChangePercent = (event) => {
+  async function onChangePercent(event) {
     console.log(event.target.value);
+    var s25 = 0, s50 = 0, s75 = 0, s100 = 0;
+    switch (event.target.value) {
+      case '0':
+        break;
+      case '25':
+        s25 = 1;
+        break;
+      case '50':
+        s25 = 1;
+        s50 = 1;
+        break;
+      case '75':
+        s25 = 1;
+        s50 = 1;
+        s75 = 1;
+        break;
+      case '100':
+        s25 = 1;
+        s50 = 1;
+        s75 = 1;
+        s100 = 1;
+        break;
+      default:
+        break;
+    }
+    var c = {
+      id: "1",
+      meta: `{"status":"started","start":"${reddate}","trainer":"false"}`,
+      data: `[{"p":25,"s":${s25}},{"p":50,"s":${s50}},{"p":75,"s":${s75}},{"p":100,"s":${s100}}]`
+    }
+    await API.graphql(graphqlOperation(updateCertification, { input: c } ))
+    getDataCertifications()
   }
 
   const onChangeTrainer = (event) => {
@@ -275,15 +328,36 @@ function App() {
         <button onClick={onClickUpdateCertification}>Update Certification</button>
       </header>
 
+      <header>
+        <button
+          onClick={async () => {
+            var data = await API.get('skillsapi','/skills')
+            console.log(data)
+            //https://thaoqib2c6.execute-api.us-east-1.amazonaws.com/dev
+          }}
+        >skillsapi</button>
+      </header>
+
+      <header>
+        <button
+          onClick={async () => {
+            //var data = await API.get('miscapi','/misc')
+            var data = await API.get('todosApi','/todos')
+            console.log(data)
+            //https://thaoqib2c6.execute-api.us-east-1.amazonaws.com/dev
+          }}
+        >test an api</button>
+      </header>
+
       <Diamond meta={item.meta} data={item.data} boxSize={bandX} padding={30}/>
 
-      <div onChange={onChangePercent}>
+      {/* <div onChange={onChangePercent}>
         Percent:
         <input type="radio" value="0" name="percent" /> 0%
         <input type="radio" value="25" name="percent" /> 25%
         <input type="radio" value="75" name="percent" /> 75%
         <input type="radio" value="100" name="percent" /> 100%
-      </div>
+      </div> */}
 
       <div onChange={onChangePercent}>
         Certification:
@@ -328,7 +402,9 @@ Certifications:
               <br/>
               <Diamond meta={item.meta} data={item.data} boxSize={bandX} padding={30}/>
 
-              {/* id:{item.id} skillID:{item.skillID} operatorID:{item.operatorID}<br/> meta:{item.meta}<br/> data:{item.data} */}
+              id:{item.id} skillID:{item.skillID} operatorID:{item.operatorID}
+
+              {/* <br/> meta:{item.meta}<br/> data:{item.data} */}
 
             </div>
           )

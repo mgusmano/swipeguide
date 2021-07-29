@@ -10,6 +10,26 @@
       "StackName": "amplify-swipeguide-dev-125345",
       "StackId": "arn:aws:cloudformation:us-east-1:914346668773:stack/amplify-swipeguide-dev-125345/6332c660-e656-11eb-b636-0ad6df532df1",
       "AmplifyAppId": "d4szxr11wkcnn"
+    },
+    "categories": {
+      "function": {
+        "skillsfunction": {
+          "deploymentBucketName": "amplify-swipeguide-dev-125345-deployment",
+          "s3Key": "amplify-builds/skillsfunction-6739734c39332b535439-build.zip"
+        },
+        "miscfunction": {
+          "deploymentBucketName": "amplify-swipeguide-dev-125345-deployment",
+          "s3Key": "amplify-builds/miscfunction-7678504763526c394672-build.zip"
+        },
+        "certificationfunction": {
+          "deploymentBucketName": "amplify-swipeguide-dev-125345-deployment",
+          "s3Key": "amplify-builds/certificationfunction-68304936674472643076-build.zip"
+        },
+        "todosFunction": {
+          "deploymentBucketName": "amplify-swipeguide-dev-125345-deployment",
+          "s3Key": "amplify-builds/todosFunction-6e73652b535667396443-build.zip"
+        }
+      }
     }
   }
 }
