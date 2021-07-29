@@ -23,11 +23,11 @@
         },
         "certificationfunction": {
           "deploymentBucketName": "amplify-swipeguide-dev-125345-deployment",
-          "s3Key": "amplify-builds/certificationfunction-68304936674472643076-build.zip"
+          "s3Key": "amplify-builds/certificationfunction-4d7471784f6a58534d73-build.zip"
         },
         "todosFunction": {
           "deploymentBucketName": "amplify-swipeguide-dev-125345-deployment",
-          "s3Key": "amplify-builds/todosFunction-6e73652b535667396443-build.zip"
+          "s3Key": "amplify-builds/todosFunction-704b65696d582b30342b-build.zip"
         }
       }
     }

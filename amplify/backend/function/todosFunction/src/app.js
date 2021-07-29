@@ -48,6 +48,19 @@ const convertUrlType = (param, type) => {
  * HTTP Get method for list objects *
  ********************************/
 
+app.get('/items', function(req, res) {
+  // Add your code here
+  res.json({success: 'items get call succeed!', url: req.url});
+});
+
+app.get('/todos', function(req, res) {
+  // Add your code here
+  res.json({success: 'todos get call succeed!', url: req.url});
+});
+
+
+
+
 app.get(path + hashKeyPath, function(req, res) {
   var condition = {}
   condition[partitionKeyName] = {
