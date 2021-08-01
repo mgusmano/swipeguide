@@ -16,8 +16,6 @@ export const Toolbar = React.memo((props) => {
     })
     .catch(ex => {
       console.log(ex);
-      console.log("inside getCurrentUser catch, calling federatedSignIn");
-      //Auth.federatedSignIn({ provider: "Federate" });
     });
 
 
@@ -106,17 +104,17 @@ export const Toolbar = React.memo((props) => {
           Toggle Legend {matrixState.userName}
         </button>
 
-
+{/* 
         <button
           onClick={async () => {
             var data = await API.get('skillsapi','/skills')
             console.log(data)
             //https://thaoqib2c6.execute-api.us-east-1.amazonaws.com/dev
           }}
-        >skillsapi</button>
+        >skillsapi</button> */}
 
-        <button style={{marginLeft:'40px',width:'100px',height:'30px'}} onClick={()=>checkUser()}>check user</button>
-        <button style={{marginLeft:'0',width:'100px',height:'30px'}} onClick={()=>signOut()}>sign out</button>
+        {/* <button style={{marginLeft:'40px',width:'100px',height:'30px'}} onClick={()=>checkUser()}>check user</button>
+        <button style={{marginLeft:'0',width:'100px',height:'30px'}} onClick={()=>signOut()}>sign out</button> */}
 
 
       </div>
