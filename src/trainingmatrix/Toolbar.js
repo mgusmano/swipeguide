@@ -1,10 +1,47 @@
 import React from 'react';
 import { useMatrixState } from './state/MatrixProvider';
 import { API } from 'aws-amplify'
-
+import {Auth} from 'aws-amplify';
 
 export const Toolbar = React.memo((props) => {
   const matrixState = useMatrixState();
+
+  function checkUser() {
+    let user = Auth.currentAuthenticatedUser();
+
+    Auth.currentAuthenticatedUser()
+    .then(user => {
+      console.log(user);
+      return user;
+    })
+    .catch(ex => {
+      console.log(ex);
+      console.log("inside getCurrentUser catch, calling federatedSignIn");
+      //Auth.federatedSignIn({ provider: "Federate" });
+    });
+
+
+    //alert(user)
+  }
+
+  function signOut() {
+    //let user = Auth.currentAuthenticatedUser();
+
+    Auth.signOut()
+    .then(user => {
+      console.log(user);
+      return user;
+    })
+    .catch(ex => {
+      console.log(ex);
+      console.log("inside signOut catch, calling federatedSignIn");
+      //Auth.federatedSignIn({ provider: "Federate" });
+    });
+
+
+    //alert(user)
+  }
+
 
   const onClickSize = (e,direction) => {
     var multiplier;
@@ -77,6 +114,10 @@ export const Toolbar = React.memo((props) => {
             //https://thaoqib2c6.execute-api.us-east-1.amazonaws.com/dev
           }}
         >skillsapi</button>
+
+        <button style={{marginLeft:'40px',width:'60px',height:'30px'}} onClick={()=>checkUser()}>check user</button>
+        <button style={{marginLeft:'0',width:'60px',height:'30px'}} onClick={()=>signOut()}>sign out</button>
+
 
       </div>
     </div>
