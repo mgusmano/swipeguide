@@ -6,6 +6,7 @@ import CsvDataOperator from './CsvDataOperator';
 import CsvDataSkill from './CsvDataSkill';
 import CsvDataCertification from './CsvDataCertification';
 import './CsvData.css'
+import { withAuthenticator } from '@aws-amplify/ui-react'
 
 const CsvData = (props) => {
   const matrixState = useMatrixState();
@@ -31,4 +32,5 @@ const CsvData = (props) => {
   )
 }
 
-export default CsvData
+//export default CsvData
+export default withAuthenticator(CsvData)

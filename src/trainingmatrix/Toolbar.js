@@ -115,8 +115,8 @@ export const Toolbar = React.memo((props) => {
           }}
         >skillsapi</button>
 
-        <button style={{marginLeft:'40px',width:'60px',height:'30px'}} onClick={()=>checkUser()}>check user</button>
-        <button style={{marginLeft:'0',width:'60px',height:'30px'}} onClick={()=>signOut()}>sign out</button>
+        <button style={{marginLeft:'40px',width:'100px',height:'30px'}} onClick={()=>checkUser()}>check user</button>
+        <button style={{marginLeft:'0',width:'100px',height:'30px'}} onClick={()=>signOut()}>sign out</button>
 
 
       </div>

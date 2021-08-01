@@ -97,7 +97,6 @@ function App() {
     //alert(user)
   }
 
-
   async function getDataCertifications() {
     const result = await API.graphql(graphqlOperation(listCertifications))
     setTimeout(function(){

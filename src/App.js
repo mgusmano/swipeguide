@@ -5,7 +5,7 @@ import Header from './Header';
 import TopMenu from './TopMenu';
 
 import { Route, Switch, Redirect } from 'react-router-dom';
-import { TrainingMatrix } from './trainingmatrix/TrainingMatrix'
+import TrainingMatrix from './trainingmatrix/TrainingMatrix'
 import CsvData from './trainingmatrix/csv/CsvData'
 
 import { withAuthenticator } from '@aws-amplify/ui-react'

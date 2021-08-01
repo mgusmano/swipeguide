@@ -15,9 +15,10 @@ import { Row3Col2 } from './Row3Col2';
 import { Row3Col3 } from './Row3Col3';
 import { styles } from './styles';
 import { useResizeEvent } from './useResizeEvent';
+import { withAuthenticator } from '@aws-amplify/ui-react'
 
 //export const TrainingMatrix = React.memo(({widgetData}) => {
-export const TrainingMatrix = () => {
+const TrainingMatrix = () => {
   const matrixState = useMatrixState();
   useResizeEvent()
 
@@ -88,3 +89,5 @@ export const TrainingMatrix = () => {
     </div>
   )
 }
+
+export default withAuthenticator(TrainingMatrix)
