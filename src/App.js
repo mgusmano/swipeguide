@@ -1,502 +1,354 @@
-import React, { useEffect, useState } from 'react';
-import { Diamond } from './Diamond';
-import { getDates } from './util';
-import { API, graphqlOperation } from 'aws-amplify'
+import React, { useState } from 'react';
+import { MatrixProvider } from './trainingmatrix/state/MatrixProvider';
+import Top from './Top';
+import Header from './Header';
+import TopMenu from './TopMenu';
 
-import { listSkills } from './graphql/queries'
-import { createSkill, updateSkill, deleteSkill } from './graphql/mutations'
-import { listOperators} from './graphql/queries'
-import { createOperator, deleteOperator } from './graphql/mutations'
-import { listCertifications} from './graphql/queries'
-import { createCertification, deleteCertification, updateCertification } from './graphql/mutations'
+import { Route, Switch, Redirect } from 'react-router-dom';
+import { TrainingMatrix } from './trainingmatrix/TrainingMatrix'
+import CsvData from './trainingmatrix/csv/CsvData'
 
 import { withAuthenticator } from '@aws-amplify/ui-react'
 import {Auth} from 'aws-amplify';
-
 import { Authenticator, SignIn, SignUp, ConfirmSignUp, Greetings } from 'aws-amplify-react';
-
 // https://docs.amplify.aws/ui/customization/theming/q/framework/react
 import './App.css'
 
-const AlwaysOn = (props) => {
-    return (
-        <div>
-            <div>I am always here to show current auth state: {props.authState}</div>
-            <button onClick={() => props.onStateChange('signUp')}>Show Sign Up</button>
-        </div>
-    )
-}
+//import { BrowserRouter as Router, Redirect } from 'react-router-dom';
 
-const handleAuthStateChange = (state) => {
-  if (state === 'signedIn') {
-      /* Do something when the user has signed-in */
-  }
-}
+//import SideMenu from 'react-sidemenu';
 
-// import { AmplifyTheme } from 'aws-amplify-react-native';
+//import queryString from 'query-string'
 
-// const MySectionHeader = Object.assign({}, AmplifyTheme.sectionHeader, { background: 'orange' });
-// const MyTheme = Object.assign({}, AmplifyTheme, { sectionHeader: MySectionHeader });
+//import { AuthContext } from "./context/auth";
+//import { useAuth } from "./context/auth";
 
 
-function App() {
-  const [skills, setSkills] = useState([])
-  const [operators, setOperators] = useState([])
-  const [certifications, setCertifications] = useState([])
+//import PrivateRoute from './PrivateRoute';
+// import Login from "./pages/login/Login";
+// import Admin from "./pages/admin/Admin";
+// //import Home from './pages/home/Home';
+// import CardReport from './CardReport';
+// import Absolute from './pages/absolute/Absolute'
+// import Dynamic from './pages/dynamic/Dynamic'
 
-  const [greendate, yellowdate, reddate] = getDates();
+//import { SkillsMatrix } from './pages/matrix/SkillsMatrix'
+//import { FixedMatrix } from './pages/matrix/FixedMatrix'
 
-  var bandX=50
-  var item = {
-    skillID:10,
-    operatorID:1,
-    meta:{status:'started',start:greendate,trainer:true},
-    data:[
-      {p:25,s:1},{p:50,s:1},{p:75,s:1},{p:100,s:1}
-    ]
-  }
+// import MyAdmin from './pages/MyAdmin'
+// import CsvData from './pages/matrix/CsvData'
 
-  useEffect(() => {
-    getDataSkills()
-    getDataOperators()
-    getDataCertifications()
+// import CovidReport from './pages/covidreport/CovidReport';
 
-  },[])
+// import CovidReportPreVisit from './pages/covidreport/CovidReportPreVisit';
+// import CovidReportHealth from './pages/covidreport/CovidReportHealth';
+// //import CovidReportOnSite from './pages/covidreport/CovidReportOnSite';
+// import CovidReportPostVisit from './pages/covidreport/CovidReportPostVisit';
+// import CovidReportComply from './pages/covidreport/CovidReportComply';
+// import CovidReportDetail from './pages/covidreport/CovidReportDetail';
 
-  function checkUser() {
-    let user = Auth.currentAuthenticatedUser();
+// import Dashboard from './pages/benchmarkreport/Dashboard';
 
-    Auth.currentAuthenticatedUser()
-    .then(user => {
-      console.log(user);
-      return user;
-    })
-    .catch(ex => {
-      console.log(ex);
-      console.log("inside getCurrentUser catch, calling federatedSignIn");
-      //Auth.federatedSignIn({ provider: "Federate" });
-    });
+import Horizontal from './layout/Horizontal'
+import Vertical from './layout/Vertical'
+//import Splitter from './layout/Splitter'
+//import Separator from './layout/Separator'
+
+//import './side-menu.css'
 
 
-    //alert(user)
-  }
-
-  function signOut() {
-    //let user = Auth.currentAuthenticatedUser();
-
-    Auth.signOut()
-    .then(user => {
-      console.log(user);
-      return user;
-    })
-    .catch(ex => {
-      console.log(ex);
-      console.log("inside signOut catch, calling federatedSignIn");
-      //Auth.federatedSignIn({ provider: "Federate" });
-    });
+// var PartnerCNA = {
+//   PartnerID: 395,
+//   PartnerShort: 'CNA',
+//   PartnerName: 'CNA',
+//   PersonID: 275399,
+//   GroupID: 33582,
+//   showratings: false,
+//   ratingsources: '4' //ManagerRating
+// }
 
 
-    //alert(user)
-  }
+// var PartnerGMIsb = {
+//   PartnerID: 434,
+//   PartnerShort: 'GMIsb',
+//   PartnerName: 'General Mills',
+//   PersonID: 281326,
+//   GroupID: 33931,
+//   showratings: true,
+//   ratingsources: '1000' //SelfRating
+// }
+
+function App(props) {
+  // const [menudisplay, setMenudisplay] = useState('block');
+  // const [filterdisplay, setFilterdisplay] = useState('block');
+  // const [authTokens, setAuthTokens] = useState('');
+  // const [activemenu, setActivemenu] = useState('/cnacovid');
+  // // const [initialdashboard, setInitialDashboard] = useState(true);
+  // const [currentdashboard] = useState('PreVisit');
+
+  // const items = [];
+
+  // const location = useLocation();
+
+  // if (authTokens === '') {
+  //   switch (location.pathname) {
+  //     case '/cnasme':
+  //       items.push({label: 'Risk Control SME Report', value: '/cnasme', icon: 'fa-id-card'})
+  //       break;
+  //     case '/cnaadmin':
+  //       items.push({label: 'Risk Control SME', value: '/cnasme', icon: 'fa-id-card'})
+  //       items.push({label: 'Risk Control Skills Report', value: '/cnacard', icon: 'fa-id-card'})
+  //       items.push({label: 'Benchmark Report', value: '/cnabenchmark', icon: 'fa-balance-scale'})
+  //       break;
+  //     default:
+  //       break;
+  //   }
+  // }
+
+  // switch (authTokens) {
+
+  //   case 'mjg':
+  //     items.push({label: 'Training Matrix', value: '/trainingmatrix', icon: 'fa-clipboard'})
+  //     items.push({label: 'CNA Covid-19 Dashboard', value: '/cnacovidpremiumaudit', icon: 'fa-clipboard'})
+  //     items.push({label: 'Benchmark Report', value: '/benchmarkcna', icon: 'fa-balance-scale'})
+  //     items.push({label: 'Absolute', value: '/absolute', icon: 'fa-clipboard'})
+  //     items.push({label: 'Dynamic', value: '/dynamic', icon: 'fa-clipboard'})
+  //     items.push({label: 'Risk Control SME Remort', value: '/cardcnasme', icon: 'fa-id-card'})
+  //     break;
 
 
-  async function getDataCertifications() {
-    const result = await API.graphql(graphqlOperation(listCertifications))
-    setTimeout(function(){
+  //   case 'cnasme':
+  //     items.push({label: 'Risk Control SME Remort', value: '/cardcnasme', icon: 'fa-id-card'})
+  //     //setActivemenu('/cardcnasme')
+  //     break;
 
-      setCertifications(result.data.listCertifications.items.sort((a, b) => (a.id > b.id) ? 1 : -1))
-    }, 100);
+  //   case 'cnaadmin':
+  //     items.push({label: 'Risk Control SME Report', value: '/cardcnasme', icon: 'fa-id-card'})
+  //     items.push({label: 'Risk Control Skills Report', value: '/cardcna', icon: 'fa-id-card'})
+  //     items.push({label: 'Benchmark Report', value: '/benchmarkcna', icon: 'fa-balance-scale'})
+  //     //setActivemenu('/cardcna')
+  //     break;
 
-  }
+  //   case 'cna':
+  //     items.push({label: 'Risk Control Skills Report', value: '/cardcna', icon: 'fa-id-card'})
+  //     items.push({label: 'Benchmark Report', value: '/benchmarkcna', icon: 'fa-balance-scale'})
 
-  async function getDataSkills() {
-    const skillData = await API.graphql(graphqlOperation(listSkills))
-    var o = skillData.data.listSkills.items.sort((a, b) => (a.id > b.id) ? 1 : -1)
-    console.log(o)
-    setSkills(o)
-  }
+  //     //setActivemenu('/cardcna')
+  //     break;
 
-  async function getDataOperators() {
-    const operatorData = await API.graphql(graphqlOperation(listOperators,{type: 'id',sortDirection: 'ASC'}))
-    var o = operatorData.data.listOperators.items.sort((a, b) => (a.id > b.id) ? 1 : -1)
-    console.log(o)
-    setOperators(o)
-  }
+  //     // case 'cnacovid':
+  //     //   items.push({label: 'Covid - CNA', icon: 'fa-clipboard', expanded: true, children: [
+  //     //     {label: 'Pre-Visit Controls', value: '/covidcnaprevisit', icon: 'fa-clipboard'},
+  //     //     {label: 'Health Assessment', value: '/covidcnahealth', icon: 'fa-clipboard'},
+  //     //     {label: 'Post-Visit Controls', value: '/covidcnapostvisit', icon: 'fa-clipboard'},
+  //     //     {label: 'Consultant Compliance', value: '/covidcnacomply', icon: 'fa-clipboard'},
+  //     //   ]})
+  //     //   //setActivemenu('/covidcnaprevisit')
+  //     //   break;
 
-  async function onClickAddAllSkills() {
-    var skillsX = [
-      {skillID:10,line:'S',skillName:'Core Loading'},
-      {skillID:20,line:'S',skillName:'Phase Paper Insertion (VW)'},
-      {skillID:30,line:'S',skillName:'Lead Wire Setting'},
-      {skillID:40,line:'S',skillName:'Neutral Tube Insertion'},
-      {skillID:50,line:'S',skillName:'Neutral Crimp'},
-      {skillID:60,line:'S',skillName:'Pre-Lacing'},
-      {skillID:70,line:'S',skillName:'Lacing'},
-      {skillID:80,line:'S',skillName:'Lead Terminal Crimp'},
-      {skillID:90,line:'S',skillName:'Lead Wire Forming'},
-    ]
-    Promise.allSettled(skillsX.map((item, i) => {
-      return API.graphql(graphqlOperation(createSkill, { input: {id: i+1, skillName: item.skillName} }))
-    }))
-    .then((results) => {
-      results.forEach((result) => {
-        if (result.status !== 'fulfilled') {console.log(result)}
-      })
-      getDataSkills()
-    })
-  }
+  //   case 'cnacovid':
+  //     items.push({label: 'CNA Covid-19 Dashboard', value: '/cnacovid', icon: 'fa-clipboard'})
+  //     break;
 
-  async function onClickDeleteAllSkills() {
-    Promise.allSettled(skills.map(item => {
-      return API.graphql(graphqlOperation(deleteSkill, { input: {id: item.id} } ))
-    }))
-    .then((results) => {
-      results.forEach((result) => {
-        if (result.status !== 'fulfilled') {console.log(result)}
-      })
-      getDataSkills()
-    })
-  }
+  //   case 'cnacovidriskcontrol':
+  //     items.push({label: 'CNA Covid-19 Dashboard', value: '/cnacovidriskcontrol', icon: 'fa-clipboard'})
+  //     break;
 
+  //   case 'cnacovidclaims':
+  //     items.push({label: 'CNA Covid-19 Dashboard', value: '/cnacovidclaims', icon: 'fa-clipboard'})
+  //     break;
 
-
-  async function onClickAddAllOperators() {
-    var operatorsX = [
-      {operatorID:1,operatorName:'Joe Smith'},
-      {operatorID:2,operatorName:'Marc Ester'},
-      {operatorID:3,operatorName:'Ted White'},
-      {operatorID:4,operatorName:'Betty Green'},
-      {operatorID:5,operatorName:'Bob Jones'},
-      {operatorID:6,operatorName:'Frank Davis'},
-      {operatorID:7,operatorName:'Jane Johnson'},
-      {operatorID:8,operatorName:'Mary Bird'},
-      {operatorID:9,operatorName:'Zoya Lee'},
-      //{operatorID:10,operatorName:'Joe Adams'},
-    ]
-    Promise.allSettled(operatorsX.map((item,i) => {
-      //var i = id+1;setId(i);
-      return API.graphql(graphqlOperation(createOperator, { input: {id: i+1, operatorName: item.operatorName} }))
-    }))
-    .then((results) => {
-      results.forEach((result) => {
-        if (result.status !== 'fulfilled') {console.log(result)}
-      })
-      getDataOperators()
-    })
-  }
-
-
-  async function onClickDeleteAllOperators() {
-    Promise.allSettled(operators.map(item => {
-      return API.graphql(graphqlOperation(deleteOperator, { input: {id: item.id } } ))
-    }))
-    .then((results) => {
-      results.forEach((result) => {
-        if (result.status !== 'fulfilled') {console.log(result)}
-      })
-      getDataOperators()
-    })
-  }
-
-
-  async function onClickAddAllCertifications() {
-    console.log('onClickAddAllCertifications')
-    var id = 1;
-    skills.map((skill, s) => {
-      console.log(skill)
-      operators.map(async (operator,o) => {
-        var c = {
-          id: id,
-          skillID: skill.id,
-          operatorID: operator.id,
-          meta: `{"status":"not started","start":"${greendate}","trainer":"false"}`,
-          data: `[{"p":25,"s":0},{"p":50,"s":0},{"p":75,"s":0},{"p":100,"s":0}]`
-        }
-        id++;
-        console.log('create',c)
-        await API.graphql(graphqlOperation(createCertification, { input: c }))
-      })
-    })
-    getDataCertifications()
+  //   case 'cnacovidpremiumaudit':
+  //     items.push({label: 'CNA Covid-19 Dashboard', value: '/cnacovidpremiumaudit', icon: 'fa-clipboard'})
+  //     break;
 
 
 
-return
+  //   case 'cnacovidadmin':
 
-    Promise.allSettled(skills.map((skill, s) => {
-      console.log(skill)
-      return operators.map((operator,o) => {
-        var c = {
-          id: id,
-          skillID: skill.id,
-          operatorID: operator.id,
-          meta: `{"status":"not started","start":"${greendate}","trainer":"false"}`,
-          data: `[{"p":25,"s":0},{"p":50,"s":0},{"p":75,"s":0},{"p":100,"s":0}]`
-        }
-        id++;
-        console.log('create',c)
-        return API.graphql(graphqlOperation(createCertification, { input: c }))
-      })
-    }))
-    .then((results) => {
-      console.log('in then of onClickAddAllCertifications')
-      console.log(results)
-      results.forEach((result) => {
-        if (result.status !== 'fulfilled') {console.log(result)}
-      })
-      getDataCertifications()
-    })
-    .catch((error) => {
-      console.log(error)
-    })
-  }
-
-  async function onClickDeleteAllCertifications() {
-    Promise.allSettled(certifications.map(item => {
-      return API.graphql(graphqlOperation(deleteCertification, { input: {id: item.id } } ))
-      //return API.graphql(graphqlOperation(deleteOperator, { input: {id: item.id} } ))
-    }))
-    .then((results) => {
-      results.forEach((result) => {
-        if (result.status !== 'fulfilled') {console.log(result)}
-      })
-      getDataCertifications()
-    })
-    .catch((error) => {
-      console.log(error)
-    })
-  }
+  //     items.push({label: 'CNA Covid-19 Dashboard', value: '/cnacovid', icon: 'fa-clipboard', children: [
+  //       {label: 'Pre-Visit Controls', value: 'PreVisit', icon: 'fa-clipboard', extras: 'currentdashboard'},
+  //       {label: 'Health Assessment', value: 'Health', icon: 'fa-clipboard', extras: 'currentdashboard'},
+  //       {label: 'Post-Visit Controls', value: 'PostVisit', icon: 'fa-clipboard', extras: 'currentdashboard'},
+  //       {label: 'Consultant Compliance', value: 'Comply', icon: 'fa-clipboard', extras: 'currentdashboard'},
+  //     ]})
 
 
 
+  //     items.push({label: 'Covid', value: '/covid', icon: 'fa-clipboard'})
+  //     items.push({label: 'Pre-Visit Site Assessment', value: '/covidcnaprevisit', icon: 'fa-clipboard'})
+  //     items.push({label: 'Health Assessment', value: '/covidcnahealth', icon: 'fa-clipboard'})
+  //     items.push({label: 'Post-Visit Controls', value: '/covidcnapostvisit', icon: 'fa-clipboard'})
+  //     items.push({label: 'Consultant Compliance', value: '/covidcnacomply', icon: 'fa-clipboard'})
+  //     items.push({label: 'Detail', value: '/covidcnadetail', icon: 'fa-clipboard'})
+  //     items.push({label: 'Absolute', value: '/absolute', icon: 'fa-clipboard'})
+  //     items.push({label: 'Dynamic', value: '/dynamic', icon: 'fa-clipboard'})
 
+  //     //setActivemenu('/covidcnaprevisit')
+  //     break;
 
+  //   case 'gmi':
+  //     items.push({label: 'Card Report - GMI', value: '/cardgmi', icon: 'fa-id-card'})
+  //     items.push({label: 'Benchmark - GMI', value: '/benchmarkgmisb', icon: 'fa-balance-scale'})
+  //     //setActivemenu('/cardgmi')
+  //     break;
+  //   default:
+  //     break;
+  // }
 
-  async function onClickCreate() {
-    console.log('click')
-    var skill = {skillName: 'Skill01'}
-    await API.graphql(graphqlOperation(createSkill, { input: skill }))
-    getDataSkills()
-  }
+  // if (authTokens !== '') {
+  //   items.push({label: 'Logout', value: '/login', icon: 'fa-sign-out'})
+  // }
 
-  async function onClickUpdate() {
-    console.log('click')
-    var skill = {id: "7e323d72-0420-40af-9f67-b625924682e6", skillName: "Marc"}
-    await API.graphql(graphqlOperation(updateSkill, { input: skill }))
-    getDataSkills()
-  }
+  // const history = useHistory();
 
-  async function onClickDelete() {
-    console.log('click')
-    var skill = {id: "ec1a0cd8-2825-419b-acae-242115d8527b"}
-    await API.graphql(graphqlOperation(deleteSkill, { input: skill } ))
-    getDataSkills()
-  }
+  // const setTokens = (data) => {
+  //   localStorage.setItem("tokens", JSON.stringify(data));
+  //   setAuthTokens(data);
+  // }
 
+  // const SendIt = (type, payload) => {
+  //   window.dispatchEvent(new CustomEvent(type,{detail:{payload:payload}}));
+  // }
 
-  async function onClickUpdateCertification() {
-    var c = {
-      id: "1",
-      meta: `{"status":"started","start":"${reddate}","trainer":"false"}`,
-      data: `[{"p":25,"s":1},{"p":50,"s":1},{"p":75,"s":1},{"p":100,"s":0}]`
+  const onMenuItemClick = (value, extras) => {
+    //console.log(extras)
+    if (extras !== undefined) {
+      //var message = extras
+      //setActivemenu(value)
+      //history.push(value);
+      //setCurrentDashboard(value)
+      //SendIt(message, value)
+      window.dispatchEvent(new CustomEvent(extras,{detail:{payload:value}}));
+
     }
-    await API.graphql(graphqlOperation(updateCertification, { input: c } ))
-    getDataCertifications()
-  }
+    //alert("You just clicked me:" + value)
+    //let history = useHistory();
 
-  async function onClickGetOneCertification() {
-    var c = await API.graphql(graphqlOperation(listCertifications,{filter: {id: {eq: "3"}}}))
-    var certification = c.data.listCertifications.items[0]
-
-    var s = await API.graphql(graphqlOperation(listSkills,{filter: {id: {eq: certification.skillID}}}))
-    var skill = s.data.listSkills.items[0]
-
-    var o = await API.graphql(graphqlOperation(listOperators,{filter: {id: {eq: certification.operatorID}}}))
-    var operator = o.data.listOperators.items[0]
-
-    console.log(certification,skill,operator)
-  }
-
-  async function onChangePercent(event) {
-    console.log(event.target.value);
-    var s25 = 0, s50 = 0, s75 = 0, s100 = 0;
-    switch (event.target.value) {
-      case '0':
-        break;
-      case '25':
-        s25 = 1;
-        break;
-      case '50':
-        s25 = 1;
-        s50 = 1;
-        break;
-      case '75':
-        s25 = 1;
-        s50 = 1;
-        s75 = 1;
-        break;
-      case '100':
-        s25 = 1;
-        s50 = 1;
-        s75 = 1;
-        s100 = 1;
-        break;
-      default:
-        break;
+    // if (value == 'Health') {
+    //   SendIt('currentdashboard', value)
+    //   //setInitialDashboard(false)
+    //   //setCurrentDashboard(value)
+    // }
+    else {
+      // setActivemenu(value)
+      // history.push(value);
     }
-    var c = {
-      id: "1",
-      meta: `{"status":"started","start":"${reddate}","trainer":"false"}`,
-      data: `[{"p":25,"s":${s25}},{"p":50,"s":${s50}},{"p":75,"s":${s75}},{"p":100,"s":${s100}}]`
-    }
-    await API.graphql(graphqlOperation(updateCertification, { input: c } ))
-    getDataCertifications()
+
+
+
   }
 
-  const onChangeTrainer = (event) => {
-    console.log(event.target.value);
+  //const { authTokens } = useAuth();
+  //console.log(authTokens)
+
+  const onMenuClick = (value) => {
+    // console.log('onMenuClick')
+    // if (menudisplay === 'block') {
+    //   setMenudisplay('none')
+    // }
+    // else {
+    //   setMenudisplay('block')
+    // }
+  }
+
+  const onFilterClick = (value) => {
+    // console.log('onFilterClick')
+    // if (filterdisplay === 'block') {
+    //   setFilterdisplay('none')
+    // }
+    // else {
+    //   setFilterdisplay('block')
+    // }
   }
 
 
-
-// const onClick = async (() => {
-//     console.log('click')
-//     var skill = {skillName: 'Skill01'}
-//     await API.graphql(graphqlOperation(CreateSkill, { input: skill }))
-//   })
+  //Risk Control
+  //Claims
+  //Premium Audit
 
   return (
-    <div style={{ textAlign: 'center' }}>
-      <header>
-        <button onClick={onClickDeleteAllSkills}>Delete All Skills</button>
-        <button onClick={onClickDeleteAllOperators}>Delete All Operators</button>
-        <button onClick={onClickDeleteAllCertifications}>Delete All Certifications</button>
-      </header>
-      <header>
-        <button onClick={onClickAddAllSkills}>Add All Skills</button>
-        <button onClick={onClickAddAllOperators}>Add All Operators</button>
-        <button onClick={onClickAddAllCertifications}>Add All Certifications</button>
-      </header>
-
-      <header>
-        <button onClick={onClickGetOneCertification}>get One Certification</button>
-      </header>
 
 
-      <header>
-        <button onClick={onClickCreate}>Create</button>
-        <button onClick={onClickUpdate}>Update</button>
-        <button onClick={onClickDelete}>Delete</button>
-      </header>
+      <MatrixProvider>
+      <Vertical>
+        <Top/>
+        <Header menuClick={onMenuClick} filterClick={onFilterClick}/>
+        <TopMenu/>
 
-      <header>
-        <button onClick={onClickUpdateCertification}>Update Certification</button>
-      </header>
+        {/* <Separator/> */}
+        <Horizontal style={{width:'100%',background:'blue'}}>
+          {/* <Menu/> */}
+          <Vertical style={{display:'none',height:'100%',background:'black',width:'0'}}>
+            <div style={{height:'50px'}}></div>
+            {/* <SideMenu
+              items={items}
+              collapse={false}
+              onMenuItemClick={(value, extras) => onMenuItemClick(value,extras)}
+              activeItem={activemenu}
+            /> */}
+          </Vertical>
+          {/* <Splitter/> */}
+          {/* <Center/> */}
 
-      <header>
-        <button
-          onClick={async () => {
-            var data = await API.get('skillsapi','/skills')
-            console.log(data)
-            //https://thaoqib2c6.execute-api.us-east-1.amazonaws.com/dev
-          }}
-        >skillsapi</button>
-      </header>
+          <div
+              style={{flex:'1',
+              border:'0px solid green',
+              background:'whitesmoke',
+              overflow:'auto',
+              width: '100%',
+              height: '100%',
+          }}>
 
-      <header>
-        <button
-          onClick={async () => {
-            //var data = await API.get('miscapi','/misc')
-            checkUser()
+          <Switch>
+            <Route exact path="/"><Redirect to="/trainingmatrix" /></Route>
+            <Route path="/trainingmatrix" default component={TrainingMatrix} />
+            <Route path="/csv" component={() => <CsvData/>} />
 
-            signOut()
+          </Switch>
 
-            var data = await API.get('todosApi','/todos')
-            console.log(data)
-            //https://thaoqib2c6.execute-api.us-east-1.amazonaws.com/dev
-          }}
-        >test an api</button>
-      </header>
-
-      <header>
-        <button onClick={async () => {signOut()}}>sign out</button>
-      </header>
-
-      <Diamond meta={item.meta} data={item.data} boxSize={bandX} padding={30}/>
-
-      <Authenticator hideDefault={true} onStateChange={handleAuthStateChange}>
-            <SignIn/>
-            <SignUp/>
-            <ConfirmSignUp/>
-            <Greetings/>
-            <AlwaysOn/>
-        </Authenticator>
-
-
-      {/* <div onChange={onChangePercent}>
-        Percent:
-        <input type="radio" value="0" name="percent" /> 0%
-        <input type="radio" value="25" name="percent" /> 25%
-        <input type="radio" value="75" name="percent" /> 75%
-        <input type="radio" value="100" name="percent" /> 100%
-      </div> */}
-
-      <div onChange={onChangePercent}>
-        Certification:
-        <input style={{marginLeft:'20px'}} type="radio" value="0" name="percent" /> Started
-        <input style={{marginLeft:'20px'}} type="radio" value="25" name="percent" /> Apprentice
-        <input style={{marginLeft:'20px'}} type="radio" value="50" name="percent" /> Beginner
-        <input style={{marginLeft:'20px'}} type="radio" value="75" name="percent" /> Intermediate
-        <input style={{marginLeft:'20px'}} type="radio" value="100" name="percent" /> Certified
-      </div>
-
-      <div onChange={onChangeTrainer}>
-        Trainer:
-        <input type="radio" value="true" name="trainer" /> true
-        <input type="radio" value="false" name="trainer" /> false
-      </div>
-
-
-
-Skills:
-      {
-        skills.map((item, index) => (
-          <div key={index}>
-            <h5>{item.id} - {item.skillName}</h5>
           </div>
-        ))
-      }
+          {/* center */}
+          {/* <Splitter/>
+          <Context/> */}
+        </Horizontal>
+        {/* <Splitter/>
+        <div>footer</div> */}
+      </Vertical>
+      </MatrixProvider>
 
-Operators:
-      {
-        operators.map((item, index) => (
-          <div key={index}>
-            <h5>{item.id} - {item.operatorName}</h5>
-          </div>
-        ))
-      }
 
-Certifications:
-      {
-        certifications.map((item, index) => {
-          return (
-            <div key={index}>
-              <br/>
-              <Diamond meta={item.meta} data={item.data} boxSize={bandX} padding={30}/>
-
-              id:{item.id} skillID:{item.skillID} operatorID:{item.operatorID}
-
-              {/* <br/> meta:{item.meta}<br/> data:{item.data} */}
-
-            </div>
-          )
-        })
-      }
-
-    </div>
   );
 }
 
 //export default App;
 export default withAuthenticator(App)
-//export default withAuthenticator(App, false, [], null, MyTheme);
+
+
+
+// {/* <span style={{xwidth:'500px',height:'100%',background:'#f1f1f1'}}>
+// <ul style={{paddingTop:'30px'}}>
+//   {/* <li><Link to="/">Home</Link></li> */}
+
+// {authTokens === 'cnasme' &&
+//   <>
+//   <li><Link to="/cardcnasme">Risk Control SME</Link></li>
+//   </>
+// }
+
+// {authTokens === 'cna' &&
+//   <>
+//   <li><Link to="/cardcna">Card CNA</Link></li>
+//   <li><Link to="/benchmarkcna">Benchmark CNA</Link></li>
+//   <li><Link to="/covidcna">Covid CNA</Link></li>
+//   </>
+// }
+// {authTokens === 'gmi' &&
+//   <>
+//   <li><Link to="/cardgmi">Card GMI</Link></li>
+//   <li><Link to="/benchmarkgmisb">Benchmark GMIsb</Link></li>
+//   </>
+// }
+//   <li><Link to="/admin">Logout</Link></li>
+// </ul>
+// </span> */}
