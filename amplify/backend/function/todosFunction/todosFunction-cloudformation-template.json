@@ -97,12 +97,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "swipeguideLambdaRole1945f47d",
+            "swipeguideLambdaRole5c6e9117",
             {
               "Fn::Join": [
                 "",
                 [
-                  "swipeguideLambdaRole1945f47d",
+                  "swipeguideLambdaRole5c6e9117",
                   "-",
                   {
                     "Ref": "env"

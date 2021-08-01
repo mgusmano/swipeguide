@@ -15,7 +15,7 @@
       "function": {
         "skillsfunction": {
           "deploymentBucketName": "amplify-swipeguide-dev-125345-deployment",
-          "s3Key": "amplify-builds/skillsfunction-6739734c39332b535439-build.zip"
+          "s3Key": "amplify-builds/skillsfunction-68496a32324949525957-build.zip"
         },
         "miscfunction": {
           "deploymentBucketName": "amplify-swipeguide-dev-125345-deployment",
@@ -27,8 +27,11 @@
         },
         "todosFunction": {
           "deploymentBucketName": "amplify-swipeguide-dev-125345-deployment",
-          "s3Key": "amplify-builds/todosFunction-704b65696d582b30342b-build.zip"
+          "s3Key": "amplify-builds/todosFunction-72533874706479784462-build.zip"
         }
+      },
+      "auth": {
+        "swipeguide609f36f6": {}
       }
     }
   }

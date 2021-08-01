@@ -6,6 +6,7 @@ export const getOperator = /* GraphQL */ `
     getOperator(id: $id) {
       id
       operatorName
+      goal
       certifications {
         nextToken
       }
@@ -24,6 +25,7 @@ export const listOperators = /* GraphQL */ `
       items {
         id
         operatorName
+        goal
         createdAt
         updatedAt
       }
@@ -36,6 +38,7 @@ export const getSkill = /* GraphQL */ `
     getSkill(id: $id) {
       id
       skillName
+      goal
       certifications {
         nextToken
       }
@@ -54,6 +57,7 @@ export const listSkills = /* GraphQL */ `
       items {
         id
         skillName
+        goal
         createdAt
         updatedAt
       }
@@ -98,6 +102,7 @@ export const getCertification = /* GraphQL */ `
       operator {
         id
         operatorName
+        goal
         createdAt
         updatedAt
       }
@@ -105,6 +110,7 @@ export const getCertification = /* GraphQL */ `
       skill {
         id
         skillName
+        goal
         createdAt
         updatedAt
       }

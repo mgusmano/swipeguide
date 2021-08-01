@@ -1,12 +1,12 @@
 {
   "paths": [
     {
-      "name": "/items",
+      "name": "/todos",
       "lambdaFunction": "todosFunction",
       "privacy": {
         "open": true
       },
-      "policyResourceName": "/items"
+      "policyResourceName": "/todos"
     }
   ],
   "resourceName": "todosApi",

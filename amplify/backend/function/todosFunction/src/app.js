@@ -11,6 +11,8 @@ let tableName = "todos";
 if(process.env.ENV && process.env.ENV !== "NONE") {
   tableName = tableName + '-' + process.env.ENV;
 }
+console.log('dynamodb',dynamodb)
+console.log('tableName',tableName)
 
 const userIdPresent = false; // TODO: update in case is required to use that definition
 const partitionKeyName = "id";
@@ -18,7 +20,7 @@ const partitionKeyType = "S";
 const sortKeyName = "";
 const sortKeyType = "";
 const hasSortKey = sortKeyName !== "";
-const path = "/items";
+const path = "/todos";
 const UNAUTH = 'UNAUTH';
 const hashKeyPath = '/:' + partitionKeyName;
 const sortKeyPath = hasSortKey ? '/:' + sortKeyName : '';
@@ -44,22 +46,21 @@ const convertUrlType = (param, type) => {
   }
 }
 
+app.get('/todos', function(req, res) {
+  var s = [
+    { id: 1, todoName: 'todo1'},
+    { id: 2, todoName: 'todo2'},
+    { id: 3, todoName: 'todo3'},
+  ]
+  console.log('hashKeyPath',hashKeyPath)
+  // Add your code here
+  //res.json({success: 'get call succeed!', url: req.url});
+  res.json(s);
+});
+
 /********************************
  * HTTP Get method for list objects *
  ********************************/
-
-app.get('/items', function(req, res) {
-  // Add your code here
-  res.json({success: 'items get call succeed!', url: req.url});
-});
-
-app.get('/todos', function(req, res) {
-  // Add your code here
-  res.json({success: 'todos get call succeed!', url: req.url});
-});
-
-
-
 
 app.get(path + hashKeyPath, function(req, res) {
   var condition = {}

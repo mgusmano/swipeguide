@@ -1,12 +1,14 @@
 type Operator @model {
   id: ID!
   operatorName: String!
+  goal: Int!
   certifications: [Certification!]! @connection(keyName: "byOperator", fields: ["id"])
 }
 
 type Skill @model {
   id: ID!
   skillName: String!
+  goal: Int!
   certifications: [Certification] @connection(keyName: "bySkill", fields: ["id"])
 }
 

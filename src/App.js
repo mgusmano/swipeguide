@@ -10,6 +10,35 @@ import { createOperator, deleteOperator } from './graphql/mutations'
 import { listCertifications} from './graphql/queries'
 import { createCertification, deleteCertification, updateCertification } from './graphql/mutations'
 
+import { withAuthenticator } from '@aws-amplify/ui-react'
+import {Auth} from 'aws-amplify';
+
+import { Authenticator, SignIn, SignUp, ConfirmSignUp, Greetings } from 'aws-amplify-react';
+
+// https://docs.amplify.aws/ui/customization/theming/q/framework/react
+import './App.css'
+
+const AlwaysOn = (props) => {
+    return (
+        <div>
+            <div>I am always here to show current auth state: {props.authState}</div>
+            <button onClick={() => props.onStateChange('signUp')}>Show Sign Up</button>
+        </div>
+    )
+}
+
+const handleAuthStateChange = (state) => {
+  if (state === 'signedIn') {
+      /* Do something when the user has signed-in */
+  }
+}
+
+// import { AmplifyTheme } from 'aws-amplify-react-native';
+
+// const MySectionHeader = Object.assign({}, AmplifyTheme.sectionHeader, { background: 'orange' });
+// const MyTheme = Object.assign({}, AmplifyTheme, { sectionHeader: MySectionHeader });
+
+
 function App() {
   const [skills, setSkills] = useState([])
   const [operators, setOperators] = useState([])
@@ -33,6 +62,42 @@ function App() {
     getDataCertifications()
 
   },[])
+
+  function checkUser() {
+    let user = Auth.currentAuthenticatedUser();
+
+    Auth.currentAuthenticatedUser()
+    .then(user => {
+      console.log(user);
+      return user;
+    })
+    .catch(ex => {
+      console.log(ex);
+      console.log("inside getCurrentUser catch, calling federatedSignIn");
+      //Auth.federatedSignIn({ provider: "Federate" });
+    });
+
+
+    //alert(user)
+  }
+
+  function signOut() {
+    //let user = Auth.currentAuthenticatedUser();
+
+    Auth.signOut()
+    .then(user => {
+      console.log(user);
+      return user;
+    })
+    .catch(ex => {
+      console.log(ex);
+      console.log("inside signOut catch, calling federatedSignIn");
+      //Auth.federatedSignIn({ provider: "Federate" });
+    });
+
+
+    //alert(user)
+  }
 
 
   async function getDataCertifications() {
@@ -342,6 +407,10 @@ return
         <button
           onClick={async () => {
             //var data = await API.get('miscapi','/misc')
+            checkUser()
+
+            signOut()
+
             var data = await API.get('todosApi','/todos')
             console.log(data)
             //https://thaoqib2c6.execute-api.us-east-1.amazonaws.com/dev
@@ -349,7 +418,20 @@ return
         >test an api</button>
       </header>
 
+      <header>
+        <button onClick={async () => {signOut()}}>sign out</button>
+      </header>
+
       <Diamond meta={item.meta} data={item.data} boxSize={bandX} padding={30}/>
+
+      <Authenticator hideDefault={true} onStateChange={handleAuthStateChange}>
+            <SignIn/>
+            <SignUp/>
+            <ConfirmSignUp/>
+            <Greetings/>
+            <AlwaysOn/>
+        </Authenticator>
+
 
       {/* <div onChange={onChangePercent}>
         Percent:
@@ -415,4 +497,6 @@ Certifications:
   );
 }
 
-export default App;
+//export default App;
+export default withAuthenticator(App)
+//export default withAuthenticator(App, false, [], null, MyTheme);
