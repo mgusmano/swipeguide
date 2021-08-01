@@ -58,9 +58,10 @@ const TopMenu = (props) => {
         </div>
       </div>
 
-
-      <div style={{marginLeft:'50px',color:'white',textDecoration:'none'}}>Logged In User: {loggedinuser}</div>
-      <AmplifySignOut />
+      <div style={{display:'flex',flexDirection:'row'}}>
+        <div style={{marginTop:'9px',marginRight:'9px',color:'white',textDecoration:'none'}}>Logged In User: {loggedinuser}</div>
+        <AmplifySignOut />
+      </div>
       {/* <i style={{marginRight:'20px',cursor:'pointer'}} className="fa fa-bars" onClick={props.filterClick}></i> */}
     </div>
   )

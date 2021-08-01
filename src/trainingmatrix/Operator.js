@@ -4,14 +4,28 @@ import { MatrixCell } from './MatrixCell';
 
 export const Operator = React.memo((props) => {
   const {data} = props
+  console.log(props)
+  const goal = props.data.goal;
   var bandX=50, bandY=50;
   var fontsize=14
   var img = 'https://examples.sencha.com/extjs/7.4.0/examples/kitchensink/resources/images/staff/' + data.id + '.jpg'
   return (
     <div style={{display:'flex',flexDirection:'column',width:'100%',height:'100%'}}>
       <div style={{height:'200px'}}>
-        <div style={{fontSize:'24px'}}>Operator: {data.operatorName}</div>
-        <img alt="pic" src={img} style={{borderRadius: '50%', x: '125px', y: '250px', width: '140px', height: '140px'}}/>
+        <div style={{fontSize:'20px'}}>Operator: {data.operatorName}</div>
+        <div>
+          Certification Goal: <input value={goal} type="input" style={{marginLeft:'10px',marginTop:5,marginBottom:5,width:'16px',height:'16px'}}
+          />
+          <button
+            onClick={(event)=> {
+              console.log('pdate')
+            }}
+          >
+            Update
+          </button>
+        </div>
+        <img alt="pic" src={img} style={{marginTop:'30',borderRadius: '50%', x: '125px', y: '250px', width: '140px', height: '140px'}}/>
+
       </div>
       <div style={{flex:'1',overflow:'none'}}>
         <svg width="100%" height="100%">

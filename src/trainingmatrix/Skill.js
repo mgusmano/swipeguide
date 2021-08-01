@@ -3,8 +3,10 @@ import { Diamond } from './Diamond';
 import { MatrixCell } from './MatrixCell';
 
 export const Skill = React.memo((props) => {
+  console.log(props)
   const {data} = props;
   const {num} = props;
+  const goal = props.data.skill.goal;
   var bandX=30;
   var bandY=30;
   var fontsize=14;
@@ -19,14 +21,24 @@ export const Skill = React.memo((props) => {
   return (
     <div style={{display:'flex',flexDirection:'column',width:'100%',height:'100%'}}>
       <div style={{height:'30px',fontSize:'18px'}}>
-        <div style={{fontSize:'24px'}}>Skill: {data.skill.skillName}</div>
+        <div style={{fontSize:'20px'}}>Skill: {data.skill.skillName}</div>
+        <div>
+        Number Certified Goal: <input value={goal} type="input" style={{marginLeft:'10px',marginTop:5,width:'16px',height:'16px'}}/>
+        <button
+          onClick={(event)=> {
+            console.log('update')
+          }}
+        >
+          Update
+        </button>
+      </div>
       </div>
       <div style={{flex:'1'}}>
         <svg width="100%" height="100%">
         {data.skill.data.map((item,i) => {
           //console.log(data)
           return (
-            <g key={i} transform={"translate(100," + (i*bandY) + ")"} className="group" >
+            <g key={i} transform={"translate(100," + ((i+1)*bandY) + ")"} className="group" >
               <text
                 dominantBaseline="left"
                 textAnchor="end"
