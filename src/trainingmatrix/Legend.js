@@ -5,7 +5,7 @@ import { getDates } from './util';
 //https://github.com/bokuweb/react-rnd
 
 export const Legend = React.memo((props) => {
-  const [legendX, setLegendX] = useState(10);
+  const [legendX, setLegendX] = useState(750);
   const [legendY, setLegendY] = useState(60);
   const [greendate, yellowdate, reddate] = getDates();
   var dates = [greendate, yellowdate, reddate];

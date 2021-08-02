@@ -20,3 +20,4 @@ ReactDOM.render(
 //https://docs.amplify.aws/lib/auth/customui/q/platform/js
 //https://docs.amplify.aws/lib/auth/getting-started/q/platform/js
 //https://docs.amplify.aws/ui/customization/theming/q/framework/react
+//https://docs.aws.amazon.com/amplify/latest/userguide/reuse-backends.html

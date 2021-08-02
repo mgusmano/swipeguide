@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import { useMatrixState } from './state/MatrixProvider';
 import LoadingOverlay from 'react-loading-overlay';
 import { Legend } from './Legend';
+import "flex-splitter-directive"
+import "flex-splitter-directive/styles.min.css"
 //import { Log } from './Log';
 import { Toolbar } from './Toolbar';
 import { Row1Col1 } from './Row1Col1';
@@ -38,7 +40,7 @@ const TrainingMatrix = () => {
       <div className='mainarea' data-flex-splitter-horizontal style={{...styles.horizontal,width:'100%',height:'100%'}}>
 
         {/* left area - matrix - start */}
-        <div className='left' style={{...styles.v,flex:1,boxSizing:'border-box'}}>
+        <div data-flex-splitter-horizontal className='left' style={{...styles.v,flex:1,boxSizing:'border-box'}}>
 
           <div className='leftrow1' height={matrixState.dimensions.row1} style={{...styles.h,height:matrixState.dimensions.row1+'px',background:'lightgray'}}>
             <Row1Col1/>

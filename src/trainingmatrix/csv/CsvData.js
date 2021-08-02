@@ -17,31 +17,19 @@ const CsvData = (props) => {
   },[])
 
   return (
-
-    // <LoadingOverlay
-    //   styles={{wrapper: {width:'100%',height:'100%',zIndex:'10'}}}
-    //   active={matrixState.active}
-    //   spinner
-    //   text='Loading...'
-    // >
-
+    <LoadingOverlay
+      styles={{wrapper: {width:'100%',height:'100%',zIndex:'10'}}}
+      active={matrixState.active}
+      spinner
+      text='Loading...'
+    >
       <div className='csv' style={{...styles.v,width:'100%',height:'100%',overflow:'auto'}}>
-
-
-
-
         <CsvDataOperator/>
         <CsvDataSkill/>
         <CsvDataCertification/>
-
-
-
       </div>
-
-// </LoadingOverlay>
-
+    </LoadingOverlay>
   )
 }
 
-//export default CsvData
 export default withAuthenticator(CsvData)
