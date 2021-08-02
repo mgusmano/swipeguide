@@ -1,17 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import {
-  // BrowserRouter as Router,
-  // Switch,
-  // Route,
-  Link
-} from "react-router-dom";
-
+import { Link } from "react-router-dom";
 import {Auth} from 'aws-amplify';
-import { withAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react';
-//https://docs.amplify.aws/lib/auth/getting-started/q/platform/js
+import { AmplifySignOut } from '@aws-amplify/ui-react';
+import { useHistory } from "react-router-dom";
 
 const TopMenu = (props) => {
   const [loggedinuser, setLoggedInUser] = useState('')
+  const history = useHistory();
 
   useEffect(() => {
 
@@ -23,7 +18,7 @@ const TopMenu = (props) => {
       setLoggedInUser(user.username);
     })
     .catch(ex => {
-      console.log(ex);
+      setLoggedInUser(ex);
     });
 
   },[])
@@ -50,17 +45,28 @@ const TopMenu = (props) => {
 
 
   return (
-    <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',xjustifyContent:'center',height:'50px',color:'white',background:'black',fontSize:'24px'}}>
+    <div className="topmenu" style={{display:'flex',justifyContent:'space-between',alignItems:'center',xjustifyContent:'center',height:'50px',color:'white',background:'black',fontSize:'24px'}}>
       <div style={{display:'flex',flexDirection:'row'}}>
         <div>
             <Link style={{marginLeft:'60px',color:'white',textDecoration:'none'}} to="/trainingmatrix">Training Matrix</Link>
             <Link style={{marginLeft:'50px',color:'white',textDecoration:'none'}} to="/csv">Load Data</Link>
+            {/* <Link style={{marginLeft:'50px',color:'white',textDecoration:'none'}} to="/admin">Admin</Link> */}
         </div>
       </div>
 
       <div style={{display:'flex',flexDirection:'row'}}>
-        <div style={{marginTop:'9px',marginRight:'9px',color:'white',textDecoration:'none'}}>Logged In User: {loggedinuser}</div>
-        <AmplifySignOut />
+        <div style={{fontSize:'14px',marginTop:'29px',marginRight:'9px',color:'white',textDecoration:'none'}}>Logged In User: {loggedinuser}</div>
+        <AmplifySignOut
+          handleAuthStateChange = {(nextAuthState,data) => {
+            console.log(nextAuthState)
+            if (nextAuthState == 'signedout') {
+              history.push("/admin");
+              history.push("/trainingmatrix");
+              //Auth.signOut();
+            }
+
+          }}
+        />
       </div>
       {/* <i style={{marginRight:'20px',cursor:'pointer'}} className="fa fa-bars" onClick={props.filterClick}></i> */}
     </div>

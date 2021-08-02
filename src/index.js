@@ -15,3 +15,8 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById('root')
 );
+
+//https://docs.amplify.aws/ui/q/framework/react
+//https://docs.amplify.aws/lib/auth/customui/q/platform/js
+//https://docs.amplify.aws/lib/auth/getting-started/q/platform/js
+//https://docs.amplify.aws/ui/customization/theming/q/framework/react

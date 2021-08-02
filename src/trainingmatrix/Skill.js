@@ -38,7 +38,7 @@ export const Skill = React.memo((props) => {
           onChange={(event)=> {
             setGoal(event.target.value)
           }}
-          style={{marginLeft:'10px',marginTop:5,width:'26px',height:'16px'}}
+          style={{marginLeft:'10px',marginTop:5,width:'26px',height:'15px'}}
         />
         <button
           onClick={(event)=> {

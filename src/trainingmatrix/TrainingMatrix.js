@@ -29,7 +29,7 @@ const TrainingMatrix = () => {
 
   //<div className='' style={{...styles.vertical,width:'100%',height:'100%',fontSize:matrixState.dimensions.fontsize+'pt'}}>
   return (
-    <div className='trainingmatrix' style={{...styles.v,width:'100%',height:'100%'}}>
+    <div className='trainingmatrix' style={{...styles.v,width:'100%',height:'100%',background:'lightgray'}}>
       {matrixState.showTheLegend && <Legend/>}
       <Toolbar/>
 
@@ -40,13 +40,13 @@ const TrainingMatrix = () => {
         {/* left area - matrix - start */}
         <div className='left' style={{...styles.v,flex:1,boxSizing:'border-box'}}>
 
-          <div className='leftrow1' height={matrixState.dimensions.row1} style={{...styles.h,height:matrixState.dimensions.row1+'px'}}>
+          <div className='leftrow1' height={matrixState.dimensions.row1} style={{...styles.h,height:matrixState.dimensions.row1+'px',background:'lightgray'}}>
             <Row1Col1/>
             <Row1Col2 data={matrixState.byOperator}/>
             <Row1Col3 data={[['Goal','# Certified','Gap']]}/>
           </div>
 
-          <div className='leftrow2' style={{...styles.h,height:(matrixState.dimensions.row2Orig)+'px'}}>
+          <div className='leftrow2' style={{...styles.h,height:(matrixState.dimensions.row2Orig)+'px',background:'lightgray'}}>
             <Row2Col1 data={matrixState.bySkill}/>
 
             {/* <Log data={matrixState.active}/> */}
@@ -61,7 +61,7 @@ const TrainingMatrix = () => {
             <Row2Col3 data={matrixState.righttotals}/>
           </div>
 
-          <div className='leftrow3' style={{...styles.h,height: matrixState.dimensions.row3+'px',minHeight:matrixState.dimensions.row3+'px'}}>
+          <div className='leftrow3' style={{...styles.h,height: matrixState.dimensions.row3+'px',minHeight:matrixState.dimensions.row3+'px',background:'lightgray'}}>
             <Row3Col1 data={[['Goal'],['# Certified'],['Gap']]}/>
             <Row3Col2 data={matrixState.bottomtotals}/>
             <Row3Col3/>

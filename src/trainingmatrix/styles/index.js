@@ -37,6 +37,6 @@ export const styles = {
     flexDirection:'column',
     boxSizing:'border-box',
     border:'0px solid blue',
-    overflow:'hidden'
+    xoverflow:'hidden'
   },
 };

@@ -258,10 +258,10 @@ export const MatrixProvider = (props) => {
       const bandX = 5;
       const bandY = 5;
       var col1 = 40;
-      var col2 = bandX * x;
+      var col2 = (bandX * x)+1;
       var col3 =(bandX*3);
       var row1 = 20;
-      var row2 = (bandY * y)+0;
+      var row2 = (bandY * y)+1;
       var row3 = bandX*3;
 
       var d2= {

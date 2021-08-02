@@ -25,15 +25,13 @@ export const Operator = React.memo((props) => {
         <div style={{fontSize:'20px'}}>Operator: {data.operatorName}</div>
         <div>
           Goal for Certifications:
-          {/* <input value={goal} type="input" style={{marginLeft:'10px',marginTop:5,marginBottom:5,width:'16px',height:'16px'}}
-          /> */}
           <input
             type="text"
             value={goal}
             onChange={(event)=> {
               setGoal(event.target.value)
             }}
-            style={{marginLeft:'10px',marginTop:5,width:'26px',height:'16px'}}
+            style={{marginLeft:'10px',marginTop:5,width:'26px',height:'15px'}}
           />
           <button
             onClick={(event)=> {
