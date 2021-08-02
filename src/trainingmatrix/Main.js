@@ -1,6 +1,6 @@
 import React, { useState, useEffect, forwardRef} from 'react';
-import { Diamond } from './Diamond';
 import { useMatrixState } from './state/MatrixProvider';
+import { Diamond } from './Diamond';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 

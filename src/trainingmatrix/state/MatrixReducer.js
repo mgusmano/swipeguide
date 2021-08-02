@@ -1,11 +1,35 @@
 import produce from 'immer';
-import { SET_BOTTOMTOTALS, SET_RIGHTTOTALS, SET_CURRENT_CERTIFICATION, SET_ACTIVE,SET_ALL, SET_OPERATORS, SET_SKILLS, SET_CERTIFICATIONS, SET_BYSKILL, SET_BYOPERATOR, SET_SPECIFIC, TOGGLE_LEGEND, SET_DIMENSIONS, SET_ORIGINAL } from './MatrixTypes';
+import { UPDATE_OPERATORGOAL, UPDATE_SKILLGOAL, SET_BOTTOMTOTALS, SET_RIGHTTOTALS, SET_CURRENT_CERTIFICATION, SET_ACTIVE,SET_ALL, SET_OPERATORS, SET_SKILLS, SET_CERTIFICATIONS, SET_BYSKILL, SET_BYOPERATOR, SET_SPECIFIC, TOGGLE_LEGEND, SET_DIMENSIONS, SET_ORIGINAL } from './MatrixTypes';
 
 export const MatrixReducer = (state, action) => {
 
   const { type, payload } = action;
   var s;
   switch (type) {
+
+    case UPDATE_OPERATORGOAL:
+      //console.log(state.operators)
+      var index = state.operators.map(item => item.id).indexOf(payload.id);
+      s = {
+        ...state,
+        operators: state.operators.map(
+          (operator, i) => i === index ? {...operator, goal: parseInt(payload.goal)} : operator
+        )
+      }
+      //console.log(s)
+      return s
+
+    case UPDATE_SKILLGOAL:
+      console.log(state.skills)
+      var index = state.skills.map(item => item.id).indexOf(payload.id);
+      s = {
+        ...state,
+        skills: state.skills.map(
+          (skill, i) => i === index ? {...skill, goal: parseInt(payload.goal)} : skill
+        )
+      }
+      console.log(s)
+      return s
 
     case SET_BOTTOMTOTALS:
       s = {...state,bottomtotals:payload}

@@ -1,18 +1,33 @@
 import React, { createContext, useReducer, useContext } from 'react';
 import { MatrixReducer } from './MatrixReducer';
-import { SET_BOTTOMTOTALS, SET_RIGHTTOTALS, SET_CURRENT_CERTIFICATION, SET_ACTIVE, SET_ALL, SET_OPERATORS, SET_SKILLS, SET_CERTIFICATIONS, SET_BYSKILL, SET_BYOPERATOR, SET_SPECIFIC, TOGGLE_LEGEND, SET_DIMENSIONS, SET_ORIGINAL } from './MatrixTypes';
+import { UPDATE_OPERATORGOAL, UPDATE_SKILLGOAL, SET_BOTTOMTOTALS, SET_RIGHTTOTALS, SET_CURRENT_CERTIFICATION, SET_ACTIVE, SET_ALL, SET_OPERATORS, SET_SKILLS, SET_CERTIFICATIONS, SET_BYSKILL, SET_BYOPERATOR, SET_SPECIFIC, TOGGLE_LEGEND, SET_DIMENSIONS, SET_ORIGINAL } from './MatrixTypes';
 
 import { API, graphqlOperation } from 'aws-amplify'
 import { listOperators} from '../graphql/queries'
 import { listSkills } from '../graphql/queries'
 import { listCertifications} from '../graphql/queries'
-import { updateCertification } from '../graphql/mutations'
+import { updateSkill, updateOperator, updateCertification } from '../graphql/mutations'
 
 const MatrixContext = createContext();
 
 export const MatrixProvider = (props) => {
 
+  const updateOperatorGoal = (payload) => {
+    //dispatch({type: UPDATE_OPERATORGOAL, payload: payload});
+    API.graphql(graphqlOperation(updateOperator, { input: payload } ))
+    .then(() => {
+      dispatch({type: UPDATE_OPERATORGOAL, payload: payload});
+      setAll(false)
+    })
+  }
 
+  const updateSkillGoal = (payload) => {
+    API.graphql(graphqlOperation(updateSkill, { input: payload } ))
+    .then(() => {
+      dispatch({type: UPDATE_SKILLGOAL, payload: payload});
+      setAll(false)
+    })
+  }
 
   const setRightTotals = (payload) => {
     dispatch({type: SET_RIGHTTOTALS, payload: payload});
@@ -334,6 +349,8 @@ export const MatrixProvider = (props) => {
   }
 
   const initialState = {
+    operatorgoal: 0,
+    skillgoal: 0,
     bottomtotals: [],
     righttotals: [],
     currentcertification: null,
@@ -353,6 +370,8 @@ export const MatrixProvider = (props) => {
 
   return (
     <MatrixContext.Provider value={{
+      operatorgoal: state.operatorgoal,
+      skillgoal: state.skillgoal,
       bottomtotals: state.bottomtotals,
       righttotals: state.righttotals,
       currentcertification: state.currentcertification,
@@ -367,6 +386,8 @@ export const MatrixProvider = (props) => {
       showTheLegend: state.showTheLegend,
       dimensions: state.dimensions,
       original: state.original,
+      updateOperatorGoal,
+      updateSkillGoal,
       updateCert,
       setBottomTotals,
       setRightTotals,

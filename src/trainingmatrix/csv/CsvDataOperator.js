@@ -13,7 +13,7 @@ const CsvDataOperator = (props) => {
   const [csvitems, setCSVItems] = useState([])
   const [csvitemsstring, setCSVItemsString] = useState('')
 
-  async function updateCert(payload) {
+  async function updateOperator(payload) {
     await API.graphql(graphqlOperation(updateOperator, { input: payload } ))
     getDataOperators()
   }
@@ -138,7 +138,7 @@ const CsvDataOperator = (props) => {
                     id: params.id,
                     operatorName: params.props.value
                   }
-                  updateCert(c)
+                  updateOperator(c)
                 }}
                 onCellOut={(params,mouseevent) => {
                   console.log('onCellOut')

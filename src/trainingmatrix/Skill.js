@@ -1,12 +1,20 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useMatrixState } from './state/MatrixProvider';
 import { Diamond } from './Diamond';
 import { MatrixCell } from './MatrixCell';
 
 export const Skill = React.memo((props) => {
-  console.log(props)
+  const matrixState = useMatrixState();
+  const [goal, setGoal] = useState(0);
+  const skillID = props.data.skill.id;
+
+  useEffect(() => {
+    setGoal(props.data.skill.goal)
+  },[props])
+
   const {data} = props;
   const {num} = props;
-  const goal = props.data.skill.goal;
+
   var bandX=30;
   var bandY=30;
   var fontsize=14;
@@ -20,13 +28,26 @@ export const Skill = React.memo((props) => {
   }
   return (
     <div style={{display:'flex',flexDirection:'column',width:'100%',height:'100%'}}>
-      <div style={{height:'30px',fontSize:'18px'}}>
+      <div style={{height:'60px',fontSize:'18px'}}>
         <div style={{fontSize:'20px'}}>Skill: {data.skill.skillName}</div>
         <div>
-        Number Certified Goal: <input value={goal} type="input" style={{marginLeft:'10px',marginTop:5,width:'16px',height:'16px'}}/>
+        Number Certified Goal:
+        <input
+          type="text"
+          value={goal}
+          onChange={(event)=> {
+            setGoal(event.target.value)
+          }}
+          style={{marginLeft:'10px',marginTop:5,width:'26px',height:'16px'}}
+        />
         <button
           onClick={(event)=> {
-            console.log('update')
+            matrixState.setActive(true)
+            var payload = {
+              id: skillID,
+              goal: goal
+            }
+            matrixState.updateSkillGoal(payload)
           }}
         >
           Update
@@ -36,7 +57,6 @@ export const Skill = React.memo((props) => {
       <div style={{flex:'1'}}>
         <svg width="100%" height="100%">
         {data.skill.data.map((item,i) => {
-          //console.log(data)
           return (
             <g key={i} transform={"translate(100," + ((i+1)*bandY) + ")"} className="group" >
               <text
@@ -73,6 +93,7 @@ export const Skill = React.memo((props) => {
           xsrc={"https://app.swipeguide.com/embed/guide/46e3b328-9e74-4875-a774-99418940d9f4/279b3f82-e4e1-4468-b166-419372c57c39?embed=true&locale=EN_US&isolatedInstruction=true"}>
         </iframe>
       </div>
+
     </div>
   )
 })

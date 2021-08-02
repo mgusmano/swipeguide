@@ -1,11 +1,21 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useMatrixState } from './state/MatrixProvider';
+
 import { Diamond } from './Diamond';
 import { MatrixCell } from './MatrixCell';
 
 export const Operator = React.memo((props) => {
+  const matrixState = useMatrixState();
+  const [goal, setGoal] = useState(0);
+  const operatorID = props.data.id;
+
+  useEffect(() => {
+    setGoal(props.data.goal)
+  },[props])
+
   const {data} = props
   console.log(props)
-  const goal = props.data.goal;
+  //const goal = props.data.goal;
   var bandX=50, bandY=50;
   var fontsize=14
   var img = 'https://examples.sencha.com/extjs/7.4.0/examples/kitchensink/resources/images/staff/' + data.id + '.jpg'
@@ -14,11 +24,25 @@ export const Operator = React.memo((props) => {
       <div style={{height:'200px'}}>
         <div style={{fontSize:'20px'}}>Operator: {data.operatorName}</div>
         <div>
-          Certification Goal: <input value={goal} type="input" style={{marginLeft:'10px',marginTop:5,marginBottom:5,width:'16px',height:'16px'}}
+          Certification Goal:
+          {/* <input value={goal} type="input" style={{marginLeft:'10px',marginTop:5,marginBottom:5,width:'16px',height:'16px'}}
+          /> */}
+          <input
+            type="text"
+            value={goal}
+            onChange={(event)=> {
+              setGoal(event.target.value)
+            }}
+            style={{marginLeft:'10px',marginTop:5,width:'26px',height:'16px'}}
           />
           <button
             onClick={(event)=> {
-              console.log('pdate')
+              matrixState.setActive(true)
+              var payload = {
+                id: operatorID,
+                goal: goal
+              }
+              matrixState.updateOperatorGoal(payload)
             }}
           >
             Update
