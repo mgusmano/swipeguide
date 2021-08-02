@@ -1,26 +1,23 @@
 import React, { useState, useEffect } from 'react';
+import { useMatrixState } from './trainingmatrix/state/MatrixProvider';
 import { Link } from "react-router-dom";
 import {Auth} from 'aws-amplify';
 import { AmplifySignOut } from '@aws-amplify/ui-react';
 import { useHistory } from "react-router-dom";
 
 const TopMenu = (props) => {
-  const [loggedinuser, setLoggedInUser] = useState('')
+  const matrixState = useMatrixState();
+  //const [loggedinuser, setLoggedInUser] = useState('')
   const history = useHistory();
 
   useEffect(() => {
-
-    //let user = Auth.currentAuthenticatedUser();
-
     Auth.currentAuthenticatedUser()
     .then(user => {
-      //console.log(user.username)
-      setLoggedInUser(user.username);
+      matrixState.setAuthenticatedUser(user.username)
     })
     .catch(ex => {
-      setLoggedInUser(ex);
+      matrixState.setAuthenticatedUser(ex)
     });
-
   },[])
 
   // function signOut() {
@@ -55,11 +52,12 @@ const TopMenu = (props) => {
       </div>
 
       <div style={{display:'flex',flexDirection:'row'}}>
-        <div style={{fontSize:'14px',marginTop:'29px',marginRight:'9px',color:'white',textDecoration:'none'}}>Logged In User: {loggedinuser}</div>
+        <div style={{fontSize:'14px',marginTop:'29px',marginRight:'9px',color:'white',textDecoration:'none'}}>Logged In User: {matrixState.authenticateduser}</div>
         <AmplifySignOut
           handleAuthStateChange = {(nextAuthState,data) => {
             console.log(nextAuthState)
             if (nextAuthState == 'signedout') {
+              matrixState.setAuthenticatedUser('')
               history.push("/admin");
               history.push("/trainingmatrix");
               //Auth.signOut();

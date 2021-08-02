@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useMatrixState } from '../state/MatrixProvider';
+import {Auth} from 'aws-amplify';
 import LoadingOverlay from 'react-loading-overlay';
 import { styles } from '../styles';
 import CsvDataOperator from './CsvDataOperator';
@@ -10,6 +11,16 @@ import { withAuthenticator } from '@aws-amplify/ui-react'
 
 const CsvData = (props) => {
   const matrixState = useMatrixState();
+
+  useEffect(() => {
+    Auth.currentAuthenticatedUser()
+    .then(user => {
+      matrixState.setAuthenticatedUser(user.username)
+    })
+    .catch(ex => {
+      matrixState.setAuthenticatedUser(ex)
+    });
+  },[])
 
   useEffect(() => {
     matrixState.setActive(true)

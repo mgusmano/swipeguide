@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useMatrixState } from './state/MatrixProvider';
+import {Auth} from 'aws-amplify';
 import LoadingOverlay from 'react-loading-overlay';
 import { Legend } from './Legend';
 import "flex-splitter-directive"
@@ -23,6 +24,16 @@ import { withAuthenticator } from '@aws-amplify/ui-react'
 const TrainingMatrix = () => {
   const matrixState = useMatrixState();
   useResizeEvent()
+
+  useEffect(() => {
+    Auth.currentAuthenticatedUser()
+    .then(user => {
+      matrixState.setAuthenticatedUser(user.username)
+    })
+    .catch(ex => {
+      matrixState.setAuthenticatedUser(ex)
+    });
+  },[])
 
   useEffect(() => {
     matrixState.setActive(true)
