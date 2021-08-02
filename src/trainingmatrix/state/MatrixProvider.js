@@ -135,7 +135,7 @@ export const MatrixProvider = (props) => {
             }
             return null
           })
-          if (num >  0 && meta.status === 'started') {
+          if (num == 4 && meta.status === 'started') {
             var dStart = new Date(meta.start);
             var dToday = new Date();
             var difftime = dToday.getTime() - dStart.getTime()
@@ -205,7 +205,7 @@ export const MatrixProvider = (props) => {
             }
             return null
           })
-          if (num >  0 && meta.status === 'started') {
+          if (num == 4 && meta.status === 'started') {
             var dStart = new Date(meta.start);
             var dToday = new Date();
             var difftime = dToday.getTime() - dStart.getTime()
