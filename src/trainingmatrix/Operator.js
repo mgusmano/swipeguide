@@ -24,7 +24,7 @@ export const Operator = React.memo((props) => {
       <div style={{height:'200px'}}>
         <div style={{fontSize:'20px'}}>Operator: {data.operatorName}</div>
         <div>
-          Certification Goal:
+          Goal for Certifications:
           {/* <input value={goal} type="input" style={{marginLeft:'10px',marginTop:5,marginBottom:5,width:'16px',height:'16px'}}
           /> */}
           <input

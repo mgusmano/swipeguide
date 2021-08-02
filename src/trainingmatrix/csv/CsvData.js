@@ -17,18 +17,29 @@ const CsvData = (props) => {
   },[])
 
   return (
+
     <LoadingOverlay
       styles={{wrapper: {width:'100%',height:'100%',zIndex:'10'}}}
       active={matrixState.active}
       spinner
       text='Loading...'
     >
-      <div className='app' style={{...styles.v,width:'100%',height:'100%',overflow:'scroll'}}>
+
+      <div className='csv' style={{...styles.v,width:'100%',height:'100%',overflow:'scroll'}}>
+
+
+
+
         <CsvDataOperator/>
         <CsvDataSkill/>
         <CsvDataCertification/>
+
+
+
       </div>
-    </LoadingOverlay>
+
+</LoadingOverlay>
+
   )
 }
 

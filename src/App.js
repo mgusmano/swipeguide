@@ -271,43 +271,38 @@ function App(props) {
 
 
       <MatrixProvider>
-      <Vertical>
+      <Vertical  style={{width:'100%',height:'100%',display:'flex',flexDirection:'column'}}>
         <Top/>
-        <Header menuClick={onMenuClick} filterClick={onFilterClick}/>
+        {/* <Header menuClick={onMenuClick} filterClick={onFilterClick}/> */}
         <TopMenu/>
 
         {/* <Separator/> */}
-        <Horizontal style={{width:'100%',background:'blue'}}>
-          {/* <Menu/> */}
-          <Vertical style={{display:'none',height:'100%',background:'black',width:'0'}}>
-            <div style={{height:'50px'}}></div>
-            {/* <SideMenu
-              items={items}
-              collapse={false}
-              onMenuItemClick={(value, extras) => onMenuItemClick(value,extras)}
-              activeItem={activemenu}
-            /> */}
-          </Vertical>
-          {/* <Splitter/> */}
-          {/* <Center/> */}
+        <Horizontal style={{width:'100%',height:'100%',flex:1,background:'yellow',overflow:'hidden'}}>
 
-          <div
+
+          {/* <div
               style={{flex:'1',
               border:'0px solid green',
               background:'whitesmoke',
               overflow:'auto',
               width: '100%',
               height: '100%',
-          }}>
+          }}> */}
 
           <Switch>
-            <Route exact path="/"><Redirect to="/trainingmatrix" /></Route>
-            <Route path="/trainingmatrix" default component={TrainingMatrix} />
-            <Route path="/csv" component={() => <CsvData/>} />
-
+            <Route exact path="/"><Redirect to="/trainingmatrix"/></Route>
+            <Route path="/trainingmatrix" default component={TrainingMatrix}/>
+            <Route path="/csv" component={() => <CsvData/>}/>
           </Switch>
 
-          </div>
+          {/* <Switch>
+            <Route exact path="/"><Redirect to="/trainingmatrix" /></Route>
+            <Route exact path="/"><Redirect to="/" /></Route>
+            <Route path="/" component={TrainingMatrix} />
+            <Route path="/csv" component={() => <CsvData/>} />
+          </Switch> */}
+
+          {/* </div> */}
           {/* center */}
           {/* <Splitter/>
           <Context/> */}

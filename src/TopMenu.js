@@ -54,7 +54,7 @@ const TopMenu = (props) => {
       <div style={{display:'flex',flexDirection:'row'}}>
         <div>
             <Link style={{marginLeft:'60px',color:'white',textDecoration:'none'}} to="/trainingmatrix">Training Matrix</Link>
-            <Link style={{marginLeft:'50px',color:'white',textDecoration:'none'}} to="/csv">CSV</Link>
+            <Link style={{marginLeft:'50px',color:'white',textDecoration:'none'}} to="/csv">Load Data</Link>
         </div>
       </div>
 

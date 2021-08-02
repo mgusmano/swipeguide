@@ -31,7 +31,7 @@ export const Skill = React.memo((props) => {
       <div style={{height:'60px',fontSize:'18px'}}>
         <div style={{fontSize:'20px'}}>Skill: {data.skill.skillName}</div>
         <div>
-        Number Certified Goal:
+        Goal for Number Certified:
         <input
           type="text"
           value={goal}
@@ -58,7 +58,7 @@ export const Skill = React.memo((props) => {
         <svg width="100%" height="100%">
         {data.skill.data.map((item,i) => {
           return (
-            <g key={i} transform={"translate(100," + ((i+1)*bandY) + ")"} className="group" >
+            <g key={i} transform={"translate(100," + ((i+0)*bandY) + ")"} className="group" >
               <text
                 dominantBaseline="left"
                 textAnchor="end"
