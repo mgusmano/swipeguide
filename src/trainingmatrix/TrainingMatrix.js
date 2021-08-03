@@ -1,10 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useMatrixState } from './state/MatrixProvider';
-import {Auth} from 'aws-amplify';
+import { Auth } from 'aws-amplify';
 import LoadingOverlay from 'react-loading-overlay';
 import { Legend } from './Legend';
 import "flex-splitter-directive"
 import "flex-splitter-directive/styles.min.css"
+import Drawer from '@material-ui/core/Drawer';
 //import { Log } from './Log';
 import { Toolbar } from './Toolbar';
 import { Row1Col1 } from './Row1Col1';
@@ -23,6 +24,7 @@ import { withAuthenticator } from '@aws-amplify/ui-react'
 //export const TrainingMatrix = React.memo(({widgetData}) => {
 const TrainingMatrix = () => {
   const matrixState = useMatrixState();
+  const [draweropen, setDrawerOpen] = useState(false)
   useResizeEvent()
 
   useEffect(() => {
@@ -45,6 +47,11 @@ const TrainingMatrix = () => {
     <div className='trainingmatrix' style={{...styles.v,width:'100%',height:'100%',background:'lightgray'}}>
       {matrixState.showTheLegend && <Legend/>}
       <Toolbar/>
+      <button style={{marginLeft:'40px',width:'120px',height:'30px'}}
+          onClick={(e)=> {
+            setDrawerOpen(!draweropen)
+          }}
+        >open</button>
 
       {/* main area start */}
       {matrixState.dimensions !== null &&
@@ -94,6 +101,31 @@ const TrainingMatrix = () => {
           </div>
         </div>
         {/* right area - details - end */}
+
+
+        <Drawer anchor={'right'} open={draweropen}
+          onClose={
+            console.log('close')
+            //toggleDrawer(anchor, false)
+          }
+        >
+          <div style={{display:'flex',flexDirection:'column',width:'500px',height:'100%',boxSizing:'border-box',border:'10px solid green'}}>
+            <div style={{height:'50px'}}>Any Settings Would be Here</div>
+            <div style={{flex:1}}></div>
+            <div>
+              <button style={{marginLeft:'0',width:'120px',height:'30px'}}
+                onClick={(e)=> {
+                  setDrawerOpen(!draweropen)
+                }}
+              >
+                close
+              </button>
+            </div>
+          </div>
+
+
+        </Drawer>
+
 
       </div>
       }
