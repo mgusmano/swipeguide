@@ -12,11 +12,6 @@ type Skill @model {
   certifications: [Certification] @connection(keyName: "bySkill", fields: ["id"])
 }
 
-type Score @model {
-  p: String!
-  s: String!
-}
-
 type Certification @model @key(name: "byOperator", fields: ["operatorID"])  @key(name: "bySkill", fields: ["skillID"]){
   id: ID!
   operatorID: ID!
@@ -25,40 +20,4 @@ type Certification @model @key(name: "byOperator", fields: ["operatorID"])  @key
   skill: Skill @connection(fields: ["skillID"])
   meta: String!
   data: String!
-}
-
-
-
-
-
-type Talk @model {
-  id: ID!
-  clientId: ID
-  name: String!
-  description: String!
-  speakerName: String!
-  speakerBio: String!
-}
-
-
-
-type Blog @model {
-  id: ID!
-  name: String!
-  posts: [Post] @connection(keyName: "byBlog", fields: ["id"])
-}
-
-type Post @model @key(name: "byBlog", fields: ["blogID"]) {
-  id: ID!
-  title: String!
-  blogID: ID!
-  blog: Blog @connection(fields: ["blogID"])
-  comments: [Comment] @connection(keyName: "byPost", fields: ["id"])
-}
-
-type Comment @model @key(name: "byPost", fields: ["postID", "content"]) {
-  id: ID!
-  postID: ID!
-  post: Post @connection(fields: ["postID"])
-  content: String!
 }

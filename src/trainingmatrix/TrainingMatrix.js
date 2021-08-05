@@ -21,6 +21,10 @@ import { styles } from './styles';
 import { useResizeEvent } from './useResizeEvent';
 import { withAuthenticator } from '@aws-amplify/ui-react'
 
+import { API, graphqlOperation } from 'aws-amplify';
+import { getOperator } from '../graphql/queries';
+import * as queries from '../graphql/queries';
+
 //export const TrainingMatrix = React.memo(({widgetData}) => {
 const TrainingMatrix = () => {
   const matrixState = useMatrixState();
@@ -47,11 +51,66 @@ const TrainingMatrix = () => {
     <div className='trainingmatrix' style={{...styles.v,width:'100%',height:'100%',background:'lightgray'}}>
       {matrixState.showTheLegend && <Legend/>}
       <Toolbar/>
+
       <button style={{marginLeft:'40px',width:'120px',height:'30px'}}
-          onClick={(e)=> {
-            setDrawerOpen(!draweropen)
-          }}
-        >open</button>
+        onClick={(e)=> {
+          setDrawerOpen(!draweropen)
+        }}
+      >open</button>
+      <button style={{marginLeft:'40px',width:'120px',height:'30px'}}
+        onClick={async (e)=> {
+          //setDrawerOpen(!draweropen)
+
+          const getOperatorL = /* GraphQL */ `
+          query GetOperatorL($id: ID!) {
+            getOperator(id: $id) {
+              id
+              operatorName
+              goal
+              certifications {
+                items {
+                  id
+                  skill {
+                    skillName
+                    id
+                    goal
+                  }
+                }
+              }
+            }
+          }
+        `;
+
+
+        const byOperatorL = /* GraphQL */ `
+        query byOperator {
+          byOperator(
+            type: "Certification"
+            sortDirection: ASC
+          ) {
+            id
+            operatorID
+            skillID
+          }
+        }
+      `;
+
+
+          var r = await API.graphql(graphqlOperation(queries.operatorsByName, { operatorName: { ne: "08/20/2018" } } ))
+          //var r = await API.graphql(graphqlOperation(getOperatorL, { id: 1 }))
+
+          // var r = await API.graphql({
+          //   query: getOperatorL,
+          //   variables: { id: 1 },
+          //   //authMode: 'AWS_IAM'
+          // })
+
+          //var r = await API.graphql(graphqlOperation(byOperatorL))
+
+
+          console.log(r)
+        }}
+      >GraphQL</button>
 
       {/* main area start */}
       {matrixState.dimensions !== null &&

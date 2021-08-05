@@ -109,6 +109,78 @@ export const MatrixProvider = (props) => {
       return certificationData.data.listCertifications.items.sort((a, b) => (a.id > b.id) ? 1 : -1)
     }
 
+    const doCerts = (filteredcertifications) => {
+      var ss = {}
+      ss.numstarted = 0
+      ss.numtrainers = 0
+      ss.numcertified = 0
+      filteredcertifications.map((fc,i) => {
+        var meta = JSON.parse(fc.meta)
+        var data = JSON.parse(fc.data)
+
+        //ss = calcIt(meta, data, ss)
+
+        var num = 0;
+        data.map((slice,i) => {
+          if (slice.s === 1) {
+            num++
+          }
+          return null
+        })
+        if (num == 4 && meta.status === 'started') {
+          var dStart = new Date(meta.start);
+          var dToday = new Date();
+          var difftime = dToday.getTime() - dStart.getTime()
+          var diffdays = difftime / (1000 * 3600 * 24);
+          if (diffdays < 180) {
+            ss.numcertified ++
+          }
+        }
+        if (data.status === 'started') {
+          ss.numstarted ++
+        }
+        if (meta.status === 'started') {
+          ss.numstarted ++
+        }
+        if (meta.trainer === 'true' || meta.trainer === true ) {
+          ss.numtrainers ++
+        }
+        return null
+      })
+
+      return ss
+    }
+
+    const calcIt = (meta, data, ss) => {
+      var num = 0;
+      data.map((slice,i) => {
+        if (slice.s === 1) {
+          num++
+        }
+        return null
+      })
+      if (num == 4 && meta.status === 'started') {
+        var dStart = new Date(meta.start);
+        var dToday = new Date();
+        var difftime = dToday.getTime() - dStart.getTime()
+        var diffdays = difftime / (1000 * 3600 * 24);
+        if (diffdays < 180) {
+          ss.numcertified ++
+        }
+      }
+      if (data.status === 'started') {
+        ss.numstarted ++
+      }
+      if (meta.status === 'started') {
+        ss.numstarted ++
+      }
+      if (meta.trainer === 'true' || meta.trainer === true ) {
+        ss.numtrainers ++
+      }
+      return ss
+    }
+
+
     const doByOperator = (operators, skills, certifications) => {
       var byOperator = []
       var operatorsummary = []
@@ -246,6 +318,214 @@ export const MatrixProvider = (props) => {
       })
 
       dispatch({type: SET_RIGHTTOTALS, payload: righttotals});
+      return bySkill
+    }
+
+
+
+
+
+    const doByOperator2 = (operators, skills, certifications) => {
+      var byOperator = []
+      var operatorsummary = []
+      var bottomtotals = []
+
+      //if (operators = []) { return }
+      operators.map((operator,o) => {
+        o = operator
+        o.meta = operator
+        o.data = []
+        const filteredcertifications = certifications.filter(item => item.operatorID === operator.id);
+
+        var ss = doCerts(filteredcertifications)
+
+        // var ss = {}
+        // ss.numstarted = 0
+        // ss.numtrainers = 0
+        // ss.numcertified = 0
+        // filteredcertifications.map((fc,i) => {
+        //   var meta = JSON.parse(fc.meta)
+        //   var data = JSON.parse(fc.data)
+
+        //   ss = calcIt(meta, data, ss)
+
+        //   // var num = 0;
+        //   // data.map((slice,i) => {
+        //   //   if (slice.s === 1) {
+        //   //     num++
+        //   //   }
+        //   //   return null
+        //   // })
+        //   // if (num == 4 && meta.status === 'started') {
+        //   //   var dStart = new Date(meta.start);
+        //   //   var dToday = new Date();
+        //   //   var difftime = dToday.getTime() - dStart.getTime()
+        //   //   var diffdays = difftime / (1000 * 3600 * 24);
+        //   //   if (diffdays < 180) {
+        //   //     ss.numcertified ++
+        //   //   }
+        //   // }
+        //   // if (data.status === 'started') {
+        //   //   ss.numstarted ++
+        //   // }
+        //   // if (meta.status === 'started') {
+        //   //   ss.numstarted ++
+        //   // }
+        //   // if (meta.trainer === 'true' || meta.trainer === true ) {
+        //   //   ss.numtrainers ++
+        //   // }
+        //   return null
+        // })
+
+
+        operatorsummary.push(ss)
+
+        var goal = operator.goal;
+        var val = [goal, ss.numcertified, goal-ss.numcertified]
+        bottomtotals.push(val)
+
+        filteredcertifications.map((fc,i) => {
+          var skill  = skills.find(item => item.id === fc.skillID);
+          o.data[i] = {};
+          o.data[i].operator = operator
+          o.data[i].skill = skill
+          o.data[i].meta = fc.meta
+          o.data[i].data = fc.data
+          return null
+        })
+        byOperator.push(o)
+        return null
+      })
+
+      var transpose = m => m[0].map((x,i) => m.map(x => x[i]))
+      var bottomtotalstransposed = transpose(bottomtotals)
+      dispatch({type: SET_BOTTOMTOTALS, payload: bottomtotalstransposed});
+      console.log(byOperator)
+      return byOperator
+    }
+    const doBySkill2 = (operators, skills, certifications) => {
+      var bySkill = []
+      var skillsummary = []
+      var righttotals = []
+
+      var certID = 1;
+
+      skills.map((skill,s) => {
+        var o = {}
+        o = skill
+        o.meta = skill
+        o.data = []
+        //const filteredcertifications = certifications.filter(item => item.skillID === skill.id);
+        //console.log(filteredcertifications)
+        var fcall2 = operators.map((operator,i) => {
+
+          var cert = {
+            //id: certID.toString(),
+            certificationID: certID.toString(),
+            skill: skill,
+            operator: operator,
+            meta: "{\"status\":\"not started\",\"start\":\"8/2/2021\",\"trainer\":\"false\"}",
+            data: "[{\"p\":25,\"s\":0},{\"p\":50,\"s\":0},{\"p\":75,\"s\":0},{\"p\":100,\"s\":0}]",
+
+
+            // operatorID: operator.id,
+            // skillID: skill.id,
+
+          }
+
+
+
+          //operator.certID = certID;
+          //certID = certID + 1;
+          return cert
+        })
+        //console.log(fcall2)
+        var ss = doCerts(fcall2)
+        //console.log(ss)
+
+
+
+        // var fcall = filteredcertifications.map((item,i) => {
+        //   //item.certID = certID;
+        //   //certID++;
+        //   return item
+        // })
+        // console.log(fcall)
+
+        //var ss = doCerts(filteredcertifications)
+
+
+        // var ss = {}
+        // ss.numstarted = 0
+        // ss.numtrainers = 0
+        // ss.numcertified = 0
+        // filteredcertifications.map((fc,i) => {
+
+
+        //   var meta = JSON.parse(fc.meta)
+        //   var data = JSON.parse(fc.data)
+
+        //   ss = calcIt(meta, data, ss)
+
+
+
+
+        //   // var num = 0;
+        //   // data.map((slice,i) => {
+        //   //   if (slice.s === 1) {
+        //   //     num++
+        //   //   }
+        //   //   return null
+        //   // })
+        //   // if (num == 4 && meta.status === 'started') {
+        //   //   var dStart = new Date(meta.start);
+        //   //   var dToday = new Date();
+        //   //   var difftime = dToday.getTime() - dStart.getTime()
+        //   //   var diffdays = difftime / (1000 * 3600 * 24);
+        //   //   if (diffdays < 180) {
+        //   //     ss.numcertified ++
+        //   //   }
+        //   // }
+        //   // if (data.status === 'started') {
+        //   //   ss.numstarted ++
+        //   // }
+        //   // if (meta.status === 'started') {
+        //   //   ss.numstarted ++
+        //   // }
+        //   // if (meta.trainer === 'true' || meta.trainer === true ) {
+        //   //   ss.numtrainers ++
+        //   // }
+
+
+        //   return null
+        // })
+
+        skillsummary.push(ss)
+        var goal = skill.goal;
+        var val = [goal, ss.numcertified, goal-ss.numcertified]
+        righttotals.push(val)
+
+        // filteredcertifications.map((fc,i) => {
+        //   console.log(fc)
+        //   var operator  = operators.find(item => item.id === fc.operatorID);
+        //   console.log(fc.meta)
+        //   console.log(fc.data)
+        //   o.data[i] = {};
+        //   o.data[i].certificationID = fc.id
+        //   o.data[i].skill = skill
+        //   o.data[i].operator = operator
+        //   o.data[i].meta = fc.meta
+        //   o.data[i].data = fc.data
+        //   return null
+        // })
+
+        //bySkill.push(o)
+        bySkill.push(fcall2)
+        return null
+      })
+
+      dispatch({type: SET_RIGHTTOTALS, payload: righttotals});
+      console.log(bySkill)
       return bySkill
     }
 
