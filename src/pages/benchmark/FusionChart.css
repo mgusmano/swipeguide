@@ -1,0 +1,22 @@
+#root,
+.app,
+.fusioncharts-container,
+.fusioncharts-parent,
+html,
+body {
+  display: flex;
+  flex: 1;
+  height: 100%;
+  width:100%;
+  margin: 0;
+  overflow: overlay;
+  font-family: Arial;
+}
+
+.border {
+  vpadding: 15px;
+  margin: 15;
+  border: 10px solid lightgray;
+  box-sizing: border-box;
+  box-shadow: 0 10px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+}

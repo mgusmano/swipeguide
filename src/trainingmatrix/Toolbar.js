@@ -1,10 +1,25 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useMatrixState } from './state/MatrixProvider';
+import { useAppState } from '../state/AppProvider';
 import { API } from 'aws-amplify'
 import {Auth} from 'aws-amplify';
+import { AmplifySignOut } from '@aws-amplify/ui-react';
+import { useHistory } from "react-router-dom";
 
 export const Toolbar = React.memo((props) => {
+  const appState = useAppState();
   const matrixState = useMatrixState();
+  const history = useHistory();
+
+    useEffect(() => {
+    Auth.currentAuthenticatedUser()
+    .then(user => {
+      matrixState.setAuthenticatedUser(user.username)
+    })
+    .catch(ex => {
+      matrixState.setAuthenticatedUser(ex)
+    });
+  },[])
 
   function checkUser() {
     let user = Auth.currentAuthenticatedUser();
@@ -104,7 +119,34 @@ export const Toolbar = React.memo((props) => {
           Toggle Legend {matrixState.userName}
         </button>
 
-{/* 
+        <button style={{marginLeft:'40px',width:'120px',height:'30px'}}
+          onClick={(e)=> {
+            matrixState.setUserName('newmatrix')
+            appState.setUserName('newapp')
+          }}
+        >
+          UserName
+        </button>
+
+
+<div>{appState.userName}</div> -
+<div>{matrixState.userName}</div>
+
+                <div style={{fontSize:'14px',marginTop:'29px',marginRight:'9px',color:'white',textDecoration:'none'}}>Logged In User: {matrixState.authenticateduser}</div>
+        <AmplifySignOut
+          handleAuthStateChange = {(nextAuthState,data) => {
+            console.log(nextAuthState)
+            if (nextAuthState == 'signedout') {
+              matrixState.setAuthenticatedUser('')
+              history.push("/admin");
+              history.push("/trainingmatrix");
+              //Auth.signOut();
+            }
+
+          }}
+        />
+
+{/*
         <button
           onClick={async () => {
             var data = await API.get('skillsapi','/skills')

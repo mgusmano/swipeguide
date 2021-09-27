@@ -30,20 +30,6 @@
         }
       ]
     },
-    "miscapi": {
-      "service": "API Gateway",
-      "providerPlugin": "awscloudformation",
-      "dependsOn": [
-        {
-          "category": "function",
-          "resourceName": "miscfunction",
-          "attributes": [
-            "Name",
-            "Arn"
-          ]
-        }
-      ]
-    },
     "certificationapi": {
       "service": "API Gateway",
       "providerPlugin": "awscloudformation",
@@ -75,11 +61,6 @@
   },
   "function": {
     "skillsfunction": {
-      "build": true,
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda"
-    },
-    "miscfunction": {
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda"

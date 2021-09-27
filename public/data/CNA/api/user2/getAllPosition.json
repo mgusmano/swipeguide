@@ -1,0 +1,66 @@
+[
+  {
+    "position_id": 1,
+    "position_name": "AVP - PC"
+  },
+  {
+    "position_id": 2,
+    "position_name": "RC Consulting Director - PC"
+  },
+  {
+    "position_id": 3,
+    "position_name": "RC Director - PC"
+  },
+  {
+    "position_id": 4,
+    "position_name": "RC Consultant - PC"
+  },
+  {
+    "position_id": 5,
+    "position_name": "RC Specialist - PC"
+  },
+  {
+    "position_id": 6,
+    "position_name": "RC Rep - PC"
+  },
+  {
+    "position_id": 7,
+    "position_name": "RC Trainee - PC"
+  },
+  {
+    "position_id": 8,
+    "position_name": "AVP - EB"
+  },
+  {
+    "position_id": 9,
+    "position_name": "RC Consulting Director - EB"
+  },
+  {
+    "position_id": 10,
+    "position_name": "RC Director - EB"
+  },
+  {
+    "position_id": 11,
+    "position_name": "RC Consultant - EB"
+  },
+  {
+    "position_id": 12,
+    "position_name": "RC Specialist - EB"
+  },
+  {
+    "position_id": 13,
+    "position_name": "RC Rep - EB"
+  },
+  {
+    "position_id": 14,
+    "position_name": "RC Trainee - EB"
+  },
+  {
+    "position_id": 15,
+    "position_name": "RC Senior Consultant - EB"
+  },
+  {
+    "position_id": 16,
+    "position_name": "RC Senior Consultant - PC"
+  },
+]

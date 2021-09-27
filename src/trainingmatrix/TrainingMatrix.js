@@ -21,12 +21,17 @@ import { styles } from './styles';
 import { useResizeEvent } from './useResizeEvent';
 import { withAuthenticator } from '@aws-amplify/ui-react'
 
-import { API, graphqlOperation } from 'aws-amplify';
-import { getOperator } from '../graphql/queries';
-import * as queries from '../graphql/queries';
+import { MatrixProvider } from './state/MatrixProvider';
+
+// import { API, graphqlOperation } from 'aws-amplify';
+// import { getOperator } from '../graphql/queries';
+// import * as queries from '../graphql/queries';
+
+export const TrainingMatrix = (() => (<MatrixProvider><Main/></MatrixProvider>))
+
 
 //export const TrainingMatrix = React.memo(({widgetData}) => {
-const TrainingMatrix = () => {
+const Main = () => {
   const matrixState = useMatrixState();
   const [draweropen, setDrawerOpen] = useState(false)
   useResizeEvent()
@@ -96,7 +101,7 @@ const TrainingMatrix = () => {
       `;
 
 
-          var r = await API.graphql(graphqlOperation(queries.operatorsByName, { operatorName: { ne: "08/20/2018" } } ))
+          //var r = await API.graphql(graphqlOperation(queries.operatorsByName, { operatorName: { ne: "08/20/2018" } } ))
           //var r = await API.graphql(graphqlOperation(getOperatorL, { id: 1 }))
 
           // var r = await API.graphql({
@@ -108,7 +113,7 @@ const TrainingMatrix = () => {
           //var r = await API.graphql(graphqlOperation(byOperatorL))
 
 
-          console.log(r)
+          //console.log(r)
         }}
       >GraphQL</button>
 

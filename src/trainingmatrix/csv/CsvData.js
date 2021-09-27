@@ -9,17 +9,21 @@ import CsvDataCertification from './CsvDataCertification';
 import './CsvData.css'
 import { withAuthenticator } from '@aws-amplify/ui-react'
 
-const CsvData = (props) => {
+import { MatrixProvider } from '../state/MatrixProvider';
+
+export const CsvData = (() => (<MatrixProvider><Main/></MatrixProvider>))
+
+const Main = (props) => {
   const matrixState = useMatrixState();
 
   useEffect(() => {
-    Auth.currentAuthenticatedUser()
-    .then(user => {
-      matrixState.setAuthenticatedUser(user.username)
-    })
-    .catch(ex => {
-      matrixState.setAuthenticatedUser(ex)
-    });
+    // Auth.currentAuthenticatedUser()
+    // .then(user => {
+    //   matrixState.setAuthenticatedUser(user.username)
+    // })
+    // .catch(ex => {
+    //   matrixState.setAuthenticatedUser(ex)
+    // });
   },[])
 
   useEffect(() => {

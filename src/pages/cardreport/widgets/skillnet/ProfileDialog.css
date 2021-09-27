@@ -1,0 +1,53 @@
+.add-widgets-dialog .add-widgets-cell {
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -ms-border-radius: 3px;
+    -o-border-radius: 3px;
+    border-radius: 3px;
+    border: 1px solid #757575;
+    cursor: pointer;
+    height: 65px;
+    margin: 3px;
+    min-height: 55px;
+    max-width: 23%;
+    min-width: 23%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.add-widgets-dialog .add-widgets-cell:hover {
+    box-shadow: 0 10px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    z-index: 2000
+}
+
+.add-widgets-dialog > span {
+    color: #757575;
+    display: block;
+    font-size: 11px;
+    font-weight: bold;
+    margin: 5px 0 0 3px;
+    width: 100%;
+    margin-left: 5px;
+    margin-top: 5px;
+}
+
+/* .add-widgets-dialog .icon.widget-comparative {
+    background-image: url(./icons.svg#comparative);
+} */
+
+.add-widgets-dialog .widget-type-name {
+    color: #212121;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items:center;
+    font-size: 11px;
+    line-height: 13px;
+    margin: 5px;
+    text-align: center;
+}
+
+.MuiDialog-paperWidthSm {
+     max-width: 750px !important; 
+}

@@ -1,17 +1,21 @@
 import produce from 'immer';
-import { SET_AUTHENTICATEDUSER, UPDATE_OPERATORGOAL, UPDATE_SKILLGOAL, SET_BOTTOMTOTALS, SET_RIGHTTOTALS, SET_CURRENT_CERTIFICATION, SET_ACTIVE,SET_ALL, SET_OPERATORS, SET_SKILLS, SET_CERTIFICATIONS, SET_BYSKILL, SET_BYOPERATOR, SET_SPECIFIC, TOGGLE_LEGEND, SET_DIMENSIONS, SET_ORIGINAL } from './MatrixTypes';
+//import { SET_AUTHENTICATEDUSER, UPDATE_OPERATORGOAL, UPDATE_SKILLGOAL, SET_BOTTOMTOTALS, SET_RIGHTTOTALS, SET_CURRENT_CERTIFICATION, SET_ACTIVE,SET_ALL, SET_OPERATORS, SET_SKILLS, SET_CERTIFICATIONS, SET_BYSKILL, SET_BYOPERATOR, SET_SPECIFIC, TOGGLE_LEGEND, SET_DIMENSIONS, SET_ORIGINAL } from './MatrixTypes';
 
+import * as types from './MatrixTypes';
 export const MatrixReducer = (state, action) => {
 
   const { type, payload } = action;
   var s;
   switch (type) {
+    case types.SET_USERNAME:
+      s = {...state,userName:payload}
+      return s
 
-    case SET_AUTHENTICATEDUSER:
+    case types.SET_AUTHENTICATEDUSER:
       s = {...state,authenticateduser:payload}
       return s
 
-    case UPDATE_OPERATORGOAL:
+    case types.UPDATE_OPERATORGOAL:
       //console.log(state.operators)
       var index = state.operators.map(item => item.id).indexOf(payload.id);
       s = {
@@ -23,7 +27,7 @@ export const MatrixReducer = (state, action) => {
       //console.log(s)
       return s
 
-    case UPDATE_SKILLGOAL:
+    case types.UPDATE_SKILLGOAL:
       console.log(state.skills)
       var index = state.skills.map(item => item.id).indexOf(payload.id);
       s = {
@@ -35,17 +39,17 @@ export const MatrixReducer = (state, action) => {
       console.log(s)
       return s
 
-    case SET_BOTTOMTOTALS:
+    case types.SET_BOTTOMTOTALS:
       s = {...state,bottomtotals:payload}
       return s
 
-    case SET_RIGHTTOTALS:
+    case types.SET_RIGHTTOTALS:
       s = {...state,righttotals:payload}
       return s
-    case SET_CURRENT_CERTIFICATION:
+    case types.SET_CURRENT_CERTIFICATION:
       s = {...state,currentcertification:payload}
       return s
-    case SET_ALL:
+    case types.SET_ALL:
       s = {
         ...state,
         bySkill:payload.bySkill,
@@ -55,7 +59,7 @@ export const MatrixReducer = (state, action) => {
         certifications:payload.certifications,
       }
       return s
-    case SET_ACTIVE:
+    case types.SET_ACTIVE:
       if (payload === true) {
         s = {...state,active:true}
       }
@@ -63,32 +67,32 @@ export const MatrixReducer = (state, action) => {
         s = {...state,active:false}
       }
       return s
-    case SET_OPERATORS:
+    case types.SET_OPERATORS:
       s = {...state,operators:payload}
       return s
-    case SET_SKILLS:
+    case types.SET_SKILLS:
       s = {...state,skills:payload}
       return s
-    case SET_CERTIFICATIONS:
+    case types.SET_CERTIFICATIONS:
       s = {...state,certifications:payload}
       return s
-    case SET_BYSKILL:
+    case types.SET_BYSKILL:
       s = {...state,bySkill:payload}
       return s
-    case SET_BYOPERATOR:
+    case types.SET_BYOPERATOR:
       s = {...state,byOperator:payload}
       return s
 
-    case SET_SPECIFIC:
+    case types.SET_SPECIFIC:
       s = {...state,specific:payload}
       return s
-    case SET_DIMENSIONS:
+    case types.SET_DIMENSIONS:
       s = {...state,dimensions:payload}
       return s
-    case SET_ORIGINAL:
+    case types.SET_ORIGINAL:
         s = {...state,original:payload}
         return s
-    case TOGGLE_LEGEND:
+    case types.TOGGLE_LEGEND:
       var val = !state.showTheLegend
       s = {...state,showTheLegend:val}
       return s

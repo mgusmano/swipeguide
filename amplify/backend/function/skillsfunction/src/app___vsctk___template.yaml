@@ -1,0 +1,10 @@
+Resources:
+  src:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: index.handler
+      CodeUri: >-
+        /Volumes/BOOTCAMP/_____/aws/swipeguide/amplify/backend/function/skillsfunction/src
+      Runtime: nodejs14.x
+      Environment:
+        Variables: {}

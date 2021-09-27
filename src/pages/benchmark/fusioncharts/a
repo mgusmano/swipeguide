@@ -1,0 +1,21 @@
+http://skillnetusersapi.azurewebsites.net/api/groupusers?personid=276597&GroupID=33785&PartnerID=418
+
+
+// //https://www.fusioncharts.com/dev/chart-attributes/area2d
+// import { chord } from './fusioncharts/chord'
+// import { column2d } from './fusioncharts/column2d'
+// import { doughnut2d } from './fusioncharts/doughnut2d'
+// import { msline } from './fusioncharts/msline'
+// import { MultiAxisLine } from './fusioncharts/MultiAxisLine'
+// import { msspline } from './fusioncharts/msspline'
+// import { mscolumn2d } from './fusioncharts/mscolumn2d'
+// import { msbar2d } from './fusioncharts/msbar2d'
+// import { scrollline2d } from './fusioncharts/scrollline2d'
+      {/* <FusionChart type='chord' dataSource={chord}/> */}
+      {/* <FusionChart type='doughnut2d' dataSource={doughnut2d}/> */}
+      {/* <FusionChart type='column2d' dataSource={column2d}/> */}
+      {/* <FusionChart type='msline' dataSource={msline}/> */}
+      {/* <FusionChart type='MultiAxisLine' dataSource={MultiAxisLine}/> */}
+      {/* <FusionChart type='msspline' dataSource={msspline}/> */}
+      {/* <FusionChart type='mscolumn2d' dataSource={mscolumn2d}/> */}
+      {/* <FusionChart type='msbar2d' dataSource={msbar2d}/> */}
