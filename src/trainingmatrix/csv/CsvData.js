@@ -47,4 +47,5 @@ const Main = (props) => {
   )
 }
 
-export default withAuthenticator(CsvData)
+//export default withAuthenticator(CsvData)
+export default CsvData

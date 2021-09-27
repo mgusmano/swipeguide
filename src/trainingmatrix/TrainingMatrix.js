@@ -199,4 +199,5 @@ const Main = () => {
   )
 }
 
-export default withAuthenticator(TrainingMatrix)
+//export default withAuthenticator(TrainingMatrix)
+export default TrainingMatrix
