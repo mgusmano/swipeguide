@@ -51,9 +51,12 @@ const TopMenu = (props) => {
         <div>
             <Link style={{marginLeft:'60px',color:'white',textDecoration:'none'}} to="/trainingmatrix">Training Matrix</Link>
             <Link style={{marginLeft:'50px',color:'white',textDecoration:'none'}} to="/csv">Load Data</Link>
-            <Link style={{marginLeft:'50px',color:'white',textDecoration:'none'}} to="/simple">Simple</Link>
+
+
+            {/* <Link style={{marginLeft:'50px',color:'white',textDecoration:'none'}} to="/simple">Simple</Link>
             <Link style={{marginLeft:'50px',color:'white',textDecoration:'none'}} to="/benchmark">Benchmark</Link>
-            <Link style={{marginLeft:'50px',color:'white',textDecoration:'none'}} to="/cardreport">Card Report</Link>
+            <Link style={{marginLeft:'50px',color:'white',textDecoration:'none'}} to="/cardreport">Card Report</Link> */}
+
 
             {/* <Link style={{marginLeft:'50px',color:'white',textDecoration:'none'}} to="/admin">Admin</Link> */}
         </div>
@@ -61,16 +64,18 @@ const TopMenu = (props) => {
 
       <div style={{display:'flex',flexDirection:'row'}}>
 
-        <button style={{marginLeft:'10px',width:'120px',height:'30px'}}
+        <button style={{display:'none',marginLeft:'10px',width:'120px',height:'30px'}}
           onClick={(e)=> {
             appState.setUserName('newAppUserName')
           }}
         >Set All</button>
 
 
-        <div>{appState.userName}</div>
-        <div style={{fontSize:'14px',marginTop:'29px',marginRight:'9px',color:'white',textDecoration:'none'}}>Logged In User: {appState.authenticatedUser}</div>
-        <AmplifySignOut
+        <div style={{display:'none'}} >{appState.userName}</div>
+        <div style={{display:'none',fontSize:'14px',marginTop:'29px',marginRight:'9px',color:'white',textDecoration:'none'}}>Logged In User: {appState.authenticatedUser}</div>
+
+
+        {/* <AmplifySignOut
           handleAuthStateChange = {(nextAuthState,data) => {
             console.log(nextAuthState)
             if (nextAuthState == 'signedout') {
@@ -79,9 +84,13 @@ const TopMenu = (props) => {
               history.push("/trainingmatrix");
               //Auth.signOut();
             }
-
           }}
-        />
+        /> */}
+
+
+
+
+
       </div>
       {/* <i style={{marginRight:'20px',cursor:'pointer'}} className="fa fa-bars" onClick={props.filterClick}></i> */}
     </div>

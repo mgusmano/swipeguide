@@ -55,14 +55,18 @@ const Main = () => {
   return (
     <div className='trainingmatrix' style={{...styles.v,width:'100%',height:'100%',background:'lightgray'}}>
       {matrixState.showTheLegend && <Legend/>}
-      <Toolbar/>
 
-      <button style={{marginLeft:'40px',width:'120px',height:'30px'}}
+      {/* <Toolbar/> */}
+
+      {/* <button style={{marginLeft:'40px',width:'120px',height:'30px'}}
         onClick={(e)=> {
           setDrawerOpen(!draweropen)
         }}
-      >open</button>
-      <button style={{marginLeft:'40px',width:'120px',height:'30px'}}
+      >open</button> */}
+
+
+
+      <button style={{display:'none',marginLeft:'40px',width:'120px',height:'30px'}}
         onClick={async (e)=> {
           //setDrawerOpen(!draweropen)
 

@@ -51,7 +51,7 @@ function Main(props) {
 
   return (
       <Vertical style={{width:'100%',height:'100%',display:'flex',flexDirection:'column'}}>
-        <div>{appState.userName}</div>
+        {/* <div>{appState.userName}</div> */}
         <Top/>
         <TopMenu/>
         <div className="routehost" style={{flex: 'auto', display:'flex', flexDirection:'row',alignItems:'center',justifyContent:'center',overflow:'hidden'}}>
