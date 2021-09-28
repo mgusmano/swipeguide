@@ -53,7 +53,7 @@ const Main = () => {
 
   //<div className='' style={{...styles.vertical,width:'100%',height:'100%',fontSize:matrixState.dimensions.fontsize+'pt'}}>
   return (
-    <div className='trainingmatrix' style={{...styles.v,width:'100%',height:'100%',background:'lightgray'}}>
+    <div className='trainingmatrix' style={{...styles.v,padding:'20px',width:'100%',height:'100%',background:'lightgray'}}>
       {matrixState.showTheLegend && <Legend/>}
 
       {/* <Toolbar/> */}
