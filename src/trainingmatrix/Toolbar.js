@@ -116,10 +116,10 @@ export const Toolbar = React.memo((props) => {
             matrixState.toggleLegend()
           }}
         >
-          Toggle Legend {matrixState.userName}
+          Toggle Legend
         </button>
 
-        <button style={{marginLeft:'40px',width:'120px',height:'30px'}}
+        <button style={{display:'none',height:'40px',width:'120px',height:'30px'}}
           onClick={(e)=> {
             matrixState.setUserName('newmatrix')
             appState.setUserName('newapp')
@@ -129,22 +129,20 @@ export const Toolbar = React.memo((props) => {
         </button>
 
 
-<div>{appState.userName}</div> -
-<div>{matrixState.userName}</div>
+{/* <div>{appState.userName}</div> -
+<div>{matrixState.userName}</div> */}
 
-                <div style={{fontSize:'14px',marginTop:'29px',marginRight:'9px',color:'white',textDecoration:'none'}}>Logged In User: {matrixState.authenticateduser}</div>
-        <AmplifySignOut
+                <div style={{display:'none',fontSize:'14px',marginTop:'29px',marginRight:'9px',color:'white',textDecoration:'none'}}>Logged In User: {matrixState.authenticateduser}</div>
+        {/* <AmplifySignOut
           handleAuthStateChange = {(nextAuthState,data) => {
             console.log(nextAuthState)
             if (nextAuthState == 'signedout') {
               matrixState.setAuthenticatedUser('')
               history.push("/admin");
               history.push("/trainingmatrix");
-              //Auth.signOut();
             }
-
           }}
-        />
+        /> */}
 
 {/*
         <button

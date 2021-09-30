@@ -53,10 +53,10 @@ const Main = () => {
 
   //<div className='' style={{...styles.vertical,width:'100%',height:'100%',fontSize:matrixState.dimensions.fontsize+'pt'}}>
   return (
-    <div className='trainingmatrix' style={{...styles.v,padding:'20px',width:'100%',height:'100%',background:'lightgray'}}>
+    <div className='trainingmatrix' style={{...styles.v,width:'100%',height:'100%',background:'lightgray'}}>
       {matrixState.showTheLegend && <Legend/>}
 
-      {/* <Toolbar/> */}
+      <Toolbar/>
 
       {/* <button style={{marginLeft:'40px',width:'120px',height:'30px'}}
         onClick={(e)=> {
@@ -123,7 +123,7 @@ const Main = () => {
 
       {/* main area start */}
       {matrixState.dimensions !== null &&
-      <div className='mainarea' data-flex-splitter-horizontal style={{...styles.horizontal,width:'100%',height:'100%'}}>
+      <div className='mainarea' data-flex-splitter-horizontal style={{...styles.horizontal,padding:'20px',width:'100%',height:'100%'}}>
 
         {/* left area - matrix - start */}
         <div data-flex-splitter-horizontal className='left' style={{...styles.v,flex:1,boxSizing:'border-box'}}>
@@ -172,10 +172,10 @@ const Main = () => {
 
 
         <Drawer anchor={'right'} open={draweropen}
-          onClose={
-            console.log('close')
-            //toggleDrawer(anchor, false)
-          }
+          // onClose={
+
+          //   //toggleDrawer(anchor, false)
+          // }
         >
           <div style={{display:'flex',flexDirection:'column',width:'500px',height:'100%',boxSizing:'border-box',border:'10px solid green'}}>
             <div style={{height:'50px'}}>Any Settings Would be Here</div>

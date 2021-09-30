@@ -23,15 +23,21 @@ export const setAll = (dispatch, first) => {
 
   async function getDataOperators() {
     const operatorData = await API.graphql(graphqlOperation(listOperators))
-    return operatorData.data.listOperators.items.sort((a, b) => (a.id > b.id) ? 1 : -1)
+    var data = operatorData.data.listOperators.items.sort((a, b) => (a.id > b.id) ? 1 : -1)
+console.log(data)
+    return data; //operatorData.data.listOperators.items.sort((a, b) => (a.id > b.id) ? 1 : -1)
   }
   async function getDataSkills() {
     const skillData = await API.graphql(graphqlOperation(listSkills))
-    return skillData.data.listSkills.items.sort((a, b) => (a.id > b.id) ? 1 : -1)
+    var data = skillData.data.listSkills.items.sort((a, b) => (a.id > b.id) ? 1 : -1)
+console.log(data)
+    return data; //skillData.data.listSkills.items.sort((a, b) => (a.id > b.id) ? 1 : -1)
   }
   async function getDataCertifications() {
     const certificationData = await API.graphql(graphqlOperation(listCertifications))
-    return certificationData.data.listCertifications.items.sort((a, b) => (a.id > b.id) ? 1 : -1)
+    var data = certificationData.data.listCertifications.items.sort((a, b) => (a.id > b.id) ? 1 : -1)
+console.log(data)
+    return data; //certificationData.data.listCertifications.items.sort((a, b) => (a.id > b.id) ? 1 : -1)
   }
 
   const doByOperator = (operators, skills, certifications,dispatch) => {
@@ -232,9 +238,9 @@ export const setAll = (dispatch, first) => {
     var byOperator = []
     var bySkill = []
 
-    console.log(doBy)
-    console.log(operators.length)
-    console.log(skills.length)
+    //console.log(doBy)
+    //console.log(operators.length)
+    //console.log(skills.length)
     if (doBy === undefined) {
       if (operators.length !== 0 && listSkills.length !== 0) {
         //console.log('in2')
@@ -270,7 +276,6 @@ export const setAll = (dispatch, first) => {
     //}, 1000);
 
   };
-  console.log(dispatch)
   callAll(dispatch,first)
 }
 
