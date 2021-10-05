@@ -1,7 +1,11 @@
 import React from 'react';
-import {SvgX,PathX,TextX, CircleX} from './SvgStuff';
+import {SvgX, PathX, TextX, CircleX, ImageX} from './SvgStuff';
 
 export const Diamond = ({meta, data, boxSize, padding}) => {
+  var type = meta.type
+  var solidcolor = meta.color
+  var letter = meta.letter
+
   if (typeof data === 'string') {
     data = JSON.parse(data)
   }
@@ -82,7 +86,15 @@ export const Diamond = ({meta, data, boxSize, padding}) => {
 
   return (
     <SvgX width={boxSize} height={boxSize} viewBox={'-100 -100 200 200'}>
-    {status === 'started' &&
+
+    {type === 'solid' &&
+    <>
+    <CircleX cx={0} cy={0} fill={solidcolor} r={radius} stroke={solidcolor} strokeWidth={(40-padding)} fillOpacity="1.0" />
+    <TextX textAnchor="middle" alignmentBaseline="middle" fontSize={(130-padding)} fill="white" x ={'0'} y ={(diamondSize/4)} width={(44-padding)} height={(40-padding)} strokeWidth="1" stroke="black">{letter}</TextX>
+    </>
+    }
+
+    {type !== 'solid' && status === 'started' &&
     data.map((slice,s)=>{
       var [d,f] = getSlice(slice,diamondSize)
       return (
@@ -95,6 +107,7 @@ export const Diamond = ({meta, data, boxSize, padding}) => {
     <CircleX cx={0} cy={0} r={radius} stroke="blue" strokeWidth={(40-padding)} fillOpacity="0.0" />
     </>
     }
+
     </SvgX>
   )
 }

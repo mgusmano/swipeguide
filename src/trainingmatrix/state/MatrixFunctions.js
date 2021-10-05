@@ -2,9 +2,9 @@ import * as types from './MatrixTypes';
 //import * as types from './Types';
 
 import { API, graphqlOperation } from 'aws-amplify'
-import { listOperators} from '../../graphql/queries'
-import { listSkills } from '../../graphql/queries'
-import { listCertifications} from '../../graphql/queries'
+// import { listOperators} from '../../graphql/queries'
+// import { listSkills } from '../../graphql/queries'
+// import { listCertifications} from '../../graphql/queries'
 import { updateSkill, updateOperator, updateCertification } from '../graphql/mutations'
 
 export const setUserName = (dispatch, payload) => {
@@ -19,26 +19,26 @@ export const updateOperatorGoal = (dispatch,payload) => {
   })
 }
 
-export const setAll = (dispatch, first) => {
+export const setAll = (dispatch, first, operatorsData, skillsData, certificationsData) => {
 
-  async function getDataOperators() {
-    const operatorData = await API.graphql(graphqlOperation(listOperators))
-    var data = operatorData.data.listOperators.items.sort((a, b) => (a.id > b.id) ? 1 : -1)
-console.log(data)
-    return data; //operatorData.data.listOperators.items.sort((a, b) => (a.id > b.id) ? 1 : -1)
-  }
-  async function getDataSkills() {
-    const skillData = await API.graphql(graphqlOperation(listSkills))
-    var data = skillData.data.listSkills.items.sort((a, b) => (a.id > b.id) ? 1 : -1)
-console.log(data)
-    return data; //skillData.data.listSkills.items.sort((a, b) => (a.id > b.id) ? 1 : -1)
-  }
-  async function getDataCertifications() {
-    const certificationData = await API.graphql(graphqlOperation(listCertifications))
-    var data = certificationData.data.listCertifications.items.sort((a, b) => (a.id > b.id) ? 1 : -1)
-console.log(data)
-    return data; //certificationData.data.listCertifications.items.sort((a, b) => (a.id > b.id) ? 1 : -1)
-  }
+//   async function getDataOperators() {
+//     const operatorData = await API.graphql(graphqlOperation(listOperators))
+//     var data = operatorData.data.listOperators.items.sort((a, b) => (a.id > b.id) ? 1 : -1)
+//     //console.log(JSON.stringify(data))
+//     return data; //operatorData.data.listOperators.items.sort((a, b) => (a.id > b.id) ? 1 : -1)
+//   }
+//   async function getDataSkills() {
+//     const skillData = await API.graphql(graphqlOperation(listSkills))
+//     var data = skillData.data.listSkills.items.sort((a, b) => (a.id > b.id) ? 1 : -1)
+// //console.log(JSON.stringify(data))
+//     return data; //skillData.data.listSkills.items.sort((a, b) => (a.id > b.id) ? 1 : -1)
+//   }
+//   async function getDataCertifications() {
+//     const certificationData = await API.graphql(graphqlOperation(listCertifications))
+//     var data = certificationData.data.listCertifications.items.sort((a, b) => (a.id > b.id) ? 1 : -1)
+// //    console.log(JSON.stringify(data))
+//     return data; //certificationData.data.listCertifications.items.sort((a, b) => (a.id > b.id) ? 1 : -1)
+//   }
 
   const doByOperator = (operators, skills, certifications,dispatch) => {
     var byOperator = []
@@ -57,13 +57,27 @@ console.log(data)
       ss.numtrainers = 0
       ss.numcertified = 0
       filteredcertifications.map((fc,i) => {
-        var meta = JSON.parse(fc.meta)
-        var data = JSON.parse(fc.data)
+        var meta
+        var data
+        if (typeof fc.meta === 'string' || fc.meta instanceof String) {
+          meta = JSON.parse(fc.meta)
+        }
+        else {
+          meta = fc.meta
+        }
+        if (typeof fc.data === 'string' || fc.data instanceof String) {
+          data = JSON.parse(fc.data)
+        }
+        else {
+          data = fc.data
+        }
+
         var num = 0;
         data.map((slice,i) => {
           if (slice.s === 1) {
             num++
           }
+          return null
         })
         if (num >  0 && meta.status === 'started') {
           var dStart = new Date(meta.start);
@@ -83,6 +97,7 @@ console.log(data)
         if (meta.trainer === 'true' || meta.trainer === true ) {
           ss.numtrainers ++
         }
+        return null
       })
       operatorsummary.push(ss)
 
@@ -125,13 +140,28 @@ console.log(data)
       ss.numtrainers = 0
       ss.numcertified = 0
       filteredcertifications.map((fc,i) => {
-        var meta = JSON.parse(fc.meta)
-        var data = JSON.parse(fc.data)
+
+        var meta
+        var data
+        if (typeof fc.meta === 'string' || fc.meta instanceof String) {
+          meta = JSON.parse(fc.meta)
+        }
+        else {
+          meta = fc.meta
+        }
+        if (typeof fc.data === 'string' || fc.data instanceof String) {
+          data = JSON.parse(fc.data)
+        }
+        else {
+          data = fc.data
+        }
+
         var num = 0;
         data.map((slice,i) => {
           if (slice.s === 1) {
             num++
           }
+          return null
         })
         if (num >  0 && meta.status === 'started') {
           var dStart = new Date(meta.start);
@@ -151,6 +181,7 @@ console.log(data)
         if (meta.trainer === 'true' || meta.trainer === true ) {
           ss.numtrainers ++
         }
+        return null
       })
       skillsummary.push(ss)
       var goal = skill.goal;
@@ -230,24 +261,44 @@ console.log(data)
   }
 
 
-  const callAll = async (dispatch,first,doBy) => {
+  //  const callAll = async (dispatch,first,doBy, operatorsData, skillsData, certificationsData) => {
+  const callAll = async (dispatch,payload2) => {
+    var first = payload2.first
+    var operatorsData = payload2.operatorsData
+    var skillsData = payload2.skillsData
+    var certificationsData = payload2.certificationsData
 
-    var operators = await getDataOperators()
-    var skills = await getDataSkills()
-    var certifications = await getDataCertifications()
+    //console.log('operatorsData')
+    //console.log(operatorsData)
+
+    var operators
+    var skills
+    var certifications
+
+    if (operatorsData === undefined) {
+      // operators = await getDataOperators()
+      // skills = await getDataSkills()
+      // certifications = await getDataCertifications()
+    }
+    else {
+      operators = operatorsData
+      skills = skillsData
+      certifications = certificationsData
+    }
+
     var byOperator = []
     var bySkill = []
 
-    //console.log(doBy)
-    //console.log(operators.length)
-    //console.log(skills.length)
-    if (doBy === undefined) {
-      if (operators.length !== 0 && listSkills.length !== 0) {
+    //var  doBy
+//mjg
+    //if (doBy === undefined) {
+      //if (operators.length !== 0 && listSkills.length !== 0) {
+      if (operators.length !== 0 && skills.length !== 0) {
         //console.log('in2')
         byOperator = doByOperator(operators,skills,certifications,dispatch)
         bySkill = doBySkill(operators,skills,certifications,dispatch)
       }
-    }
+    //}
 
 // console.log(operators)
 // console.log(skills)
@@ -261,7 +312,6 @@ console.log(data)
       setInit({oLen,sLen})
     }
 
-
     var payload = {
       bySkill: bySkill,
       byOperator: byOperator,
@@ -270,13 +320,14 @@ console.log(data)
       certifications: certifications
     }
     dispatch({type: types.SET_ALL, payload: payload});
+    dispatch({type: types.SET_ACTIVE, payload: false});
+  }
 
-    //setTimeout(function(){
-      dispatch({type: types.SET_ACTIVE, payload: false});
-    //}, 1000);
+  //console.log(first)
+  //console.log(dispatch,first, operatorsData, skillsData, certificationsData)
 
-  };
-  callAll(dispatch,first)
+
+  callAll(dispatch,first, operatorsData, skillsData, certificationsData)
 }
 
 // export const setOperators = (dispatch) => {

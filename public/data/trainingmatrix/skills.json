@@ -1,0 +1,65 @@
+[
+  {
+    "id": "1",
+    "skillName": "Core Loading",
+    "goal": 9,
+    "createdAt": "2021-08-03T11:00:40.757Z",
+    "updatedAt": "2021-08-03T11:00:40.757Z"
+  },
+  {
+    "id": "2",
+    "skillName": "Phase Paper Insertion (VW)",
+    "goal": 2,
+    "createdAt": "2021-08-03T11:00:40.844Z",
+    "updatedAt": "2021-08-03T11:00:40.844Z"
+  },
+  {
+    "id": "3",
+    "skillName": "Lead Wire Setting",
+    "goal": 8,
+    "createdAt": "2021-08-03T11:00:40.801Z",
+    "updatedAt": "2021-08-03T11:00:40.801Z"
+  },
+  {
+    "id": "4",
+    "skillName": "Neutral Tube Insertion",
+    "goal": 3,
+    "createdAt": "2021-08-03T11:00:40.786Z",
+    "updatedAt": "2021-08-03T11:00:40.786Z"
+  },
+  {
+    "id": "5",
+    "skillName": "Neutral Crimp",
+    "goal": 7,
+    "createdAt": "2021-08-03T11:00:40.760Z",
+    "updatedAt": "2021-08-03T11:00:40.760Z"
+  },
+  {
+    "id": "6",
+    "skillName": "Pre-Lacing",
+    "goal": 4,
+    "createdAt": "2021-08-03T11:00:40.778Z",
+    "updatedAt": "2021-08-03T11:00:40.778Z"
+  },
+  {
+    "id": "7",
+    "skillName": "Lacing",
+    "goal": 5,
+    "createdAt": "2021-08-03T11:00:40.782Z",
+    "updatedAt": "2021-08-03T11:00:40.782Z"
+  },
+  {
+    "id": "8",
+    "skillName": "Lead Terminal Crimp",
+    "goal": 6,
+    "createdAt": "2021-08-03T11:00:40.761Z",
+    "updatedAt": "2021-08-03T11:00:40.761Z"
+  },
+  {
+    "id": "9",
+    "skillName": "Lead Wire Forming",
+    "goal": 1,
+    "createdAt": "2021-08-03T11:00:40.743Z",
+    "updatedAt": "2021-08-03T11:00:40.743Z"
+  }
+]

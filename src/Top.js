@@ -2,7 +2,7 @@ import React from 'react';
 //import logoImg from "./images/SkillNetBall.jpeg";
 //import { Logo } from "./components/AuthForms";
 //import SKILLNETBALL from './images/SkillNetBall.jpeg';
-import SWIPE from './images/swipe-logo-normal.svg';
+//import SWIPE from './images/swipe-logo-normal.svg';
 
 const Top = (props) => {
 

@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useAppState } from './state/AppProvider';
 
 import { Link } from "react-router-dom";
 import {Auth} from 'aws-amplify';
-import { AmplifySignOut } from '@aws-amplify/ui-react';
-import { useHistory } from "react-router-dom";
+//import { AmplifySignOut } from '@aws-amplify/ui-react';
+//import { useHistory } from "react-router-dom";
 
 const TopMenu = (props) => {
   const appState = useAppState();
 
   //const matrixState = useMatrixState();
   //const [loggedinuser, setLoggedInUser] = useState('')
-  const history = useHistory();
+  //const history = useHistory();
 
   useEffect(() => {
     Auth.currentAuthenticatedUser()

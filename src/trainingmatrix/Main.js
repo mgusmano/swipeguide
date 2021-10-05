@@ -69,7 +69,7 @@ export const Main = (props) => {
     else {
       setTrainer(false)
     }
-  },[props])
+  },[props,data,meta])
 
   const onTrainerChange = async (event) => {
     matrixState.setActive(true)

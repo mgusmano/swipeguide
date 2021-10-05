@@ -1,8 +1,8 @@
 import * as types from './BenchmarkTypes';
-import evaluateLocationGraph from './helper/locationGraphHelper';
-import evaluatePositionGraph from './helper/positionGraphHelper';
-import evaluateManagerGraph from './helper/managerGraphHelper';
-import evaluateIndividualGraph from './helper/individualGraphHelper';
+// import evaluateLocationGraph from './helper/locationGraphHelper';
+// import evaluatePositionGraph from './helper/positionGraphHelper';
+// import evaluateManagerGraph from './helper/managerGraphHelper';
+// import evaluateIndividualGraph from './helper/individualGraphHelper';
 
 export const BenchmarkReducer = (state, action) => {
   const { type, payload } = action;

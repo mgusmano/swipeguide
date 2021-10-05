@@ -2,7 +2,7 @@ import * as types from './AppTypes';
 
 export const AppReducer = (state, action) => {
   const { type, payload } = action;
-  var s;
+  //var s;
   //console.log(type)
   //console.log(types.SET_USERNAME)
   switch (type) {

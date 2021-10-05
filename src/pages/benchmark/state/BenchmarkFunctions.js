@@ -1,5 +1,5 @@
 import * as types from './BenchmarkTypes';
-import httpHelper from "./helper/httpHelper";
+//import httpHelper from "./helper/httpHelper";
 import axios from 'axios';
 //import { UserAssessmentReport } from './UserAssessmentReport'
 
@@ -332,7 +332,7 @@ export const setAll = (dispatch, payload) => {
     console.log(userskills2)
 
     //const targetDataSet = userskills.filter(item => item.user_skill_is_self == 0);
-    const targetDataSet = userskills2.filter(item => item.is_self == outputId);
+    const targetDataSet = userskills2.filter(item => item.is_self === outputId);
     //console.log(targetDataSet)
 
     //const targetDataSet = this.userSkillData.filter(item => filterObj.rating === item.is_self);

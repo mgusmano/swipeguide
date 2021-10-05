@@ -11,7 +11,9 @@ export const MatrixProvider = (props) => {
   const getFunctions = {
     setUserName: (payload) => functions.setUserName(dispatch, payload),
     setActive: (payload) => functions.setActive(dispatch, payload),
-    setAll: (payload) => functions.setAll(dispatch, payload),
+    setAll: (payload) => {
+      functions.setAll(dispatch, payload)
+    },
     updateOperatorGoal: (payload) => functions.updateOperatorGoal(dispatch, payload),
 
     setAuthenticatedUser: (payload) => functions.setAuthenticatedUser(dispatch, payload),
