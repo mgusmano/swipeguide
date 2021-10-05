@@ -1,5 +1,5 @@
 import React from 'react';
-import {SvgX, PathX, TextX, CircleX, ImageX} from './SvgStuff';
+import {SvgX, PathX, TextX, CircleX} from './SvgStuff';
 
 export const Diamond = ({meta, data, boxSize, padding}) => {
   var type = meta.type

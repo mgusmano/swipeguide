@@ -769,180 +769,231 @@ export const TrainingMatrixPage = (props) => {
     },
   ]
 
-  var operatorsDataA = [
-    {
-      "id": "1",
-      "operatorName": "Joe2 Smith",
-      "goal": 7,
-      "createdAt": "2021-08-03T11:00:31.714Z",
-      "updatedAt": "2021-09-30T13:53:28.747Z"
-    },
-    {
-      "id": "2",
-      "operatorName": "Marcus Ester",
-      "goal": 4,
-      "createdAt": "2021-08-03T11:00:31.702Z",
-      "updatedAt": "2021-08-03T11:00:31.702Z"
-    },
-    {
-      "id": "3",
-      "operatorName": "Ted White",
-      "goal": 3,
-      "createdAt": "2021-08-03T11:00:31.733Z",
-      "updatedAt": "2021-08-03T11:00:31.733Z"
-    },
-    {
-      "id": "4",
-      "operatorName": "Betty Green",
-      "goal": 2,
-      "createdAt": "2021-08-03T11:00:31.719Z",
-      "updatedAt": "2021-08-03T11:00:31.719Z"
-    },
-    {
-      "id": "5",
-      "operatorName": "Bob Jones",
-      "goal": 1,
-      "createdAt": "2021-08-03T11:00:31.717Z",
-      "updatedAt": "2021-08-03T11:00:31.717Z"
-    },
-    {
-      "id": "6",
-      "operatorName": "Frank Davis",
-      "goal": 8,
-      "createdAt": "2021-08-03T11:00:31.749Z",
-      "updatedAt": "2021-08-03T11:00:31.749Z"
-    },
-    {
-      "id": "7",
-      "operatorName": "Jane Johnson",
-      "goal": 7,
-      "createdAt": "2021-08-03T11:00:31.709Z",
-      "updatedAt": "2021-08-03T11:00:31.709Z"
-    },
-    {
-      "id": "8",
-      "operatorName": "Mary Bird",
-      "goal": 6,
-      "createdAt": "2021-08-03T11:00:31.721Z",
-      "updatedAt": "2021-10-01T09:38:34.558Z"
-    },
-    {
-      "id": "9",
-      "operatorName": "Zoya Lee",
-      "goal": 5,
-      "createdAt": "2021-08-03T11:00:31.720Z",
-      "updatedAt": "2021-08-03T11:00:31.720Z"
+  useEffect(() => {
+
+    var skillsDataA = [
+      {
+        "id": "1",
+        "skillName": "Core2 Loading",
+        "goal": 8,
+      },
+      {
+        "id": "2",
+        "skillName": "Phase Paper Insertion (VW)",
+        "goal": 2,
+        "createdAt": "2021-08-03T11:00:40.844Z",
+        "updatedAt": "2021-08-03T11:00:40.844Z"
+      },
+      {
+        "id": "3",
+        "skillName": "Lead Wire Setting",
+        "goal": 8,
+        "createdAt": "2021-08-03T11:00:40.801Z",
+        "updatedAt": "2021-08-03T11:00:40.801Z"
+      },
+      {
+        "id": "4",
+        "skillName": "Neutral Tube Insertion",
+        "goal": 3,
+        "createdAt": "2021-08-03T11:00:40.786Z",
+        "updatedAt": "2021-08-03T11:00:40.786Z"
+      },
+      {
+        "id": "5",
+        "skillName": "Neutral Crimp",
+        "goal": 7,
+        "createdAt": "2021-08-03T11:00:40.760Z",
+        "updatedAt": "2021-08-03T11:00:40.760Z"
+      },
+      {
+        "id": "6",
+        "skillName": "Pre-Lacing",
+        "goal": 4,
+        "createdAt": "2021-08-03T11:00:40.778Z",
+        "updatedAt": "2021-08-03T11:00:40.778Z"
+      },
+      {
+        "id": "7",
+        "skillName": "Lacing",
+        "goal": 5,
+        "createdAt": "2021-08-03T11:00:40.782Z",
+        "updatedAt": "2021-08-03T11:00:40.782Z"
+      },
+      {
+        "id": "8",
+        "skillName": "Lead Terminal Crimp",
+        "goal": 6,
+        "createdAt": "2021-08-03T11:00:40.761Z",
+        "updatedAt": "2021-08-03T11:00:40.761Z"
+      },
+      {
+        "id": "9",
+        "skillName": "Lead Wire Forming",
+        "goal": 1,
+        "createdAt": "2021-08-03T11:00:40.743Z",
+        "updatedAt": "2021-08-03T11:00:40.743Z"
+      }
+    ]
+    var operatorsDataA = [
+      {
+        "id": "1",
+        "operatorName": "Joe2 Smith",
+        "goal": 7,
+        "createdAt": "2021-08-03T11:00:31.714Z",
+        "updatedAt": "2021-09-30T13:53:28.747Z"
+      },
+      {
+        "id": "2",
+        "operatorName": "Marcus Ester",
+        "goal": 4,
+        "createdAt": "2021-08-03T11:00:31.702Z",
+        "updatedAt": "2021-08-03T11:00:31.702Z"
+      },
+      {
+        "id": "3",
+        "operatorName": "Ted White",
+        "goal": 3,
+        "createdAt": "2021-08-03T11:00:31.733Z",
+        "updatedAt": "2021-08-03T11:00:31.733Z"
+      },
+      {
+        "id": "4",
+        "operatorName": "Betty Green",
+        "goal": 2,
+        "createdAt": "2021-08-03T11:00:31.719Z",
+        "updatedAt": "2021-08-03T11:00:31.719Z"
+      },
+      {
+        "id": "5",
+        "operatorName": "Bob Jones",
+        "goal": 1,
+        "createdAt": "2021-08-03T11:00:31.717Z",
+        "updatedAt": "2021-08-03T11:00:31.717Z"
+      },
+      {
+        "id": "6",
+        "operatorName": "Frank Davis",
+        "goal": 8,
+        "createdAt": "2021-08-03T11:00:31.749Z",
+        "updatedAt": "2021-08-03T11:00:31.749Z"
+      },
+      {
+        "id": "7",
+        "operatorName": "Jane Johnson",
+        "goal": 7,
+        "createdAt": "2021-08-03T11:00:31.709Z",
+        "updatedAt": "2021-08-03T11:00:31.709Z"
+      },
+      {
+        "id": "8",
+        "operatorName": "Mary Bird",
+        "goal": 6,
+        "createdAt": "2021-08-03T11:00:31.721Z",
+        "updatedAt": "2021-10-01T09:38:34.558Z"
+      },
+      {
+        "id": "9",
+        "operatorName": "Zoya Lee",
+        "goal": 5,
+        "createdAt": "2021-08-03T11:00:31.720Z",
+        "updatedAt": "2021-08-03T11:00:31.720Z"
+      }
+    ]
+    var certificationsDataA = [
+      {
+        "id": "1","operatorID": "1","skillID": "1",
+        "meta": {
+          "type":"solid","color":"green","letter":"",
+          "status":"started","start":"8/3/2021","trainer":false
+        },
+        "data": [{"p":25,"s":1},{"p":50,"s":1},{"p":75,"s":1},{"p":100,"s":0}]
+      },
+      {
+        "id": "2","operatorID": "2","skillID": "1",
+        "meta": {
+          "type":"solid","color":"goldenrod","letter":"C",
+          "status":"started","start":"8/3/2021","trainer":false
+        },
+        "data": [{"p":25,"s":1},{"p":50,"s":1},{"p":75,"s":1},{"p":100,"s":0}]
+      },
+      {
+        "id": "3","operatorID": "3","skillID": "5",
+        "meta": {
+          "type":"solid","color":"red","letter":"!",
+          "status":"started","start":"8/3/2021","trainer":false
+        },
+        "data": [{"p":25,"s":1},{"p":50,"s":1},{"p":75,"s":1},{"p":100,"s":0}]
+      },
+      {
+        "id": "4","operatorID": "2","skillID": "1",
+        "meta": {
+          "type":"solid","color":"blue","letter":"T",
+          "status":"started","start":"8/3/2021","trainer":false
+        },
+        "data": [{"p":25,"s":1},{"p":50,"s":1},{"p":75,"s":1},{"p":100,"s":0}]
+      },
+
+      {"id": "5","operatorID": "6","skillID": "4","meta": {},"data": []}
+    ]
+
+    console.log(skillsDataA.length)
+
+    var certificationsDataCreated = []
+    var certID = 0
+    for (let s = 0; s < skillsDataA.length; s++) {
+
+      for (let o = 0; o < operatorsDataA.length; o++) {
+        certID++
+        certificationsDataCreated.push({"id": String(certID),"operatorID": String(o+1),"skillID": String(s+1),"meta": {},"data": []})
+      }
     }
-  ]
-  var skillsDataA = [
-    {
-      "id": "1",
-      "skillName": "Core2 Loading",
-      "goal": 8,
-    },
-    {
-      "id": "2",
-      "skillName": "Phase Paper Insertion (VW)",
-      "goal": 2,
-      "createdAt": "2021-08-03T11:00:40.844Z",
-      "updatedAt": "2021-08-03T11:00:40.844Z"
-    },
-    {
-      "id": "3",
-      "skillName": "Lead Wire Setting",
-      "goal": 8,
-      "createdAt": "2021-08-03T11:00:40.801Z",
-      "updatedAt": "2021-08-03T11:00:40.801Z"
-    },
-    {
-      "id": "4",
-      "skillName": "Neutral Tube Insertion",
-      "goal": 3,
-      "createdAt": "2021-08-03T11:00:40.786Z",
-      "updatedAt": "2021-08-03T11:00:40.786Z"
-    },
-    {
-      "id": "5",
-      "skillName": "Neutral Crimp",
-      "goal": 7,
-      "createdAt": "2021-08-03T11:00:40.760Z",
-      "updatedAt": "2021-08-03T11:00:40.760Z"
-    },
-    {
-      "id": "6",
-      "skillName": "Pre-Lacing",
-      "goal": 4,
-      "createdAt": "2021-08-03T11:00:40.778Z",
-      "updatedAt": "2021-08-03T11:00:40.778Z"
-    },
-    {
-      "id": "7",
-      "skillName": "Lacing",
-      "goal": 5,
-      "createdAt": "2021-08-03T11:00:40.782Z",
-      "updatedAt": "2021-08-03T11:00:40.782Z"
-    },
-    {
-      "id": "8",
-      "skillName": "Lead Terminal Crimp",
-      "goal": 6,
-      "createdAt": "2021-08-03T11:00:40.761Z",
-      "updatedAt": "2021-08-03T11:00:40.761Z"
-    },
-    {
-      "id": "9",
-      "skillName": "Lead Wire Forming",
-      "goal": 1,
-      "createdAt": "2021-08-03T11:00:40.743Z",
-      "updatedAt": "2021-08-03T11:00:40.743Z"
-    }
-  ]
-  var certificationsDataA = [
-    {
+    console.log(certificationsDataCreated)
+
+    certificationsDataCreated[0] = {
       "id": "1","operatorID": "1","skillID": "1",
       "meta": {
         "type":"solid","color":"green","letter":"",
         "status":"started","start":"8/3/2021","trainer":false
       },
       "data": [{"p":25,"s":1},{"p":50,"s":1},{"p":75,"s":1},{"p":100,"s":0}]
-    },
-    {
+    }
+    certificationsDataCreated[1] = {
       "id": "2","operatorID": "2","skillID": "1",
       "meta": {
         "type":"solid","color":"goldenrod","letter":"C",
         "status":"started","start":"8/3/2021","trainer":false
       },
       "data": [{"p":25,"s":1},{"p":50,"s":1},{"p":75,"s":1},{"p":100,"s":0}]
-    },
-    {
+    }
+    certificationsDataCreated[2] = {
       "id": "3","operatorID": "3","skillID": "5",
       "meta": {
         "type":"solid","color":"red","letter":"!",
         "status":"started","start":"8/3/2021","trainer":false
       },
       "data": [{"p":25,"s":1},{"p":50,"s":1},{"p":75,"s":1},{"p":100,"s":0}]
-    },
-    {
+    }
+    certificationsDataCreated[3] = {
       "id": "4","operatorID": "2","skillID": "1",
       "meta": {
         "type":"solid","color":"blue","letter":"T",
         "status":"started","start":"8/3/2021","trainer":false
       },
       "data": [{"p":25,"s":1},{"p":50,"s":1},{"p":75,"s":1},{"p":100,"s":0}]
-    },
+    }
 
-    {"id": "5","operatorID": "6","skillID": "4","meta": {},"data": []}
-  ]
 
-  useEffect(() => {
+
+
+
     setSkillsData(skillsDataA)
     setOperatorsData(operatorsDataA)
-    setCertificationsData(certificationsDataA)
+    setCertificationsData(certificationsDataCreated)
+    //setCertificationsData(certificationsDataA)
   },[])
 
   const cellClicked = (id) => {
-    console.log(id)
-    setTextMessage(textMessage + '\n' + 'cellClicked: ' + id)
+    setTextMessage(textMessage + '\ncellClicked: ' + id)
   }
 
   return (
@@ -952,14 +1003,15 @@ export const TrainingMatrixPage = (props) => {
         <button onClick={()=>{setShowLegend(!showLegend)}}>Legend</button>
 
         <input
-            type="text"
-            value={textMessage}
-
+          type="text"
+          value={textMessage}
+          onChange={()=>{}}
         />
 
         <textarea name="body"
-            value={textMessage}
-          />
+          value={textMessage}
+          onChange={()=>{}}
+        />
 
       </div>
       {certificationsData !== null &&

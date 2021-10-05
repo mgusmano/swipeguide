@@ -3,7 +3,7 @@ import { Matrix } from './Matrix';
 import { MatrixCell } from './MatrixCell';
 import { useMatrixState } from './state/MatrixProvider';
 import { Diamond } from './Diamond';
-//import { Main } from './Main';
+import { Main } from './Main';
 
 export const Row2Col2 = (props) => {
   const {data} = props;
@@ -41,8 +41,8 @@ export const Row2Col2 = (props) => {
 
   const clickMainCell = useCallback((e,colid,rowid,type,data,col) => {
     props.cellClicked(data.certificationID)
-    //matrixState.setCurrentCertification(data.certificationID)
-    //matrixState.setSpecific(<Main data={data}/>)
+    matrixState.setCurrentCertification(data.certificationID)
+    matrixState.setSpecific(<Main data={data}/>)
   })
 
   const renderMainCell = (props,c,col,r,row,sTop,data,clickCellFunction,fontsize) => {

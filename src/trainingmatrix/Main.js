@@ -13,8 +13,15 @@ export const Main = (props) => {
   const [trainer, setTrainer] = useState(false)
   const [startDate, setStartDate] = useState(new Date());
 
-  const data = JSON.parse(props.data.data)
-  const meta = JSON.parse(props.data.meta)
+  var data = props.data.data
+  var meta = props.data.meta
+  if (typeof data === 'string') {
+    data = JSON.parse(data)
+  }
+  if (typeof meta === 'string') {
+    meta = JSON.parse(meta)
+  }
+
   const operator = props.data.operator
   const skill = props.data.skill
   const certificationID = props.data.certificationID
