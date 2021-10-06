@@ -274,7 +274,7 @@ export const setAll = (dispatch, first, operatorsData, skillsData, certification
 
     //subscribeCertifications();
 
-    const multiplier = 9;
+    const multiplier = 8;
     const topHeight = 0;
     const fontsize = 2;
     const bandX = 5;
@@ -282,7 +282,7 @@ export const setAll = (dispatch, first, operatorsData, skillsData, certification
     var col1 = 40;
     var col2 = bandX * x;
     var col3 =(bandX*3);
-    var row1 = 20;
+    var row1 = 35;
     var row2 = (bandY * y)+0;
     var row3 = bandX*3;
 
