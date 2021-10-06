@@ -37,6 +37,7 @@ const Main = (props) => {
       }
     }
 
+    console.log(certificationsDataCreated)
     for (let o = 0; o < certificationsData.length; o++) {
       //console.log(certificationsData[o])
       var found = certificationsDataCreated.find(element => {

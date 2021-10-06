@@ -101,6 +101,10 @@ export const Main = (props) => {
   }
 
   const onCertificationChange = async (event) => {
+    console.log(metadata)
+    setCertification(event.target.value)
+    return
+
     matrixState.setActive(true)
     var metadatalocal = {...metadata};
     var s25 = 0, s50 = 0, s75 = 0, s100 = 0;
@@ -195,7 +199,7 @@ export const Main = (props) => {
           </div>
 
           <div style={{display:'flex',flexDirection:'row'}}>
-            <div style={{marginLeft:'30px',display:'flex',flexDirection:'column'}}>
+            {/* <div style={{marginLeft:'30px',display:'flex',flexDirection:'column'}}>
               Certification:
               <div><input value="notstarted" checked={certification === 'notstarted'} onChange={onCertificationChange} style={{marginLeft:'20px'}} type="radio" name="percent2" /> Not Started</div>
               <div><input value="started" checked={certification === 'started'} onChange={onCertificationChange} style={{marginLeft:'20px'}} type="radio" name="percent2" /> Started</div>
@@ -203,13 +207,24 @@ export const Main = (props) => {
               <div><input value="beginner" checked={certification === 'beginner'} onChange={onCertificationChange} style={{marginLeft:'20px'}} type="radio" name="percent2" /> Beginner</div>
               <div><input value="intermediate" checked={certification === 'intermediate'} onChange={onCertificationChange} style={{marginLeft:'20px'}} type="radio" name="percent2" /> Intermediate</div>
               <div><input value="certified" checked={certification === 'certified'} onChange={onCertificationChange} style={{marginLeft:'20px'}} type="radio" name="percent2" /> Certified</div>
+            </div> */}
+
+            <div style={{marginLeft:'30px',display:'flex',flexDirection:'column'}}>
+              Certification:
+              <div><input value="intraining" checked={certification === 'intraining'} onChange={onCertificationChange} style={{marginLeft:'20px'}} type="radio" name="percent2" /> In Training</div>
+              <div><input value="notproficient" checked={certification === 'notproficient'} onChange={onCertificationChange} style={{marginLeft:'20px'}} type="radio" name="percent2" /> Not Proficient</div>
+              <div><input value="certified" checked={certification === 'certified'} onChange={onCertificationChange} style={{marginLeft:'20px'}} type="radio" name="percent2" /> Certified</div>
+              <div><input value="trainer" checked={certification === 'trainer'} onChange={onCertificationChange} style={{marginLeft:'20px'}} type="radio" name="percent2" /> Trainer</div>
+              <div><input value="supertrainer" checked={certification === 'supertrainer'} onChange={onCertificationChange} style={{marginLeft:'20px'}} type="radio" name="percent2" /> Super Trainer</div>
+              <div><input value="notapplicable" checked={certification === 'notapplicable'} onChange={onCertificationChange} style={{marginLeft:'20px'}} type="radio" name="percent2" /> Not Applicable</div>
             </div>
 
-            <div style={{marginLeft:'40px',marginTop:'0',display:'flex',flexDirection:'column'}}>
+            {/* <div style={{marginLeft:'40px',marginTop:'0',display:'flex',flexDirection:'column'}}>
               Trainer:
               <div><input value="false" checked={trainer === false} onChange={onTrainerChange} style={{marginLeft:'20px'}} type="radio" name="trainer" /> No</div>
               <div><input value="true" checked={trainer === true} onChange={onTrainerChange} style={{marginLeft:'20px'}} type="radio" name="trainer" /> Yes</div>
-            </div>
+            </div> */}
+
           </div>
 
         </div>

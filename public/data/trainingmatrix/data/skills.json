@@ -1,0 +1,11 @@
+[
+  {"id": "1","skillName": "Core2 Loading","goal": 8},
+  {"id": "2","skillName": "Phase Paper Insertion (VW)","goal": 2},
+  {"id": "3","skillName": "Lead Wire Setting","goal": 8},
+  {"id": "4","skillName": "Neutral Tube Insertion","goal": 3},
+  {"id": "5","skillName": "Neutral Crimp","goal": 7},
+  {"id": "6","skillName": "Pre-Lacing","goal": 4},
+  {"id": "7","skillName": "Lacing","goal": 5},
+  {"id": "8","skillName": "Lead Terminal Crimp","goal": 6},
+  {"id": "9","skillName": "Lead Wire Forming","goal": 1}
+]

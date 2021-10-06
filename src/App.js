@@ -1,75 +1,87 @@
-import React from 'react';
-import { AppProvider } from './state/AppProvider';
-//import { useAppState } from './state/AppProvider';
+import React, { useState, useEffect } from 'react';
+import TrainingMatrix from './trainingmatrix/TrainingMatrix'
+import axios from "axios";
 
-import { Route, Switch, Redirect } from 'react-router-dom';
-import './App.css'
-//import Horizontal from './layout/Horizontal'
-import Vertical from './layout/Vertical'
+export const App = (props) => {
+  const [textMessage, setTextMessage] = useState('');
+  const [showLegend, setShowLegend] = useState(false);
+  const [skillsData, setSkillsData] = useState(null);
+  const [operatorsData, setOperatorsData] = useState(null);
+  const [certificationsData, setCertificationsData] = useState(null);
 
-// import Top from './Top';
-// import TopMenu from './TopMenu';
+  var newCertificationsData = [
+    {"operatorID": "1","skillID": "7","meta": {"type":"solid","color":"green","strokecolor":"black","letter":"","start":"8/3/2021","status":"started","trainer":false},"data": []},
+    {"operatorID": "2","skillID": "7","meta": {"type":"solid","color":"green","strokecolor":"black","letter":"","start":"8/3/2021","status":"started","trainer":false},"data": []},
+  ]
 
-//import TrainingMatrix from './trainingmatrix/TrainingMatrix'
-import { TrainingMatrixPage } from './pages/trainingmatrixpage/TrainingMatrixPage'
+  useEffect(() => {
+    async function fetchData() {
+      const skillsResult = await axios("data/trainingmatrix/data/skills.json");
+      const operatorsResult = await axios("data/trainingmatrix/data/operators.json");
+      const certificationsResult = await axios("data/trainingmatrix/data/certifications.json");
 
-// import CsvData from './trainingmatrix/csv/CsvData'
-// import Admin from './trainingmatrix/admin/Admin'
-// import { Simple } from './pages/simple/Simple'
-// import { Benchmark } from './pages/benchmark/Benchmark'
-// import { CardReport } from './pages/cardreport/CardReport'
+      var skills = skillsResult.data
+      if (typeof skillsResult.data === 'string') {
+        skills = JSON.parse(skillsResult.data)
+      }
+      var operators = operatorsResult.data
+      if (typeof operatorsResult.data === 'string') {
+        operators = JSON.parse(operatorsResult.data)
+      }
+      var certifications = certificationsResult.data
+      if (typeof certificationsResult.data === 'string') {
+        certifications = JSON.parse(certificationsResult.data)
+      }
+      //console.log(skills)
+      //console.log(operators)
+      //console.log(certifications)
+
+      setSkillsData(skills)
+      setOperatorsData(operators)
+      setCertificationsData(certifications)
+    }
+    fetchData();
 
 
+    //setSkillsData(skillsDataA)
+    //setOperatorsData(operatorsDataA)
+    //setCertificationsData(certificationsDataA)
+  },[])
 
-//import { withAuthenticator } from '@aws-amplify/ui-react'
-//import {Auth} from 'aws-amplify';
-//import { Authenticator, SignIn, SignUp, ConfirmSignUp, Greetings } from 'aws-amplify-react';
-// https://docs.amplify.aws/ui/customization/theming/q/framework/react
-
-export const App = (() => (<AppProvider><Main/></AppProvider>))
-
-function Main(props) {
-  //const appState = useAppState();
-
-  // var PartnerCNA = {
-  //   PartnerID: 395,
-  //   PartnerShort: 'CNA',
-  //   PartnerName: 'CNA',
-  //   PersonID: 275399,
-  //   GroupID: 33582,
-  //   showratings: false,
-  //   ratingsources: '4' //ManagerRating
-  // }
-
-  // var PartnerGMIsb = {
-  //   PartnerID: 434,
-  //   PartnerShort: 'GMIsb',
-  //   PartnerName: 'General Mills',
-  //   PersonID: 281326,
-  //   GroupID: 33931,
-  //   showratings: true,
-  //   ratingsources: '1000' //SelfRating
-  // }
+  const cellClicked = (id) => {
+    setTextMessage('cellClicked: ' + id)
+  }
 
   return (
-      <Vertical style={{width:'100%',height:'100%',display:'flex',flexDirection:'column'}}>
-        {/* <div>{appState.userName}</div> */}
-        {/* <Top/>
-        <TopMenu/> */}
-        <div className="routehost" style={{flex: 'auto', display:'flex', flexDirection:'row',alignItems:'center',justifyContent:'center',overflow:'hidden'}}>
-          <Switch>
-            <Route exact path="/"><Redirect to="/trainingmatrixpage"/></Route>
-            {/* <Route path="/trainingmatrix" default component={TrainingMatrix}/> */}
-            <Route path="/trainingmatrixpage" default component={TrainingMatrixPage}/>
-            {/* <Route path="/csv" component={() => <CsvData/>}/>
-            <Route path="/admin" component={() => <Admin/>}/>
-            <Route path="/simple" component={() => <Simple/>}/>
-            <Route path="/benchmark" component={() => <Benchmark Partner={PartnerGMIsb}/>}/>
-            <Route path="/cardreport" component={() => <CardReport Partner={PartnerCNA} PartnerID='395' SMEOnly={true} showlob={false}/>} />}/> */}
-          </Switch>
-        </div>
-      </Vertical>
-  );
-}
+    <div style={{display:'flex',flexDirection:'column',height:'100%',width:'100%'}}>
 
-//export default App;
+      <div style={{height:'40px',paddingLeft:'15px',paddingTop:'15px',background:'gray'}}>
+        <button onClick={()=>{setCertificationsData(newCertificationsData)}}>replace matrix data</button>
+        <button onClick={()=>{setShowLegend(!showLegend)}}>Legend</button>
+        <input
+          style={{marginLeft:'70px'}}
+          type="text"
+          value={textMessage}
+          onChange={()=>{}}
+        />
+        {/* <textarea name="body"
+          value={textMessage}
+          onChange={()=>{}}
+        /> */}
+      </div>
+
+      <div style={{flex:'1'}}>
+        {certificationsData !== null &&
+        <TrainingMatrix
+          showLegend={showLegend}
+          operatorsData={operatorsData}
+          skillsData={skillsData}
+          certificationsData={certificationsData}
+          cellClicked={cellClicked}
+        />
+        }
+      </div>
+
+    </div>
+  )
+}
