@@ -73,3 +73,21 @@ function Main(props) {
 }
 
 //export default App;
+
+
+      //var skills = skillsResult.data
+      // if (typeof skillsResult.data === 'string') {
+      //   skills = JSON.parse(skillsResult.data)
+      // }
+      //var operators = operatorsResult.data
+      // if (typeof operatorsResult.data === 'string') {
+      //   operators = JSON.parse(operatorsResult.data)
+      // }
+      //var certifications = certificationsResult.data
+      // if (typeof certificationsResult.data === 'string') {
+      //   certifications = JSON.parse(certificationsResult.data)
+      // }
+
+      // setSkillsData(skills)
+      // setOperatorsData(operators)
+      // setCertificationsData(certifications)

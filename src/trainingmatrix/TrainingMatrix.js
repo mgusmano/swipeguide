@@ -37,16 +37,12 @@ const Main = (props) => {
       }
     }
 
-    console.log(certificationsDataCreated)
     for (let o = 0; o < certificationsData.length; o++) {
-      //console.log(certificationsData[o])
       var found = certificationsDataCreated.find(element => {
         if (element.skillID === certificationsData[o].skillID && element.operatorID === certificationsData[o].operatorID) {
           return certificationsData[o]
         }
       });
-      //console.log(found)
-      //console.log(certificationsData[o])
       found.meta = certificationsData[o].meta
       found.data = certificationsData[o].data
     }

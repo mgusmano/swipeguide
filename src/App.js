@@ -20,32 +20,11 @@ export const App = (props) => {
       const operatorsResult = await axios("data/trainingmatrix/data/operators.json");
       const certificationsResult = await axios("data/trainingmatrix/data/certifications.json");
 
-      var skills = skillsResult.data
-      if (typeof skillsResult.data === 'string') {
-        skills = JSON.parse(skillsResult.data)
-      }
-      var operators = operatorsResult.data
-      if (typeof operatorsResult.data === 'string') {
-        operators = JSON.parse(operatorsResult.data)
-      }
-      var certifications = certificationsResult.data
-      if (typeof certificationsResult.data === 'string') {
-        certifications = JSON.parse(certificationsResult.data)
-      }
-      //console.log(skills)
-      //console.log(operators)
-      //console.log(certifications)
-
-      setSkillsData(skills)
-      setOperatorsData(operators)
-      setCertificationsData(certifications)
+      setSkillsData(skillsResult.data)
+      setOperatorsData(operatorsResult.data)
+      setCertificationsData(certificationsResult.data)
     }
     fetchData();
-
-
-    //setSkillsData(skillsDataA)
-    //setOperatorsData(operatorsDataA)
-    //setCertificationsData(certificationsDataA)
   },[])
 
   const cellClicked = (id) => {
@@ -55,7 +34,7 @@ export const App = (props) => {
   return (
     <div style={{display:'flex',flexDirection:'column',height:'100%',width:'100%'}}>
 
-      <div style={{height:'40px',paddingLeft:'15px',paddingTop:'15px',background:'gray'}}>
+      <div style={{display:'flex',flexDirection:'row',height:'40px',padding:'5px',background:'gray'}}>
         <button onClick={()=>{setCertificationsData(newCertificationsData)}}>replace matrix data</button>
         <button onClick={()=>{setShowLegend(!showLegend)}}>Legend</button>
         <input
@@ -64,10 +43,7 @@ export const App = (props) => {
           value={textMessage}
           onChange={()=>{}}
         />
-        {/* <textarea name="body"
-          value={textMessage}
-          onChange={()=>{}}
-        /> */}
+        <div style={{margin:'10px'}}>v2021-10-06-a</div>
       </div>
 
       <div style={{flex:'1'}}>
