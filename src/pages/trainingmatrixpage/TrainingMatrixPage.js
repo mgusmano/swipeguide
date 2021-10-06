@@ -772,224 +772,56 @@ export const TrainingMatrixPage = (props) => {
   useEffect(() => {
 
     var skillsDataA = [
-      {
-        "id": "1",
-        "skillName": "Core2 Loading",
-        "goal": 8,
-      },
-      {
-        "id": "2",
-        "skillName": "Phase Paper Insertion (VW)",
-        "goal": 2,
-        "createdAt": "2021-08-03T11:00:40.844Z",
-        "updatedAt": "2021-08-03T11:00:40.844Z"
-      },
-      {
-        "id": "3",
-        "skillName": "Lead Wire Setting",
-        "goal": 8,
-        "createdAt": "2021-08-03T11:00:40.801Z",
-        "updatedAt": "2021-08-03T11:00:40.801Z"
-      },
-      {
-        "id": "4",
-        "skillName": "Neutral Tube Insertion",
-        "goal": 3,
-        "createdAt": "2021-08-03T11:00:40.786Z",
-        "updatedAt": "2021-08-03T11:00:40.786Z"
-      },
-      {
-        "id": "5",
-        "skillName": "Neutral Crimp",
-        "goal": 7,
-        "createdAt": "2021-08-03T11:00:40.760Z",
-        "updatedAt": "2021-08-03T11:00:40.760Z"
-      },
-      {
-        "id": "6",
-        "skillName": "Pre-Lacing",
-        "goal": 4,
-        "createdAt": "2021-08-03T11:00:40.778Z",
-        "updatedAt": "2021-08-03T11:00:40.778Z"
-      },
-      {
-        "id": "7",
-        "skillName": "Lacing",
-        "goal": 5,
-        "createdAt": "2021-08-03T11:00:40.782Z",
-        "updatedAt": "2021-08-03T11:00:40.782Z"
-      },
-      {
-        "id": "8",
-        "skillName": "Lead Terminal Crimp",
-        "goal": 6,
-        "createdAt": "2021-08-03T11:00:40.761Z",
-        "updatedAt": "2021-08-03T11:00:40.761Z"
-      },
-      {
-        "id": "9",
-        "skillName": "Lead Wire Forming",
-        "goal": 1,
-        "createdAt": "2021-08-03T11:00:40.743Z",
-        "updatedAt": "2021-08-03T11:00:40.743Z"
-      }
+      {"id": "1","skillName": "Core2 Loading","goal": 8,},
+      {"id": "2","skillName": "Phase Paper Insertion (VW)","goal": 2,},
+      {"id": "3","skillName": "Lead Wire Setting","goal": 8,},
+      {"id": "4","skillName": "Neutral Tube Insertion","goal": 3,},
+      {"id": "5","skillName": "Neutral Crimp","goal": 7,},
+      {"id": "6","skillName": "Pre-Lacing","goal": 4,},
+      {"id": "7","skillName": "Lacing","goal": 5,},
+      {"id": "8","skillName": "Lead Terminal Crimp","goal": 6,},
+      {"id": "9","skillName": "Lead Wire Forming","goal": 1,}
     ]
     var operatorsDataA = [
-      {
-        "id": "1",
-        "operatorName": "Joe2 Smith",
-        "goal": 7,
-        "createdAt": "2021-08-03T11:00:31.714Z",
-        "updatedAt": "2021-09-30T13:53:28.747Z"
-      },
-      {
-        "id": "2",
-        "operatorName": "Marcus Ester",
-        "goal": 4,
-        "createdAt": "2021-08-03T11:00:31.702Z",
-        "updatedAt": "2021-08-03T11:00:31.702Z"
-      },
-      {
-        "id": "3",
-        "operatorName": "Ted White",
-        "goal": 3,
-        "createdAt": "2021-08-03T11:00:31.733Z",
-        "updatedAt": "2021-08-03T11:00:31.733Z"
-      },
-      {
-        "id": "4",
-        "operatorName": "Betty Green",
-        "goal": 2,
-        "createdAt": "2021-08-03T11:00:31.719Z",
-        "updatedAt": "2021-08-03T11:00:31.719Z"
-      },
-      {
-        "id": "5",
-        "operatorName": "Bob Jones",
-        "goal": 1,
-        "createdAt": "2021-08-03T11:00:31.717Z",
-        "updatedAt": "2021-08-03T11:00:31.717Z"
-      },
-      {
-        "id": "6",
-        "operatorName": "Frank Davis",
-        "goal": 8,
-        "createdAt": "2021-08-03T11:00:31.749Z",
-        "updatedAt": "2021-08-03T11:00:31.749Z"
-      },
-      {
-        "id": "7",
-        "operatorName": "Jane Johnson",
-        "goal": 7,
-        "createdAt": "2021-08-03T11:00:31.709Z",
-        "updatedAt": "2021-08-03T11:00:31.709Z"
-      },
-      {
-        "id": "8",
-        "operatorName": "Mary Bird",
-        "goal": 6,
-        "createdAt": "2021-08-03T11:00:31.721Z",
-        "updatedAt": "2021-10-01T09:38:34.558Z"
-      },
-      {
-        "id": "9",
-        "operatorName": "Zoya Lee",
-        "goal": 5,
-        "createdAt": "2021-08-03T11:00:31.720Z",
-        "updatedAt": "2021-08-03T11:00:31.720Z"
-      }
+      {"id": "1","operatorName": "Aaron Cariaga","picture": "Aaron Cariaga.JPG","goal": 7,},
+      {"id": "2","operatorName": "Ahmed Al Talabani","picture": "Ahmed Al Talabani.JPG","goal": 7,},
+      {"id": "3","operatorName": "Baltazar Garcia","picture": "Baltazar Garcia.JPG","goal": 7,},
+      {"id": "4","operatorName": "Blaise Chancellor Podehole","picture": "Blaise Chancellor Podehale.JPG","goal": 7,},
+      {"id": "5","operatorName": "Brian Phetnavong","picture": "Brian Phetnavong.JPG","goal": 7,},
+      {"id": "6","operatorName": "Christopher Corvera","picture": "Christopher Corvera.JPG","goal": 7,},
+      {"id": "7","operatorName": "Patricia Wandemberg","picture": "Patricia Wandemberg.JPG","goal": 7,},
+      {"id": "8","operatorName": "Evanson Kirathe","picture": "Evanson Kirathe.JPG","goal": 7,},
+      {"id": "9","operatorName": "Jawwad Mushtaq","picture": "Jawwad Mushtaq.JPG","goal": 7,},
+      {"id": "10","operatorName": "Jesus Gonzalez","picture": "Jesus Gonzalez.JPG","goal": 7,},
+      {"id": "11","operatorName": "Linda Davila","picture": "Linda Davila.JPG","goal": 7,},
+      {"id": "12","operatorName": "Maria Flores","picture": "Maria Flores.JPG","goal": 7,},
+      {"id": "13","operatorName": "Maribel Briggs","picture": "Maribel Briggs.JPG","goal": 7,},
+      {"id": "14","operatorName": "Osvaldo Cabrera","picture": "Osvaldo Cabrera.JPG","goal": 7,},
+      {"id": "15","operatorName": "Richard Genova","picture": "Richard Genova.JPG","goal": 7,},
+      {"id": "16","operatorName": "Roger Rivas","picture": "Roger Rivas.JPG","goal": 7,},
+      {"id": "17","operatorName": "Sheny Alecio","picture": "Sheny Alecio.JPG","goal": 7,},
+      {"id": "18","operatorName": "Trung Nguyen","picture": "Trung Nguyen.JPG","goal": 7,},
+      {"id": "19","operatorName": "Shakira Shakir","picture": "Shakira Shakir.JPG","goal": 7,},
+      {"id": "20","operatorName": "Jeremy Washington","picture": "Jeremy Washington.JPG","goal": 7,},
     ]
+    //https://www.compart.com/en/unicode/block/
     var certificationsDataA = [
-      {
-        "id": "1","operatorID": "1","skillID": "1",
-        "meta": {
-          "type":"solid","color":"green","letter":"",
-          "status":"started","start":"8/3/2021","trainer":false
-        },
-        "data": [{"p":25,"s":1},{"p":50,"s":1},{"p":75,"s":1},{"p":100,"s":0}]
-      },
-      {
-        "id": "2","operatorID": "2","skillID": "1",
-        "meta": {
-          "type":"solid","color":"goldenrod","letter":"C",
-          "status":"started","start":"8/3/2021","trainer":false
-        },
-        "data": [{"p":25,"s":1},{"p":50,"s":1},{"p":75,"s":1},{"p":100,"s":0}]
-      },
-      {
-        "id": "3","operatorID": "3","skillID": "5",
-        "meta": {
-          "type":"solid","color":"red","letter":"!",
-          "status":"started","start":"8/3/2021","trainer":false
-        },
-        "data": [{"p":25,"s":1},{"p":50,"s":1},{"p":75,"s":1},{"p":100,"s":0}]
-      },
-      {
-        "id": "4","operatorID": "2","skillID": "1",
-        "meta": {
-          "type":"solid","color":"blue","letter":"T",
-          "status":"started","start":"8/3/2021","trainer":false
-        },
-        "data": [{"p":25,"s":1},{"p":50,"s":1},{"p":75,"s":1},{"p":100,"s":0}]
-      },
+      {"operatorID": "1","skillID": "1","meta": {"type":"solid","color":"green","strokecolor":"black","letter":"","start":"8/3/2021",},"data": []},
+      {"operatorID": "2","skillID": "1","meta": {"type":"solid","color":"gold","strokecolor":"black","letter":"","start":"8/3/2021",},"data": []},
+      {"operatorID": "3","skillID": "1","meta": {"type":"solid","color":"red","strokecolor":"black","letter":"","start":"8/3/2021",},"data": []},
+      {"operatorID": "4","skillID": "1","meta": {"type":"solid","color":"goldenrod","strokecolor":"black","letter":"C","start":"8/3/2021",},"data": []},
+      {"operatorID": "5","skillID": "1","meta": {"type":"solid","color":"blue","strokecolor":"black","letter":"T","start":"8/3/2021",},"data": []},
 
-      {"id": "5","operatorID": "6","skillID": "4","meta": {},"data": []}
+      {"operatorID": "5","skillID": "5","meta": {"type":"solid","color":"green","strokecolor":"black","letter":"","start":"8/3/2021",},"data": []},
+      {"operatorID": "5","skillID": "6","meta": {"type":"solid","color":"white","strokecolor":"black","letter":"\uD83D\uDC04","start":"8/3/2021",},"data": []},
+      {"operatorID": "5","skillID": "7","meta": {"type":"solid","color":"white","strokecolor":"white","letter":"\uD83C\uDF45","start":"8/3/2021",},"data": []},
+      {"operatorID": "5","skillID": "9","meta": {"type":"solid","color":"white","strokecolor":"green","letter":"\uD83D\uDD14","start":"8/3/2021",},"data": []},
+      {"operatorID": "19","skillID": "9","meta": {"type":"solid","color":"white","strokecolor":"green","letter":"\uD83D\uDD14","start":"8/3/2021",},"data": []},
     ]
-
-    console.log(skillsDataA.length)
-
-    var certificationsDataCreated = []
-    var certID = 0
-    for (let s = 0; s < skillsDataA.length; s++) {
-
-      for (let o = 0; o < operatorsDataA.length; o++) {
-        certID++
-        certificationsDataCreated.push({"id": String(certID),"operatorID": String(o+1),"skillID": String(s+1),"meta": {},"data": []})
-      }
-    }
-    console.log(certificationsDataCreated)
-
-    certificationsDataCreated[0] = {
-      "id": "1","operatorID": "1","skillID": "1",
-      "meta": {
-        "type":"solid","color":"green","letter":"",
-        "status":"started","start":"8/3/2021","trainer":false
-      },
-      "data": [{"p":25,"s":1},{"p":50,"s":1},{"p":75,"s":1},{"p":100,"s":0}]
-    }
-    certificationsDataCreated[1] = {
-      "id": "2","operatorID": "2","skillID": "1",
-      "meta": {
-        "type":"solid","color":"goldenrod","letter":"C",
-        "status":"started","start":"8/3/2021","trainer":false
-      },
-      "data": [{"p":25,"s":1},{"p":50,"s":1},{"p":75,"s":1},{"p":100,"s":0}]
-    }
-    certificationsDataCreated[2] = {
-      "id": "3","operatorID": "3","skillID": "5",
-      "meta": {
-        "type":"solid","color":"red","letter":"!",
-        "status":"started","start":"8/3/2021","trainer":false
-      },
-      "data": [{"p":25,"s":1},{"p":50,"s":1},{"p":75,"s":1},{"p":100,"s":0}]
-    }
-    certificationsDataCreated[3] = {
-      "id": "4","operatorID": "2","skillID": "1",
-      "meta": {
-        "type":"solid","color":"blue","letter":"T",
-        "status":"started","start":"8/3/2021","trainer":false
-      },
-      "data": [{"p":25,"s":1},{"p":50,"s":1},{"p":75,"s":1},{"p":100,"s":0}]
-    }
-
-
-
-
 
     setSkillsData(skillsDataA)
     setOperatorsData(operatorsDataA)
-    setCertificationsData(certificationsDataCreated)
-    //setCertificationsData(certificationsDataA)
+    setCertificationsData(certificationsDataA)
   },[])
 
   const cellClicked = (id) => {

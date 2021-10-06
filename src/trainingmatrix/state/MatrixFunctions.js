@@ -40,6 +40,27 @@ export const setAll = (dispatch, first, operatorsData, skillsData, certification
 //     return data; //certificationData.data.listCertifications.items.sort((a, b) => (a.id > b.id) ? 1 : -1)
 //   }
 
+  const doByOperatorx = (operators, skills, certifications,dispatch) => {
+    var byOperator = []
+    var operatorsummary = []
+    var bottomtotals = []
+
+    var certID = 0
+    for (let o = 0; o < operators.length; o++) {
+
+      for (let s = 0; s < skills.length; s++) {
+        certID++
+        byOperator.push({"id": String(certID),"operatorID": String(o+1),"skillID": String(s+1),"meta": {
+          "type":"solid","color":"green","letter":"A",
+        },"data": []})
+      }
+    }
+
+    dispatch({type: types.SET_BOTTOMTOTALS, payload: bottomtotals});
+    //console.log(byOperator)
+    return byOperator
+  }
+
   const doByOperator = (operators, skills, certifications,dispatch) => {
     var byOperator = []
     var operatorsummary = []
@@ -123,6 +144,45 @@ export const setAll = (dispatch, first, operatorsData, skillsData, certification
     dispatch({type: types.SET_BOTTOMTOTALS, payload: bottomtotalstransposed});
     return byOperator
   }
+
+  const doBySkillx = (operators, skills, certifications,dispatch) => {
+    var bySkill = []
+    var skillsummary = []
+    var righttotals = []
+
+    //var certificationsDataCreated = []
+    var certID = 0
+    for (let sk = 0; sk < skills.length; sk++) {
+      var o = {}
+      o = skills[sk]
+      o.meta = skills[sk]
+      o.data = []
+
+      for (let op = 0; op < operators.length; op++) {
+        certID++
+
+        o.data[op] = {};
+        o.data[op].certificationID = certID
+        o.data[op].skill = skills[op]
+        o.data[op].operator = operators[op]
+        o.data[op].meta = {"type":"solid","color":"green","letter":"","status":"started","start":"8/3/2021","trainer":false}
+        o.data[op].data = []
+
+        bySkill.push(o)
+
+
+
+        // bySkill.push({"id": String(certID),"operatorID": String(op+1),"skillID": String(sk+1),"meta": {
+        //   "type":"solid","color":"green","letter":"B",
+        // },"data": []})
+      }
+    }
+
+    dispatch({type: types.SET_RIGHTTOTALS, payload: righttotals});
+    //console.log(bySkill)
+    return bySkill
+  }
+
   const doBySkill = (operators, skills, certifications,dispatch) => {
     var bySkill = []
     var skillsummary = []
@@ -134,7 +194,7 @@ export const setAll = (dispatch, first, operatorsData, skillsData, certification
       o.meta = skill
       o.data = []
       const filteredcertifications = certifications.filter(item => item.skillID === skill.id);
-
+      //console.log(filteredcertifications)
       var ss = {}
       ss.numstarted = 0
       ss.numtrainers = 0
@@ -214,7 +274,7 @@ export const setAll = (dispatch, first, operatorsData, skillsData, certification
 
     //subscribeCertifications();
 
-    const multiplier = 7;
+    const multiplier = 9;
     const topHeight = 0;
     const fontsize = 2;
     const bandX = 5;
@@ -264,27 +324,34 @@ export const setAll = (dispatch, first, operatorsData, skillsData, certification
   //  const callAll = async (dispatch,first,doBy, operatorsData, skillsData, certificationsData) => {
   const callAll = async (dispatch,payload2) => {
     var first = payload2.first
-    var operatorsData = payload2.operatorsData
-    var skillsData = payload2.skillsData
-    var certificationsData = payload2.certificationsData
 
-    //console.log('operatorsData')
-    //console.log(operatorsData)
+    //var operatorsData = payload2.operatorsData
+    //var skillsData = payload2.skillsData
+    //var certificationsData = payload2.certificationsData
 
     var operators
     var skills
     var certifications
 
-    if (operatorsData === undefined) {
-      // operators = await getDataOperators()
-      // skills = await getDataSkills()
-      // certifications = await getDataCertifications()
-    }
-    else {
-      operators = operatorsData
-      skills = skillsData
-      certifications = certificationsData
-    }
+    operators = payload2.operatorsData
+    skills = payload2.skillsData
+    certifications = payload2.certificationsData
+
+    //console.log('operatorsData')
+    //console.log(operatorsData)
+
+
+
+    // if (operatorsData === undefined) {
+    //   // operators = await getDataOperators()
+    //   // skills = await getDataSkills()
+    //   // certifications = await getDataCertifications()
+    // }
+    // else {
+    //   operators = operatorsData
+    //   skills = skillsData
+    //   certifications = certificationsData
+    // }
 
     var byOperator = []
     var bySkill = []

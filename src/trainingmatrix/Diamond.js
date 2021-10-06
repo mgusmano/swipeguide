@@ -4,6 +4,7 @@ import {SvgX, PathX, TextX, CircleX} from './SvgStuff';
 export const Diamond = ({meta, data, boxSize, padding}) => {
   var type = meta.type
   var solidcolor = meta.color
+  var strokecolor = meta.strokecolor
   var letter = meta.letter
 
   if (typeof data === 'string') {
@@ -89,7 +90,7 @@ export const Diamond = ({meta, data, boxSize, padding}) => {
 
     {type === 'solid' &&
     <>
-    <CircleX cx={0} cy={0} fill={solidcolor} r={radius} stroke={solidcolor} strokeWidth={(40-padding)} fillOpacity="1.0" />
+    <CircleX cx={0} cy={0} fill={solidcolor} r={radius} stroke={strokecolor} strokeWidth={(40-padding)} fillOpacity="1.0" />
     <TextX textAnchor="middle" alignmentBaseline="middle" fontSize={(130-padding)} fill="white" x ={'0'} y ={(diamondSize/4)} width={(44-padding)} height={(40-padding)} strokeWidth="1" stroke="black">{letter}</TextX>
     </>
     }

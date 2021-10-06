@@ -31,8 +31,10 @@ export const Matrix = React.memo((props) => {
   }
 
   const getJ = () => {
+    //console.log(data)
     var r = data.map((row,r) => {
       var theRow = getRow(row,oneRow)
+      //console.log(theRow)
       return (
         <g key={r} transform={"translate(0," + ((bandY*r)+(sTop*r)) + ")"} className="row">
           {renderRowFunction !== undefined && renderRowFunction(props.params,r,row,sTop,fontsize)}

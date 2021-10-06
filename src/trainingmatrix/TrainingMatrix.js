@@ -27,23 +27,45 @@ const Main = (props) => {
   useResizeEvent()
 
   useEffect(() => {
+
+    var certificationsDataCreated = []
+    var certID = 0
+    for (let s = 0; s < props.props.skillsData.length; s++) {
+      for (let o = 0; o < props.props.operatorsData.length; o++) {
+        certID++
+        certificationsDataCreated.push({"id": String(certID),"operatorID": String(o+1),"skillID": String(s+1),"meta": {},"data": []})
+      }
+    }
+
+    for (let o = 0; o < certificationsData.length; o++) {
+      //console.log(certificationsData[o])
+      var found = certificationsDataCreated.find(element => {
+        if (element.skillID === certificationsData[o].skillID && element.operatorID === certificationsData[o].operatorID) {
+          return certificationsData[o]
+        }
+      });
+      //console.log(found)
+      //console.log(certificationsData[o])
+      found.meta = certificationsData[o].meta
+      found.data = certificationsData[o].data
+    }
+
     matrixState.setActive(true)
     matrixState.setAll({
       'first':true,
       'operatorsData':props.props.operatorsData,
       'skillsData':props.props.skillsData,
-      'certificationsData':certificationsData
+      'certificationsData':certificationsDataCreated
     })
   },[certificationsData])
 
   useEffect(() => {
     if (matrixState.specific !== null) {
-      console.log('matrixState.specific:',matrixState.specific.props.data)
+      //console.log('matrixState.specific:',matrixState.specific.props.data)
     }
   },[matrixState.specific])
 
   const cellClicked = (id) => {
-    console.log('cellClicked')
     props.props.cellClicked(id)
   }
 

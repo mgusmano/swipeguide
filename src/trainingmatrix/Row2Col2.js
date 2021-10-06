@@ -7,6 +7,7 @@ import { Main } from './Main';
 
 export const Row2Col2 = (props) => {
   const {data} = props;
+  //console.log(data)
   const matrixState = useMatrixState();
   const {row2Orig,row2,col2,fontsize,topHeight,bandX,bandY} = matrixState.dimensions;
 

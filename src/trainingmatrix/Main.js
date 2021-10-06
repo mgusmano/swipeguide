@@ -26,7 +26,9 @@ export const Main = (props) => {
   const skill = props.data.skill
   const certificationID = props.data.certificationID
 
-  var img = 'https://examples.sencha.com/extjs/7.4.0/examples/kitchensink/resources/images/staff/' + operator.id + '.jpg'
+  //var img = 'https://examples.sencha.com/extjs/7.4.0/examples/kitchensink/resources/images/staff/' + operator.id + '.jpg'
+
+  var img = 'data/trainingmatrix/pictures/' + operator.picture
 
   const setTheCert = (data,meta) => {
     var num = 0
@@ -61,15 +63,15 @@ export const Main = (props) => {
       default:
         break;
     }
-
-
   }
 
   useEffect(() => {
     setDiamondData(data)
     setMetaData(meta)
     setTheCert(data,meta)
-    setStartDate(new Date(meta.start))
+    if (meta.start !== undefined) {
+      setStartDate(new Date(meta.start))
+    }
     if (meta.trainer === 'true') {
       setTrainer(true)
     }

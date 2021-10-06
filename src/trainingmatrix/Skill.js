@@ -58,7 +58,7 @@ export const Skill = React.memo((props) => {
         <svg width="100%" height="100%">
         {data.skill.data.map((item,i) => {
           return (
-            <g key={i} transform={"translate(100," + ((i+0)*bandY) + ")"} className="group" >
+            <g key={i} transform={"translate(200," + ((i+0)*bandY) + ")"} className="group" >
               <text
                 dominantBaseline="left"
                 textAnchor="end"
@@ -84,7 +84,7 @@ export const Skill = React.memo((props) => {
         </svg>
       </div>
 
-      <div style={{flex:'1',display:'flex'}}>
+      {/* <div style={{flex:'1',display:'flex'}}>
         <iframe
           title={'SwipeGuide'}
           width="100%"
@@ -92,7 +92,7 @@ export const Skill = React.memo((props) => {
           src={src}
           xsrc={"https://app.swipeguide.com/embed/guide/46e3b328-9e74-4875-a774-99418940d9f4/279b3f82-e4e1-4468-b166-419372c57c39?embed=true&locale=EN_US&isolatedInstruction=true"}>
         </iframe>
-      </div>
+      </div> */}
 
     </div>
   )

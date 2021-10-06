@@ -26,7 +26,10 @@ export const Row1Col2 = (props) => {
         <foreignObject x={(bandX*c)+5} y={10} width='50px' height='50px'>
           <img
             alt="pic"
-            src={'https://examples.sencha.com/extjs/7.4.0/examples/kitchensink/resources/images/staff/'+data.id+'.jpg'}
+            xsrc={'https://examples.sencha.com/extjs/7.4.0/examples/kitchensink/resources/images/staff/'+data.id+'.jpg'}
+            xwsrc={'data/trainingmatrix/pictures/Aaron Cariaga.JPG'}
+            src={'data/trainingmatrix/pictures/' + data.picture}
+
             style={{borderRadius:'50%',width: bandX-10,height:bandX-10}}
           />
         </foreignObject>

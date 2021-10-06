@@ -14,11 +14,13 @@ export const Operator = React.memo((props) => {
   },[props])
 
   const {data} = props
-  console.log(props)
   //const goal = props.data.goal;
   var bandX=50, bandY=50;
   var fontsize=14
-  var img = 'https://examples.sencha.com/extjs/7.4.0/examples/kitchensink/resources/images/staff/' + data.id + '.jpg'
+  //var img = 'https://examples.sencha.com/extjs/7.4.0/examples/kitchensink/resources/images/staff/' + data.id + '.jpg'
+  //var img = 'data/trainingmatrix/pictures/Aaron Cariaga.JPG'
+  var img = 'data/trainingmatrix/pictures/' + data.picture
+
   return (
     <div style={{display:'flex',flexDirection:'column',width:'100%',height:'100%'}}>
       <div style={{height:'200px'}}>
