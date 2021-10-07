@@ -10,17 +10,11 @@ export const App = (props) => {
   const [operatorsData, setOperatorsData] = useState(null);
   const [certificationsData, setCertificationsData] = useState(null);
 
-  var newCertificationsData = [
-    {"operatorID": "1","skillID": "7","meta": {"type":"solid","color":"green","strokecolor":"black","letter":"","start":"8/3/2021","status":"started","trainer":false},"data": []},
-    {"operatorID": "2","skillID": "7","meta": {"type":"solid","color":"green","strokecolor":"black","letter":"","start":"8/3/2021","status":"started","trainer":false},"data": []},
-  ]
-
   useEffect(() => {
     async function fetchData() {
       const skillsResult = await axios("data/trainingmatrix/data/skills.json");
       const operatorsResult = await axios("data/trainingmatrix/data/operators.json");
       const certificationsResult = await axios("data/trainingmatrix/data/certifications.json");
-
       setSkillsData(skillsResult.data)
       setOperatorsData(operatorsResult.data)
       setCertificationsData(certificationsResult.data)
@@ -33,24 +27,33 @@ export const App = (props) => {
   },[])
 
   const cellClicked = (id) => {
-    setTextMessage('cellClicked: ' + id)
+    setTextMessage(id)
+  }
+
+  const replaceMatrixData = () => {
+    async function fetchData() {
+      const certificationsnewResult = await axios("data/trainingmatrix/data/certificationsnew.json");
+      setCertificationsData(certificationsnewResult.data)
+    }
+    fetchData();
   }
 
   return (
     <div style={{display:'flex',flexDirection:'column',height:'100%',width:'100%'}}>
 
       <div style={{display:'flex',flexDirection:'row',height:'40px',padding:'5px',background:'gray'}}>
-        <button onClick={()=>{setCertificationsData(newCertificationsData)}}>replace matrix data</button>
+        <button onClick={replaceMatrixData}>replace matrix data</button>
         <button onClick={()=>{setShowLegend(!showLegend)}}>Legend</button>
         <button style={{marginLeft:'10px'}} onClick={()=>{setMultiplier(multiplier-1)}}>smaller</button>
         <button onClick={()=>{setMultiplier(multiplier+1)}}>bigger</button>
         <div style={{marginLeft:'70px',marginTop:'10px'}}>cell clicked:</div>
         <input
+          style={{width:'30px'}}
           type="text"
           value={textMessage}
           onChange={()=>{}}
         />
-        <div style={{margin:'10px'}}>v2021-10-07-b</div>
+        <div style={{margin:'10px'}}>v2021-10-07-c</div>
       </div>
 
       <div style={{flex:'1'}}>
