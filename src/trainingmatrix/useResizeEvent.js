@@ -30,6 +30,7 @@ export function useResizeEvent() {
       bandX: matrixState.original.bandX*multiplier,
       bandY: matrixState.original.bandY*multiplier,
       col1: col1,
+      col1a: matrixState.original.col1a*multiplier,
       col2: matrixState.original.col2*multiplier,
       col3: matrixState.original.col3*multiplier,
       row1: matrixState.original.row1*multiplier,

@@ -3,7 +3,7 @@ import TrainingMatrix from './trainingmatrix/TrainingMatrix'
 import axios from "axios";
 
 export const App = (props) => {
-  const [multiplier, setMultiplier] = useState(7);
+  const [multiplier, setMultiplier] = useState(0);
   const [textMessage, setTextMessage] = useState('');
   const [showLegend, setShowLegend] = useState(false);
   const [skillsData, setSkillsData] = useState(null);
@@ -26,6 +26,10 @@ export const App = (props) => {
       setCertificationsData(certificationsResult.data)
     }
     fetchData();
+
+    if (window.innerWidth < 1200) { setMultiplier(5) } else
+    if (window.innerWidth < 1500) { setMultiplier(6) } else
+    { setMultiplier(7) }
   },[])
 
   const cellClicked = (id) => {
@@ -46,7 +50,7 @@ export const App = (props) => {
           value={textMessage}
           onChange={()=>{}}
         />
-        <div style={{margin:'10px'}}>v2021-10-07-a</div>
+        <div style={{margin:'10px'}}>v2021-10-07-b</div>
       </div>
 
       <div style={{flex:'1'}}>

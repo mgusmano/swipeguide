@@ -40,9 +40,9 @@ const Main = (props) => {
   useEffect(() => {
 
     if (multiplier == '') return
-    if (window.innerWidth <1500) {
-      multiplier = 6
-    }
+    // if (window.innerWidth <1500) {
+    //   multiplier = 6
+    // }
 
     var certificationsDataCreated = []
     var certID = 0
