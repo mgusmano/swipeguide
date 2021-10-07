@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useMatrixState } from './state/MatrixProvider';
 
 export function useResizeEvent() {
+  console.log('useResizeEvent',window.innerWidth)
   const matrixState = useMatrixState();
 
   var event = 'resize'
@@ -10,7 +11,7 @@ export function useResizeEvent() {
   const handler = () => {
     var multiplier = matrixState.original.multiplier
     var col1 = 0, row2 = 0, topHeight = 0, row2Orig = 0;
-    if (window.innerWidth <200) {
+    if (window.innerWidth <1000) {
       col1 = 0*multiplier;
       topHeight = 5;
       //row2 = ((matrixState.original.row2*2)*multiplier)+(topHeight*multiplier);

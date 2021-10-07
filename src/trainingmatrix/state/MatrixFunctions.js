@@ -19,7 +19,8 @@ export const updateOperatorGoal = (dispatch,payload) => {
   })
 }
 
-export const setAll = (dispatch, first, operatorsData, skillsData, certificationsData) => {
+//export const setAll = (dispatch, first, operatorsData, skillsData, certificationsData, multiplier) => {
+export const setAll = (dispatch, theData) => {
 
 //   async function getDataOperators() {
 //     const operatorData = await API.graphql(graphqlOperation(listOperators))
@@ -40,26 +41,26 @@ export const setAll = (dispatch, first, operatorsData, skillsData, certification
 //     return data; //certificationData.data.listCertifications.items.sort((a, b) => (a.id > b.id) ? 1 : -1)
 //   }
 
-  const doByOperatorx = (operators, skills, certifications,dispatch) => {
-    var byOperator = []
-    var operatorsummary = []
-    var bottomtotals = []
+  // const doByOperatorx = (operators, skills, certifications,dispatch) => {
+  //   var byOperator = []
+  //   var operatorsummary = []
+  //   var bottomtotals = []
 
-    var certID = 0
-    for (let o = 0; o < operators.length; o++) {
+  //   var certID = 0
+  //   for (let o = 0; o < operators.length; o++) {
 
-      for (let s = 0; s < skills.length; s++) {
-        certID++
-        byOperator.push({"id": String(certID),"operatorID": String(o+1),"skillID": String(s+1),"meta": {
-          "type":"solid","color":"green","letter":"A",
-        },"data": []})
-      }
-    }
+  //     for (let s = 0; s < skills.length; s++) {
+  //       certID++
+  //       byOperator.push({"id": String(certID),"operatorID": String(o+1),"skillID": String(s+1),"meta": {
+  //         "type":"solid","color":"green","letter":"A",
+  //       },"data": []})
+  //     }
+  //   }
 
-    dispatch({type: types.SET_BOTTOMTOTALS, payload: bottomtotals});
-    //console.log(byOperator)
-    return byOperator
-  }
+  //   dispatch({type: types.SET_BOTTOMTOTALS, payload: bottomtotals});
+  //   //console.log(byOperator)
+  //   return byOperator
+  // }
 
   const doByOperator = (operators, skills, certifications,dispatch) => {
     var byOperator = []
@@ -145,43 +146,43 @@ export const setAll = (dispatch, first, operatorsData, skillsData, certification
     return byOperator
   }
 
-  const doBySkillx = (operators, skills, certifications,dispatch) => {
-    var bySkill = []
-    var skillsummary = []
-    var righttotals = []
+  // const doBySkillx = (operators, skills, certifications,dispatch) => {
+  //   var bySkill = []
+  //   var skillsummary = []
+  //   var righttotals = []
 
-    //var certificationsDataCreated = []
-    var certID = 0
-    for (let sk = 0; sk < skills.length; sk++) {
-      var o = {}
-      o = skills[sk]
-      o.meta = skills[sk]
-      o.data = []
+  //   //var certificationsDataCreated = []
+  //   var certID = 0
+  //   for (let sk = 0; sk < skills.length; sk++) {
+  //     var o = {}
+  //     o = skills[sk]
+  //     o.meta = skills[sk]
+  //     o.data = []
 
-      for (let op = 0; op < operators.length; op++) {
-        certID++
+  //     for (let op = 0; op < operators.length; op++) {
+  //       certID++
 
-        o.data[op] = {};
-        o.data[op].certificationID = certID
-        o.data[op].skill = skills[op]
-        o.data[op].operator = operators[op]
-        o.data[op].meta = {"type":"solid","color":"green","letter":"","status":"started","start":"8/3/2021","trainer":false}
-        o.data[op].data = []
+  //       o.data[op] = {};
+  //       o.data[op].certificationID = certID
+  //       o.data[op].skill = skills[op]
+  //       o.data[op].operator = operators[op]
+  //       o.data[op].meta = {"type":"solid","color":"green","letter":"","status":"started","start":"8/3/2021","trainer":false}
+  //       o.data[op].data = []
 
-        bySkill.push(o)
+  //       bySkill.push(o)
 
 
 
-        // bySkill.push({"id": String(certID),"operatorID": String(op+1),"skillID": String(sk+1),"meta": {
-        //   "type":"solid","color":"green","letter":"B",
-        // },"data": []})
-      }
-    }
+  //       // bySkill.push({"id": String(certID),"operatorID": String(op+1),"skillID": String(sk+1),"meta": {
+  //       //   "type":"solid","color":"green","letter":"B",
+  //       // },"data": []})
+  //     }
+  //   }
 
-    dispatch({type: types.SET_RIGHTTOTALS, payload: righttotals});
-    //console.log(bySkill)
-    return bySkill
-  }
+  //   dispatch({type: types.SET_RIGHTTOTALS, payload: righttotals});
+  //   //console.log(bySkill)
+  //   return bySkill
+  // }
 
   const doBySkill = (operators, skills, certifications,dispatch) => {
     var bySkill = []
@@ -274,15 +275,17 @@ export const setAll = (dispatch, first, operatorsData, skillsData, certification
 
     //subscribeCertifications();
 
-    const multiplier = 8;
+    const multiplier = o.multiplier;
     const topHeight = 0;
     const fontsize = 2;
     const bandX = 5;
     const bandY = 5;
     var col1 = 40;
+    var col1a = 5;
     var col2 = bandX * x;
     var col3 =(bandX*3);
     var row1 = 35;
+
     var row2 = (bandY * y)+0;
     var row3 = bandX*3;
 
@@ -293,6 +296,7 @@ export const setAll = (dispatch, first, operatorsData, skillsData, certification
       bandX: bandX,
       bandY: bandY,
       col1: col1,
+      col1a: col1a,
       col2: col2,
       col3: col3,
       row1: row1,
@@ -310,6 +314,7 @@ export const setAll = (dispatch, first, operatorsData, skillsData, certification
       bandX: bandX*multiplier,
       bandY: bandY*multiplier,
       col1: col1*multiplier,
+      col1a: col1a*multiplier,
       col2: col2*multiplier,
       col3: col3*multiplier,
       row1: row1*multiplier,
@@ -319,7 +324,6 @@ export const setAll = (dispatch, first, operatorsData, skillsData, certification
     }
     dispatch({type: types.SET_DIMENSIONS, payload: d});
   }
-
 
   //  const callAll = async (dispatch,first,doBy, operatorsData, skillsData, certificationsData) => {
   const callAll = async (dispatch,payload2) => {
@@ -336,6 +340,8 @@ export const setAll = (dispatch, first, operatorsData, skillsData, certification
     operators = payload2.operatorsData
     skills = payload2.skillsData
     certifications = payload2.certificationsData
+
+    var multiplier = payload2.multiplier
 
     //console.log('operatorsData')
     //console.log(operatorsData)
@@ -376,7 +382,7 @@ export const setAll = (dispatch, first, operatorsData, skillsData, certification
     if (first === true) {
       var oLen = operators.length
       var sLen = skills.length
-      setInit({oLen,sLen})
+      setInit({oLen,sLen,multiplier})
     }
 
     var payload = {
@@ -394,7 +400,18 @@ export const setAll = (dispatch, first, operatorsData, skillsData, certification
   //console.log(dispatch,first, operatorsData, skillsData, certificationsData)
 
 
-  callAll(dispatch,first, operatorsData, skillsData, certificationsData)
+  //callAll(dispatch,first, operatorsData, skillsData, certificationsData, multiplier)
+
+  callAll(dispatch, theData)
+  // callAll(dispatch,{
+  //   first:first,
+  //   operatorsData:operatorsData,
+  //   skillsData:skillsData,
+  //   certificationsData:certificationsData,
+  //   multiplier:multiplier
+  // })
+
+
 }
 
 // export const setOperators = (dispatch) => {

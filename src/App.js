@@ -3,6 +3,7 @@ import TrainingMatrix from './trainingmatrix/TrainingMatrix'
 import axios from "axios";
 
 export const App = (props) => {
+  const [multiplier, setMultiplier] = useState(7);
   const [textMessage, setTextMessage] = useState('');
   const [showLegend, setShowLegend] = useState(false);
   const [skillsData, setSkillsData] = useState(null);
@@ -37,18 +38,21 @@ export const App = (props) => {
       <div style={{display:'flex',flexDirection:'row',height:'40px',padding:'5px',background:'gray'}}>
         <button onClick={()=>{setCertificationsData(newCertificationsData)}}>replace matrix data</button>
         <button onClick={()=>{setShowLegend(!showLegend)}}>Legend</button>
+        <button style={{marginLeft:'10px'}} onClick={()=>{setMultiplier(multiplier-1)}}>smaller</button>
+        <button onClick={()=>{setMultiplier(multiplier+1)}}>bigger</button>
+        <div style={{marginLeft:'70px',marginTop:'10px'}}>cell clicked:</div>
         <input
-          style={{marginLeft:'70px'}}
           type="text"
           value={textMessage}
           onChange={()=>{}}
         />
-        <div style={{margin:'10px'}}>v2021-10-06-a</div>
+        <div style={{margin:'10px'}}>v2021-10-07-a</div>
       </div>
 
       <div style={{flex:'1'}}>
         {certificationsData !== null &&
         <TrainingMatrix
+          multiplier={multiplier}
           showLegend={showLegend}
           operatorsData={operatorsData}
           skillsData={skillsData}

@@ -5,12 +5,16 @@ import { Legend } from './Legend';
 import "flex-splitter-directive"
 import "flex-splitter-directive/styles.min.css"
 import { Row1Col1 } from './Row1Col1';
+import { Row1Col1a } from './Row1Col1a';
 import { Row1Col2 } from './Row1Col2';
 import { Row1Col3 } from './Row1Col3';
 import { Row2Col1 } from './Row2Col1';
+//import { Row2Col1a } from './Row2Col1a';
+import { Row2Col1a } from './Row2Col1a';
 import { Row2Col2 } from './Row2Col2';
 import { Row2Col3 } from './Row2Col3';
 import { Row3Col1 } from './Row3Col1';
+import { Row3Col1a } from './Row3Col1a';
 import { Row3Col2 } from './Row3Col2';
 import { Row3Col3 } from './Row3Col3';
 import { styles } from './styles';
@@ -26,7 +30,19 @@ const Main = (props) => {
   var certificationsData = props.props.certificationsData
   useResizeEvent()
 
+  var multiplier = props.props.multiplier
+
+  // useEffect(() => {
+  //   console.log('multiplier',multiplier)
+
+  // },[multiplier])
+
   useEffect(() => {
+
+    if (multiplier == '') return
+    if (window.innerWidth <1500) {
+      multiplier = 6
+    }
 
     var certificationsDataCreated = []
     var certID = 0
@@ -52,9 +68,10 @@ const Main = (props) => {
       'first':true,
       'operatorsData':props.props.operatorsData,
       'skillsData':props.props.skillsData,
-      'certificationsData':certificationsDataCreated
+      'certificationsData':certificationsDataCreated,
+      'multiplier':multiplier
     })
-  },[certificationsData])
+  },[certificationsData,multiplier])
 
   useEffect(() => {
     if (matrixState.specific !== null) {
@@ -79,12 +96,15 @@ const Main = (props) => {
 
           <div className='leftrow1' height={matrixState.dimensions.row1} style={{...styles.h,height:matrixState.dimensions.row1+'px',background:'lightgray'}}>
             <Row1Col1/>
+            <Row1Col1a data={[['Rev#']]}/>
             <Row1Col2 data={matrixState.byOperator}/>
             <Row1Col3 data={[['Goal','# Certified','Gap']]}/>
           </div>
 
           <div className='leftrow2' style={{...styles.h,height:(matrixState.dimensions.row2Orig)+'px',background:'lightgray'}}>
             <Row2Col1 data={matrixState.bySkill}/>
+            {/* <Row2Col1a/> */}
+            <Row2Col1a data={[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]}/>
 
             {/* <Log data={matrixState.active}/> */}
             <LoadingOverlay
@@ -100,6 +120,7 @@ const Main = (props) => {
 
           <div className='leftrow3' style={{...styles.h,height: matrixState.dimensions.row3+'px',minHeight:matrixState.dimensions.row3+'px',background:'lightgray'}}>
             <Row3Col1 data={[['Goal'],['# Certified'],['Gap']]}/>
+            <Row3Col1a/>
             <Row3Col2 data={matrixState.bottomtotals}/>
             <Row3Col3/>
           </div>
