@@ -15,7 +15,7 @@ const Top = (props) => {
         <div style={{fontSize:'18px',marginLeft:'28px',marginTop:'14px'}}>Skill Certification</div>
 
       </div>
-      <div style={{margin:'30px 15px 5px 1px',fontSize:'11px'}}>08-02-2021(g)</div>
+      <div style={{margin:'30px 15px 5px 1px',fontSize:'11px'}}>10-08-2021(a)</div>
     </div>
   )
 }
