@@ -29,15 +29,15 @@ const Admin = (props) => {
 }
 
   return (
-    <div className='csv' style={{...styles.v,width:'100%',height:'100%',overflow:'none',background:'yellow'}}>
-      <div>hi</div>
-      <button style={{marginLeft:'40px',width:'120px',height:'30px'}}
+    <div className='admin' style={{...styles.v,padding:'20px',width:'100%',height:'100%',overflow:'none',background:'gray'}}>
+      <div>Admin Page</div>
+      {/* <button style={{marginLeft:'40px',width:'120px',height:'30px'}}
           onClick={(e)=> {
             signUp('marcg1','marcg1password','mgusmano@yahoo.com','+013122222222')
           }}
         >
           Add User
-        </button>
+      </button> */}
     </div>
   )
 }

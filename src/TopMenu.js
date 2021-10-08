@@ -49,16 +49,16 @@ const TopMenu = (props) => {
     <div className="topmenu" style={{display:'flex',justifyContent:'space-between',alignItems:'center',xjustifyContent:'center',height:'50px',color:'white',background:'black',fontSize:'24px'}}>
       <div style={{display:'flex',flexDirection:'row'}}>
         <div>
-            <Link style={{marginLeft:'60px',color:'white',textDecoration:'none'}} to="/trainingmatrix">Training Matrix</Link>
-            <Link style={{marginLeft:'50px',color:'white',textDecoration:'none'}} to="/csv">Load Data</Link>
+            {/* <Link style={{marginLeft:'60px',color:'white',textDecoration:'none'}} to="/trainingmatrix">Training Matrix</Link>
+            <Link style={{marginLeft:'50px',color:'white',textDecoration:'none'}} to="/csv">Load Data</Link> */}
+            <Link style={{marginLeft:'50px',color:'white',textDecoration:'none'}} to="/admin">Admin</Link>
 
 
-            {/* <Link style={{marginLeft:'50px',color:'white',textDecoration:'none'}} to="/simple">Simple</Link>
+            <Link style={{marginLeft:'50px',color:'white',textDecoration:'none'}} to="/simple">Simple</Link>
             <Link style={{marginLeft:'50px',color:'white',textDecoration:'none'}} to="/benchmark">Benchmark</Link>
-            <Link style={{marginLeft:'50px',color:'white',textDecoration:'none'}} to="/cardreport">Card Report</Link> */}
+            <Link style={{marginLeft:'50px',color:'white',textDecoration:'none'}} to="/cardreport">Card Report</Link>
 
 
-            {/* <Link style={{marginLeft:'50px',color:'white',textDecoration:'none'}} to="/admin">Admin</Link> */}
         </div>
       </div>
 

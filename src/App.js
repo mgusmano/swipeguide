@@ -7,17 +7,17 @@ import './App.css'
 //import Horizontal from './layout/Horizontal'
 import Vertical from './layout/Vertical'
 
-// import Top from './Top';
-// import TopMenu from './TopMenu';
+import Top from './Top';
+import TopMenu from './TopMenu';
 
 //import TrainingMatrix from './trainingmatrix/TrainingMatrix'
 import { TrainingMatrixPage } from './pages/trainingmatrixpage/TrainingMatrixPage'
 
-// import CsvData from './trainingmatrix/csv/CsvData'
-// import Admin from './trainingmatrix/admin/Admin'
-// import { Simple } from './pages/simple/Simple'
-// import { Benchmark } from './pages/benchmark/Benchmark'
-// import { CardReport } from './pages/cardreport/CardReport'
+import CsvData from './trainingmatrix/csv/CsvData'
+import Admin from './trainingmatrix/admin/Admin'
+import { Simple } from './pages/simple/Simple'
+import { Benchmark } from './pages/benchmark/Benchmark'
+import { CardReport } from './pages/cardreport/CardReport'
 
 
 
@@ -31,41 +31,41 @@ export const App = (() => (<AppProvider><Main/></AppProvider>))
 function Main(props) {
   //const appState = useAppState();
 
-  // var PartnerCNA = {
-  //   PartnerID: 395,
-  //   PartnerShort: 'CNA',
-  //   PartnerName: 'CNA',
-  //   PersonID: 275399,
-  //   GroupID: 33582,
-  //   showratings: false,
-  //   ratingsources: '4' //ManagerRating
-  // }
+  var PartnerCNA = {
+    PartnerID: 395,
+    PartnerShort: 'CNA',
+    PartnerName: 'CNA',
+    PersonID: 275399,
+    GroupID: 33582,
+    showratings: false,
+    ratingsources: '4' //ManagerRating
+  }
 
-  // var PartnerGMIsb = {
-  //   PartnerID: 434,
-  //   PartnerShort: 'GMIsb',
-  //   PartnerName: 'General Mills',
-  //   PersonID: 281326,
-  //   GroupID: 33931,
-  //   showratings: true,
-  //   ratingsources: '1000' //SelfRating
-  // }
+  var PartnerGMIsb = {
+    PartnerID: 434,
+    PartnerShort: 'GMIsb',
+    PartnerName: 'General Mills',
+    PersonID: 281326,
+    GroupID: 33931,
+    showratings: true,
+    ratingsources: '1000' //SelfRating
+  }
 
   return (
       <Vertical style={{width:'100%',height:'100%',display:'flex',flexDirection:'column'}}>
         {/* <div>{appState.userName}</div> */}
-        {/* <Top/>
-        <TopMenu/> */}
+        <Top/>
+        <TopMenu/>
         <div className="routehost" style={{flex: 'auto', display:'flex', flexDirection:'row',alignItems:'center',justifyContent:'center',overflow:'hidden'}}>
           <Switch>
-            <Route exact path="/"><Redirect to="/trainingmatrixpage"/></Route>
+            <Route exact path="/"><Redirect to="/admin"/></Route>
             {/* <Route path="/trainingmatrix" default component={TrainingMatrix}/> */}
-            <Route path="/trainingmatrixpage" default component={TrainingMatrixPage}/>
-            {/* <Route path="/csv" component={() => <CsvData/>}/>
-            <Route path="/admin" component={() => <Admin/>}/>
+            {/* <Route path="/trainingmatrixpage" default component={TrainingMatrixPage}/>
+            <Route path="/csv" component={() => <CsvData/>}/> */}
+            <Route path="/admin" default component={() => <Admin/>}/>
             <Route path="/simple" component={() => <Simple/>}/>
             <Route path="/benchmark" component={() => <Benchmark Partner={PartnerGMIsb}/>}/>
-            <Route path="/cardreport" component={() => <CardReport Partner={PartnerCNA} PartnerID='395' SMEOnly={true} showlob={false}/>} />}/> */}
+            <Route path="/cardreport" component={() => <CardReport Partner={PartnerCNA} PartnerID='395' SMEOnly={true} showlob={false}/>} />}/>
           </Switch>
         </div>
       </Vertical>
