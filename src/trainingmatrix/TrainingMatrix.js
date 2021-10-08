@@ -92,16 +92,16 @@ const Main = (props) => {
       <div className='mainarea' data-flex-splitter-horizontal style={{...styles.horizontal,padding:'20px',width:'100%',height:'100%'}}>
 
         {/* left area - matrix - start */}
-        <div data-flex-splitter-horizontal className='left' style={{...styles.v,flex:1,boxSizing:'border-box'}}>
+        <div data-flex-splitter-horizontal className='left' style={{...styles.v,flex:1,boxSizing:'border-box',display:'flex'}}>
 
-          <div className='leftrow1' height={matrixState.dimensions.row1} style={{...styles.h,height:matrixState.dimensions.row1+'px',background:'lightgray'}}>
+          <div className='leftrow1' height={matrixState.dimensions.row1} style={{...styles.h,overflow:'hidden',height:matrixState.dimensions.row1+'px',background:'lightgray'}}>
             <Row1Col1/>
             <Row1Col1a data={[['Rev#']]}/>
             <Row1Col2 data={matrixState.byOperator}/>
             <Row1Col3 data={[['Goal','# Certified','Gap']]}/>
           </div>
 
-          <div className='leftrow2' style={{...styles.h,height:(matrixState.dimensions.row2Orig)+'px',background:'lightgray'}}>
+          <div className='leftrow2' style={{...styles.h,flex:'1',xheight:(matrixState.dimensions.row2Orig)+'px',background:'lightgray'}}>
             <Row2Col1 data={matrixState.bySkill}/>
             {/* <Row2Col1a/> */}
             <Row2Col1a data={[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]}/>

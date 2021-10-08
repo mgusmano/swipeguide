@@ -30,7 +30,7 @@ export const styles = {
     flexDirection:'row',
     boxSizing:'border-box',
     border:'0px solid blue',
-    overflow:'hidden'
+    xoverflow:'hidden'
   },
   v: {
     display:'flex',
