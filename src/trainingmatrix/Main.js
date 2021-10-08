@@ -28,7 +28,7 @@ export const Main = (props) => {
 
   //var img = 'https://examples.sencha.com/extjs/7.4.0/examples/kitchensink/resources/images/staff/' + operator.id + '.jpg'
 
-  var img = 'data/trainingmatrix/pictures/' + operator.picture
+  var img = 'data/trainingmatrix/pictures/' + operator.picture + ''
 
   const setTheCert = (data,meta) => {
     var num = 0

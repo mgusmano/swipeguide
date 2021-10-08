@@ -28,7 +28,7 @@ export const Row1Col2 = (props) => {
         <foreignObject x={(bandX*c)+5} y={10} width='50px' height='50px'>
           <img
             alt="pic"
-            src={'data/trainingmatrix/pictures/' + data.picture}
+            src={'data/trainingmatrix/pictures/' + data.picture + ''}
             style={{borderRadius:'50%',width: bandX-10,height:bandX-10}}
           />
         </foreignObject>

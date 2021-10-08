@@ -13,7 +13,7 @@ const Top = (props) => {
         {/* <img src={SWIPE} style={{marginLeft:'20px',width:'200px'}} alt="SWIPE" /> */}
         <div style={{fontSize:'18px',marginLeft:'28px',marginTop:'14px'}}>Skill Certification</div>
       </div>
-      <div style={{margin:'30px 15px 5px 1px',fontSize:'11px'}}>10-01-2021(a)</div>
+      <div style={{margin:'30px 15px 5px 1px',fontSize:'11px'}}>10-08-2021(a)</div>
     </div>
   )
 }
