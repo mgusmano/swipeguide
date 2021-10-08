@@ -1,74 +1,93 @@
-import React, { useState, useEffect } from 'react';
-import TrainingMatrix from './trainingmatrix/TrainingMatrix'
-import axios from "axios";
+import React from 'react';
+import { AppProvider } from './state/AppProvider';
+//import { useAppState } from './state/AppProvider';
 
-export const App = (props) => {
-  const [multiplier, setMultiplier] = useState(0);
-  const [textMessage, setTextMessage] = useState('');
-  const [showLegend, setShowLegend] = useState(false);
-  const [skillsData, setSkillsData] = useState(null);
-  const [operatorsData, setOperatorsData] = useState(null);
-  const [certificationsData, setCertificationsData] = useState(null);
+import { Route, Switch, Redirect } from 'react-router-dom';
+import './App.css'
+//import Horizontal from './layout/Horizontal'
+import Vertical from './layout/Vertical'
 
-  useEffect(() => {
-    async function fetchData() {
-      const skillsResult = await axios("data/trainingmatrix/data/skills.json");
-      const operatorsResult = await axios("data/trainingmatrix/data/operators.json");
-      const certificationsResult = await axios("data/trainingmatrix/data/certifications.json");
-      setSkillsData(skillsResult.data)
-      setOperatorsData(operatorsResult.data)
-      setCertificationsData(certificationsResult.data)
-    }
-    fetchData();
+// import Top from './Top';
+// import TopMenu from './TopMenu';
 
-    if (window.innerWidth < 1200) { setMultiplier(5) } else
-    if (window.innerWidth < 1500) { setMultiplier(6) } else
-    { setMultiplier(7) }
-  },[])
+//import TrainingMatrix from './trainingmatrix/TrainingMatrix'
+import { TrainingMatrixPage } from './pages/trainingmatrixpage/TrainingMatrixPage'
 
-  const cellClicked = (id) => {
-    setTextMessage(id)
-  }
+// import CsvData from './trainingmatrix/csv/CsvData'
+// import Admin from './trainingmatrix/admin/Admin'
+// import { Simple } from './pages/simple/Simple'
+// import { Benchmark } from './pages/benchmark/Benchmark'
+// import { CardReport } from './pages/cardreport/CardReport'
 
-  const replaceMatrixData = () => {
-    async function fetchData() {
-      const certificationsnewResult = await axios("data/trainingmatrix/data/certificationsnew.json");
-      setCertificationsData(certificationsnewResult.data)
-    }
-    fetchData();
-  }
+
+
+//import { withAuthenticator } from '@aws-amplify/ui-react'
+//import {Auth} from 'aws-amplify';
+//import { Authenticator, SignIn, SignUp, ConfirmSignUp, Greetings } from 'aws-amplify-react';
+// https://docs.amplify.aws/ui/customization/theming/q/framework/react
+
+export const App = (() => (<AppProvider><Main/></AppProvider>))
+
+function Main(props) {
+  //const appState = useAppState();
+
+  // var PartnerCNA = {
+  //   PartnerID: 395,
+  //   PartnerShort: 'CNA',
+  //   PartnerName: 'CNA',
+  //   PersonID: 275399,
+  //   GroupID: 33582,
+  //   showratings: false,
+  //   ratingsources: '4' //ManagerRating
+  // }
+
+  // var PartnerGMIsb = {
+  //   PartnerID: 434,
+  //   PartnerShort: 'GMIsb',
+  //   PartnerName: 'General Mills',
+  //   PersonID: 281326,
+  //   GroupID: 33931,
+  //   showratings: true,
+  //   ratingsources: '1000' //SelfRating
+  // }
 
   return (
-    <div style={{display:'flex',flexDirection:'column',height:'100%',width:'100%'}}>
-
-      <div style={{display:'flex',flexDirection:'row',height:'40px',padding:'5px',background:'gray'}}>
-        <button onClick={replaceMatrixData}>replace matrix data</button>
-        <button onClick={()=>{setShowLegend(!showLegend)}}>Legend</button>
-        <button style={{marginLeft:'10px'}} onClick={()=>{setMultiplier(multiplier-1)}}>smaller</button>
-        <button onClick={()=>{setMultiplier(multiplier+1)}}>bigger</button>
-        <div style={{marginLeft:'70px',marginTop:'10px'}}>cell clicked:</div>
-        <input
-          style={{width:'30px'}}
-          type="text"
-          value={textMessage}
-          onChange={()=>{}}
-        />
-        <div style={{margin:'10px'}}>v2021-10-07-c</div>
-      </div>
-
-      <div style={{flex:'1'}}>
-        {certificationsData !== null &&
-        <TrainingMatrix
-          multiplier={multiplier}
-          showLegend={showLegend}
-          operatorsData={operatorsData}
-          skillsData={skillsData}
-          certificationsData={certificationsData}
-          cellClicked={cellClicked}
-        />
-        }
-      </div>
-
-    </div>
-  )
+      <Vertical style={{width:'100%',height:'100%',display:'flex',flexDirection:'column'}}>
+        {/* <div>{appState.userName}</div> */}
+        {/* <Top/>
+        <TopMenu/> */}
+        <div className="routehost" style={{flex: 'auto', display:'flex', flexDirection:'row',alignItems:'center',justifyContent:'center',overflow:'hidden'}}>
+          <Switch>
+            <Route exact path="/"><Redirect to="/trainingmatrixpage"/></Route>
+            {/* <Route path="/trainingmatrix" default component={TrainingMatrix}/> */}
+            <Route path="/trainingmatrixpage" default component={TrainingMatrixPage}/>
+            {/* <Route path="/csv" component={() => <CsvData/>}/>
+            <Route path="/admin" component={() => <Admin/>}/>
+            <Route path="/simple" component={() => <Simple/>}/>
+            <Route path="/benchmark" component={() => <Benchmark Partner={PartnerGMIsb}/>}/>
+            <Route path="/cardreport" component={() => <CardReport Partner={PartnerCNA} PartnerID='395' SMEOnly={true} showlob={false}/>} />}/> */}
+          </Switch>
+        </div>
+      </Vertical>
+  );
 }
+
+//export default App;
+
+
+      //var skills = skillsResult.data
+      // if (typeof skillsResult.data === 'string') {
+      //   skills = JSON.parse(skillsResult.data)
+      // }
+      //var operators = operatorsResult.data
+      // if (typeof operatorsResult.data === 'string') {
+      //   operators = JSON.parse(operatorsResult.data)
+      // }
+      //var certifications = certificationsResult.data
+      // if (typeof certificationsResult.data === 'string') {
+      //   certifications = JSON.parse(certificationsResult.data)
+      // }
+
+      // setSkillsData(skills)
+      // setOperatorsData(operators)
+      // setCertificationsData(certifications)
