@@ -101,8 +101,64 @@ export const Main = (props) => {
   }
 
   const onCertificationChange = async (event) => {
-    console.log(metadata)
+    var color = 'green'
+    switch (event.target.value) {
+      case 'notapplicable':
+        color = 'white'
+        break;
+      case 'intraining':
+        color = 'red'
+        break;
+      case 'notproficient':
+        color = 'goldenrod'
+        break;
+      case 'certified':
+        color = 'green'
+        break;
+      case 'trainer':
+        color = 'blue'
+        break;
+      case 'supertrainer':
+        color = 'gold'
+        break;
+      default:
+        break;
+    }
+    var meta = {"type":"solid","color":color,"strokecolor":"black","letter":"","start":"8/3/2021"}
+
+
+    var newCerts = matrixState.certifications.slice();
+    var certString = certificationID.toString()
+    const lastCertIndex = newCerts.findIndex(
+      (cert) => cert.id === certString
+    )
+    if (lastCertIndex !== -1) {
+      newCerts[lastCertIndex] = {
+        "id": certificationID,
+        "operatorID": operator.id,
+        "skillID": skill.id,
+        "meta": meta,
+        "data": []
+      }
+    }
+
+    setMetaData(meta)
+
     setCertification(event.target.value)
+    var c = {
+      id: certificationID,
+      skillID: skill.id,
+      operatorID: operator.id,
+      certification: event.target.value,
+      meta: meta,
+      skills: matrixState.skills,
+      operators: matrixState.operators,
+      certifications: newCerts,
+      multiplier: matrixState.dimensions.multiplier
+      //meta: JSON.stringify(metadatalocal),
+      //data: JSON.stringify(dd2),
+    }
+    matrixState.updateCert(c)
     return
 
     matrixState.setActive(true)
@@ -147,6 +203,9 @@ export const Main = (props) => {
     setCertification(event.target.value)
     var c = {
       id: certificationID,
+      skillID: skill.skillID,
+      operatorID: operator.operatorID,
+      certification: event.target.value,
       meta: JSON.stringify(metadatalocal),
       data: JSON.stringify(dd2),
     }
@@ -211,12 +270,12 @@ export const Main = (props) => {
 
             <div style={{marginLeft:'30px',display:'flex',flexDirection:'column'}}>
               Certification:
+              <div><input value="notapplicable" checked={certification === 'notapplicable'} onChange={onCertificationChange} style={{marginLeft:'20px'}} type="radio" name="percent2" /> Not Applicable</div>
               <div><input value="intraining" checked={certification === 'intraining'} onChange={onCertificationChange} style={{marginLeft:'20px'}} type="radio" name="percent2" /> In Training</div>
               <div><input value="notproficient" checked={certification === 'notproficient'} onChange={onCertificationChange} style={{marginLeft:'20px'}} type="radio" name="percent2" /> Not Proficient</div>
               <div><input value="certified" checked={certification === 'certified'} onChange={onCertificationChange} style={{marginLeft:'20px'}} type="radio" name="percent2" /> Certified</div>
               <div><input value="trainer" checked={certification === 'trainer'} onChange={onCertificationChange} style={{marginLeft:'20px'}} type="radio" name="percent2" /> Trainer</div>
               <div><input value="supertrainer" checked={certification === 'supertrainer'} onChange={onCertificationChange} style={{marginLeft:'20px'}} type="radio" name="percent2" /> Super Trainer</div>
-              <div><input value="notapplicable" checked={certification === 'notapplicable'} onChange={onCertificationChange} style={{marginLeft:'20px'}} type="radio" name="percent2" /> Not Applicable</div>
             </div>
 
             {/* <div style={{marginLeft:'40px',marginTop:'0',display:'flex',flexDirection:'column'}}>

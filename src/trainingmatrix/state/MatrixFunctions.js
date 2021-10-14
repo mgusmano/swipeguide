@@ -333,6 +333,9 @@ export const setAll = (dispatch, theData) => {
     //var skillsData = payload2.skillsData
     //var certificationsData = payload2.certificationsData
 
+
+    console.log(payload2.certificationsData)
+
     var operators
     var skills
     var certifications
@@ -392,6 +395,7 @@ export const setAll = (dispatch, theData) => {
       skills: skills,
       certifications: certifications
     }
+    console.log(payload)
     dispatch({type: types.SET_ALL, payload: payload});
     dispatch({type: types.SET_ACTIVE, payload: false});
   }
@@ -500,6 +504,29 @@ export const toggleLegend = (dispatch, payload) => {
 }
 
 export const updateCert = async (dispatch, payload) => {
-  await API.graphql(graphqlOperation(updateCertification, { input: payload } ))
-  setAll(dispatch,false)
+  console.log('updateCert - WebApi call here: ',
+    payload.skillID,
+    payload.operatorID,
+    payload.certification,
+    payload.meta
+  )
+  dispatch({type: types.UPDATE_CERT, payload: payload});
+  //await API.graphql(graphqlOperation(updateCertification, { input: payload } ))
+  //setAll(dispatch,false)
+  //setActive(true)
+  setAll(dispatch,{
+    'first':true,
+    'operatorsData':payload.operators,
+    'skillsData':payload.skills,
+    'certificationsData':payload.certifications,
+    'multiplier': payload.multiplier
+  })
+
+  // setAll({
+  //   'first':true,
+  //   'operatorsData':operatorsData,
+  //   'skillsData':props.props.skillsData,
+  //   'certificationsData':certificationsDataCreated,
+  //   'multiplier':multiplier
+  // })
 }

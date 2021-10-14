@@ -7,6 +7,14 @@ export const MatrixReducer = (state, action) => {
   const { type, payload } = action;
   var s;
   switch (type) {
+
+    case types.UPDATE_CERT:
+      //s = {...state,bottomtotals:payload}
+      s = {...state,certifications:payload.certifications}
+      return s
+
+
+
     case types.SET_USERNAME:
       s = {...state,userName:payload}
       return s
