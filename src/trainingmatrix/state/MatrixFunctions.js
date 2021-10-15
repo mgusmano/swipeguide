@@ -514,6 +514,12 @@ export const updateCert = async (dispatch, payload) => {
   console.log('skillID: ',  payload.skillID)
   console.log('operatorID: ',  payload.operatorID)
   console.log('certification: ',  payload.certification)
+
+  alert('updateCert - WebApi call here: \n'
+  + 'skillID: ' + payload.skillID + '\n'
+  + 'operatorID: ' + payload.operatorID + '\n'
+  + 'certification: ' + payload.certification + '\n'
+  )
   //console.log('meta',  payload.meta)
 
   dispatch({type: types.UPDATE_CERT, payload: payload});
