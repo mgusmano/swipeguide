@@ -95,7 +95,7 @@ export const setAll = (dispatch, theData) => {
         }
 
         var num = 0;
-        if (data != undefined) {
+        if (data !== undefined) {
           data.map((slice,i) => {
             if (slice.s === 1) {
               num++
@@ -222,7 +222,7 @@ export const setAll = (dispatch, theData) => {
 
 
         var num = 0;
-        if (data != undefined) {
+        if (data !== undefined) {
           data.map((slice,i) => {
             if (slice.s === 1) {
               num++
@@ -515,11 +515,14 @@ export const updateCert = async (dispatch, payload) => {
   console.log('operatorID: ',  payload.operatorID)
   console.log('certification: ',  payload.certification)
 
-  alert('updateCert - WebApi call here: \n'
-  + 'skillID: ' + payload.skillID + '\n'
-  + 'operatorID: ' + payload.operatorID + '\n'
-  + 'certification: ' + payload.certification + '\n'
-  )
+  setTimeout(function(){
+    alert('updateCert - WebApi call here: \n'
+    + 'skillID: ' + payload.skillID + '\n'
+    + 'operatorID: ' + payload.operatorID + '\n'
+    + 'certification: ' + payload.certification + '\n'
+    )
+  }, 50);
+
   //console.log('meta',  payload.meta)
 
   dispatch({type: types.UPDATE_CERT, payload: payload});

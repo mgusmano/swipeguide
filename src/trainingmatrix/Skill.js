@@ -19,13 +19,13 @@ export const Skill = React.memo((props) => {
   var bandY=30;
   var fontsize=14;
   const result = num % 2;
-  var src;
-  if (result === 1) {
-    src="https://app.swipeguide.com/guide/example-guide-line-1-wort-cooling-wort-aeration/safety/attach-lock/2"
-  }
-  else {
-    src="https://app.swipeguide.com/guide/multipacker-ocme/getting-started/copy%20500e%20of%20prepare-the-machine"
-  }
+  // var src;
+  // if (result === 1) {
+  //   src="https://app.swipeguide.com/guide/example-guide-line-1-wort-cooling-wort-aeration/safety/attach-lock/2"
+  // }
+  // else {
+  //   src="https://app.swipeguide.com/guide/multipacker-ocme/getting-started/copy%20500e%20of%20prepare-the-machine"
+  // }
   return (
     <div style={{display:'flex',flexDirection:'column',width:'100%',height:'100%'}}>
       <div style={{height:'60px',fontSize:'18px'}}>

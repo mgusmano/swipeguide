@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import TrainingMatrix from './trainingmatrix/TrainingMatrix'
 import axios from "axios";
+import Select from 'react-select';
 
 export const App = (props) => {
   const [multiplier, setMultiplier] = useState(0);
@@ -9,15 +10,20 @@ export const App = (props) => {
   const [skillsData, setSkillsData] = useState(null);
   const [operatorsData, setOperatorsData] = useState(null);
   const [certificationsData, setCertificationsData] = useState(null);
+  const [groupsData, setGroupsData] = useState(null);
 
   useEffect(() => {
     async function fetchData() {
       const skillsResult = await axios("data/trainingmatrix/data/skills.json");
       const operatorsResult = await axios("data/trainingmatrix/data/operators.json");
       const certificationsResult = await axios("data/trainingmatrix/data/certifications.json");
+      const groupsResult = await axios("data/trainingmatrix/data/groups.json");
+
       setSkillsData(skillsResult.data)
       setOperatorsData(operatorsResult.data)
       setCertificationsData(certificationsResult.data)
+      setGroupsData(groupsResult.data)
+      console.log(groupsResult.data)
     }
     fetchData();
 
@@ -53,7 +59,8 @@ export const App = (props) => {
           value={textMessage}
           onChange={()=>{}}
         />
-        <div style={{margin:'10px'}}>v2021-10-16-a</div>
+        <Select style={{width:'50px'}} options={groupsData} />
+        <div style={{margin:'10px'}}>v2021-10-16-b</div>
       </div>
 
       <div style={{flex:'1'}}>

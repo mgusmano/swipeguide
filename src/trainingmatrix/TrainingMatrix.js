@@ -39,7 +39,12 @@ const Main = (props) => {
 
   useEffect(() => {
 
-    if (multiplier == '') return
+    if (multiplier === '') return
+
+    console.log(props.props.skillsData)
+    console.log(props.props.operatorsData)
+    console.log(props.props.certificationsData)
+    var certificationsData = props.props.certificationsData;
     // if (window.innerWidth <1500) {
     //   multiplier = 6
     // }
@@ -59,6 +64,7 @@ const Main = (props) => {
           return certificationsData[o]
         }
       });
+      //console.log(found)
       found.meta = certificationsData[o].meta
       found.data = certificationsData[o].data
     }
