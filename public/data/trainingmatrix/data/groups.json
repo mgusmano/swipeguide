@@ -1,6 +1,6 @@
 [
-  {"value":"1","label": "Group 1"},
-  {"value":"2","label": "Group 2"},
-  {"value":"3","label": "Group 3"},
-  {"value":"4","label": "Group 4"}
+  {"id":"1","groupName": "Group 1"},
+  {"id":"2","groupName": "Group 2"},
+  {"id":"3","groupName": "Group 3"},
+  {"id":"4","groupName": "Group 4"}
 ]

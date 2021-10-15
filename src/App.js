@@ -12,6 +12,14 @@ export const App = (props) => {
   const [certificationsData, setCertificationsData] = useState(null);
   const [groupsData, setGroupsData] = useState(null);
 
+
+  const options = [
+    { value: 'chocolate', label: 'Chocolate' },
+    { value: 'strawberry', label: 'Strawberry' },
+    { value: 'vanilla', label: 'Vanilla' }
+  ]
+
+
   useEffect(() => {
     async function fetchData() {
       const skillsResult = await axios("data/trainingmatrix/data/skills.json");
@@ -52,15 +60,24 @@ export const App = (props) => {
         <button onClick={()=>{setShowLegend(!showLegend)}}>Legend</button>
         <button style={{marginLeft:'10px'}} onClick={()=>{setMultiplier(multiplier-1)}}>smaller</button>
         <button onClick={()=>{setMultiplier(multiplier+1)}}>bigger</button>
-        <div style={{marginLeft:'70px',marginTop:'10px'}}>cell clicked:</div>
+        <div style={{marginLeft:'30px',marginTop:'10px'}}>cell clicked:</div>
         <input
           style={{width:'30px'}}
           type="text"
           value={textMessage}
           onChange={()=>{}}
         />
-        <Select style={{width:'50px'}} options={groupsData} />
-        <div style={{margin:'10px'}}>v2021-10-16-b</div>
+        {/* <Select style={{width:'250px'}} options={options} /> */}
+
+        <div style={{marginLeft:'30px',marginTop:'10px'}}>groups:</div>
+        <select style={{width:'100px'}} onChange={(event) => {console.log(event)}}>
+          {groupsData !== null &&
+            groupsData.map((group,i) => {
+              return <option key={i} value={group.id}>{group.groupName}</option>
+            })
+          }
+        </select>
+        <div style={{margin:'10px',marginLeft:'70px'}}>v2021-10-16-c</div>
       </div>
 
       <div style={{flex:'1'}}>
