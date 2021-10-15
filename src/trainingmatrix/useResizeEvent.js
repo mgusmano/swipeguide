@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useMatrixState } from './state/MatrixProvider';
 
 export function useResizeEvent() {
-  console.log('useResizeEvent',window.innerWidth)
+  //console.log('useResizeEvent',window.innerWidth)
   const matrixState = useMatrixState();
 
   var event = 'resize'

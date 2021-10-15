@@ -1,12 +1,12 @@
-import React from 'react';
+import React, { useState, useEffect} from 'react';
 import {SvgX, PathX, TextX, CircleX} from './SvgStuff';
+import { getTheColor } from './state/Util';
 
 export const Diamond = ({meta, data, boxSize, padding}) => {
+  const [solidcolor, setSolidColor] = useState(null)
   var type = meta.type
-  var solidcolor = meta.color
-  var strokecolor = meta.strokecolor
+  var strokecolor = 'black'; //meta.strokecolor
   var letter = meta.letter
-
   if (typeof data === 'string') {
     data = JSON.parse(data)
   }
@@ -16,6 +16,15 @@ export const Diamond = ({meta, data, boxSize, padding}) => {
   if (meta.trainer === "true") { meta.trainer = true }
   if (meta.trainer === "false") { meta.trainer = false }
   var status = meta.status;
+
+  useEffect(() => {
+    if (meta.certification !== undefined) {
+      var c = getTheColor(meta.certification)
+      //console.log(meta.certification)
+      //console.log(c)
+      setSolidColor(c)
+    }
+  },[meta])
 
   function polarToCartesian(centerX, centerY, radius, angleInDegrees) {
     var angleInRadians = (angleInDegrees-90) * Math.PI / 180.0;

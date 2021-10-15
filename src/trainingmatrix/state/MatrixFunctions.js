@@ -95,29 +95,32 @@ export const setAll = (dispatch, theData) => {
         }
 
         var num = 0;
-        data.map((slice,i) => {
-          if (slice.s === 1) {
-            num++
+        if (data != undefined) {
+          data.map((slice,i) => {
+            if (slice.s === 1) {
+              num++
+            }
+            return null
+          })
+
+          if (num >  0 && meta.status === 'started') {
+            var dStart = new Date(meta.start);
+            var dToday = new Date();
+            var difftime = dToday.getTime() - dStart.getTime()
+            var diffdays = difftime / (1000 * 3600 * 24);
+            if (diffdays < 180) {
+              ss.numcertified ++
+            }
           }
-          return null
-        })
-        if (num >  0 && meta.status === 'started') {
-          var dStart = new Date(meta.start);
-          var dToday = new Date();
-          var difftime = dToday.getTime() - dStart.getTime()
-          var diffdays = difftime / (1000 * 3600 * 24);
-          if (diffdays < 180) {
-            ss.numcertified ++
+          if (data.status === 'started') {
+            ss.numstarted ++
           }
-        }
-        if (data.status === 'started') {
-          ss.numstarted ++
-        }
-        if (meta.status === 'started') {
-          ss.numstarted ++
-        }
-        if (meta.trainer === 'true' || meta.trainer === true ) {
-          ss.numtrainers ++
+          if (meta.status === 'started') {
+            ss.numstarted ++
+          }
+          if (meta.trainer === 'true' || meta.trainer === true ) {
+            ss.numtrainers ++
+          }
         }
         return null
       })
@@ -217,30 +220,33 @@ export const setAll = (dispatch, theData) => {
           data = fc.data
         }
 
+
         var num = 0;
-        data.map((slice,i) => {
-          if (slice.s === 1) {
-            num++
+        if (data != undefined) {
+          data.map((slice,i) => {
+            if (slice.s === 1) {
+              num++
+            }
+            return null
+          })
+          if (num >  0 && meta.status === 'started') {
+            var dStart = new Date(meta.start);
+            var dToday = new Date();
+            var difftime = dToday.getTime() - dStart.getTime()
+            var diffdays = difftime / (1000 * 3600 * 24);
+            if (diffdays < 180) {
+              ss.numcertified ++
+            }
           }
-          return null
-        })
-        if (num >  0 && meta.status === 'started') {
-          var dStart = new Date(meta.start);
-          var dToday = new Date();
-          var difftime = dToday.getTime() - dStart.getTime()
-          var diffdays = difftime / (1000 * 3600 * 24);
-          if (diffdays < 180) {
-            ss.numcertified ++
+          if (data.status === 'started') {
+            ss.numstarted ++
           }
-        }
-        if (data.status === 'started') {
-          ss.numstarted ++
-        }
-        if (meta.status === 'started') {
-          ss.numstarted ++
-        }
-        if (meta.trainer === 'true' || meta.trainer === true ) {
-          ss.numtrainers ++
+          if (meta.status === 'started') {
+            ss.numstarted ++
+          }
+          if (meta.trainer === 'true' || meta.trainer === true ) {
+            ss.numtrainers ++
+          }
         }
         return null
       })
@@ -334,7 +340,7 @@ export const setAll = (dispatch, theData) => {
     //var certificationsData = payload2.certificationsData
 
 
-    console.log(payload2.certificationsData)
+    //console.log(payload2.certificationsData)
 
     var operators
     var skills
@@ -395,7 +401,7 @@ export const setAll = (dispatch, theData) => {
       skills: skills,
       certifications: certifications
     }
-    console.log(payload)
+    //console.log(payload)
     dispatch({type: types.SET_ALL, payload: payload});
     dispatch({type: types.SET_ACTIVE, payload: false});
   }
@@ -504,12 +510,12 @@ export const toggleLegend = (dispatch, payload) => {
 }
 
 export const updateCert = async (dispatch, payload) => {
-  console.log('updateCert - WebApi call here: ',
-    payload.skillID,
-    payload.operatorID,
-    payload.certification,
-    payload.meta
-  )
+  console.log('updateCert - WebApi call here: ')
+  console.log('skillID: ',  payload.skillID)
+  console.log('operatorID: ',  payload.operatorID)
+  console.log('certification: ',  payload.certification)
+  //console.log('meta',  payload.meta)
+
   dispatch({type: types.UPDATE_CERT, payload: payload});
   //await API.graphql(graphqlOperation(updateCertification, { input: payload } ))
   //setAll(dispatch,false)

@@ -53,7 +53,7 @@ export const App = (props) => {
           value={textMessage}
           onChange={()=>{}}
         />
-        <div style={{margin:'10px'}}>v2021-10-07-c</div>
+        <div style={{margin:'10px'}}>v2021-10-16-a</div>
       </div>
 
       <div style={{flex:'1'}}>

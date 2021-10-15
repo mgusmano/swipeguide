@@ -1,12 +1,11 @@
 import React, { useState, useEffect, forwardRef} from 'react';
 import { useMatrixState } from './state/MatrixProvider';
 import { Diamond } from './Diamond';
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+//import DatePicker from "react-datepicker";
+//import "react-datepicker/dist/react-datepicker.css";
 
 export const Main = (props) => {
   const matrixState = useMatrixState();
-
   const [diamonddata, setDiamondData] = useState(null)
   const [metadata, setMetaData] = useState(null)
   const [certification, setCertification] = useState(null)
@@ -25,10 +24,25 @@ export const Main = (props) => {
   const operator = props.data.operator
   const skill = props.data.skill
   const certificationID = props.data.certificationID
-
   //var img = 'https://examples.sencha.com/extjs/7.4.0/examples/kitchensink/resources/images/staff/' + operator.id + '.jpg'
-
   var img = 'data/trainingmatrix/pictures/' + operator.picture + ''
+
+  useEffect(() => {
+    setDiamondData(data)
+    setMetaData(meta)
+    //setTheCert(data,meta)
+    setCertification(meta.certification)
+    if (meta.start !== undefined) {
+      setStartDate(new Date(meta.start))
+    }
+    if (meta.trainer === 'true') {
+      setTrainer(true)
+    }
+    else {
+      setTrainer(false)
+    }
+  },[props,data,meta])
+
 
   const setTheCert = (data,meta) => {
     var num = 0
@@ -65,21 +79,6 @@ export const Main = (props) => {
     }
   }
 
-  useEffect(() => {
-    setDiamondData(data)
-    setMetaData(meta)
-    setTheCert(data,meta)
-    if (meta.start !== undefined) {
-      setStartDate(new Date(meta.start))
-    }
-    if (meta.trainer === 'true') {
-      setTrainer(true)
-    }
-    else {
-      setTrainer(false)
-    }
-  },[props,data,meta])
-
   const onTrainerChange = async (event) => {
     matrixState.setActive(true)
     var metadatalocal = {...metadata};
@@ -101,64 +100,43 @@ export const Main = (props) => {
   }
 
   const onCertificationChange = async (event) => {
-    var color = 'green'
-    switch (event.target.value) {
-      case 'notapplicable':
-        color = 'white'
-        break;
-      case 'intraining':
-        color = 'red'
-        break;
-      case 'notproficient':
-        color = 'goldenrod'
-        break;
-      case 'certified':
-        color = 'green'
-        break;
-      case 'trainer':
-        color = 'blue'
-        break;
-      case 'supertrainer':
-        color = 'gold'
-        break;
-      default:
-        break;
-    }
-    var meta = {"type":"solid","color":color,"strokecolor":"black","letter":"","start":"8/3/2021"}
+    //console.log(meta)
+    if (meta.type === 'solid') {
+      var metaval = {"type":"solid","certification":event.target.value,"strokecolor":"black","letter":"","start":"8/3/2021"}
 
-
-    var newCerts = matrixState.certifications.slice();
-    var certString = certificationID.toString()
-    const lastCertIndex = newCerts.findIndex(
-      (cert) => cert.id === certString
-    )
-    if (lastCertIndex !== -1) {
-      newCerts[lastCertIndex] = {
-        "id": certificationID,
-        "operatorID": operator.id,
-        "skillID": skill.id,
-        "meta": meta,
-        "data": []
+      var newCerts = matrixState.certifications.slice();
+      var certString = certificationID.toString()
+      const lastCertIndex = newCerts.findIndex(
+        (cert) => cert.id === certString
+      )
+      if (lastCertIndex !== -1) {
+        newCerts[lastCertIndex] = {
+          "id": certificationID,
+          "operatorID": operator.id,
+          "skillID": skill.id,
+          "meta": metaval,
+          "data": []
+        }
       }
-    }
 
-    setMetaData(meta)
-
-    setCertification(event.target.value)
-    var c = {
-      id: certificationID,
-      skillID: skill.id,
-      operatorID: operator.id,
-      certification: event.target.value,
-      meta: meta,
-      skills: matrixState.skills,
-      operators: matrixState.operators,
-      certifications: newCerts,
-      multiplier: matrixState.dimensions.multiplier
-      //meta: JSON.stringify(metadatalocal),
-      //data: JSON.stringify(dd2),
+      //console.log(metaval)
+      setMetaData(metaval)
+      setCertification(event.target.value)
+      var c = {
+        id: certificationID,
+        skillID: skill.id,
+        operatorID: operator.id,
+        certification: event.target.value,
+        meta: metaval,
+        skills: matrixState.skills,
+        operators: matrixState.operators,
+        certifications: newCerts,
+        multiplier: matrixState.dimensions.multiplier
+        //meta: JSON.stringify(metadatalocal),
+        //data: JSON.stringify(dd2),
+      }
+      matrixState.updateCert(c)
     }
-    matrixState.updateCert(c)
     return
 
     matrixState.setActive(true)
@@ -218,6 +196,8 @@ export const Main = (props) => {
     </button>
   ));
 
+
+
   return (
     <div>
       <div style={{fontSize:'24px'}}>Operator: {operator.operatorName}</div>
@@ -229,15 +209,18 @@ export const Main = (props) => {
             <img alt="pic" src={img} style={{borderRadius: '50%', x: '125px', y: '250px', width: '140px', height: '140px'}}/>
 
             <svg style={{marginLeft:'30',marginTop:'5'}} width="150" height="150">
-            {diamonddata !== null &&
+            {diamonddata !== null && metadata !== null &&
             <Diamond meta={metadata} data={diamonddata} boxSize={140} padding={25}/>
             }
             </svg>
 
           </div>
           <div style={{margin:'30px',display:'flex',flexDirection:'column'}}>
-            Date Started:
-            <DatePicker
+            Date Started: {startDate.toLocaleDateString()}
+            <div style={{marginTop:'30px'}}>
+            <a href="http://www.microsoft.com">Certification Form for this Operator</a>
+            </div>
+            {/* <DatePicker
               customInput={<DatePickerInput />}
               dateFormat="MM/dd/yyyy"
               selected={startDate}
@@ -254,7 +237,7 @@ export const Main = (props) => {
                   data: JSON.stringify(diamonddata),
                 }
                 matrixState.updateCert(c)
-              }} />
+              }} /> */}
           </div>
 
           <div style={{display:'flex',flexDirection:'row'}}>
