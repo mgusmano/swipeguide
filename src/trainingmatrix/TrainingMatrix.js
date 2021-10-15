@@ -29,21 +29,14 @@ const Main = (props) => {
   const matrixState = useMatrixState();
   var certificationsData = props.props.certificationsData
   useResizeEvent()
-
   var multiplier = props.props.multiplier
 
-  // useEffect(() => {
-  //   console.log('multiplier',multiplier)
-
-  // },[multiplier])
-
   useEffect(() => {
-
     if (multiplier === '') return
 
-    console.log(props.props.skillsData)
-    console.log(props.props.operatorsData)
-    console.log(props.props.certificationsData)
+    //console.log(props.props.skillsData)
+    //console.log(props.props.operatorsData)
+    //console.log(props.props.certificationsData)
     var certificationsData = props.props.certificationsData;
     // if (window.innerWidth <1500) {
     //   multiplier = 6
@@ -54,7 +47,7 @@ const Main = (props) => {
     for (let s = 0; s < props.props.skillsData.length; s++) {
       for (let o = 0; o < props.props.operatorsData.length; o++) {
         certID++
-        certificationsDataCreated.push({"id": String(certID),"operatorID": String(o+1),"skillID": String(s+1),"meta": {},"data": []})
+        certificationsDataCreated.push({"id": String(certID),"operatorID": String(o+1),"skillID": String(s+1),"meta": {"type":"solid","certification":"notapplicable"},"data": []})
       }
     }
 

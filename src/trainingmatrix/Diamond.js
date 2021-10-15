@@ -6,6 +6,9 @@ export const Diamond = ({meta, data, boxSize, padding}) => {
   const [solidcolor, setSolidColor] = useState(null)
   var type = meta.type
   var strokecolor = 'black'; //meta.strokecolor
+  if (meta.certification === "notapplicable") {
+    strokecolor = "white"
+  }
   var letter = meta.letter
   if (typeof data === 'string') {
     data = JSON.parse(data)

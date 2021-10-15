@@ -12,14 +12,6 @@ export const App = (props) => {
   const [certificationsData, setCertificationsData] = useState(null);
   const [groupsData, setGroupsData] = useState(null);
 
-
-  const options = [
-    { value: 'chocolate', label: 'Chocolate' },
-    { value: 'strawberry', label: 'Strawberry' },
-    { value: 'vanilla', label: 'Vanilla' }
-  ]
-
-
   useEffect(() => {
     async function fetchData() {
       const skillsResult = await axios("data/trainingmatrix/data/skills.json");
@@ -31,7 +23,7 @@ export const App = (props) => {
       setOperatorsData(operatorsResult.data)
       setCertificationsData(certificationsResult.data)
       setGroupsData(groupsResult.data)
-      console.log(groupsResult.data)
+      //console.log(groupsResult.data)
     }
     fetchData();
 
@@ -77,7 +69,7 @@ export const App = (props) => {
             })
           }
         </select>
-        <div style={{margin:'10px',marginLeft:'70px'}}>v2021-10-16-c</div>
+        <div style={{margin:'10px',marginLeft:'70px'}}>v2021-10-16-d</div>
       </div>
 
       <div style={{flex:'1'}}>
