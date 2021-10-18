@@ -36,7 +36,6 @@ export const MatrixCell = React.memo(({rowid, colid, bandX, bandY, type, x, stro
       stroke="blue"
       fill="gray"
       strokeWidth="5"
-
       x={x}
       width={bandX}
       height={bandY}

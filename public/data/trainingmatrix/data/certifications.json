@@ -1,5 +1,8 @@
 [
   {"operatorID": "1","skillID": "1","groupID": "1","meta": {"type":"solid","certification":"notapplicable","letter":"","start":"8/3/2021"},"data": []},
+
+
+  
   {"operatorID": "2","skillID": "1","groupID": "1","meta": {"type":"solid","certification":"intraining","colorzzz":"gold","strokecolor":"black","letter":"","start":"8/3/2021"},"data": []},
   {"operatorID": "3","skillID": "1","groupID": "1","meta": {"type":"solid","certification":"notproficient","colorzzz":"red","strokecolor":"black","letter":"","start":"8/3/2021"},"data": []},
   {"operatorID": "4","skillID": "1","groupID": "1","meta": {"type":"solid","certification":"certified","colorzzz":"goldenrod","strokecolor":"black","letter":"","start":"8/3/2021"},"data": []},

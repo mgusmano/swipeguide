@@ -5,6 +5,7 @@ import { useMatrixState } from './state/MatrixProvider';
 //import { Skill } from './Skill';
 //import { styles } from './styles'
 import { Operator } from './Operator';
+import { Main } from './Main';
 import { MatrixOneRow } from './MatrixOneRow';
 
 export const Row1Col2 = (props) => {
@@ -14,7 +15,21 @@ export const Row1Col2 = (props) => {
   const {row1,col2,fontsize,bandX} = matrixState.dimensions;
 
   const clickOperatorCell = (e,colid,rowid,type,data,col) => {
+    //data.picture=""
+    data.operator = {}
+    data.operator.picture = ""
+
+    data.skill = {}
+    data.skill.skillName = ""
+    //matrixState.setSpecific(<div style={{display:'flex', flexDirection:'row'}}><Operator data={data}/><Main data={data}/></div>)
+    matrixState.setCellData({})
+    matrixState.showMainDialog('none')
+    matrixState.showSecondaryDialog('block')
+
+
+
     matrixState.setSpecific(<Operator data={data}/>)
+
   }
 
   const renderOperatorCell = (props,c,col,r,row,sTop,data,clickCellFunction) => {

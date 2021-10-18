@@ -4,6 +4,7 @@ import { Diamond } from './Diamond';
 import { MatrixCell } from './MatrixCell';
 
 export const Skill = React.memo((props) => {
+  console.log(props)
   const matrixState = useMatrixState();
   const [goal, setGoal] = useState(0);
   const skillID = props.data.skill.id;
@@ -26,39 +27,65 @@ export const Skill = React.memo((props) => {
   // else {
   //   src="https://app.swipeguide.com/guide/multipacker-ocme/getting-started/copy%20500e%20of%20prepare-the-machine"
   // }
+
+  //<div xonClick={(event)=>{console.log(event)}}>{item.operator.id}</div>
+  //<div xonClick={(event)=>{console.log(event)}}>{item.operator.operatorName}</div>
+
   return (
-    <div style={{display:'flex',flexDirection:'column',width:'100%',height:'100%'}}>
-      <div style={{height:'60px',fontSize:'18px'}}>
-        <div style={{fontSize:'20px'}}>Skill: {data.skill.skillName}</div>
-        <div>
-        Goal for Number Certified:
-        <input
-          type="text"
-          value={goal}
-          onChange={(event)=> {
-            setGoal(event.target.value)
-          }}
-          style={{marginLeft:'10px',marginTop:5,width:'26px',height:'15px'}}
-        />
-        <button
-          onClick={(event)=> {
-            matrixState.setActive(true)
-            var payload = {
-              id: skillID,
-              goal: goal
-            }
-            matrixState.updateSkillGoal(payload)
-          }}
-        >
-          Update
-        </button>
+    <div style={{display:'flex',flexDirection:'column',padding:'10px',width:'250px',height:'99%',borderRight:'0px solid red'}}>
+      <div style={{height:'150px',fontSize:'18px'}}>
+        <div style={{fontSize:'20px'}}>{data.skill.skillName}</div>
+          <div style={{marginTop:'20px'}}>
+          Goal for Number Certified:<br/>
+          <input
+            type="text"
+            value={goal}
+            onChange={(event)=> {
+              setGoal(event.target.value)
+            }}
+            style={{marginLeft:'10px',marginTop:5,width:'26px',height:'15px'}}
+          />
+          <button
+            onClick={(event)=> {
+              matrixState.setActive(true)
+              var payload = {
+                id: skillID,
+                goal: goal
+              }
+              matrixState.updateSkillGoal(payload)
+            }}
+          >
+            Update
+          </button>
+        </div>
       </div>
+
+      <div style={{flex:'1', overflow: 'hidden'}}>
+        <div>Select an Operator<br/>to Load Certification Data<br/>for this Skill</div>
+        <select size="15" onChange={(event)=>{
+          var val = event.target.options[ event.target.selectedIndex ].value
+          const found = data.skill.data.find(element => element.certificationID == val);
+          matrixState.setCellData(found)
+          matrixState.showMainDialog('block')
+        }}>
+        {data.skill.data.map((item,i) => {
+          return (
+            <option key={i} value={item.certificationID}>
+              {item.operator.operatorName}
+            </option>
+          )
+        })}
+        </select>
       </div>
-      <div style={{flex:'1'}}>
+
+
+
+      <div style={{display:'none',flex:'1', overflow: 'hidden'}}>
+        {/* <div style={{height:'200px', overflow:'scroll'}}> */}
         <svg width="100%" height="100%">
         {data.skill.data.map((item,i) => {
           return (
-            <g key={i} transform={"translate(200," + ((i+0)*bandY) + ")"} className="group" >
+            <g key={i} transform={"translate(200," + ((i+0)*bandY) + ")"} className="group" onClick={(event,i,item)=>{console.log(event)}} >
               <text
                 dominantBaseline="left"
                 textAnchor="end"
@@ -70,18 +97,19 @@ export const Skill = React.memo((props) => {
                   {item.operator.operatorName}
               </text>
               <Diamond meta={item.meta} data={item.data} boxSize={bandX} padding={20}/>
-              <MatrixCell
+              {/* <MatrixCell
                 rowid={item.meta.id}
                 colid={1}
                 bandX={bandX}
                 bandY={bandY}
                 type="pie"
                 data={data}
-              />
+              /> */}
             </g>
           )
         })}
         </svg>
+        {/* </div> */}
       </div>
 
       {/* <div style={{flex:'1',display:'flex'}}>
@@ -97,3 +125,29 @@ export const Skill = React.memo((props) => {
     </div>
   )
 })
+
+
+
+// {/* <div key={i} style={{display:'flex', flexDirection: 'row'}}
+//             onClick={(event)=>{
+//               console.log(event)
+//               console.log(item)
+//               matrixState.setCellData(item)
+//               matrixState.showMainDialog('block')
+//             }
+//           }>
+//             <div>{item.certificationID} {item.operator.id} {item.operator.operatorName}</div>
+//           </div> */}
+
+//         // return (
+//         //   <div key={i} style={{display:'flex', flexDirection: 'row'}}
+//         //     onClick={(event)=>{
+//         //       console.log(event)
+//         //       console.log(item)
+//         //       matrixState.setCellData(item)
+//         //       matrixState.showMainDialog('block')
+//         //     }
+//         //   }>
+//         //     <div>{item.certificationID} {item.operator.id} {item.operator.operatorName}</div>
+//         //   </div>
+//         // )

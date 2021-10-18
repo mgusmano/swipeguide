@@ -7,6 +7,25 @@ import { API, graphqlOperation } from 'aws-amplify'
 // import { listCertifications} from '../../graphql/queries'
 import { updateSkill, updateOperator, updateCertification } from '../graphql/mutations'
 
+
+export const showSkillDialog = (dispatch, payload) => {
+  dispatch({type: types.SET_SHOWSKILLDIALOG, payload: payload});
+}
+
+export const showOperatorDialog = (dispatch, payload) => {
+  dispatch({type: types.SET_SHOWOPERATORDIALOG, payload: payload});
+}
+
+export const showMainDialog = (dispatch, payload) => {
+  dispatch({type: types.SET_SHOWMAINDIALOG, payload: payload});
+}
+export const showSecondaryDialog = (dispatch, payload) => {
+  dispatch({type: types.SET_SHOWSECONDARYDIALOG, payload: payload});
+}
+export const setCellData = (dispatch, payload) => {
+  console.log('setCellData')
+  dispatch({type: types.SET_CELLDATA, payload: payload});
+}
 export const setUserName = (dispatch, payload) => {
   console.log('setUserNameFunction')
   dispatch({type: types.SET_USERNAME, payload: payload});
@@ -515,13 +534,13 @@ export const updateCert = async (dispatch, payload) => {
   console.log('operatorID: ',  payload.operatorID)
   console.log('certification: ',  payload.certification)
 
-  setTimeout(function(){
-    alert('updateCert - WebApi call here: \n'
-    + 'skillID: ' + payload.skillID + '\n'
-    + 'operatorID: ' + payload.operatorID + '\n'
-    + 'certification: ' + payload.certification + '\n'
-    )
-  }, 50);
+  // setTimeout(function(){
+  //   alert('updateCert - WebApi call here: \n'
+  //   + 'skillID: ' + payload.skillID + '\n'
+  //   + 'operatorID: ' + payload.operatorID + '\n'
+  //   + 'certification: ' + payload.certification + '\n'
+  //   )
+  // }, 50);
 
   //console.log('meta',  payload.meta)
 

@@ -3,6 +3,7 @@ import { Matrix } from './Matrix';
 import { MatrixCell } from './MatrixCell';
 import { useMatrixState } from './state/MatrixProvider';
 import { Skill } from './Skill';
+import { Main } from './Main';
 import { styles } from './styles'
 
 export const Row2Col1 = (props) => {
@@ -13,7 +14,13 @@ export const Row2Col1 = (props) => {
 
   const clickSkillCell = (e,colid,rowid,type,data,col) => {
     setNum(num + 1);
+    matrixState.setCellData({})
     matrixState.setSpecific(<Skill data={data} num={num}/>)
+    matrixState.showMainDialog('none')
+    matrixState.showSecondaryDialog('block')
+
+    //matrixState.setSpecific(<div style={{display:'flex', flexDirection:'row'}}><Skill data={data} num={num}/><Main data={data}/></div>)
+
   }
 
   const renderSkillCell = (props,c,col,r,row,sTop,data,clickCellFunction) => {

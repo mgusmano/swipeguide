@@ -17,19 +17,22 @@ import { Row3Col1 } from './Row3Col1';
 import { Row3Col1a } from './Row3Col1a';
 import { Row3Col2 } from './Row3Col2';
 import { Row3Col3 } from './Row3Col3';
+import { Main } from './Main';
 import { styles } from './styles';
 import { useResizeEvent } from './useResizeEvent';
 import { MatrixProvider } from './state/MatrixProvider';
 
 export const TrainingMatrix = ((props) => {
-  return(<MatrixProvider><Main props={props}/></MatrixProvider>)
+  return(<MatrixProvider><MainMatrixProvider props={props}/></MatrixProvider>)
 })
 
-const Main = (props) => {
+const MainMatrixProvider = (props) => {
   const matrixState = useMatrixState();
   var certificationsData = props.props.certificationsData
   useResizeEvent()
   var multiplier = props.props.multiplier
+
+  console.log(matrixState.mainDialog)
 
   useEffect(() => {
     if (multiplier === '') return
@@ -130,12 +133,18 @@ const Main = (props) => {
         <div role="separator"></div>
 
         {/* right area - details - start */}
-        <div className='right' style={{width:'400px'}}>
-          <div style={{width:'100%', height:'100%', padding:'25px', background:'white', boxSizing:'border-box'}}>
-            <div style={{width:'100%', height:'100%', boxSizing:'border-box', padding:'10px', boxShadow: '0 10px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19)'}}>
+        <div className='right' style={{display:'flex',flexDirection:'row',overflow: 'hidden',padding:'0px', background:'white', boxSizing:'border-box',boxShadow: '0 10px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19)'}}>
+          {/* <div style={{display:'flex',flexDirection:'row',width:'100%', height:'100%', padding:'25px', background:'white', boxSizing:'border-box',boxShadow: '0 10px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19)'}}> */}
+            <div style={{display: matrixState.secondaryDialog, width:'300px', height:'100%', boxSizing:'border-box', xpadding:'10px', xboxShadow: '0 10px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19)'}}>
               {matrixState.specific}
             </div>
-          </div>
+
+            <div style={{display: matrixState.mainDialog, width:'300px', height:'100%', boxSizing:'border-box', xpadding:'10px', xboxShadow: '0 10px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19)'}}>
+              <Main data={{}}/>
+            </div>
+
+
+          {/* </div> */}
         </div>
         {/* right area - details - end */}
       </div>

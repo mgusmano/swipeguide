@@ -7,6 +7,19 @@ export const MatrixReducer = (state, action) => {
   const { type, payload } = action;
   var s;
   switch (type) {
+    case types.SET_SHOWSKILLDIALOG: return {...state,skillDialog:payload}
+    case types.SET_SHOWOPERATORDIALOG: return {...state,operatorDialog:payload}
+    case types.SET_SHOWMAINDIALOG: return {...state,mainDialog:payload}
+    case types.SET_SHOWSECONDARYDIALOG: return {...state,secondaryDialog:payload}
+
+    case types.SET_CELLDATA:
+      //s = {...state,bottomtotals:payload}
+      console.log(payload)
+      s = {...state,celldata:payload}
+      return s
+
+
+
 
     case types.UPDATE_CERT:
       //s = {...state,bottomtotals:payload}

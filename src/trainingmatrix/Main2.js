@@ -4,7 +4,7 @@ import { Diamond } from './Diamond';
 //import DatePicker from "react-datepicker";
 //import "react-datepicker/dist/react-datepicker.css";
 
-export const Main = (props) => {
+export const Main2 = (props) => {
   const matrixState = useMatrixState();
   const [diamonddata, setDiamondData] = useState(null)
   const [metadata, setMetaData] = useState(null)
@@ -12,54 +12,25 @@ export const Main = (props) => {
   const [trainer, setTrainer] = useState(false)
   const [startDate, setStartDate] = useState(new Date());
 
-
-  console.log(matrixState.celldata.data)
-
-
-  var operator = {}
-  var skill = {}
-  var certificationID = "0"
-  var img = ""
-
-  console.log(matrixState.celldata)
-
-  if (matrixState.celldata.meta !== undefined) {
-    operator = matrixState.celldata.operator
-    skill = matrixState.celldata.skill
-    certificationID = matrixState.celldata.certificationID
-    img = 'data/trainingmatrix/pictures/' + matrixState.celldata.operator.picture + ''
+  var data = props.data.data
+  var meta = props.data.meta
+  if (typeof data === 'string') {
+    data = JSON.parse(data)
   }
-  console.log(img)
-  // else {
-  //   operator = {}
-  // }
+  if (typeof meta === 'string') {
+    meta = JSON.parse(meta)
+  }
 
+  const operator = props.data.operator
+  const skill = props.data.skill
+  const certificationID = props.data.certificationID
+  //var img = 'https://examples.sencha.com/extjs/7.4.0/examples/kitchensink/resources/images/staff/' + operator.id + '.jpg'
+  var img = 'data/trainingmatrix/pictures/' + operator.picture + ''
 
   useEffect(() => {
-
-    console.log(matrixState.celldata.length)
-
-    if (matrixState.celldata.meta === undefined) {
-
-      setDiamondData(null)
-      setMetaData(null)
-      setCertification(null)
-
-      return
-    }
-    var data = matrixState.celldata.data
-    var meta = matrixState.celldata.meta
-    if (typeof data === 'string') {
-      data = JSON.parse(data)
-    }
-    if (typeof meta === 'string') {
-      meta = JSON.parse(meta)
-    }
-
-    console.log(meta)
-
     setDiamondData(data)
     setMetaData(meta)
+    //setTheCert(data,meta)
     setCertification(meta.certification)
     if (meta.start !== undefined) {
       setStartDate(new Date(meta.start))
@@ -70,7 +41,7 @@ export const Main = (props) => {
     else {
       setTrainer(false)
     }
-  },[props])
+  },[props,data,meta])
 
 
   const setTheCert = (data,meta) => {
@@ -130,7 +101,7 @@ export const Main = (props) => {
 
   const onCertificationChange = async (event) => {
     //console.log(meta)
-    if (metadata.type === 'solid') {
+    if (meta.type === 'solid') {
       var metaval = {"type":"solid","certification":event.target.value,"strokecolor":"black","letter":"","start":"8/3/2021"}
 
       var newCerts = matrixState.certifications.slice();
@@ -164,7 +135,6 @@ export const Main = (props) => {
         //meta: JSON.stringify(metadatalocal),
         //data: JSON.stringify(dd2),
       }
-      console.log('updateCert')
       matrixState.updateCert(c)
     }
     return
@@ -229,9 +199,9 @@ export const Main = (props) => {
 
 
   return (
-    <div style={{padding:'10px'}}>
-      <div style={{fontSize:'20px'}}>{skill.skillName}</div>
-      <div style={{fontSize:'20px',marginBottom:'10px'}}>{operator.operatorName}</div>
+    <div>
+      <div style={{fontSize:'24px'}}>Operator: {operator.operatorName}</div>
+      <div style={{fontSize:'20px',marginBottom:'10px'}}>Skill: {skill.skillName}</div>
       <div style={{fontSize:'12px',marginBottom:'10px'}}>certificationID: {certificationID} - skill.id: {skill.id} - operator.id: {operator.id}</div>
       <div>
         <div style={{display:'flex',flexDirection:'column'}}>

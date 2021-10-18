@@ -9,6 +9,13 @@ const MatrixContext = createContext();
 export const MatrixProvider = (props) => {
 
   const getFunctions = {
+    showSkillDialog: (payload) => functions.showSkillDialog(dispatch, payload),
+    showOperatorDialog: (payload) => functions.showOperatorDialog(dispatch, payload),
+    showMainDialog: (payload) => functions.showMainDialog(dispatch, payload),
+    showSecondaryDialog: (payload) => functions.showSecondaryDialog(dispatch, payload),
+
+    setCellData: (payload) => functions.setCellData(dispatch, payload),
+
     setUserName: (payload) => functions.setUserName(dispatch, payload),
     setActive: (payload) => functions.setActive(dispatch, payload),
     setAll: (payload) => {
@@ -35,6 +42,11 @@ export const MatrixProvider = (props) => {
   }
 
   const initialState = {
+    skillDialog: 'none',
+    operatorDialog: 'none',
+    mainDialog: 'none',
+    secondaryDialog: 'none',
+    celldata: {},
     userName: 'initmatrix',
     authenticateduser: '',
     operatorgoal: 0,

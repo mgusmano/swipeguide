@@ -9,6 +9,8 @@ export const Operator = React.memo((props) => {
   const [goal, setGoal] = useState(0);
   const operatorID = props.data.id;
 
+  console.log(props)
+
   useEffect(() => {
     setGoal(props.data.goal)
   },[props])
@@ -22,11 +24,11 @@ export const Operator = React.memo((props) => {
   var img = 'data/trainingmatrix/pictures/' + data.picture + ''
 
   return (
-    <div style={{display:'flex',flexDirection:'column',width:'100%',height:'100%'}}>
-      <div style={{height:'200px'}}>
-        <div style={{fontSize:'20px'}}>Operator: {data.operatorName}</div>
+    <div style={{display:'flex',flexDirection:'column',padding:'10px',width:'100%',height:'100%'}}>
+      <div style={{height:'230px'}}>
+        <div style={{fontSize:'20px'}}>{data.operatorName}</div>
         <div>
-          Goal for Certifications:
+          Goal for Certifications:<br/>
           <input
             type="text"
             value={goal}
@@ -51,7 +53,53 @@ export const Operator = React.memo((props) => {
         <img alt="pic" src={img} style={{marginTop:'30',borderRadius: '50%', x: '125px', y: '250px', width: '140px', height: '140px'}}/>
 
       </div>
-      <div style={{flex:'1',overflow:'none'}}>
+
+      <div style={{flex:'1', overflow: 'hidden'}}>
+        <div>Select a Skill<br/>to Load Certification Data<br/>for this Operator</div>
+        <select size="15" onChange={(event)=>{
+          var val = event.target.options[ event.target.selectedIndex ].value
+          console.log(val)
+
+          console.log(matrixState.certifications)
+
+          var found = matrixState.certifications.find(element => element.id == val.toString());
+
+          const foundoperator = matrixState.operators.find(element => element.id == found.operatorID.toString());
+          const foundskill = matrixState.skills.find(element => element.id == found.skillID.toString());
+
+          found.operator = foundoperator
+          found.skill = foundskill
+
+          console.log(found)
+          matrixState.setCellData(found)
+          matrixState.showMainDialog('block')
+        }}>
+        {data.data.map((item,i) => {
+          console.log(item)
+
+console.log(item.operator.id)
+console.log(item.skill.id)
+
+//console.log(matrixState.certifications)
+
+  const found = matrixState.certifications.find((element) => {
+    if (element.operatorID === item.operator.id && element.skillID === item.skill.id) {
+      return element
+    }
+  });
+  console.log(found)
+
+          return (
+            <option key={i} value={found.id}>
+              {item.skill.skillName}
+            </option>
+          )
+        })}
+        </select>
+      </div>
+
+
+      <div style={{flex:'1',overflow:'none',display: 'none'}}>
         <svg width="100%" height="100%">
         {data.data.map((item,i) => {
           return (

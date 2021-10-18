@@ -43,7 +43,15 @@ export const Row2Col2 = (props) => {
   const clickMainCell = useCallback((e,colid,rowid,type,data,col) => {
     props.cellClicked(data.certificationID)
     matrixState.setCurrentCertification(data.certificationID)
-    matrixState.setSpecific(<Main data={data}/>)
+
+console.log('this is what is set')
+console.log(data)
+
+    matrixState.setCellData(data)
+    matrixState.showMainDialog('block')
+    matrixState.showSecondaryDialog('none')
+
+    //matrixState.setSpecific(<Main data={data}/>)
   })
 
   const renderMainCell = (props,c,col,r,row,sTop,data,clickCellFunction,fontsize) => {
