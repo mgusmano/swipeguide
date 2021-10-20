@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import TrainingMatrix from './trainingmatrix/TrainingMatrix'
 import axios from "axios";
-import Select from 'react-select';
+//import Select from 'react-select';
 
 export const App = (props) => {
   const [multiplier, setMultiplier] = useState(0);
@@ -69,7 +69,7 @@ export const App = (props) => {
             })
           }
         </select>
-        <div style={{margin:'10px',marginLeft:'70px'}}>v2021-10-18-a</div>
+        <div style={{margin:'10px',marginLeft:'70px'}}>v2021-10-20-a</div>
       </div>
 
       <div style={{flex:'1'}}>

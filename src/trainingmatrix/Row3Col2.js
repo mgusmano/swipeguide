@@ -26,7 +26,7 @@ export const Row3Col2 = (props) => {
   }
 
   return (
-    <div id="studenttotals" style={{...styles.v,overflow:'scroll',overflow:'hidden',border:'0px solid red'}}>
+    <div id="studenttotals" style={{...styles.v,overflow:'hidden',border:'0px solid red'}}>
       <div style={{ maxWidth:col2+'px'}} width={(col2)+'px'} height={row3+'px'}>
       <svg style={{maxWidth:col2+'px'}} width={(col2)+'px'} height={row3+'px'}>
         <Matrix

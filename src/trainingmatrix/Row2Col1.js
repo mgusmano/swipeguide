@@ -3,7 +3,7 @@ import { Matrix } from './Matrix';
 import { MatrixCell } from './MatrixCell';
 import { useMatrixState } from './state/MatrixProvider';
 import { Skill } from './Skill';
-import { Main } from './Main';
+//import { Main } from './Main';
 import { styles } from './styles'
 
 export const Row2Col1 = (props) => {
@@ -17,7 +17,11 @@ export const Row2Col1 = (props) => {
     matrixState.setCellData({})
     matrixState.setSpecific(<Skill data={data} num={num}/>)
     matrixState.showMainDialog('none')
-    matrixState.showSecondaryDialog('block')
+    //matrixState.showSecondaryDialog('none')
+    matrixState.showOperatorDialog('none')
+    matrixState.showSkillDialog('block')
+
+
 
     //matrixState.setSpecific(<div style={{display:'flex', flexDirection:'row'}}><Skill data={data} num={num}/><Main data={data}/></div>)
 
@@ -50,7 +54,7 @@ export const Row2Col1 = (props) => {
   }
 
   return (
-    <div id="skill" style={{...styles.v,width:col1+'px',minWidth:col1+'px',overflow:'scroll',overflow:'hidden'}} className='skillsheet' >
+    <div id="skill" style={{...styles.v,width:col1+'px',minWidth:col1+'px',overflow:'hidden'}} className='skillsheet' >
       <div width={col1+'px'} height={row2+'px'} >
       <svg width={col1+'px'} height={row2+'px'}>
       {data !== null &&

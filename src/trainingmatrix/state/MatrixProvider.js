@@ -9,6 +9,7 @@ const MatrixContext = createContext();
 export const MatrixProvider = (props) => {
 
   const getFunctions = {
+    setMain: (payload) => functions.setMain(dispatch, payload),
     showSkillDialog: (payload) => functions.showSkillDialog(dispatch, payload),
     showOperatorDialog: (payload) => functions.showOperatorDialog(dispatch, payload),
     showMainDialog: (payload) => functions.showMainDialog(dispatch, payload),
@@ -42,6 +43,7 @@ export const MatrixProvider = (props) => {
   }
 
   const initialState = {
+    main: null,
     skillDialog: 'none',
     operatorDialog: 'none',
     mainDialog: 'none',

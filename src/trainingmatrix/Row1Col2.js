@@ -5,7 +5,7 @@ import { useMatrixState } from './state/MatrixProvider';
 //import { Skill } from './Skill';
 //import { styles } from './styles'
 import { Operator } from './Operator';
-import { Main } from './Main';
+//import { Main } from './Main';
 import { MatrixOneRow } from './MatrixOneRow';
 
 export const Row1Col2 = (props) => {
@@ -24,9 +24,9 @@ export const Row1Col2 = (props) => {
     //matrixState.setSpecific(<div style={{display:'flex', flexDirection:'row'}}><Operator data={data}/><Main data={data}/></div>)
     matrixState.setCellData({})
     matrixState.showMainDialog('none')
-    matrixState.showSecondaryDialog('block')
-
-
+    //matrixState.showSecondaryDialog('block')
+    matrixState.showSkillDialog('none')
+    matrixState.showOperatorDialog('block')
 
     matrixState.setSpecific(<Operator data={data}/>)
 
@@ -64,7 +64,7 @@ export const Row1Col2 = (props) => {
   }
 
   return (
-    <div id="student" className='' style={{boxSizing:'border-box',width:col2+'px',overflow:'scroll',overflow:'hidden'}}>
+    <div id="student" className='' style={{boxSizing:'border-box',width:col2+'px',overflow:'hidden'}}>
     <div width={(col2)+'px'} height={row1+'px'}>
     <svg width={(col2)+'px'} height={row1+'px'}>
       <MatrixOneRow

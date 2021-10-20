@@ -1,4 +1,4 @@
-import produce from 'immer';
+//import produce from 'immer';
 //import { SET_AUTHENTICATEDUSER, UPDATE_OPERATORGOAL, UPDATE_SKILLGOAL, SET_BOTTOMTOTALS, SET_RIGHTTOTALS, SET_CURRENT_CERTIFICATION, SET_ACTIVE,SET_ALL, SET_OPERATORS, SET_SKILLS, SET_CERTIFICATIONS, SET_BYSKILL, SET_BYOPERATOR, SET_SPECIFIC, TOGGLE_LEGEND, SET_DIMENSIONS, SET_ORIGINAL } from './MatrixTypes';
 
 import * as types from './MatrixTypes';
@@ -7,59 +7,35 @@ export const MatrixReducer = (state, action) => {
   const { type, payload } = action;
   var s;
   switch (type) {
+    case types.SET_MAIN: return {...state,main:payload}
     case types.SET_SHOWSKILLDIALOG: return {...state,skillDialog:payload}
     case types.SET_SHOWOPERATORDIALOG: return {...state,operatorDialog:payload}
     case types.SET_SHOWMAINDIALOG: return {...state,mainDialog:payload}
     case types.SET_SHOWSECONDARYDIALOG: return {...state,secondaryDialog:payload}
-
-    case types.SET_CELLDATA:
-      //s = {...state,bottomtotals:payload}
-      console.log(payload)
-      s = {...state,celldata:payload}
-      return s
-
-
-
-
-    case types.UPDATE_CERT:
-      //s = {...state,bottomtotals:payload}
-      s = {...state,certifications:payload.certifications}
-      return s
-
-
-
-    case types.SET_USERNAME:
-      s = {...state,userName:payload}
-      return s
-
-    case types.SET_AUTHENTICATEDUSER:
-      s = {...state,authenticateduser:payload}
-      return s
-
+    case types.SET_CELLDATA: return {...state,celldata:payload}
+    case types.UPDATE_CERT: return {...state,certifications:payload.certifications}
+    case types.SET_USERNAME: return {...state,userName:payload}
+    case types.SET_AUTHENTICATEDUSER: return {...state,authenticateduser:payload}
     case types.UPDATE_OPERATORGOAL:
-      //console.log(state.operators)
-      var index = state.operators.map(item => item.id).indexOf(payload.id);
+      var operatorsindex = state.operators.map(item => item.id).indexOf(payload.id);
       s = {
         ...state,
         operators: state.operators.map(
-          (operator, i) => i === index ? {...operator, goal: parseInt(payload.goal)} : operator
+          (operator, i) => i === operatorsindex ? {...operator, goal: parseInt(payload.goal)} : operator
         )
       }
-      //console.log(s)
       return s
-
     case types.UPDATE_SKILLGOAL:
-      console.log(state.skills)
-      var index = state.skills.map(item => item.id).indexOf(payload.id);
+      //console.log(state.skills)
+      var skillsindex = state.skills.map(item => item.id).indexOf(payload.id);
       s = {
         ...state,
         skills: state.skills.map(
-          (skill, i) => i === index ? {...skill, goal: parseInt(payload.goal)} : skill
+          (skill, i) => i === skillsindex ? {...skill, goal: parseInt(payload.goal)} : skill
         )
       }
       console.log(s)
       return s
-
     case types.SET_BOTTOMTOTALS:
       s = {...state,bottomtotals:payload}
       return s
@@ -126,25 +102,25 @@ export const MatrixReducer = (state, action) => {
       // })
 
 
-    case "ACTIVATE_WIDGET":
-      //console.log("ACTIVATE_WIDGET",payload.id)
-      return produce(state, draft => {
-        draft.widgetData.forEach(widget => widget.active = false)
-        var index = draft.widgetData.map(item => item.id).indexOf(payload.id);
-        if (index !== -1) {
-          draft.widgetData[index].active = true
-          draft.toolkitTitle = draft.widgetData[index].defaultTitle
-        }
-      })
+    // case "ACTIVATE_WIDGET":
+    //   //console.log("ACTIVATE_WIDGET",payload.id)
+    //   return produce(state, draft => {
+    //     draft.widgetData.forEach(widget => widget.active = false)
+    //     var index = draft.widgetData.map(item => item.id).indexOf(payload.id);
+    //     if (index !== -1) {
+    //       draft.widgetData[index].active = true
+    //       draft.toolkitTitle = draft.widgetData[index].defaultTitle
+    //     }
+    //   })
 
-    case "RESIZE_WIDGET":
-      //console.log("RESIZE_WIDGET",payload.id)
-      return produce(state, draft => {
-        var index = draft.widgetData.map(item => item.id).indexOf(payload.id);
-        if (index !== -1) {
-          draft.widgetData[index].properties.size = {width: payload.w,height: payload.h}
-        }
-      })
+    // case "RESIZE_WIDGET":
+    //   //console.log("RESIZE_WIDGET",payload.id)
+    //   return produce(state, draft => {
+    //     var index = draft.widgetData.map(item => item.id).indexOf(payload.id);
+    //     if (index !== -1) {
+    //       draft.widgetData[index].properties.size = {width: payload.w,height: payload.h}
+    //     }
+    //   })
 
     default:
       return state;

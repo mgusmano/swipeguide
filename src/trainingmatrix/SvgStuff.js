@@ -32,7 +32,7 @@ export const CircleX = (props) => {
 
 export const ImageX = (props) => {
   return (
-  <img {...props}>{props.children}</img>
+  <img alt="" {...props}>{props.children}</img>
   )
 }
 

@@ -44,14 +44,15 @@ export const Row2Col2 = (props) => {
     props.cellClicked(data.certificationID)
     matrixState.setCurrentCertification(data.certificationID)
 
-console.log('this is what is set')
-console.log(data)
+    matrixState.setMain(<Main data={data}/>)
 
     matrixState.setCellData(data)
     matrixState.showMainDialog('block')
-    matrixState.showSecondaryDialog('none')
+    //matrixState.showSecondaryDialog('none')
+    matrixState.showSkillDialog('none')
+    matrixState.showOperatorDialog('none')
 
-    //matrixState.setSpecific(<Main data={data}/>)
+
   })
 
   const renderMainCell = (props,c,col,r,row,sTop,data,clickCellFunction,fontsize) => {

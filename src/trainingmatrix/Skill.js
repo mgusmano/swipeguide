@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useMatrixState } from './state/MatrixProvider';
 import { Diamond } from './Diamond';
-import { MatrixCell } from './MatrixCell';
+import { Main } from './Main';
+//import { MatrixCell } from './MatrixCell';
 
 export const Skill = React.memo((props) => {
-  console.log(props)
   const matrixState = useMatrixState();
   const [goal, setGoal] = useState(0);
   const skillID = props.data.skill.id;
@@ -14,12 +14,12 @@ export const Skill = React.memo((props) => {
   },[props])
 
   const {data} = props;
-  const {num} = props;
+  //const {num} = props;
 
   var bandX=30;
   var bandY=30;
   var fontsize=14;
-  const result = num % 2;
+  //const result = num % 2;
   // var src;
   // if (result === 1) {
   //   src="https://app.swipeguide.com/guide/example-guide-line-1-wort-cooling-wort-aeration/safety/attach-lock/2"
@@ -33,39 +33,16 @@ export const Skill = React.memo((props) => {
 
   return (
     <div style={{display:'flex',flexDirection:'column',padding:'10px',width:'250px',height:'99%',borderRight:'0px solid red'}}>
-      <div style={{height:'150px',fontSize:'18px'}}>
+      <div style={{height:'50px',fontSize:'18px'}}>
         <div style={{fontSize:'20px'}}>{data.skill.skillName}</div>
-          <div style={{marginTop:'20px'}}>
-          Goal for Number Certified:<br/>
-          <input
-            type="text"
-            value={goal}
-            onChange={(event)=> {
-              setGoal(event.target.value)
-            }}
-            style={{marginLeft:'10px',marginTop:5,width:'26px',height:'15px'}}
-          />
-          <button
-            onClick={(event)=> {
-              matrixState.setActive(true)
-              var payload = {
-                id: skillID,
-                goal: goal
-              }
-              matrixState.updateSkillGoal(payload)
-            }}
-          >
-            Update
-          </button>
-        </div>
       </div>
-
-      <div style={{flex:'1', overflow: 'hidden'}}>
-        <div>Select an Operator<br/>to Load Certification Data<br/>for this Skill</div>
+      <div style={{flex:'1', display:'flex',flexDirection:'column',overflow: 'hidden'}}>
+        Operators:
         <select size="15" onChange={(event)=>{
           var val = event.target.options[ event.target.selectedIndex ].value
-          const found = data.skill.data.find(element => element.certificationID == val);
+          const found = data.skill.data.find(element => element.certificationID === val);
           matrixState.setCellData(found)
+          matrixState.setMain(<Main data={found}/>)
           matrixState.showMainDialog('block')
         }}>
         {data.skill.data.map((item,i) => {
@@ -77,8 +54,29 @@ export const Skill = React.memo((props) => {
         })}
         </select>
       </div>
-
-
+      <div style={{flex: '1',marginTop:'20px'}}>
+        Goal for Number Certified:<br/>
+        <input
+          type="text"
+          value={goal}
+          onChange={(event)=> {
+            setGoal(event.target.value)
+          }}
+          style={{marginLeft:'10px',marginTop:5,width:'26px',height:'15px'}}
+        />
+        <button
+          onClick={(event)=> {
+            matrixState.setActive(true)
+            var payload = {
+              id: skillID,
+              goal: goal
+            }
+            matrixState.updateSkillGoal(payload)
+          }}
+        >
+          Update
+        </button>
+      </div>
 
       <div style={{display:'none',flex:'1', overflow: 'hidden'}}>
         {/* <div style={{height:'200px', overflow:'scroll'}}> */}

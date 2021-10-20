@@ -39,7 +39,7 @@ export const Row2Col3 = (props) => {
   }
 
   return (
-    <div id="skilltotals" style={{width:col3+'px',minWidth:col3+'px',height:(row2Orig)+'px',maxHeight:(row2Orig)+'px',overflowY:'scroll',overflowY:'hidden',boxSizing:'border-box'}}>
+    <div id="skilltotals" style={{width:col3+'px',minWidth:col3+'px',height:(row2Orig)+'px',maxHeight:(row2Orig)+'px',overflowY:'hidden',boxSizing:'border-box'}}>
       <div width={col3+'px'} height={(row2+14)+'px'}>
       <svg width={col3+'px'} height={(row2+14)+'px'}>
         <Matrix

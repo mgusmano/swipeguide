@@ -17,7 +17,7 @@ import { Row3Col1 } from './Row3Col1';
 import { Row3Col1a } from './Row3Col1a';
 import { Row3Col2 } from './Row3Col2';
 import { Row3Col3 } from './Row3Col3';
-import { Main } from './Main';
+//import { Main } from './Main';
 import { styles } from './styles';
 import { useResizeEvent } from './useResizeEvent';
 import { MatrixProvider } from './state/MatrixProvider';
@@ -32,19 +32,10 @@ const MainMatrixProvider = (props) => {
   useResizeEvent()
   var multiplier = props.props.multiplier
 
-  console.log(matrixState.mainDialog)
-
   useEffect(() => {
     if (multiplier === '') return
 
-    //console.log(props.props.skillsData)
-    //console.log(props.props.operatorsData)
-    //console.log(props.props.certificationsData)
     var certificationsData = props.props.certificationsData;
-    // if (window.innerWidth <1500) {
-    //   multiplier = 6
-    // }
-
     var certificationsDataCreated = []
     var certID = 0
     for (let s = 0; s < props.props.skillsData.length; s++) {
@@ -60,7 +51,6 @@ const MainMatrixProvider = (props) => {
           return certificationsData[o]
         }
       });
-      //console.log(found)
       found.meta = certificationsData[o].meta
       found.data = certificationsData[o].data
     }
@@ -75,11 +65,11 @@ const MainMatrixProvider = (props) => {
     })
   },[certificationsData,multiplier])
 
-  useEffect(() => {
-    if (matrixState.specific !== null) {
-      //console.log('matrixState.specific:',matrixState.specific.props.data)
-    }
-  },[matrixState.specific])
+  // useEffect(() => {
+  //   if (matrixState.specific !== null) {
+  //     //console.log('matrixState.specific:',matrixState.specific.props.data)
+  //   }
+  // },[matrixState.specific])
 
   const cellClicked = (id) => {
     props.props.cellClicked(id)
@@ -135,15 +125,15 @@ const MainMatrixProvider = (props) => {
         {/* right area - details - start */}
         <div className='right' style={{display:'flex',flexDirection:'row',overflow: 'hidden',padding:'0px', background:'white', boxSizing:'border-box',boxShadow: '0 10px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19)'}}>
           {/* <div style={{display:'flex',flexDirection:'row',width:'100%', height:'100%', padding:'25px', background:'white', boxSizing:'border-box',boxShadow: '0 10px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19)'}}> */}
-            <div style={{display: matrixState.secondaryDialog, width:'300px', height:'100%', boxSizing:'border-box', xpadding:'10px', xboxShadow: '0 10px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19)'}}>
+            <div style={{display: matrixState.skillDialog, width:'300px', height:'100%', boxSizing:'border-box', xpadding:'10px', xboxShadow: '0 10px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19)'}}>
               {matrixState.specific}
             </div>
-
-            <div style={{display: matrixState.mainDialog, width:'300px', height:'100%', boxSizing:'border-box', xpadding:'10px', xboxShadow: '0 10px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19)'}}>
-              <Main data={{}}/>
+            <div style={{display: matrixState.operatorDialog, width:'300px', height:'100%', boxSizing:'border-box', xpadding:'10px', xboxShadow: '0 10px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19)'}}>
+              {matrixState.specific}
             </div>
-
-
+            <div style={{display: matrixState.mainDialog, width:'300px', height:'100%', boxSizing:'border-box', xpadding:'10px', xboxShadow: '0 10px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19)'}}>
+            {matrixState.main}
+            </div>
           {/* </div> */}
         </div>
         {/* right area - details - end */}
