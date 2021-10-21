@@ -69,7 +69,7 @@ export const App = (props) => {
             })
           }
         </select>
-        <div style={{margin:'10px',marginLeft:'70px'}}>v2021-10-21-d</div>
+        <div style={{margin:'10px',marginLeft:'70px'}}>v2021-10-21-e</div>
       </div>
 
       <div style={{flex:'1'}}>
