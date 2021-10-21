@@ -3,19 +3,69 @@ import { useMatrixState } from './state/MatrixProvider';
 import { Diamond } from './Diamond';
 import { Top } from './Top';
 import { Main } from './Main';
+import ReactList from 'react-list';
 //import { MatrixCell } from './MatrixCell';
 
 export const Skill = React.memo((props) => {
+  const {data} = props;
+  //const {num} = props;
   const matrixState = useMatrixState();
   const [goal, setGoal] = useState(0);
   const skillID = props.data.skill.id;
+  const [oldtarget, setOldTarget] = useState(null);
 
   useEffect(() => {
     setGoal(props.data.skill.goal)
   },[props])
 
-  const {data} = props;
-  //const {num} = props;
+  const clickItem = (event,index) => {
+    //console.log(event.target)
+    //console.log(event)
+    //console.log(index)
+    console.log(data.skill.data[index])
+    if (oldtarget !== null) {
+      oldtarget.style.background = 'white'
+    }
+    event.target.parentNode.style.background = 'gainsboro'
+    setOldTarget(event.target.parentNode)
+
+//return
+    //var val = event.target.options[ event.target.selectedIndex ].value
+    var val = data.skill.data[index].certificationID
+    const found = data.skill.data.find(element => element.certificationID === val);
+
+    found.operatorName = found.operator.operatorName
+    found.picture = found.operator.picture
+
+    matrixState.setCellData(found)
+    matrixState.setMain(<Main data={found}/>)
+    matrixState.showMainDialog('block')
+
+    matrixState.setTop(<Top data={found}/>)
+    matrixState.showTopDialog('block')
+
+
+
+  }
+
+  const renderItem = (index, key) => {
+    console.log(index)
+    console.log(data.skill.data[index])
+    return (
+      <div style={{display:'flex',flexDirection:'row'}} onClick={(event) => {
+        console.log(index)
+        console.log(data.skill.data[index])
+        clickItem(event,index)
+      }} key={key}>
+        <Diamond meta={data.skill.data[index].meta} data={data.skill.data[index].data} boxSize={bandX-5} padding={20}/>
+        <div style={{marginTop:'4px'}}>
+          {data.skill.data[index].operator.operatorName}
+        </div>
+      </div>
+    )
+  }
+
+
 
   var bandX=30;
   var bandY=30;
@@ -34,36 +84,13 @@ export const Skill = React.memo((props) => {
 
   return (
     <div style={{display:'flex',flexDirection:'column',padding:'10px',width:'250px',height:'99%',borderRight:'0px solid red'}}>
-      <div style={{height:'50px',fontSize:'18px'}}>
+      <div style={{height:'30px',fontSize:'18px'}}>
         <div style={{fontSize:'20px'}}>{data.skill.skillName}</div>
       </div>
       <div style={{flex:'1', display:'flex',flexDirection:'column',overflow: 'hidden'}}>
-        Operators:
-        <select size="40" onChange={(event)=>{
-          var val = event.target.options[ event.target.selectedIndex ].value
-          const found = data.skill.data.find(element => element.certificationID === val);
 
-          found.operatorName = found.operator.operatorName
-          found.picture = found.operator.picture
-
-          matrixState.setCellData(found)
-          matrixState.setMain(<Main data={found}/>)
-          matrixState.showMainDialog('block')
-
-          matrixState.setTop(<Top data={found}/>)
-          matrixState.showTopDialog('block')
-        }}>
-        {data.skill.data.map((item,i) => {
-          return (
-            <option key={i} value={item.certificationID}>
-              {item.operator.operatorName}
-            </option>
-          )
-        })}
-        </select>
-      </div>
-      <div style={{flex: '1',marginTop:'20px'}}>
-        Goal for Number Certified:<br/>
+      <div style={{}}>
+        Goal:
         <input
           type="text"
           value={goal}
@@ -85,6 +112,46 @@ export const Skill = React.memo((props) => {
           Update
         </button>
       </div>
+
+
+      <div style={{marginTop:'10px'}}>Operators:</div>
+      <div style={{overflow: 'auto', maxHeight: 500,border: '1px solid lightgray'}}>
+          <ReactList
+            itemRenderer={renderItem}
+            length={data.skill.data.length}
+            type='uniform'
+          />
+        </div>
+
+
+
+
+        {/* <select size="40" onChange={(event)=>{
+          var val = event.target.options[ event.target.selectedIndex ].value
+          const found = data.skill.data.find(element => element.certificationID === val);
+
+          found.operatorName = found.operator.operatorName
+          found.picture = found.operator.picture
+
+          matrixState.setCellData(found)
+          matrixState.setMain(<Main data={found}/>)
+          matrixState.showMainDialog('block')
+
+          matrixState.setTop(<Top data={found}/>)
+          matrixState.showTopDialog('block')
+        }}>
+        {data.skill.data.map((item,i) => {
+          return (
+            <option key={i} value={item.certificationID}>
+              {item.operator.operatorName}
+            </option>
+          )
+        })}
+        </select> */}
+
+
+      </div>
+
 
       <div style={{display:'none',flex:'1', overflow: 'hidden'}}>
         {/* <div style={{height:'200px', overflow:'scroll'}}> */}
