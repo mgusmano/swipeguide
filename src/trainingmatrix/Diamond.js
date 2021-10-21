@@ -7,7 +7,7 @@ export const Diamond = ({meta, data, boxSize, padding}) => {
   var type = meta.type
   var strokecolor = 'black'; //meta.strokecolor
   if (meta.certification === "notapplicable") {
-    strokecolor = "white"
+    strokecolor = "linen"
   }
   var letter = meta.letter
   if (typeof data === 'string') {
