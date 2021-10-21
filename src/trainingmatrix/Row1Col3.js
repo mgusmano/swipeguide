@@ -34,7 +34,7 @@ export const Row1Col3 = (props) => {
   }
 
   return (
-    <div style={{width:col3+'px',minWidth:col3+'px',height:row1+'px'}}>
+    <div style={{width:col3+'px',minWidth:col3+'px',height:row1+'px',overflowY:'hidden',boxSizing:'border-box'}}>
     <div width={col3+'px'} height={row1+'px'}>
     <svg width={col3+'px'} height={row1+'px'}>
       <Matrix

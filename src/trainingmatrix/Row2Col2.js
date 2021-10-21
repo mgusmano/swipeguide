@@ -3,6 +3,7 @@ import { Matrix } from './Matrix';
 import { MatrixCell } from './MatrixCell';
 import { useMatrixState } from './state/MatrixProvider';
 import { Diamond } from './Diamond';
+import { Top } from './Top';
 import { Main } from './Main';
 
 export const Row2Col2 = (props) => {
@@ -46,11 +47,16 @@ export const Row2Col2 = (props) => {
 
     matrixState.setMain(<Main data={data}/>)
 
+    data.operatorName = data.operator.operatorName
+    data.picture = data.operator.picture
     matrixState.setCellData(data)
     matrixState.showMainDialog('block')
     //matrixState.showSecondaryDialog('none')
     matrixState.showSkillDialog('none')
     matrixState.showOperatorDialog('none')
+
+    matrixState.setTop(<Top data={data}/>)
+    matrixState.showTopDialog('block')
 
 
   })

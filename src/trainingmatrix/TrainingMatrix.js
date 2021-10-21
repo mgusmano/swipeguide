@@ -89,7 +89,14 @@ const MainMatrixProvider = (props) => {
           <div className='leftrow1' height={matrixState.dimensions.row1} style={{...styles.h,overflow:'hidden',height:matrixState.dimensions.row1+'px',background:'lightgray'}}>
             <Row1Col1/>
             <Row1Col1a data={[['Rev#']]}/>
-            <Row1Col2 data={matrixState.byOperator}/>
+            <LoadingOverlay
+              style={{width:'100%',height:'100%',zIndex:'10'}}
+              active={false}
+              spinner
+              text='Loading...'
+              >
+              <Row1Col2 data={matrixState.byOperator}/>
+            </LoadingOverlay>
             <Row1Col3 data={[['Goal','# Certified','Gap']]}/>
           </div>
 
@@ -97,7 +104,6 @@ const MainMatrixProvider = (props) => {
             <Row2Col1 data={matrixState.bySkill}/>
             {/* <Row2Col1a/> */}
             <Row2Col1a data={[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]}/>
-
             {/* <Log data={matrixState.active}/> */}
             <LoadingOverlay
               style={{width:'100%',height:'100%',zIndex:'10'}}
@@ -123,8 +129,28 @@ const MainMatrixProvider = (props) => {
         <div role="separator"></div>
 
         {/* right area - details - start */}
-        <div className='right' style={{display:'flex',flexDirection:'row',overflow: 'hidden',padding:'0px', background:'white', boxSizing:'border-box',boxShadow: '0 10px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19)'}}>
-          {/* <div style={{display:'flex',flexDirection:'row',width:'100%', height:'100%', padding:'25px', background:'white', boxSizing:'border-box',boxShadow: '0 10px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19)'}}> */}
+        {/* <div className='right' style={{display:'flex',flexDirection:'row',overflow: 'hidden',padding:'0px', background:'white', boxSizing:'border-box',boxShadow: '0 10px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19)'}}>
+          <div style={{display: matrixState.skillDialog, width:'300px', height:'100%', boxSizing:'border-box', xpadding:'10px', xboxShadow: '0 10px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19)'}}>
+            {matrixState.specific}
+          </div>
+          <div style={{display: matrixState.operatorDialog, width:'300px', height:'100%', boxSizing:'border-box', xpadding:'10px', xboxShadow: '0 10px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19)'}}>
+            {matrixState.specific}
+          </div>
+          <div style={{display: matrixState.mainDialog, width:'300px', height:'100%', boxSizing:'border-box', xpadding:'10px', xboxShadow: '0 10px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19)'}}>
+          {matrixState.main}
+          </div>
+        </div> */}
+        {/* right area - details - end */}
+
+        {/* right area - details - start */}
+
+        <div className='right' style={{display:'flex',flexDirection:'column',overflow: 'hidden',padding:'0px', background:'white', boxSizing:'border-box',boxShadow: '0 10px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19)'}}>
+
+          <div style={{height:'200px',display: matrixState.topDialog}}>
+            {matrixState.top}
+          </div>
+
+          <div className='right' style={{flex: '1',display:'flex',flexDirection:'row',overflow: 'hidden',padding:'0px', background:'white', boxSizing:'border-box',xboxShadow: '0 10px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19)'}}>
             <div style={{display: matrixState.skillDialog, width:'300px', height:'100%', boxSizing:'border-box', xpadding:'10px', xboxShadow: '0 10px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19)'}}>
               {matrixState.specific}
             </div>
@@ -134,9 +160,13 @@ const MainMatrixProvider = (props) => {
             <div style={{display: matrixState.mainDialog, width:'300px', height:'100%', boxSizing:'border-box', xpadding:'10px', xboxShadow: '0 10px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19)'}}>
             {matrixState.main}
             </div>
-          {/* </div> */}
+          </div>
+
         </div>
+
+
         {/* right area - details - end */}
+
       </div>
       }
       {/* main area end */}

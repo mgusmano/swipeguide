@@ -4,6 +4,7 @@ import { MatrixCell } from './MatrixCell';
 import { useMatrixState } from './state/MatrixProvider';
 //import { Skill } from './Skill';
 //import { styles } from './styles'
+import { Top } from './Top';
 import { Operator } from './Operator';
 //import { Main } from './Main';
 import { MatrixOneRow } from './MatrixOneRow';
@@ -22,11 +23,15 @@ export const Row1Col2 = (props) => {
     data.skill = {}
     data.skill.skillName = ""
     //matrixState.setSpecific(<div style={{display:'flex', flexDirection:'row'}}><Operator data={data}/><Main data={data}/></div>)
-    matrixState.setCellData({})
+
+    matrixState.setCellData(data)
     matrixState.showMainDialog('none')
     //matrixState.showSecondaryDialog('block')
     matrixState.showSkillDialog('none')
     matrixState.showOperatorDialog('block')
+
+    matrixState.setTop(<Top data={data}/>)
+    matrixState.showTopDialog('block')
 
     matrixState.setSpecific(<Operator data={data}/>)
 
@@ -64,7 +69,7 @@ export const Row1Col2 = (props) => {
   }
 
   return (
-    <div id="student" className='' style={{boxSizing:'border-box',width:col2+'px',overflow:'hidden'}}>
+    <div id="student" style={{width:(col2)+'px',maxWidth:(col2)+'px',boxSizing:'border-box',overflow:'hidden'}}>
     <div width={(col2)+'px'} height={row1+'px'}>
     <svg width={(col2)+'px'} height={row1+'px'}>
       <MatrixOneRow

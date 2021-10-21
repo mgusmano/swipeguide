@@ -102,20 +102,20 @@ export const Main = (props) => {
 
   return (
     <div style={{padding:'10px'}}>
-      {show &&
+      {/* {show &&
       <div style={{marginLeft:'30px',marginTop:'5'}} >
         <img alt="pic" src={img} style={{borderRadius: '50%', x: '125px', y: '250px', width: '140px', height: '140px'}}/>
         <div style={{fontSize:'20px',marginBottom:'10px'}}>{operator.operatorName}</div>
       </div>
-      }
+      } */}
       <div>
         <div style={{display:'flex',flexDirection:'column'}}>
-          <div style={{display:'flex',flexDirection:'column',height:'200px',borderBottom: '4px solid black'}}>
-            <svg style={{marginLeft:'30',marginTop:'5'}} width="150" height="150">
+          <div style={{display:'flex',flexDirection:'column',xheight:'100px',borderBottom: '0px solid black'}}>
+            {/* <svg style={{marginLeft:'30',marginTop:'5'}} width="150" height="150">
             {diamonddata !== null && metadata !== null &&
             <Diamond meta={metadata} data={diamonddata} boxSize={140} padding={25}/>
             }
-            </svg>
+            </svg> */}
             <div style={{marginLeft:'30px',fontSize:'20px'}}>{skill.skillName}</div>
           </div>
           <div style={{margin:'30px',display:'flex',flexDirection:'column'}}>
@@ -131,6 +131,14 @@ export const Main = (props) => {
               <div><input value="trainer" checked={certification === 'trainer'} onChange={onCertificationChange} style={{marginLeft:'20px'}} type="radio" name="percent2" /> Trainer</div>
               <div><input value="supertrainer" checked={certification === 'supertrainer'} onChange={onCertificationChange} style={{marginLeft:'20px'}} type="radio" name="percent2" /> Super Trainer</div>
             </div>
+
+            <svg style={{marginLeft:'30',marginTop:'5'}} width="50" height="50">
+            {diamonddata !== null && metadata !== null &&
+            <Diamond meta={metadata} data={diamonddata} boxSize={40} padding={25}/>
+            }
+            </svg>
+
+
           </div>
         </div>
         <div style={{marginTop:'30px',marginLeft:'30px'}}>

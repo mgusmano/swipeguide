@@ -7,6 +7,12 @@ import { API, graphqlOperation } from 'aws-amplify'
 // import { listCertifications} from '../../graphql/queries'
 import { updateSkill, updateOperator } from '../graphql/mutations'
 
+export const showTopDialog = (dispatch, payload) => {
+  dispatch({type: types.SET_SHOWTOPDIALOG, payload: payload});
+}
+export const setTop = (dispatch, payload) => {
+  dispatch({type: types.SET_TOP, payload: payload});
+}
 
 export const setMain = (dispatch, payload) => {
   dispatch({type: types.SET_MAIN, payload: payload});

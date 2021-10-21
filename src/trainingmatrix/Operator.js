@@ -6,6 +6,7 @@ import { Main } from './Main';
 //import { MatrixCell } from './MatrixCell';
 
 export const Operator = React.memo((props) => {
+  const {data} = props
   const matrixState = useMatrixState();
   const [goal, setGoal] = useState(0);
   const operatorID = props.data.id;
@@ -14,7 +15,22 @@ export const Operator = React.memo((props) => {
     setGoal(props.data.goal)
   },[props])
 
-  const {data} = props
+  const stationSelected = (event) => {
+    var val = event.target.options[ event.target.selectedIndex ].value
+    var found = matrixState.certifications.find(element => element.id === val.toString());
+    const foundoperator = matrixState.operators.find(element => element.id === found.operatorID.toString());
+    const foundskill = matrixState.skills.find(element => element.id === found.skillID.toString());
+    found.operator = foundoperator
+    found.skill = foundskill
+    found.certificationID = found.id
+    found.operatorName = foundoperator.operatorName
+    found.picture = foundoperator.picture
+
+    matrixState.setCellData(found)
+    matrixState.setMain(<Main data={found}/>)
+    matrixState.showMainDialog('block')
+  }
+
   //const goal = props.data.goal;
   //var bandX=50, bandY=50;
   //var fontsize=14
@@ -24,41 +40,28 @@ export const Operator = React.memo((props) => {
 
   return (
     <div style={{display:'flex',flexDirection:'column',padding:'10px',width:'100%',height:'100%'}}>
-      <div style={{marginLeft:'30px',marginTop:'5',height:'200px', borderBottom: '4px solid black'}}>
+      {/* <div style={{marginLeft:'30px',marginTop:'5',height:'200px', borderBottom: '4px solid black'}}>
         <img alt="pic" src={img} style={{borderRadius: '50%', x: '125px', y: '250px', width: '140px', height: '140px'}}/>
         <div style={{marginTop:'10px',fontSize:'20px'}}>{data.operatorName}</div>
-      </div>
+      </div> */}
 
-      <div style={{flex:'1', display:'flex',flexDirection:'column',overflow: 'hidden',marginLeft:'30px',marginTop:'30px', marginRight:'30px'}}>
+      <div style={{flex:'1', display:'flex',flexDirection:'column',overflow: 'hidden',marginLeft:'30px',marginTop:'0px', marginRight:'30px'}}>
         Stations:
-        <select size="15" onChange={(event)=>{
-          var val = event.target.options[ event.target.selectedIndex ].value
-          var found = matrixState.certifications.find(element => element.id === val.toString());
-          const foundoperator = matrixState.operators.find(element => element.id === found.operatorID.toString());
-          const foundskill = matrixState.skills.find(element => element.id === found.skillID.toString());
-          found.operator = foundoperator
-          found.skill = foundskill
-          found.certificationID = found.id
-
-          console.log(found)
-          matrixState.setCellData(found)
-          matrixState.setMain(<Main data={found}/>)
-          matrixState.showMainDialog('block')
-        }}>
-        {data.data.map((item,i) => {
-          const found = matrixState.certifications.find((element) => {
-            var theElement = null
-            if (element.operatorID === item.operator.id && element.skillID === item.skill.id) {
-              theElement = element
-            }
-            return theElement
-          });
-          return (
-            <option key={i} value={found.id}>
-              {item.skill.skillName}
-            </option>
-          )
-        })}
+        <select size="15" onChange={stationSelected}>
+          {data.data.map((item,i) => {
+            const found = matrixState.certifications.find((element) => {
+              var theElement = null
+              if (element.operatorID === item.operator.id && element.skillID === item.skill.id) {
+                theElement = element
+              }
+              return theElement
+            });
+            return (
+              <option key={i} value={found.id}>
+                {item.skill.skillName}
+              </option>
+            )
+          })}
         </select>
       </div>
 

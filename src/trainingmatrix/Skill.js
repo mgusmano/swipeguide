@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useMatrixState } from './state/MatrixProvider';
 import { Diamond } from './Diamond';
+import { Top } from './Top';
 import { Main } from './Main';
 //import { MatrixCell } from './MatrixCell';
 
@@ -41,9 +42,16 @@ export const Skill = React.memo((props) => {
         <select size="15" onChange={(event)=>{
           var val = event.target.options[ event.target.selectedIndex ].value
           const found = data.skill.data.find(element => element.certificationID === val);
+
+          found.operatorName = found.operator.operatorName
+          found.picture = found.operator.picture
+
           matrixState.setCellData(found)
           matrixState.setMain(<Main data={found}/>)
           matrixState.showMainDialog('block')
+
+          matrixState.setTop(<Top data={found}/>)
+          matrixState.showTopDialog('block')
         }}>
         {data.skill.data.map((item,i) => {
           return (

@@ -7,6 +7,8 @@ export const MatrixReducer = (state, action) => {
   const { type, payload } = action;
   var s;
   switch (type) {
+    case types.SET_SHOWTOPDIALOG: return {...state,topDialog:payload}
+    case types.SET_TOP: return {...state,top:payload}
     case types.SET_MAIN: return {...state,main:payload}
     case types.SET_SHOWSKILLDIALOG: return {...state,skillDialog:payload}
     case types.SET_SHOWOPERATORDIALOG: return {...state,operatorDialog:payload}
