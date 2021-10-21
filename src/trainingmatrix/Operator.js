@@ -47,7 +47,7 @@ export const Operator = React.memo((props) => {
 
       <div style={{flex:'1', display:'flex',flexDirection:'column',overflow: 'hidden',marginLeft:'30px',marginTop:'0px', marginRight:'30px'}}>
         Stations:
-        <select size="15" onChange={stationSelected}>
+        <select size="40" onChange={stationSelected}>
           {data.data.map((item,i) => {
             const found = matrixState.certifications.find((element) => {
               var theElement = null

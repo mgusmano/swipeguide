@@ -39,7 +39,7 @@ export const Skill = React.memo((props) => {
       </div>
       <div style={{flex:'1', display:'flex',flexDirection:'column',overflow: 'hidden'}}>
         Operators:
-        <select size="15" onChange={(event)=>{
+        <select size="40" onChange={(event)=>{
           var val = event.target.options[ event.target.selectedIndex ].value
           const found = data.skill.data.find(element => element.certificationID === val);
 
