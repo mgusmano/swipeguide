@@ -43,8 +43,8 @@ export const Operator = React.memo((props) => {
       <div key={key} style={{display:'flex',flexDirection:'row'}} onClick={(event) => {
         clickItem(event,index)
       }}>
-        <Diamond meta={data.data[index].meta} data={data.data[index].data} boxSize={bandX-5} padding={20}/>
-        <div style={{marginTop:'4px'}}>
+        <Diamond meta={data.data[index].meta} data={data.data[index].data} boxSize={bandX-8} padding={20}/>
+        <div style={{marginTop:'4px', fontSize: '10px'}}>
           {data.data[index].skill.skillName}
         </div>
       </div>
@@ -52,14 +52,14 @@ export const Operator = React.memo((props) => {
   }
 
   return (
-    <div style={{display:'flex',flexDirection:'column',padding:'10px',xwidth:'100%',height:'100%'}}>
-      <div style={{height:'30px',fontSize:'18px'}}>
+    <div style={{display:'flex',flexDirection:'column',padding:'0px',xwidth:'100%',height:'100%'}}>
+      {/* <div style={{height:'30px',fontSize:'18px'}}>
         <div style={{fontSize:'20px'}}>{data.operatorName}</div>
-      </div>
+      </div> */}
 
-      <div style={{flex:'1', display:'flex',flexDirection:'column',overflow: 'hidden',marginLeft:'30px',marginTop:'0px', marginRight:'30px'}}>
-        <div style={{marginTop:'10px'}}>Stations:</div>
-        <div style={{overflow: 'auto', maxHeight: 500,border: '1px solid lightgray'}}>
+      <div style={{flex:'1',display:'flex',flexDirection:'column',marginLeft:'30px',marginTop:'0px',marginRight:'30px',overflow: 'hidden'}}>
+        <div style={{marginTop:'10px'}}>{data.operatorName} Stations:</div>
+        <div style={{overflow:'auto',maxHeight: 500,border:'1px solid lightgray'}}>
           <ReactList
             itemRenderer={renderItem}
             length={data.data.length}
@@ -67,7 +67,7 @@ export const Operator = React.memo((props) => {
           />
         </div>
 
-        <div>
+        <div style={{marginTop:'10px'}}>
           Goal:
           <input
             type="text"

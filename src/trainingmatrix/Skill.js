@@ -43,8 +43,8 @@ export const Skill = React.memo((props) => {
       <div key={key} style={{display:'flex',flexDirection:'row'}} onClick={(event) => {
         clickItem(event,index)
       }}>
-        <Diamond meta={data.skill.data[index].meta} data={data.skill.data[index].data} boxSize={bandX-5} padding={20}/>
-        <div style={{marginTop:'4px'}}>
+        <Diamond meta={data.skill.data[index].meta} data={data.skill.data[index].data} boxSize={bandX-8} padding={20}/>
+        <div style={{marginTop:'4px', fontSize: '10px'}}>
           {data.skill.data[index].operator.operatorName}
         </div>
       </div>
@@ -52,13 +52,13 @@ export const Skill = React.memo((props) => {
   }
 
   return (
-    <div style={{display:'flex',flexDirection:'column',padding:'10px',width:'250px',height:'99%',borderRight:'0px solid red'}}>
-      <div style={{height:'30px',fontSize:'18px'}}>
+    <div style={{display:'flex',flexDirection:'column',padding:'0px',xwidth:'250px',height:'99%',borderRight:'0px solid red'}}>
+      {/* <div style={{height:'30px',fontSize:'18px'}}>
         <div style={{fontSize:'20px'}}>{data.skill.skillName}</div>
-      </div>
-      <div style={{flex:'1', display:'flex',flexDirection:'column',marginLeft:'30px',marginTop:'0px', marginRight:'0px',overflow: 'hidden'}}>
-        <div style={{marginTop:'10px'}}>Operators:</div>
-        <div style={{overflow: 'auto', maxHeight: 500,border: '1px solid lightgray'}}>
+      </div> */}
+      <div style={{flex:'1', display:'flex',flexDirection:'column',marginLeft:'30px',marginTop:'0px', marginRight:'30px',overflow: 'hidden'}}>
+        <div style={{marginTop:'10px'}}> {data.skill.skillName} Operators:</div>
+        <div style={{overflow:'auto',maxHeight: 500,border:'1px solid lightgray'}}>
           <ReactList
             itemRenderer={renderItem}
             length={data.skill.data.length}
@@ -66,7 +66,7 @@ export const Skill = React.memo((props) => {
           />
         </div>
 
-        <div style={{}}>
+        <div style={{marginTop:'10px'}}>
           Goal:
           <input
             type="text"

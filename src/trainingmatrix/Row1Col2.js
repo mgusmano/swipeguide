@@ -25,11 +25,10 @@ export const Row1Col2 = (props) => {
     //matrixState.setSpecific(<div style={{display:'flex', flexDirection:'row'}}><Operator data={data}/><Main data={data}/></div>)
 
     matrixState.setCellData(data)
+    
     matrixState.showMainDialog('none')
-    //matrixState.showSecondaryDialog('block')
     matrixState.showSkillDialog('none')
     matrixState.showOperatorDialog('block')
-
     matrixState.setTop(<Top data={data}/>)
     matrixState.showTopDialog('block')
 

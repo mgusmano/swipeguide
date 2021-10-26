@@ -100,7 +100,7 @@ const MainMatrixProvider = (props) => {
             <Row1Col3 data={[['Goal','# Certified','Gap']]}/>
           </div>
 
-          <div className='leftrow2' style={{...styles.h,flex:'1',xheight:(matrixState.dimensions.row2Orig)+'px',background:'lightgray'}}>
+          <div className='leftrow2' style={{...styles.h,xflex:'1',height:(matrixState.dimensions.row2Orig)+'px',background:'lightgray'}}>
             <Row2Col1 data={matrixState.bySkill}/>
             {/* <Row2Col1a/> */}
             <Row2Col1a data={[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]}/>

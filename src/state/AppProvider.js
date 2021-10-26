@@ -1,23 +1,24 @@
 import React, { createContext, useReducer, useContext } from 'react';
-import * as functions from './AppFunctions'
 import { AppReducer } from './AppReducer';
+import * as types from './AppTypes';
 import {getValues } from './Util'
-import { styles } from '../styles';
 
 const AppContext = createContext();
 
 export const AppProvider = (props) => {
 
+
   const getFunctions = {
-    setAuthenticatedUser: (payload) => functions.setAuthenticatedUser(dispatch, payload),
-    setUserName: (payload) => functions.setUserName(dispatch, payload),
+    setLegend: (payload) => { dispatch({type: types.SET_LEGEND, payload: payload}) },
+    setMultiplier: (payload) => { dispatch({type: types.SET_MULTIPLIER, payload: payload}) },
   }
 
   const initialState = {
-    authenticatedUser: '',
-    userName: 'initapp',
-    styles: styles,
+    legend: false,
+    multiplier: 6,
   }
+
+
   const[state, dispatch] = useReducer(AppReducer, initialState);
 
   return (

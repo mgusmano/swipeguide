@@ -42,7 +42,9 @@ export const Row2Col2 = (props) => {
   }
 
   const clickMainCell = useCallback((e,colid,rowid,type,data,col) => {
-    props.cellClicked(data.certificationID)
+    //props.cellClicked(data.certificationID)
+    props.cellClicked(data)
+
     matrixState.setCurrentCertification(data.certificationID)
 
     matrixState.setMain(<Main data={data}/>)

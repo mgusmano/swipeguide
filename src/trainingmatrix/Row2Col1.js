@@ -3,6 +3,7 @@ import { Matrix } from './Matrix';
 import { MatrixCell } from './MatrixCell';
 import { useMatrixState } from './state/MatrixProvider';
 import { Skill } from './Skill';
+import { Top } from './Top';
 //import { Main } from './Main';
 import { styles } from './styles'
 
@@ -16,10 +17,17 @@ export const Row2Col1 = (props) => {
     setNum(num + 1);
     matrixState.setCellData({})
     matrixState.setSpecific(<Skill data={data} num={num}/>)
+
+    //matrixState.showSkillDialog('block')
+    //matrixState.showMainDialog('none')
+    ////matrixState.showSecondaryDialog('none')
+    //matrixState.showOperatorDialog('none')
+
     matrixState.showMainDialog('none')
-    //matrixState.showSecondaryDialog('none')
-    matrixState.showOperatorDialog('none')
     matrixState.showSkillDialog('block')
+    matrixState.showOperatorDialog('none')
+    matrixState.setTop(<Top data={data}/>)
+    matrixState.showTopDialog('block')
 
 
 
