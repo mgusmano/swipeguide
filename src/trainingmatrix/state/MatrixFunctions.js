@@ -48,46 +48,6 @@ export const updateOperatorGoal = (dispatch,payload) => {
 //export const setAll = (dispatch, first, operatorsData, skillsData, certificationsData, multiplier) => {
 export const setAll = (dispatch, theData) => {
 
-//   async function getDataOperators() {
-//     const operatorData = await API.graphql(graphqlOperation(listOperators))
-//     var data = operatorData.data.listOperators.items.sort((a, b) => (a.id > b.id) ? 1 : -1)
-//     //console.log(JSON.stringify(data))
-//     return data; //operatorData.data.listOperators.items.sort((a, b) => (a.id > b.id) ? 1 : -1)
-//   }
-//   async function getDataSkills() {
-//     const skillData = await API.graphql(graphqlOperation(listSkills))
-//     var data = skillData.data.listSkills.items.sort((a, b) => (a.id > b.id) ? 1 : -1)
-// //console.log(JSON.stringify(data))
-//     return data; //skillData.data.listSkills.items.sort((a, b) => (a.id > b.id) ? 1 : -1)
-//   }
-//   async function getDataCertifications() {
-//     const certificationData = await API.graphql(graphqlOperation(listCertifications))
-//     var data = certificationData.data.listCertifications.items.sort((a, b) => (a.id > b.id) ? 1 : -1)
-// //    console.log(JSON.stringify(data))
-//     return data; //certificationData.data.listCertifications.items.sort((a, b) => (a.id > b.id) ? 1 : -1)
-//   }
-
-  // const doByOperatorx = (operators, skills, certifications,dispatch) => {
-  //   var byOperator = []
-  //   var operatorsummary = []
-  //   var bottomtotals = []
-
-  //   var certID = 0
-  //   for (let o = 0; o < operators.length; o++) {
-
-  //     for (let s = 0; s < skills.length; s++) {
-  //       certID++
-  //       byOperator.push({"id": String(certID),"operatorID": String(o+1),"skillID": String(s+1),"meta": {
-  //         "type":"solid","color":"green","letter":"A",
-  //       },"data": []})
-  //     }
-  //   }
-
-  //   dispatch({type: types.SET_BOTTOMTOTALS, payload: bottomtotals});
-  //   //console.log(byOperator)
-  //   return byOperator
-  // }
-
   const doByOperator = (operators, skills, certifications,dispatch) => {
     var byOperator = []
     var operatorsummary = []
@@ -159,6 +119,7 @@ export const setAll = (dispatch, theData) => {
       filteredcertifications.map((fc,i) => {
         var skill  = skills.find(item => item.id === fc.skillID);
         o.data[i] = {};
+        o.data[i].certificationID = fc.id
         o.data[i].operator = operator
         o.data[i].skill = skill
         o.data[i].meta = fc.meta
@@ -174,44 +135,6 @@ export const setAll = (dispatch, theData) => {
     dispatch({type: types.SET_BOTTOMTOTALS, payload: bottomtotalstransposed});
     return byOperator
   }
-
-  // const doBySkillx = (operators, skills, certifications,dispatch) => {
-  //   var bySkill = []
-  //   var skillsummary = []
-  //   var righttotals = []
-
-  //   //var certificationsDataCreated = []
-  //   var certID = 0
-  //   for (let sk = 0; sk < skills.length; sk++) {
-  //     var o = {}
-  //     o = skills[sk]
-  //     o.meta = skills[sk]
-  //     o.data = []
-
-  //     for (let op = 0; op < operators.length; op++) {
-  //       certID++
-
-  //       o.data[op] = {};
-  //       o.data[op].certificationID = certID
-  //       o.data[op].skill = skills[op]
-  //       o.data[op].operator = operators[op]
-  //       o.data[op].meta = {"type":"solid","color":"green","letter":"","status":"started","start":"8/3/2021","trainer":false}
-  //       o.data[op].data = []
-
-  //       bySkill.push(o)
-
-
-
-  //       // bySkill.push({"id": String(certID),"operatorID": String(op+1),"skillID": String(sk+1),"meta": {
-  //       //   "type":"solid","color":"green","letter":"B",
-  //       // },"data": []})
-  //     }
-  //   }
-
-  //   dispatch({type: types.SET_RIGHTTOTALS, payload: righttotals});
-  //   //console.log(bySkill)
-  //   return bySkill
-  // }
 
   const doBySkill = (operators, skills, certifications,dispatch) => {
     var bySkill = []
@@ -230,7 +153,6 @@ export const setAll = (dispatch, theData) => {
       ss.numtrainers = 0
       ss.numcertified = 0
       filteredcertifications.map((fc,i) => {
-
         var meta
         var data
         if (typeof fc.meta === 'string' || fc.meta instanceof String) {
@@ -245,8 +167,6 @@ export const setAll = (dispatch, theData) => {
         else {
           data = fc.data
         }
-
-
         var num = 0;
         if (data !== undefined) {
           data.map((slice,i) => {
@@ -285,8 +205,8 @@ export const setAll = (dispatch, theData) => {
         var operator  = operators.find(item => item.id === fc.operatorID);
         o.data[i] = {};
         o.data[i].certificationID = fc.id
-        o.data[i].skill = skill
         o.data[i].operator = operator
+        o.data[i].skill = skill
         o.data[i].meta = fc.meta
         o.data[i].data = fc.data
         return null
@@ -309,14 +229,14 @@ export const setAll = (dispatch, theData) => {
 
     const multiplier = o.multiplier;
     const topHeight = 0;
-    const fontsize = 2;
+    const fontsize = 3;
     const bandX = 5;
     const bandY = 5;
-    var col1 = 40;
+    var col1 = 45;
     var col1a = 5;
     var col2 = bandX * x;
     var col3 =(bandX*3);
-    var row1 = 35;
+    var row1 = 45;
 
     var row2 = (bandY * y)+0;
     var row3 = bandX*3;
@@ -536,10 +456,14 @@ export const toggleLegend = (dispatch, payload) => {
 }
 
 export const updateCert = async (dispatch, payload) => {
-  console.log('updateCert - WebApi: ' + payload.certification)
-  // console.log('skillID: ',  payload.skillID)
-  // console.log('operatorID: ',  payload.operatorID)
-  // console.log('certification: ',  payload.certification)
+  //console.log('updateCert - WebApi: ' + payload.certification)
+
+  var j = {'skillID':payload.skillID,'operatorID':payload.operatorID,'certification':payload.certification}
+  console.log('updateCert: ' + JSON.stringify(j))
+
+  //console.log('skillID: ',  payload.skillID)
+  //console.log('operatorID: ',  payload.operatorID)
+  //console.log('certification: ',  payload.certification)
 
   // setTimeout(function(){
   //   alert('updateCert - WebApi call here: \n'

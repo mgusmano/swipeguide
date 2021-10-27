@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { MatrixProvider } from './state/MatrixProvider';
 import { useMatrixState } from './state/MatrixProvider';
 import LoadingOverlay from 'react-loading-overlay';
 import { Legend } from './Legend';
@@ -9,7 +10,6 @@ import { Row1Col1a } from './Row1Col1a';
 import { Row1Col2 } from './Row1Col2';
 import { Row1Col3 } from './Row1Col3';
 import { Row2Col1 } from './Row2Col1';
-//import { Row2Col1a } from './Row2Col1a';
 import { Row2Col1a } from './Row2Col1a';
 import { Row2Col2 } from './Row2Col2';
 import { Row2Col3 } from './Row2Col3';
@@ -17,10 +17,9 @@ import { Row3Col1 } from './Row3Col1';
 import { Row3Col1a } from './Row3Col1a';
 import { Row3Col2 } from './Row3Col2';
 import { Row3Col3 } from './Row3Col3';
-//import { Main } from './Main';
 import { styles } from './styles';
 import { useResizeEvent } from './useResizeEvent';
-import { MatrixProvider } from './state/MatrixProvider';
+
 
 export const TrainingMatrix = ((props) => {
   return(<MatrixProvider><MainMatrixProvider props={props}/></MatrixProvider>)
@@ -29,13 +28,13 @@ export const TrainingMatrix = ((props) => {
 const MainMatrixProvider = (props) => {
   const matrixState = useMatrixState();
   var certificationsData = props.props.certificationsData
-  useResizeEvent()
   var multiplier = props.props.multiplier
+  useResizeEvent()
 
   useEffect(() => {
     if (multiplier === '') return
 
-    var certificationsData = props.props.certificationsData;
+    //var certificationsData = props.props.certificationsData;
     var certificationsDataCreated = []
     var certID = 0
     for (let s = 0; s < props.props.skillsData.length; s++) {
@@ -49,7 +48,6 @@ const MainMatrixProvider = (props) => {
       var found = certificationsDataCreated.find(element => {
         var c;
         if (element.skillID === certificationsData[o].skillID && element.operatorID === certificationsData[o].operatorID) {
-          //return certificationsData[o]
           c = certificationsData[o]
         }
         return c
@@ -67,12 +65,6 @@ const MainMatrixProvider = (props) => {
       'multiplier':multiplier
     })
   },[certificationsData,multiplier])
-
-  // useEffect(() => {
-  //   if (matrixState.specific !== null) {
-  //     //console.log('matrixState.specific:',matrixState.specific.props.data)
-  //   }
-  // },[matrixState.specific])
 
   const cellClicked = (id) => {
     props.props.cellClicked(id)
@@ -161,7 +153,7 @@ const MainMatrixProvider = (props) => {
               {matrixState.specific}
             </div>
             <div style={{display: matrixState.mainDialog, width:'350px', height:'100%', boxSizing:'border-box', xpadding:'10px', xboxShadow: '0 10px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19)'}}>
-            {matrixState.main}
+              {matrixState.main}
             </div>
           </div>
 

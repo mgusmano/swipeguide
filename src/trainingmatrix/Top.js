@@ -25,7 +25,15 @@ export const Top = React.memo((props) => {
 
   return (
     <div style={{display:'flex',flexDirection:'column',padding:'10px',width:'100%',xheight:'500px',background:'gainsboro'}}>
+      <button style={{width:'50px'}}
+        onClick={()=>{
+          matrixState.showTopDialog('none')
+          matrixState.showMainDialog('none')
+          matrixState.showSkillDialog('none')
+          matrixState.showOperatorDialog('none')
+        }}>close</button>
       <div style={{marginLeft:'30px',marginTop:'5',height:'400px', borderBottom: '4px solid black'}}>
+
 {show &&
         <>
         <img alt="pic" src={img} style={{borderRadius: '50%', x: '125px', y: '250px', width: '80px', height: '80px'}}/>

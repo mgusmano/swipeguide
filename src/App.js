@@ -12,7 +12,15 @@ export const App = (props) => {
       const operatorsResult = await axios(`data/trainingmatrix/data/${appState.groupid}/operators.json`);
       const skillsResult = await axios(`data/trainingmatrix/data/${appState.groupid}/skills.json`);
       const certificationsResult = await axios(`data/trainingmatrix/data/${appState.groupid}/certifications.json`);
-      const groupsResult = await axios(`data/trainingmatrix/data/${appState.groupid}/groups.json`);
+      const groupsResult = await axios(`data/trainingmatrix/data/groups.json`);
+
+      // const locationsResult = await axios(
+      //   'https://skillnetusersapi.azurewebsites.net/api/PartnerLocations?partnerid=434',
+      //   {
+      //     auth: {username: 'skillnet',password: 'demo'}
+      //   }
+      // );
+      // console.log(locationsResult)
 
       appState.setOperators(operatorsResult.data)
       appState.setSkills(skillsResult.data)
@@ -20,6 +28,17 @@ export const App = (props) => {
       appState.setGroups(groupsResult.data)
     }
     fetchData();
+
+
+    // var url = 'https://skillnetusersapi.azurewebsites.net/api/PartnerLocations?partnerid=434'
+    // axios
+    // .get(url, {
+    //   auth: {username: 'skillnet',password: 'demo'}
+    // })
+    // .then((response) => {
+    //   console.log('result: ', response)
+    // })
+
 
     if (window.innerWidth < 1200) { appState.setMultiplier(4) } else
     if (window.innerWidth < 1500) { appState.setMultiplier(5) } else

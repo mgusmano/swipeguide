@@ -11,13 +11,11 @@ export const Operator = React.memo((props) => {
   const [goal, setGoal] = useState(0);
   const [oldtarget, setOldTarget] = useState(null);
 
-  const operatorID = props.data.id;
+  const operatorID = data.id;
   var bandX=30;
 
-
-
   useEffect(() => {
-    setGoal(props.data.goal)
+    setGoal(data.goal)
   },[props])
 
   const clickItem = (event,index) => {
