@@ -26,14 +26,17 @@ export const Toolstrip = (props) => {
         onChange={()=>{}}
       /> */}
       <div style={{marginLeft:'30px',marginTop:'10px'}}>groups:</div>
-      <select style={{width:'100px'}} onChange={(event) => {console.log(event)}}>
+      <select style={{width:'100px'}}
+        onChange={(event) => {
+          appState.setGroupID(event.target.value)
+        }}>
         {appState.groups !== null &&
           appState.groups.map((group,i) => {
             return <option key={i} value={group.id}>{group.groupName}</option>
           })
         }
       </select>
-      <div style={{margin:'10px',marginLeft:'70px'}}>v2021-10-26-b</div>
+      <div style={{margin:'10px',marginLeft:'70px'}}>v2021-10-27-a</div>
     </div>
   )
 }

@@ -59,7 +59,7 @@ export const Operator = React.memo((props) => {
 
       <div style={{flex:'1',display:'flex',flexDirection:'column',marginLeft:'30px',marginTop:'0px',marginRight:'30px',overflow: 'hidden'}}>
         <div style={{marginTop:'10px'}}>{data.operatorName} Stations:</div>
-        <div style={{overflow:'auto',maxHeight: 500,border:'1px solid lightgray'}}>
+        <div style={{overflow:'auto',maxHeight: 500,border:'0px solid lightgray'}}>
           <ReactList
             itemRenderer={renderItem}
             length={data.data.length}

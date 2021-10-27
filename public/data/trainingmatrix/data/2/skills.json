@@ -1,0 +1,16 @@
+[
+{"id": "1","groupID":"1","skillName": "Core Loading","goal": 4},
+{"id": "2","groupID":"1","skillName": "Phase Paper Insertion (VW)","goal": 4},
+{"id": "3","groupID":"1","skillName": "Phase Paper Insertion (UV)","goal": 4},
+{"id": "4","groupID":"1","skillName": "Lead Wire Setting","goal": 4},
+{"id": "5","groupID":"1","skillName": "Neutral Tube Insertion","goal": 4},
+{"id": "6","groupID":"1","skillName": "Neutral Crimp","goal": 4},
+{"id": "7","groupID":"1","skillName": "Final Forming","goal": 4},
+{"id": "8","groupID":"1","skillName": "Pre-Lacing","goal": 4},
+{"id": "9","groupID":"1","skillName": "Lacing & CSV","goal": 4},
+{"id": "10","groupID":"1","skillName": "Lead Wire Crimp","goal": 4},
+{"id": "11","groupID":"1","skillName": "Lead Wire Forming","goal": 4},
+{"id": "12","groupID":"1","skillName": "Tester I","goal": 4},
+{"id": "13","groupID":"1","skillName": "Varnish In","goal": 4},
+{"id": "14","groupID":"1","skillName": "Varnish Out 1","goal": 4}
+]

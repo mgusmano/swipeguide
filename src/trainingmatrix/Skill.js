@@ -58,7 +58,7 @@ export const Skill = React.memo((props) => {
       </div> */}
       <div style={{flex:'1', display:'flex',flexDirection:'column',marginLeft:'30px',marginTop:'0px', marginRight:'30px',overflow: 'hidden'}}>
         <div style={{marginTop:'10px'}}> {data.skill.skillName} Operators:</div>
-        <div style={{overflow:'auto',maxHeight: 500,border:'1px solid lightgray'}}>
+        <div style={{overflow:'auto',maxHeight: 500,border:'0px solid lightgray'}}>
           <ReactList
             itemRenderer={renderItem}
             length={data.skill.data.length}

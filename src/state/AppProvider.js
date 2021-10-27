@@ -9,6 +9,7 @@ export const AppProvider = (props) => {
 
 
   const getFunctions = {
+    setGroupID: (payload) => { dispatch({type: types.SET_GROUPID, payload: payload}) },
     setOperators: (payload) => { dispatch({type: types.SET_OPERATORS, payload: payload}) },
     setSkills: (payload) => { dispatch({type: types.SET_SKILLS, payload: payload}) },
     setCertifications: (payload) => { dispatch({type: types.SET_CERTIFICATIONS, payload: payload}) },
@@ -18,6 +19,7 @@ export const AppProvider = (props) => {
   }
 
   const initialState = {
+    groupid: 1,
     operators: null,
     skills: null,
     certifications: null,

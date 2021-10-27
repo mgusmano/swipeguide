@@ -9,10 +9,10 @@ export const App = (props) => {
 
   useEffect(() => {
     async function fetchData() {
-      const operatorsResult = await axios("data/trainingmatrix/data/operators.json");
-      const skillsResult = await axios("data/trainingmatrix/data/skills.json");
-      const certificationsResult = await axios("data/trainingmatrix/data/certifications.json");
-      const groupsResult = await axios("data/trainingmatrix/data/groups.json");
+      const operatorsResult = await axios(`data/trainingmatrix/data/${appState.groupid}/operators.json`);
+      const skillsResult = await axios(`data/trainingmatrix/data/${appState.groupid}/skills.json`);
+      const certificationsResult = await axios(`data/trainingmatrix/data/${appState.groupid}/certifications.json`);
+      const groupsResult = await axios(`data/trainingmatrix/data/${appState.groupid}/groups.json`);
 
       appState.setOperators(operatorsResult.data)
       appState.setSkills(skillsResult.data)
@@ -24,7 +24,7 @@ export const App = (props) => {
     if (window.innerWidth < 1200) { appState.setMultiplier(4) } else
     if (window.innerWidth < 1500) { appState.setMultiplier(5) } else
     { appState.setMultiplier(7) }
-  },[])
+  },[appState.groupid])
 
   const cellClicked = (data) => {
     console.log(data)

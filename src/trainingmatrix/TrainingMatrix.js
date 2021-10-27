@@ -47,9 +47,12 @@ const MainMatrixProvider = (props) => {
 
     for (let o = 0; o < certificationsData.length; o++) {
       var found = certificationsDataCreated.find(element => {
+        var c;
         if (element.skillID === certificationsData[o].skillID && element.operatorID === certificationsData[o].operatorID) {
-          return certificationsData[o]
+          //return certificationsData[o]
+          c = certificationsData[o]
         }
+        return c
       });
       found.meta = certificationsData[o].meta
       found.data = certificationsData[o].data
@@ -151,13 +154,13 @@ const MainMatrixProvider = (props) => {
           </div>
 
           <div className='right' style={{flex: '1',display:'flex',flexDirection:'row',overflow: 'hidden',padding:'0px', background:'white', boxSizing:'border-box',xboxShadow: '0 10px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19)'}}>
-            <div style={{display: matrixState.skillDialog, width:'300px', height:'100%', boxSizing:'border-box', xpadding:'10px', xboxShadow: '0 10px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19)'}}>
+            <div style={{display: matrixState.skillDialog, width:'350px', height:'100%', boxSizing:'border-box', xpadding:'10px', xboxShadow: '0 10px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19)'}}>
               {matrixState.specific}
             </div>
-            <div style={{display: matrixState.operatorDialog, width:'300px', height:'100%', boxSizing:'border-box', xpadding:'10px', xboxShadow: '0 10px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19)'}}>
+            <div style={{display: matrixState.operatorDialog, width:'350px', height:'100%', boxSizing:'border-box', xpadding:'10px', xboxShadow: '0 10px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19)'}}>
               {matrixState.specific}
             </div>
-            <div style={{display: matrixState.mainDialog, width:'300px', height:'100%', boxSizing:'border-box', xpadding:'10px', xboxShadow: '0 10px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19)'}}>
+            <div style={{display: matrixState.mainDialog, width:'350px', height:'100%', boxSizing:'border-box', xpadding:'10px', xboxShadow: '0 10px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19)'}}>
             {matrixState.main}
             </div>
           </div>

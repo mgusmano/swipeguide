@@ -5,10 +5,10 @@ export const Top = React.memo((props) => {
   const {data} = props
   const matrixState = useMatrixState();
   const [goal, setGoal] = useState(0);
-  const operatorID = props.data.id;
+  const operatorID = data.id;
 
   useEffect(() => {
-    setGoal(props.data.goal)
+    setGoal(data.goal)
   },[props])
 
   //console.log(matrixState.celldata)
@@ -19,11 +19,9 @@ export const Top = React.memo((props) => {
   //var img = 'data/trainingmatrix/pictures/' + data.picture + ''
 
   var show = true;
-  if (matrixState.skillDialog == 'block' && matrixState.mainDialog == 'none') {
+  if (matrixState.skillDialog === 'block' && matrixState.mainDialog === 'none') {
     show = false
   }
-console.log('s',matrixState.skillDialog)
-console.log('m',matrixState.mainDialog)
 
   return (
     <div style={{display:'flex',flexDirection:'column',padding:'10px',width:'100%',xheight:'500px',background:'gainsboro'}}>

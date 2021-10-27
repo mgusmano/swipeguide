@@ -5,7 +5,7 @@ import { Diamond } from './Diamond';
 export const Main = (props) => {
   console.log(props.data.meta.certification)
   const matrixState = useMatrixState();
-  const [show, setShow] = useState(false)
+  //const [show, setShow] = useState(false)
   const [diamonddata, setDiamondData] = useState(null)
   const [metadata, setMetaData] = useState(null)
   const [certification, setCertification] = useState(null)
@@ -15,26 +15,26 @@ export const Main = (props) => {
   var operator = {}
   var skill = {}
   var certificationID = "0"
-  var img = ""
+  //var img = ""
   //var certification = ""
 
   if (matrixState.celldata.meta !== undefined) {
     operator = matrixState.celldata.operator
     skill = matrixState.celldata.skill
     certificationID = matrixState.celldata.certificationID
-    img = 'data/trainingmatrix/pictures/' + matrixState.celldata.operator.picture + ''
+    //img = 'data/trainingmatrix/pictures/' + matrixState.celldata.operator.picture + ''
     //setCertification(matrixState.celldata.meta.certification)
     //certification = matrixState.celldata.meta.certification
   }
 
   useEffect(() => {
-    console.log('useEffect')
-    if (matrixState.skillDialog === 'block' || (matrixState.skillDialog === 'none' && matrixState.operatorDialog === 'none')) {
-      setShow(true)
-    }
-    else {
-      setShow(false)
-    }
+    // console.log('useEffect')
+    // if (matrixState.skillDialog === 'block' || (matrixState.skillDialog === 'none' && matrixState.operatorDialog === 'none')) {
+    //   setShow(true)
+    // }
+    // else {
+    //   setShow(false)
+    // }
 
     if (matrixState.celldata.meta === undefined) {
       setDiamondData(null)

@@ -7,13 +7,16 @@ import { getDates } from './util';
 export const Legend = React.memo((props) => {
   const [legendX, setLegendX] = useState(750);
   const [legendY, setLegendY] = useState(60);
-  const [greendate, yellowdate, reddate] = getDates();
-  var dates = [greendate, yellowdate, reddate];
-  var levels = ['Started','Apprentice','Beginner','Intermediate','Certified','Trainer'];
+  //const [greendate, yellowdate, reddate] = getDates();
+  //var dates = [greendate, yellowdate, reddate];
+  const [greendate] = getDates();
+  var dates = [greendate];
+  var levels = ['Not Applicable','In Training','Not Proficient','Certified','Trainer','Super Trainer'];
+  var levelsval = ['notapplicable','intraining','notproficient','certified','trainer','supertrainer'];
 
   return (
     <Rnd
-      size={{ width: '300px',  height: '360px' }}
+      size={{ width: '200px',  height: '320px' }}
       style={{zIndex: '10000'}}
       position={{ x: legendX, y: legendY }}
       onDragStop={(e, d) => {
@@ -32,49 +35,60 @@ export const Legend = React.memo((props) => {
         Floating Legend
         <br/>
         <svg height="360px">
-          <g key={0} transform="translate(10,20)" className='heading'>
+          {/* <g key={0} transform="translate(10,20)" className='heading'>
             <text key={1} x="0" y="0"style={{fontSize:'12px'}}>certification:</text>
             <text key={2} x="100" y="0"style={{fontSize:'12px'}}>valid</text>
             <text key={3} x="160" y="0"style={{fontSize:'12px'}}>expiring</text>
             <text key={4} x="230" y="0"style={{fontSize:'12px'}}>expired</text>
-          </g>
+          </g> */}
           {levels.map((level,l) => {
-            var y = 50+(50*l)
+            var y = 20+(50*l)
             var translateLevel = `translate(10,${y})`
-            var l1 = 0,l2 = 0,l3 = 0,l4 = 0;
-            var trainer = false;
-            switch (l) {
-              case 5:
-                l1=1;l2=1;l3=1;l4=1;
-                trainer=true;
-                break;
-              case 4:
-                l1=1;l2=1;l3=1;l4=1;
-                break;
-              case 3:
-                l1=1;l2=1;l3=1;
-                break;
-              case 2:
-                l1=1;l2=1;
-                break;
-              case 1:
-                l1=1;
-                break;
-              default:
-                break;
-            }
+
+            // var l1 = 0,l2 = 0,l3 = 0,l4 = 0;
+            // var trainer = false;
+            // switch (l) {
+            //   case 5:
+            //     l1=1;l2=1;l3=1;l4=1;
+            //     trainer=true;
+            //     break;
+            //   case 4:
+            //     l1=1;l2=1;l3=1;l4=1;
+            //     break;
+            //   case 3:
+            //     l1=1;l2=1;l3=1;
+            //     break;
+            //   case 2:
+            //     l1=1;l2=1;
+            //     break;
+            //   case 1:
+            //     l1=1;
+            //     break;
+            //   default:
+            //     break;
+            // }
+
+
+
+
+
             return (
               <g key={l} transform={translateLevel} className='ball'>
               <text dominantBaseline="hanging" stroke="black" style={{fontSize:'16px'}}>{level}</text>
               {dates.map((d,i) => {
-                var x = 100+(70*i)
+                var x = 120+(70*i)
                 var translate = `translate(${x},-10)`
                 return (
                   <g key={i} transform={translate} className='ball'>
                     <Diamond
+                      meta={{id:i,"type":"solid","certification":levelsval[l],start:dates[i]}}
+                      data={[]}
+                      boxSize={30} padding={15}/>
+
+                    {/* <Diamond
                       meta={{id:i,status:'started',start:dates[i],trainer:trainer}}
                       data={[{p:25,s:l1},{p:50,s:l2},{p:75,s:l3},{p:100,s:l4}]}
-                      boxSize={30} padding={15}/>
+                      boxSize={30} padding={15}/> */}
                   </g>
                 )
               })}
