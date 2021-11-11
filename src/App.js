@@ -14,31 +14,78 @@ export const App = (props) => {
       const certificationsResult = await axios(`data/trainingmatrix/data/${appState.groupid}/certifications.json`);
       const groupsResult = await axios(`data/trainingmatrix/data/groups.json`);
 
-      // const locationsResult = await axios(
-      //   'https://skillnetusersapi.azurewebsites.net/api/PartnerLocations?partnerid=434',
+
+      //http://skillnetusersapi.azurewebsites.net//api/PortalCertificationsRating?groupid=34750
+
+      //http://localhost:51186//api/PortalGroupUpdateOperatorCertification?groupid=34750&skillID=44222&operatorID=284496&certificationData=2
+
+     // http://skillnetusersapi.azurewebsites.net//api/portalgroups?partnerid=448
+
+     // http://skillnetusersapi.azurewebsites.net//api/PortalGroupSkills?partnerid=448&groupid=33784
+
+     // http://skillnetusersapi.azurewebsites.net//api/PortalGroupOperators?groupid=33784
+
+
+
+
+      const portalGroupOperatorsResult = await axios(
+        'http://skillnetusersapi.azurewebsites.net//api/PortalGroupOperators?groupid=34707',
+        {
+          auth: {username: 'skillnet',password: 'demo'}
+        }
+      );
+      console.log('portalGroupOperatorsResult')
+      console.log(portalGroupOperatorsResult)
+
+      const portalGroupSkillsResult = await axios(
+        'http://skillnetusersapi.azurewebsites.net//api/PortalGroupSkills?partnerid=448&groupid=34707',
+        {
+          auth: {username: 'skillnet',password: 'demo'}
+        }
+      );
+      console.log('portalGroupSkillsResult')
+      console.log(portalGroupSkillsResult)
+      console.log(JSON.parse(portalGroupSkillsResult.data))
+
+
+      const portalGroupsResult = await axios(
+        'http://skillnetusersapi.azurewebsites.net//api/portalgroups?partnerid=448',
+        {
+          auth: {username: 'skillnet',password: 'demo'}
+        }
+      );
+      console.log('portalGroupsResult')
+      console.log(portalGroupsResult)
+
+
+      //http://skillnetusersapi.azurewebsites.net//api/PortalCertificationsRating?groupid=34750
+      const portalCertificationsRatingResult = await axios(
+        'http://skillnetusersapi.azurewebsites.net/api/PortalCertificationsRating?groupid=34707',
+        {
+          auth: {username: 'skillnet',password: 'demo'}
+        }
+      );
+      console.log('portalCertificationsRatingResult')
+      console.log(portalCertificationsRatingResult)
+
+
+      // const attributesResult = await axios(
+      //   //'https://skillnetusersapi.azurewebsites.net/api/PartnerLocations?partnerid=434',
+      //   'http://skillnetusersapi.azurewebsites.net//api/customattributes?partnerid=409',
       //   {
       //     auth: {username: 'skillnet',password: 'demo'}
       //   }
       // );
-      // console.log(locationsResult)
+      // console.log(attributesResult)
+
 
       appState.setOperators(operatorsResult.data)
       appState.setSkills(skillsResult.data)
       appState.setCertifications(certificationsResult.data)
-      appState.setGroups(groupsResult.data)
+      //appState.setGroups(groupsResult.data)
+      appState.setGroups(portalGroupsResult.data)
     }
     fetchData();
-
-
-    // var url = 'https://skillnetusersapi.azurewebsites.net/api/PartnerLocations?partnerid=434'
-    // axios
-    // .get(url, {
-    //   auth: {username: 'skillnet',password: 'demo'}
-    // })
-    // .then((response) => {
-    //   console.log('result: ', response)
-    // })
-
 
     if (window.innerWidth < 1200) { appState.setMultiplier(4) } else
     if (window.innerWidth < 1500) { appState.setMultiplier(5) } else
@@ -67,3 +114,17 @@ export const App = (props) => {
     </div>
   )
 }
+
+
+
+
+
+
+    // var url = 'https://skillnetusersapi.azurewebsites.net/api/PartnerLocations?partnerid=434'
+    // axios
+    // .get(url, {
+    //   auth: {username: 'skillnet',password: 'demo'}
+    // })
+    // .then((response) => {
+    //   console.log('result: ', response)
+    // })

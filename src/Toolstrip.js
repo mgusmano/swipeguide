@@ -13,7 +13,6 @@ export const Toolstrip = (props) => {
 
   return (
     <div style={{display:'flex',flexDirection:'row',height:'40px',padding:'5px',background:'gray'}}>
-      {/* <button onClick={replaceMatrixData}>replace matrix data</button> */}
       <button onClick={()=>{ appState.setLegend(!appState.legend)}}>Legend</button>
       <button style={{marginLeft:'10px'}} onClick={()=>{appState.setMultiplier(appState.multiplier-1)}}>smaller</button>
       <button onClick={()=>{appState.setMultiplier(appState.multiplier+1)}}>bigger</button>
@@ -32,7 +31,7 @@ export const Toolstrip = (props) => {
         }}>
         {appState.groups !== null &&
           appState.groups.map((group,i) => {
-            return <option key={i} value={group.id}>{group.groupName}</option>
+            return <option key={i} value={group.groupID}>{group.groupName}</option>
           })
         }
       </select>
