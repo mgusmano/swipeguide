@@ -49,7 +49,7 @@ export const App = (props) => {
 
 
       const portalGroupsResult = await axios(
-        'http://skillnetusersapi.azurewebsites.net//api/portalgroups?partnerid=448',
+        'https://skillnetusersapi.azurewebsites.net//api/portalgroups?partnerid=448',
         {
           auth: {username: 'skillnet',password: 'demo'}
         }
