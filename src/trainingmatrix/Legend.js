@@ -11,7 +11,7 @@ export const Legend = React.memo((props) => {
   //var dates = [greendate, yellowdate, reddate];
   const [greendate] = getDates();
   var dates = [greendate];
-  var levels = ['Not Applicable','In Training','Not Proficient','Certified','Trainer','Super Trainer'];
+  var levels = ['0 Not Applicable','1 In Training','2 Developing','3 Certified','4 Trainer','5 Master Trainer'];
   var levelsval = ['notapplicable','intraining','notproficient','certified','trainer','supertrainer'];
 
   return (
