@@ -26,7 +26,7 @@ export const getTheColor = ((certification) => {
       color = 'blue'
       break;
     case 'supertrainer':
-      color = 'gold'
+      color = 'purple'
       break;
     default:
       break;

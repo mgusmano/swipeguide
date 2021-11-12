@@ -7,6 +7,13 @@ import { API, graphqlOperation } from 'aws-amplify'
 // import { listCertifications} from '../../graphql/queries'
 import { updateSkill, updateOperator } from '../graphql/mutations'
 
+export const setRowsArray = (dispatch, payload) => {
+  dispatch({type: types.SET_ROWSARRAY, payload: payload});
+}
+export const setColsArray = (dispatch, payload) => {
+  dispatch({type: types.SET_COLSARRAY, payload: payload});
+}
+
 export const showTopDialog = (dispatch, payload) => {
   dispatch({type: types.SET_SHOWTOPDIALOG, payload: payload});
 }
@@ -45,13 +52,75 @@ export const updateOperatorGoal = (dispatch,payload) => {
   })
 }
 
+const calcTotals = (certificationsDataCreated, dispatch) => {
+  var rowsArray = []
+  var currentRow = -1;
+  var rowCount = -1;
+
+  var colsArray = []
+  var currentCol = -1;
+  var colCount = -1;
+
+  for (let i = 0; i < certificationsDataCreated.length; i++) {
+    //console.log('row: ',certificationsDataCreated[i].row)
+    //console.log('col: ',certificationsDataCreated[i].col)
+
+    if (certificationsDataCreated[i].row > currentRow) {
+      currentRow = certificationsDataCreated[i].row
+      //console.log('currentRow: ',currentRow)
+      rowCount = rowsArray.push([certificationsDataCreated[i].operator.goal,0,0])
+      //console.log('count: ',rowCount)
+      //console.log(rowsArray)
+    }
+    switch(certificationsDataCreated[i].meta.certification) {
+      case 'certified':
+      case 'trainer':
+      case 'supertrainer':
+        rowsArray[rowCount-1][1] = rowsArray[rowCount-1][1] + 1;
+        break;
+      default:
+        break;
+    }
+    rowsArray[rowCount-1][2] = rowsArray[rowCount-1][0] - rowsArray[rowCount-1][1];
+
+    //console.log(certificationsDataCreated[i].meta.certification)
+    //console.log(certificationsDataCreated[i])
+
+
+    if (certificationsDataCreated[i].col > currentCol) {
+      currentCol = certificationsDataCreated[i].col
+      //colCount = colsArray.push(0)
+      colCount = colsArray.push([certificationsDataCreated[i].skill.goal,0,0])
+    }
+    switch(certificationsDataCreated[i].meta.certification) {
+      case 'certified':
+      case 'trainer':
+      case 'supertrainer':
+        colsArray[colCount-1][1] = colsArray[colCount-1][1] + 1;
+        break;
+      default:
+        break;
+    }
+    colsArray[colCount-1][2] = colsArray[colCount-1][0] - colsArray[colCount-1][1];
+  }
+  //console.log(rowsArray)
+  //console.log(JSON.stringify(colsArray))
+  //matrixState.setRowsArray(rowsArray)
+  dispatch({type: types.SET_ROWSARRAY, payload: rowsArray});
+  var transpose = m => m[0].map((x,i) => m.map(x => x[i]))
+  var colsArraytransposed = transpose(colsArray)
+  dispatch({type: types.SET_COLSARRAY, payload: colsArraytransposed});
+  //matrixState.setColsArray(colsArraytransposed)
+}
+
+
 //export const setAll = (dispatch, first, operatorsData, skillsData, certificationsData, multiplier) => {
 export const setAll = (dispatch, theData) => {
 
-  const doByOperator = (operators, skills, certifications,dispatch) => {
+  const doByOperator = (operators, skills, certifications, dispatch) => {
     var byOperator = []
-    var operatorsummary = []
-    var bottomtotals = []
+    //var operatorsummary = []
+    //var bottomtotals = []
 
     //if (operators = []) { return }
     operators.map((operator,o) => {
@@ -60,61 +129,61 @@ export const setAll = (dispatch, theData) => {
       o.data = []
       const filteredcertifications = certifications.filter(item => item.operatorID === operator.id);
 
-      var ss = {}
-      ss.numstarted = 0
-      ss.numtrainers = 0
-      ss.numcertified = 0
-      filteredcertifications.map((fc,i) => {
-        var meta
-        var data
-        if (typeof fc.meta === 'string' || fc.meta instanceof String) {
-          meta = JSON.parse(fc.meta)
-        }
-        else {
-          meta = fc.meta
-        }
-        if (typeof fc.data === 'string' || fc.data instanceof String) {
-          data = JSON.parse(fc.data)
-        }
-        else {
-          data = fc.data
-        }
+      // var ss = {}
+      // ss.numstarted = 0
+      // ss.numtrainers = 0
+      // ss.numcertified = 0
+      // filteredcertifications.map((fc,i) => {
+      //   var meta
+      //   var data
+      //   if (typeof fc.meta === 'string' || fc.meta instanceof String) {
+      //     meta = JSON.parse(fc.meta)
+      //   }
+      //   else {
+      //     meta = fc.meta
+      //   }
+      //   if (typeof fc.data === 'string' || fc.data instanceof String) {
+      //     data = JSON.parse(fc.data)
+      //   }
+      //   else {
+      //     data = fc.data
+      //   }
 
-        var num = 0;
-        if (data !== undefined) {
-          data.map((slice,i) => {
-            if (slice.s === 1) {
-              num++
-            }
-            return null
-          })
+      //   var num = 0;
+      //   if (data !== undefined) {
+      //     data.map((slice,i) => {
+      //       if (slice.s === 1) {
+      //         num++
+      //       }
+      //       return null
+      //     })
 
-          if (num >  0 && meta.status === 'started') {
-            var dStart = new Date(meta.start);
-            var dToday = new Date();
-            var difftime = dToday.getTime() - dStart.getTime()
-            var diffdays = difftime / (1000 * 3600 * 24);
-            if (diffdays < 180) {
-              ss.numcertified ++
-            }
-          }
-          if (data.status === 'started') {
-            ss.numstarted ++
-          }
-          if (meta.status === 'started') {
-            ss.numstarted ++
-          }
-          if (meta.trainer === 'true' || meta.trainer === true ) {
-            ss.numtrainers ++
-          }
-        }
-        return null
-      })
-      operatorsummary.push(ss)
+      //     if (num >  0 && meta.status === 'started') {
+      //       var dStart = new Date(meta.start);
+      //       var dToday = new Date();
+      //       var difftime = dToday.getTime() - dStart.getTime()
+      //       var diffdays = difftime / (1000 * 3600 * 24);
+      //       if (diffdays < 180) {
+      //         ss.numcertified ++
+      //       }
+      //     }
+      //     if (data.status === 'started') {
+      //       ss.numstarted ++
+      //     }
+      //     if (meta.status === 'started') {
+      //       ss.numstarted ++
+      //     }
+      //     if (meta.trainer === 'true' || meta.trainer === true ) {
+      //       ss.numtrainers ++
+      //     }
+      //   }
+      //   return null
+      // })
+      //operatorsummary.push(ss)
 
-      var goal = operator.goal;
-      var val = [goal, ss.numcertified, goal-ss.numcertified]
-      bottomtotals.push(val)
+      // var goal = operator.goal;
+      // var val = [goal, ss.numcertified, goal-ss.numcertified]
+      // bottomtotals.push(val)
 
       filteredcertifications.map((fc,i) => {
         var skill  = skills.find(item => item.id === fc.skillID);
@@ -130,16 +199,16 @@ export const setAll = (dispatch, theData) => {
       return null
     })
 
-    var transpose = m => m[0].map((x,i) => m.map(x => x[i]))
-    var bottomtotalstransposed = transpose(bottomtotals)
-    dispatch({type: types.SET_BOTTOMTOTALS, payload: bottomtotalstransposed});
+    //var transpose = m => m[0].map((x,i) => m.map(x => x[i]))
+    //var bottomtotalstransposed = transpose(bottomtotals)
+    //dispatch({type: types.SET_BOTTOMTOTALS, payload: bottomtotalstransposed});
     return byOperator
   }
 
-  const doBySkill = (operators, skills, certifications,dispatch) => {
+  const doBySkill = (operators, skills, certifications, dispatch) => {
     var bySkill = []
-    var skillsummary = []
-    var righttotals = []
+    //var skillsummary = []
+    //var righttotals = []
 
     skills.map((skill,s) => {
       var o = {}
@@ -147,59 +216,59 @@ export const setAll = (dispatch, theData) => {
       o.meta = skill
       o.data = []
       const filteredcertifications = certifications.filter(item => item.skillID === skill.id);
-      //console.log(filteredcertifications)
-      var ss = {}
-      ss.numstarted = 0
-      ss.numtrainers = 0
-      ss.numcertified = 0
-      filteredcertifications.map((fc,i) => {
-        var meta
-        var data
-        if (typeof fc.meta === 'string' || fc.meta instanceof String) {
-          meta = JSON.parse(fc.meta)
-        }
-        else {
-          meta = fc.meta
-        }
-        if (typeof fc.data === 'string' || fc.data instanceof String) {
-          data = JSON.parse(fc.data)
-        }
-        else {
-          data = fc.data
-        }
-        var num = 0;
-        if (data !== undefined) {
-          data.map((slice,i) => {
-            if (slice.s === 1) {
-              num++
-            }
-            return null
-          })
-          if (num >  0 && meta.status === 'started') {
-            var dStart = new Date(meta.start);
-            var dToday = new Date();
-            var difftime = dToday.getTime() - dStart.getTime()
-            var diffdays = difftime / (1000 * 3600 * 24);
-            if (diffdays < 180) {
-              ss.numcertified ++
-            }
-          }
-          if (data.status === 'started') {
-            ss.numstarted ++
-          }
-          if (meta.status === 'started') {
-            ss.numstarted ++
-          }
-          if (meta.trainer === 'true' || meta.trainer === true ) {
-            ss.numtrainers ++
-          }
-        }
-        return null
-      })
-      skillsummary.push(ss)
-      var goal = skill.goal;
-      var val = [goal, ss.numcertified, goal-ss.numcertified]
-      righttotals.push(val)
+
+      // var ss = {}
+      // ss.numstarted = 0
+      // ss.numtrainers = 0
+      // ss.numcertified = 0
+      // filteredcertifications.map((fc,i) => {
+      //   var meta
+      //   var data
+      //   if (typeof fc.meta === 'string' || fc.meta instanceof String) {
+      //     meta = JSON.parse(fc.meta)
+      //   }
+      //   else {
+      //     meta = fc.meta
+      //   }
+      //   if (typeof fc.data === 'string' || fc.data instanceof String) {
+      //     data = JSON.parse(fc.data)
+      //   }
+      //   else {
+      //     data = fc.data
+      //   }
+      //   var num = 0;
+      //   if (data !== undefined) {
+      //     data.map((slice,i) => {
+      //       if (slice.s === 1) {
+      //         num++
+      //       }
+      //       return null
+      //     })
+      //     if (num >  0 && meta.status === 'started') {
+      //       var dStart = new Date(meta.start);
+      //       var dToday = new Date();
+      //       var difftime = dToday.getTime() - dStart.getTime()
+      //       var diffdays = difftime / (1000 * 3600 * 24);
+      //       if (diffdays < 180) {
+      //         ss.numcertified ++
+      //       }
+      //     }
+      //     if (data.status === 'started') {
+      //       ss.numstarted ++
+      //     }
+      //     if (meta.status === 'started') {
+      //       ss.numstarted ++
+      //     }
+      //     if (meta.trainer === 'true' || meta.trainer === true ) {
+      //       ss.numtrainers ++
+      //     }
+      //   }
+      //   return null
+      // })
+      // skillsummary.push(ss)
+      // var goal = skill.goal;
+      // var val = [goal, ss.numcertified, goal-ss.numcertified]
+      // righttotals.push(val)
 
       filteredcertifications.map((fc,i) => {
         var operator  = operators.find(item => item.id === fc.operatorID);
@@ -216,7 +285,7 @@ export const setAll = (dispatch, theData) => {
       return null
     })
 
-    dispatch({type: types.SET_RIGHTTOTALS, payload: righttotals});
+    //dispatch({type: types.SET_RIGHTTOTALS, payload: righttotals});
     return bySkill
   }
 
@@ -256,7 +325,6 @@ export const setAll = (dispatch, theData) => {
       row2: row2,
       row3: row3,
     }
-    //matrixState.setOriginal(d2)
     dispatch({type: types.SET_ORIGINAL, payload: d2});
 
     var d = {
@@ -281,6 +349,8 @@ export const setAll = (dispatch, theData) => {
   const callAll = async (dispatch,payload2) => {
     var first = payload2.first
 
+    calcTotals(payload2.certificationsData, dispatch)
+
     //var operatorsData = payload2.operatorsData
     //var skillsData = payload2.skillsData
     //var certificationsData = payload2.certificationsData
@@ -288,14 +358,13 @@ export const setAll = (dispatch, theData) => {
 
     //console.log(payload2.certificationsData)
 
-    var operators
-    var skills
-    var certifications
+    // var operators
+    // var skills
+    // var certifications
 
-    operators = payload2.operatorsData
-    skills = payload2.skillsData
-    certifications = payload2.certificationsData
-
+    var operators = payload2.operatorsData
+    var skills = payload2.skillsData
+    var certifications = payload2.certificationsData
     var multiplier = payload2.multiplier
 
     //console.log('operatorsData')
@@ -347,7 +416,6 @@ export const setAll = (dispatch, theData) => {
       skills: skills,
       certifications: certifications
     }
-    //console.log(payload)
     dispatch({type: types.SET_ALL, payload: payload});
     dispatch({type: types.SET_ACTIVE, payload: false});
   }
@@ -460,6 +528,7 @@ export const updateCert = async (dispatch, payload) => {
 
   var j = {'skillID':payload.skillID,'operatorID':payload.operatorID,'certification':payload.certification}
   console.log('updateCert: ' + JSON.stringify(j))
+  console.log(payload)
 
   //console.log('skillID: ',  payload.skillID)
   //console.log('operatorID: ',  payload.operatorID)

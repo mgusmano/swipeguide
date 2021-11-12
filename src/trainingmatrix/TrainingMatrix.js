@@ -31,6 +31,65 @@ const MainMatrixProvider = (props) => {
   var multiplier = props.props.multiplier
   useResizeEvent()
 
+  // const calcTotals = (certificationsDataCreated) => {
+  //   var rowsArray = []
+  //   var currentRow = -1;
+  //   var rowCount = -1;
+
+  //   var colsArray = []
+  //   var currentCol = -1;
+  //   var colCount = -1;
+
+  //   for (let i = 0; i < certificationsDataCreated.length; i++) {
+
+  //     if (certificationsDataCreated[i].row > currentRow) {
+  //       currentRow = certificationsDataCreated[i].row
+  //       //console.log('currentRow: ',currentRow)
+  //       rowCount = rowsArray.push([certificationsDataCreated[i].operator.goal,0,0])
+  //       //console.log('count: ',rowCount)
+  //       //console.log(rowsArray)
+  //     }
+  //     switch(certificationsDataCreated[i].meta.certification) {
+  //       case 'certified':
+  //       case 'trainer':
+  //       case 'supertrainer':
+  //         rowsArray[rowCount-1][1] = rowsArray[rowCount-1][1] + 1;
+  //         break;
+  //       default:
+  //         break;
+  //     }
+  //     rowsArray[rowCount-1][2] = rowsArray[rowCount-1][0] - rowsArray[rowCount-1][1];
+
+  //     //console.log(certificationsDataCreated[i].meta.certification)
+  //     //console.log(certificationsDataCreated[i])
+
+
+  //     if (certificationsDataCreated[i].col > currentCol) {
+  //       currentCol = certificationsDataCreated[i].col
+  //       //colCount = colsArray.push(0)
+  //       colCount = colsArray.push([certificationsDataCreated[i].skill.goal,0,0])
+  //     }
+  //     switch(certificationsDataCreated[i].meta.certification) {
+  //       case 'certified':
+  //       case 'trainer':
+  //       case 'supertrainer':
+  //         colsArray[colCount-1][1] = colsArray[colCount-1][1] + 1;
+  //         break;
+  //       default:
+  //         break;
+  //     }
+  //     colsArray[colCount-1][2] = colsArray[colCount-1][0] - colsArray[colCount-1][1];
+  //   }
+  //   console.log(rowsArray)
+  //   console.log(colsArray)
+  //   matrixState.setRowsArray(rowsArray)
+  //   var transpose = m => m[0].map((x,i) => m.map(x => x[i]))
+  //   var colsArraytransposed = transpose(colsArray)
+  //   matrixState.setColsArray(colsArraytransposed)
+  // }
+
+
+
   useEffect(() => {
     if (multiplier === '') return
 
@@ -39,10 +98,29 @@ const MainMatrixProvider = (props) => {
     var certID = 0
     for (let s = 0; s < props.props.skillsData.length; s++) {
       for (let o = 0; o < props.props.operatorsData.length; o++) {
+        //console.log(props.props.skillsData[s])
         certID++
-        certificationsDataCreated.push({"id": String(certID),"operatorID": String(o+1),"skillID": String(s+1),"meta": {"type":"solid","certification":"notapplicable","certstate": "disabled"},"data": []})
+        certificationsDataCreated.push({
+          "id": String(certID),
+          "row":s,
+          "col":o,
+          "skill":props.props.skillsData[s],
+          "operator":props.props.operatorsData[o],
+          "skillID": String(s+1),
+          "operatorID": String(o+1),
+          "meta": {
+            "type":"solid",
+            "certification":"notapplicable",
+            "strokecolor":"black",
+            "letter":"",
+            "start":"",
+            "certstate": "disabled"
+          },
+          "data": []
+        })
       }
     }
+    //console.log(certificationsDataCreated)
 
     for (let o = 0; o < certificationsData.length; o++) {
       var found = certificationsDataCreated.find(element => {
@@ -56,8 +134,73 @@ const MainMatrixProvider = (props) => {
       found.data = certificationsData[o].data
     }
 
+    //console.log(certificationsDataCreated)
+
+
+    //calcTotals(certificationsDataCreated)
+
+
+    // var rowsArray = []
+    // var currentRow = -1;
+    // var rowCount = -1;
+
+    // var colsArray = []
+    // var currentCol = -1;
+    // var colCount = -1;
+
+    // for (let i = 0; i < certificationsDataCreated.length; i++) {
+
+    //   if (certificationsDataCreated[i].row > currentRow) {
+    //     currentRow = certificationsDataCreated[i].row
+    //     //console.log('currentRow: ',currentRow)
+    //     rowCount = rowsArray.push([certificationsDataCreated[i].operator.goal,0,0])
+    //     //console.log('count: ',rowCount)
+    //     //console.log(rowsArray)
+    //   }
+    //   switch(certificationsDataCreated[i].meta.certification) {
+    //     case 'certified':
+    //     case 'trainer':
+    //     case 'supertrainer':
+    //       rowsArray[rowCount-1][1] = rowsArray[rowCount-1][1] + 1;
+    //       break;
+    //     default:
+    //       break;
+    //   }
+    //   rowsArray[rowCount-1][2] = rowsArray[rowCount-1][0] - rowsArray[rowCount-1][1];
+
+    //   //console.log(certificationsDataCreated[i].meta.certification)
+    //   //console.log(certificationsDataCreated[i])
+
+
+    //   if (certificationsDataCreated[i].col > currentCol) {
+    //     currentCol = certificationsDataCreated[i].col
+    //     //colCount = colsArray.push(0)
+    //     colCount = colsArray.push([certificationsDataCreated[i].skill.goal,0,0])
+    //   }
+    //   switch(certificationsDataCreated[i].meta.certification) {
+    //     case 'certified':
+    //     case 'trainer':
+    //     case 'supertrainer':
+    //       colsArray[colCount-1][1] = colsArray[colCount-1][1] + 1;
+    //       break;
+    //     default:
+    //       break;
+    //   }
+    //   colsArray[colCount-1][2] = colsArray[colCount-1][0] - colsArray[colCount-1][1];
+    // }
+    // console.log(rowsArray)
+    // console.log(colsArray)
+    // matrixState.setRowsArray(rowsArray)
+    // var transpose = m => m[0].map((x,i) => m.map(x => x[i]))
+    // var colsArraytransposed = transpose(colsArray)
+    // matrixState.setColsArray(colsArraytransposed)
+
+
+
     matrixState.setActive(true)
+
     matrixState.setAll({
+      //'certificationsDataCreated': certificationsDataCreated,
       'first':true,
       'operatorsData':props.props.operatorsData,
       'skillsData':props.props.skillsData,
@@ -108,13 +251,17 @@ const MainMatrixProvider = (props) => {
               >
               <Row2Col2 data={matrixState.bySkill} cellClicked={cellClicked}/>
             </LoadingOverlay>
-            <Row2Col3 data={matrixState.righttotals}/>
+            {matrixState.rowsArray !== null &&
+              <Row2Col3 data={matrixState.rowsArray}/>
+            }
           </div>
 
           <div className='leftrow3' style={{...styles.h,height: matrixState.dimensions.row3+'px',minHeight:matrixState.dimensions.row3+'px',background:'lightgray'}}>
             <Row3Col1 data={[['Goal'],['# Certified'],['Gap']]}/>
             <Row3Col1a/>
-            <Row3Col2 data={matrixState.bottomtotals}/>
+            {matrixState.colsArray !== null &&
+              <Row3Col2 data={matrixState.colsArray}/>
+            }
             <Row3Col3/>
           </div>
 

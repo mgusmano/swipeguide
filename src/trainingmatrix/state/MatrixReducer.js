@@ -7,6 +7,8 @@ export const MatrixReducer = (state, action) => {
   const { type, payload } = action;
   var s;
   switch (type) {
+    case types.SET_ROWSARRAY: return {...state,rowsArray:payload}
+    case types.SET_COLSARRAY: return {...state,colsArray:payload}
     case types.SET_SHOWTOPDIALOG: return {...state,topDialog:payload}
     case types.SET_TOP: return {...state,top:payload}
     case types.SET_MAIN: return {...state,main:payload}
@@ -38,13 +40,13 @@ export const MatrixReducer = (state, action) => {
       }
       console.log(s)
       return s
-    case types.SET_BOTTOMTOTALS:
-      s = {...state,bottomtotals:payload}
-      return s
+    // case types.SET_BOTTOMTOTALS:
+    //   s = {...state,bottomtotals:payload}
+    //   return s
 
-    case types.SET_RIGHTTOTALS:
-      s = {...state,righttotals:payload}
-      return s
+    // case types.SET_RIGHTTOTALS:
+    //   s = {...state,righttotals:payload}
+    //   return s
     case types.SET_CURRENT_CERTIFICATION:
       s = {...state,currentcertification:payload}
       return s

@@ -45,9 +45,16 @@ export const Main = (props) => {
   },[props.data.meta.certification])
 
   const onCertificationChange = async (event) => {
+    console.log(matrixState.celldata)
     if (metadata.type === 'solid') {
-      var metaval = {"type":"solid","certification":event.target.value,"strokecolor":"black","letter":"","start":"8/3/2021"}
-
+      var metaval = {
+        "type":"solid",
+        "certification":event.target.value,
+        "strokecolor":"black",
+        "letter":"",
+        "start":matrixState.celldata.meta.start,
+        "certstate":matrixState.celldata.meta.certstate
+      }
       var newCerts = matrixState.certifications.slice();
       var certString = certificationID.toString()
       const lastCertIndex = newCerts.findIndex(
@@ -56,8 +63,12 @@ export const Main = (props) => {
       if (lastCertIndex !== -1) {
         newCerts[lastCertIndex] = {
           "id": certificationID,
-          "operatorID": operator.id,
+          "row": matrixState.celldata.row,
+          "col": matrixState.celldata.col,
+          "skill": skill,
+          "operator": operator,
           "skillID": skill.id,
+          "operatorID": operator.id,
           "meta": metaval,
           "data": []
         }
@@ -67,6 +78,10 @@ export const Main = (props) => {
       setCertification(event.target.value)
       var c = {
         id: certificationID,
+        row: matrixState.celldata.row,
+        col: matrixState.celldata.col,
+        skill: skill,
+        operator: operator,
         skillID: skill.id,
         operatorID: operator.id,
         certification: event.target.value,
@@ -87,7 +102,7 @@ export const Main = (props) => {
     certstate = metadata.certstate;
 
   }
-  console.log(certstate)
+  //console.log(certstate)
 
   return (
     <div style={{padding:'10px'}}>

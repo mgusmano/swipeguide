@@ -1,7 +1,7 @@
 import React from 'react';
 import { useMatrixState } from './state/MatrixProvider';
 
-export const MatrixCell = React.memo(({rowid, colid, bandX, bandY, type, x, stroke, col, data, clickCellFunction}) => {
+export const MatrixCell = React.memo(({r, c, rowid, colid, bandX, bandY, type, x, stroke, col, data, clickCellFunction}) => {
   const matrixState = useMatrixState();
 
   var certificationID = -1;
@@ -28,6 +28,8 @@ export const MatrixCell = React.memo(({rowid, colid, bandX, bandY, type, x, stro
   return (
     <rect
     style={{boxSizing:'border-box'}}
+      r={r}
+      c={c}
       rowid={rowid}
       colid={colid}
       opacity="1"
@@ -40,7 +42,7 @@ export const MatrixCell = React.memo(({rowid, colid, bandX, bandY, type, x, stro
       width={bandX}
       height={bandY}
 
-      onClick={(e) => {clickCellFunction !== undefined && clickCellFunction(e,colid,rowid,type,data,col)}}
+      onClick={(e) => {clickCellFunction !== undefined && clickCellFunction(e,colid,rowid,type,data,col,r,c)}}
       onMouseEnter={(e) => {e.target.style.fillOpacity = '.5'}}
       onMouseOut={(e) => {e.target.style.fillOpacity = '0'}}
     />

@@ -41,9 +41,13 @@ export const Row2Col2 = (props) => {
     )
   }
 
-  const clickMainCell = useCallback((e,colid,rowid,type,data,col) => {
+  const clickMainCell = useCallback((e,colid,rowid,type,data,col,r,c) => {
     //props.cellClicked(data.certificationID)
+    //console.log(data)
+    data.row = r;
+    data.col = c;
     props.cellClicked(data)
+
 
     matrixState.setCurrentCertification(data.certificationID)
 
@@ -64,8 +68,8 @@ export const Row2Col2 = (props) => {
   })
 
   const renderMainCell = (props,c,col,r,row,sTop,data,clickCellFunction,fontsize) => {
-    // console.log(row)
-    // console.log(col)
+    //console.log(r,c)
+
     //var certificationID = col.certificationID;
 
     const {bandX, bandY} = props
@@ -73,6 +77,8 @@ export const Row2Col2 = (props) => {
       <g key={r+c} transform={"translate(" + (c*bandX) + "," + sTop + ")"} className="group" >
         <Diamond meta={col.meta} data={col.data} boxSize={bandX} padding={30}/>
         <MatrixCell
+          r={r}
+          c={c}
           clickCellFunction={clickCellFunction}
           rowid={row.meta.id}
           colid={col.meta.id}

@@ -9,6 +9,9 @@ const MatrixContext = createContext();
 export const MatrixProvider = (props) => {
 
   const getFunctions = {
+    setRowsArray: (payload) => functions.setRowsArray(dispatch, payload),
+    setColsArray: (payload) => functions.setColsArray(dispatch, payload),
+
     showTopDialog: (payload) => functions.showTopDialog(dispatch, payload),
     setTop: (payload) => functions.setTop(dispatch, payload),
     setMain: (payload) => functions.setMain(dispatch, payload),
@@ -45,6 +48,8 @@ export const MatrixProvider = (props) => {
   }
 
   const initialState = {
+    rowsArray: null,
+    colsArray: null,
     topDialog: 'none',
     top: null,
     main: null,
