@@ -98,6 +98,7 @@ export const App = (props) => {
 
   return (
     <div style={{display:'flex',flexDirection:'column',height:'100%',width:'100%'}}>
+    <div style={{height:'50px'}}><img style={{margin:'10px',width:'150px'}} src="toshiba.png" alt="Toshiba"/></div>
       <Toolstrip/>
       <div style={{flex:'1'}}>
         {appState.certifications !== null &&
