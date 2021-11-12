@@ -29,7 +29,7 @@ export const App = (props) => {
 
 
       const portalGroupOperatorsResult = await axios(
-        'http://skillnetusersapi.azurewebsites.net//api/PortalGroupOperators?groupid=34707',
+        'https://skillnetusersapi.azurewebsites.net//api/PortalGroupOperators?groupid=34707',
         {
           auth: {username: 'skillnet',password: 'demo'}
         }
@@ -38,7 +38,7 @@ export const App = (props) => {
       console.log(portalGroupOperatorsResult)
 
       const portalGroupSkillsResult = await axios(
-        'http://skillnetusersapi.azurewebsites.net//api/PortalGroupSkills?partnerid=448&groupid=34707',
+        'https://skillnetusersapi.azurewebsites.net//api/PortalGroupSkills?partnerid=448&groupid=34707',
         {
           auth: {username: 'skillnet',password: 'demo'}
         }
@@ -58,9 +58,9 @@ export const App = (props) => {
       console.log(portalGroupsResult)
 
 
-      //http://skillnetusersapi.azurewebsites.net//api/PortalCertificationsRating?groupid=34750
+      //https://skillnetusersapi.azurewebsites.net//api/PortalCertificationsRating?groupid=34750
       const portalCertificationsRatingResult = await axios(
-        'http://skillnetusersapi.azurewebsites.net/api/PortalCertificationsRating?groupid=34707',
+        'https://skillnetusersapi.azurewebsites.net/api/PortalCertificationsRating?groupid=34707',
         {
           auth: {username: 'skillnet',password: 'demo'}
         }
