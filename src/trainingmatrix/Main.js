@@ -96,11 +96,14 @@ export const Main = (props) => {
           <div style={{display:'flex',flexDirection:'column',xheight:'100px',borderBottom: '0px solid black'}}>
             <div style={{marginLeft:'30px',fontSize:'20px'}}>{skill.skillName}</div>
           </div>
-          <div style={{margin:'30px',display:'flex',flexDirection:'column'}}>
-            Date Started: {startDate.toLocaleDateString()}
+          <div style={{marginTop:'5px',marginLeft:'30px'}}>
+            <a href="http://www.microsoft.com">Certification Form</a>
+          </div>
+          <div style={{marginTop:'5px',marginLeft:'30px',display:'flex',flexDirection:'column'}}>
+            Started: {startDate.toLocaleDateString()}
           </div>
           <div style={{display:'flex',flexDirection:'row'}}>
-            <div style={{marginLeft:'30px',display:'flex',flexDirection:'column'}}>
+            <div style={{marginTop:'15px',marginLeft:'30px',display:'flex',flexDirection:'column'}}>
               Certification:
               <div><input value="notapplicable" checked={certification === 'notapplicable'} onChange={onCertificationChange} style={{marginLeft:'20px'}} type="radio" name="percent2" /> 0 Not Applicable</div>
               <div><input value="intraining" checked={certification === 'intraining'} onChange={onCertificationChange} style={{marginLeft:'20px'}} type="radio" name="percent2" /> 1 In Training</div>
@@ -134,10 +137,7 @@ export const Main = (props) => {
             </svg>
           </div>
         </div>
-        <div style={{marginTop:'30px',marginLeft:'30px'}}>
-          <a href="http://www.microsoft.com">Certification Form</a>
-        </div>
-        <div style={{fontSize:'12px',marginTop:'20px'}}>certificationID: {certificationID} - skill.id: {skill.id} - operator.id: {operator.id}</div>
+        <div style={{fontSize:'12px',marginTop:'120px'}}>certificationID: {certificationID} - skill.id: {skill.id} - operator.id: {operator.id}</div>
       </div>
     </div>
   )
