@@ -80,6 +80,15 @@ export const Main = (props) => {
     }
   }
 
+  var certstate = '';
+  if (metadata !== null) {
+    //console.log(metadata)
+    //console.log(metadata.certstate)
+    certstate = metadata.certstate;
+
+  }
+  console.log(certstate)
+
   return (
     <div style={{padding:'10px'}}>
       <div>
@@ -96,9 +105,27 @@ export const Main = (props) => {
               <div><input value="notapplicable" checked={certification === 'notapplicable'} onChange={onCertificationChange} style={{marginLeft:'20px'}} type="radio" name="percent2" /> Not Applicable</div>
               <div><input value="intraining" checked={certification === 'intraining'} onChange={onCertificationChange} style={{marginLeft:'20px'}} type="radio" name="percent2" /> In Training</div>
               <div><input value="notproficient" checked={certification === 'notproficient'} onChange={onCertificationChange} style={{marginLeft:'20px'}} type="radio" name="percent2" /> Not Proficient</div>
-              <div><input value="certified" checked={certification === 'certified'} onChange={onCertificationChange} style={{marginLeft:'20px'}} type="radio" name="percent2" /> Certified</div>
-              <div><input value="trainer" checked={certification === 'trainer'} onChange={onCertificationChange} style={{marginLeft:'20px'}} type="radio" name="percent2" /> Trainer</div>
-              <div><input value="supertrainer" checked={certification === 'supertrainer'} onChange={onCertificationChange} style={{marginLeft:'20px'}} type="radio" name="percent2" /> Super Trainer</div>
+{certstate === '' &&
+<>
+<div><input value="certified"  checked={certification === 'certified'} onChange={onCertificationChange} style={{marginLeft:'20px'}} type="radio" name="percent2" /> Certified</div>
+<div><input value="trainer"  checked={certification === 'trainer'} onChange={onCertificationChange} style={{marginLeft:'20px'}} type="radio" name="percent2" /> Trainer</div>
+<div><input value="supertrainer"  checked={certification === 'supertrainer'} onChange={onCertificationChange} style={{marginLeft:'20px'}} type="radio" name="percent2" /> Super Trainer</div>
+</>
+}
+{certstate === undefined &&
+<>
+<div><input value="certified"  checked={certification === 'certified'} onChange={onCertificationChange} style={{marginLeft:'20px'}} type="radio" name="percent2" /> Certified</div>
+<div><input value="trainer"  checked={certification === 'trainer'} onChange={onCertificationChange} style={{marginLeft:'20px'}} type="radio" name="percent2" /> Trainer</div>
+<div><input value="supertrainer"  checked={certification === 'supertrainer'} onChange={onCertificationChange} style={{marginLeft:'20px'}} type="radio" name="percent2" /> Super Trainer</div>
+</>
+}
+{certstate === 'disabled' &&
+<>
+<div style={{display:'flex',flexDirection:'row'}}><input value="certified" disabled checked={certification === 'certified'} onChange={onCertificationChange} style={{marginLeft:'20px',color:'red'}} type="radio" name="percent2" /><div style={{color:'lightgray',paddingLeft:'5px',paddingTop:'2px'}}> Certified</div></div>
+<div style={{display:'flex',flexDirection:'row'}}><input value="trainer" disabled checked={certification === 'trainer'} onChange={onCertificationChange} style={{marginLeft:'20px'}} type="radio" name="percent2" /><div style={{color:'lightgray',paddingLeft:'5px',paddingTop:'2px'}}> Trainer</div></div>
+<div style={{display:'flex',flexDirection:'row'}}><input value="supertrainer" disabled checked={certification === 'supertrainer'} onChange={onCertificationChange} style={{marginLeft:'20px'}} type="radio" name="percent2" /><div style={{color:'lightgray',paddingLeft:'5px',paddingTop:'2px'}}> Super Trainer</div></div>
+</>
+}
             </div>
             <svg style={{marginLeft:'30',marginTop:'5'}} width="50" height="50">
               {diamonddata !== null && metadata !== null &&

@@ -40,7 +40,7 @@ const MainMatrixProvider = (props) => {
     for (let s = 0; s < props.props.skillsData.length; s++) {
       for (let o = 0; o < props.props.operatorsData.length; o++) {
         certID++
-        certificationsDataCreated.push({"id": String(certID),"operatorID": String(o+1),"skillID": String(s+1),"meta": {"type":"solid","certification":"notapplicable"},"data": []})
+        certificationsDataCreated.push({"id": String(certID),"operatorID": String(o+1),"skillID": String(s+1),"meta": {"type":"solid","certification":"notapplicable","certstate": "disabled"},"data": []})
       }
     }
 

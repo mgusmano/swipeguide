@@ -93,7 +93,7 @@ export const App = (props) => {
   },[appState.groupid])
 
   const cellClicked = (data) => {
-    console.log(data)
+    //console.log(data)
   }
 
   return (
