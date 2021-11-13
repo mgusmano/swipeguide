@@ -1,6 +1,10 @@
 import * as types from './MatrixTypes';
+//import * as types from './Types';
 
 import { API, graphqlOperation } from 'aws-amplify'
+// import { listOperators} from '../../graphql/queries'
+// import { listSkills } from '../../graphql/queries'
+// import { listCertifications} from '../../graphql/queries'
 import { updateSkill, updateOperator } from '../graphql/mutations'
 
 export const setRowsArray = (dispatch, payload) => {
@@ -117,15 +121,78 @@ const calcTotals = (certificationsDataCreated, dispatch) => {
   dispatch({type: types.SET_COLSARRAY, payload: colsArraytransposed});
 }
 
+
+//export const setAll = (dispatch, first, operatorsData, skillsData, certificationsData, multiplier) => {
 export const setAll = (dispatch, theData) => {
 
   const doByOperator = (operators, skills, certifications, dispatch) => {
     var byOperator = []
+    //var operatorsummary = []
+    //var bottomtotals = []
+
+    //if (operators = []) { return }
     operators.map((operator,o) => {
       o = operator
       o.meta = operator
       o.data = []
       const filteredcertifications = certifications.filter(item => item.operatorID === operator.id);
+
+      // var ss = {}
+      // ss.numstarted = 0
+      // ss.numtrainers = 0
+      // ss.numcertified = 0
+      // filteredcertifications.map((fc,i) => {
+      //   var meta
+      //   var data
+      //   if (typeof fc.meta === 'string' || fc.meta instanceof String) {
+      //     meta = JSON.parse(fc.meta)
+      //   }
+      //   else {
+      //     meta = fc.meta
+      //   }
+      //   if (typeof fc.data === 'string' || fc.data instanceof String) {
+      //     data = JSON.parse(fc.data)
+      //   }
+      //   else {
+      //     data = fc.data
+      //   }
+
+      //   var num = 0;
+      //   if (data !== undefined) {
+      //     data.map((slice,i) => {
+      //       if (slice.s === 1) {
+      //         num++
+      //       }
+      //       return null
+      //     })
+
+      //     if (num >  0 && meta.status === 'started') {
+      //       var dStart = new Date(meta.start);
+      //       var dToday = new Date();
+      //       var difftime = dToday.getTime() - dStart.getTime()
+      //       var diffdays = difftime / (1000 * 3600 * 24);
+      //       if (diffdays < 180) {
+      //         ss.numcertified ++
+      //       }
+      //     }
+      //     if (data.status === 'started') {
+      //       ss.numstarted ++
+      //     }
+      //     if (meta.status === 'started') {
+      //       ss.numstarted ++
+      //     }
+      //     if (meta.trainer === 'true' || meta.trainer === true ) {
+      //       ss.numtrainers ++
+      //     }
+      //   }
+      //   return null
+      // })
+      //operatorsummary.push(ss)
+
+      // var goal = operator.goal;
+      // var val = [goal, ss.numcertified, goal-ss.numcertified]
+      // bottomtotals.push(val)
+
       filteredcertifications.map((fc,i) => {
         var skill  = skills.find(item => item.id === fc.skillID);
         o.data[i] = {};
@@ -139,17 +206,78 @@ export const setAll = (dispatch, theData) => {
       byOperator.push(o)
       return null
     })
+
+    //var transpose = m => m[0].map((x,i) => m.map(x => x[i]))
+    //var bottomtotalstransposed = transpose(bottomtotals)
+    //dispatch({type: types.SET_BOTTOMTOTALS, payload: bottomtotalstransposed});
     return byOperator
   }
 
   const doBySkill = (operators, skills, certifications, dispatch) => {
     var bySkill = []
+    //var skillsummary = []
+    //var righttotals = []
+
     skills.map((skill,s) => {
       var o = {}
       o = skill
       o.meta = skill
       o.data = []
       const filteredcertifications = certifications.filter(item => item.skillID === skill.id);
+
+      // var ss = {}
+      // ss.numstarted = 0
+      // ss.numtrainers = 0
+      // ss.numcertified = 0
+      // filteredcertifications.map((fc,i) => {
+      //   var meta
+      //   var data
+      //   if (typeof fc.meta === 'string' || fc.meta instanceof String) {
+      //     meta = JSON.parse(fc.meta)
+      //   }
+      //   else {
+      //     meta = fc.meta
+      //   }
+      //   if (typeof fc.data === 'string' || fc.data instanceof String) {
+      //     data = JSON.parse(fc.data)
+      //   }
+      //   else {
+      //     data = fc.data
+      //   }
+      //   var num = 0;
+      //   if (data !== undefined) {
+      //     data.map((slice,i) => {
+      //       if (slice.s === 1) {
+      //         num++
+      //       }
+      //       return null
+      //     })
+      //     if (num >  0 && meta.status === 'started') {
+      //       var dStart = new Date(meta.start);
+      //       var dToday = new Date();
+      //       var difftime = dToday.getTime() - dStart.getTime()
+      //       var diffdays = difftime / (1000 * 3600 * 24);
+      //       if (diffdays < 180) {
+      //         ss.numcertified ++
+      //       }
+      //     }
+      //     if (data.status === 'started') {
+      //       ss.numstarted ++
+      //     }
+      //     if (meta.status === 'started') {
+      //       ss.numstarted ++
+      //     }
+      //     if (meta.trainer === 'true' || meta.trainer === true ) {
+      //       ss.numtrainers ++
+      //     }
+      //   }
+      //   return null
+      // })
+      // skillsummary.push(ss)
+      // var goal = skill.goal;
+      // var val = [goal, ss.numcertified, goal-ss.numcertified]
+      // righttotals.push(val)
+
       filteredcertifications.map((fc,i) => {
         var operator  = operators.find(item => item.id === fc.operatorID);
         o.data[i] = {};
@@ -160,15 +288,22 @@ export const setAll = (dispatch, theData) => {
         o.data[i].data = fc.data
         return null
       })
+
       bySkill.push(o)
       return null
     })
+
+    //dispatch({type: types.SET_RIGHTTOTALS, payload: righttotals});
     return bySkill
   }
 
   const setInit = (o) => {
+
     var x = o.oLen
     var y = o.sLen
+
+    //subscribeCertifications();
+
     const multiplier = o.multiplier;
     const topHeight = 0;
     const fontsize = 3;
@@ -179,6 +314,7 @@ export const setAll = (dispatch, theData) => {
     var col2 = bandX * x;
     var col3 =(bandX*4);
     var row1 = 45;
+
     var row2 = (bandY * y)+0;
     var row3 = bandX*4;
 
@@ -217,22 +353,59 @@ export const setAll = (dispatch, theData) => {
     dispatch({type: types.SET_DIMENSIONS, payload: d});
   }
 
+  //  const callAll = async (dispatch,first,doBy, operatorsData, skillsData, certificationsData) => {
   const callAll = async (dispatch,payload2) => {
     var first = payload2.first
+
+    calcTotals(payload2.certificationsData, dispatch)
+
+    //var operatorsData = payload2.operatorsData
+    //var skillsData = payload2.skillsData
+    //var certificationsData = payload2.certificationsData
+
+
+    //console.log(payload2.certificationsData)
+
+    // var operators
+    // var skills
+    // var certifications
+
     var operators = payload2.operatorsData
     var skills = payload2.skillsData
     var certifications = payload2.certificationsData
     var multiplier = payload2.multiplier
 
-    calcTotals(payload2.certificationsData, dispatch)
+
+    // if (operatorsData === undefined) {
+    //   // operators = await getDataOperators()
+    //   // skills = await getDataSkills()
+    //   // certifications = await getDataCertifications()
+    // }
+    // else {
+    //   operators = operatorsData
+    //   skills = skillsData
+    //   certifications = certificationsData
+    // }
 
     var byOperator = []
     var bySkill = []
 
-    if (operators.length !== 0 && skills.length !== 0) {
-      byOperator = doByOperator(operators,skills,certifications,dispatch)
-      bySkill = doBySkill(operators,skills,certifications,dispatch)
-    }
+    //var  doBy
+//mjg
+    //if (doBy === undefined) {
+      //if (operators.length !== 0 && listSkills.length !== 0) {
+      if (operators.length !== 0 && skills.length !== 0) {
+        //console.log('in2')
+        byOperator = doByOperator(operators,skills,certifications,dispatch)
+        bySkill = doBySkill(operators,skills,certifications,dispatch)
+      }
+    //}
+
+// console.log(operators)
+// console.log(skills)
+// console.log(certifications)
+// console.log(byOperator)
+// console.log(bySkill)
 
     if (first === true) {
       var oLen = operators.length
@@ -251,8 +424,40 @@ export const setAll = (dispatch, theData) => {
     dispatch({type: types.SET_ACTIVE, payload: false});
   }
 
+  //console.log(first)
+  //console.log(dispatch,first, operatorsData, skillsData, certificationsData)
+
+
+  //callAll(dispatch,first, operatorsData, skillsData, certificationsData, multiplier)
+
   callAll(dispatch, theData)
+  // callAll(dispatch,{
+  //   first:first,
+  //   operatorsData:operatorsData,
+  //   skillsData:skillsData,
+  //   certificationsData:certificationsData,
+  //   multiplier:multiplier
+  // })
+
+
 }
+
+// export const setOperators = (dispatch) => {
+
+//   async function getDataOperators() {
+//     const operatorData = await API.graphql(graphqlOperation(listOperators))
+//     return operatorData.data.listOperators.items.sort((a, b) => (a.id > b.id) ? 1 : -1)
+//   }
+
+//   const callAll = async () => {
+//     var operators = await getDataOperators()
+//      //console.log('setUserName')
+//     dispatch({type: types.types.SET_OPERATORS, payload: operators});
+
+//   }
+
+//   callAll()
+// }
 
 export const setActive = (dispatch, payload) => {
   dispatch({type: types.SET_ACTIVE, payload: payload});
@@ -314,14 +519,39 @@ export const setOriginal = (dispatch, payload) => {
   dispatch({type: types.SET_ORIGINAL, payload: payload});
 }
 
+// export const updateUserName = (dispatch, payload) => {
+//   dispatch({type: types."U", payload: payload});
+// }
+
 export const toggleLegend = (dispatch, payload) => {
   dispatch({type: types.TOGGLE_LEGEND, payload: payload});
 }
 
 export const updateCert = async (dispatch, payload) => {
+  //console.log('updateCert - WebApi: ' + payload.certification)
+
   var j = {'skillID':parseInt(payload.skillID),'operatorID':parseInt(payload.operatorID),'currcertID':payload.currcertID}
   console.log('updateCert: ' + JSON.stringify(j))
+  //console.log(payload)
+
+  //console.log('skillID: ',  payload.skillID)
+  //console.log('operatorID: ',  payload.operatorID)
+  //console.log('certification: ',  payload.certification)
+
+  // setTimeout(function(){
+  //   alert('updateCert - WebApi call here: \n'
+  //   + 'skillID: ' + payload.skillID + '\n'
+  //   + 'operatorID: ' + payload.operatorID + '\n'
+  //   + 'certification: ' + payload.certification + '\n'
+  //   )
+  // }, 50);
+
+  //console.log('meta',  payload.meta)
+
   dispatch({type: types.UPDATE_CERT, payload: payload});
+  //await API.graphql(graphqlOperation(updateCertification, { input: payload } ))
+  //setAll(dispatch,false)
+  //setActive(true)
   setAll(dispatch,{
     'first':true,
     'operatorsData':payload.operators,
@@ -329,4 +559,12 @@ export const updateCert = async (dispatch, payload) => {
     'certificationsData':payload.certifications,
     'multiplier': payload.multiplier
   })
+
+  // setAll({
+  //   'first':true,
+  //   'operatorsData':operatorsData,
+  //   'skillsData':props.props.skillsData,
+  //   'certificationsData':certificationsDataCreated,
+  //   'multiplier':multiplier
+  // })
 }
