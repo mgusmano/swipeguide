@@ -2,12 +2,12 @@
   {"operatorID": "1","skillID": "1","groupID": "1","meta": {"type":"solid","certification":"notapplicable","letter":"","start":"8/3/2021"},"data": []},
 
 
-  
+
   {"operatorID": "2","skillID": "1","groupID": "1","meta": {"type":"solid","certification":"intraining","colorzzz":"gold","strokecolor":"black","letter":"","start":"8/3/2021"},"data": []},
-  {"operatorID": "3","skillID": "1","groupID": "1","meta": {"type":"solid","certification":"notproficient","colorzzz":"red","strokecolor":"black","letter":"","start":"8/3/2021"},"data": []},
+  {"operatorID": "3","skillID": "1","groupID": "1","meta": {"type":"solid","certification":"developing","colorzzz":"red","strokecolor":"black","letter":"","start":"8/3/2021"},"data": []},
   {"operatorID": "4","skillID": "1","groupID": "1","meta": {"type":"solid","certification":"certified","colorzzz":"goldenrod","strokecolor":"black","letter":"","start":"8/3/2021"},"data": []},
   {"operatorID": "5","skillID": "1","groupID": "1","meta": {"type":"solid","certification":"trainer","colorzzz":"blue","strokecolor":"black","letter":"1","start":"8/3/2021"},"data": []},
-  {"operatorID": "5","skillID": "5","groupID": "1","meta": {"type":"solid","certification":"supertrainer","colorzzz":"green","strokecolor":"black","letter":"","start":"8/3/2021"},"data": []},
+  {"operatorID": "5","skillID": "5","groupID": "1","meta": {"type":"solid","certification":"mastertrainer","colorzzz":"green","strokecolor":"black","letter":"","start":"8/3/2021"},"data": []},
   {"operatorID": "5","skillID": "6","groupID": "1","meta": {"type":"solid","certification":"intraining","colorzzz":"white","strokecolor":"black","xletter":"\uD83D\uDC04","start":"8/3/2021"},"data": []},
   {"operatorID": "5","skillID": "7","groupID": "1","meta": {"type":"solid","certification":"intraining","colorzzz":"white","strokecolor":"white","xletter":"\uD83C\uDF45","start":"8/3/2021"},"data": []},
   {"operatorID": "18","skillID": "9","groupID": "1","meta": {"type":"solid","certification":"intraining","colorzzz":"white","strokecolor":"green","letter":"\uD83D\uDD14","start":"8/3/2021"},"data": []},

@@ -16,7 +16,7 @@ export const getTheColor = ((certification) => {
     case 'intraining':
       color = 'red'
       break;
-    case 'notproficient':
+    case 'developing':
       color = 'goldenrod'
       break;
     case 'certified':
@@ -25,7 +25,7 @@ export const getTheColor = ((certification) => {
     case 'trainer':
       color = 'blue'
       break;
-    case 'supertrainer':
+    case 'mastertrainer':
       color = 'purple'
       break;
     default:
