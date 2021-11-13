@@ -31,68 +31,8 @@ const MainMatrixProvider = (props) => {
   var multiplier = props.props.multiplier
   useResizeEvent()
 
-  // const calcTotals = (certificationsDataCreated) => {
-  //   var rowsArray = []
-  //   var currentRow = -1;
-  //   var rowCount = -1;
-
-  //   var colsArray = []
-  //   var currentCol = -1;
-  //   var colCount = -1;
-
-  //   for (let i = 0; i < certificationsDataCreated.length; i++) {
-
-  //     if (certificationsDataCreated[i].row > currentRow) {
-  //       currentRow = certificationsDataCreated[i].row
-  //       //console.log('currentRow: ',currentRow)
-  //       rowCount = rowsArray.push([certificationsDataCreated[i].operator.goal,0,0])
-  //       //console.log('count: ',rowCount)
-  //       //console.log(rowsArray)
-  //     }
-  //     switch(certificationsDataCreated[i].meta.certification) {
-  //       case 'certified':
-  //       case 'trainer':
-  //       case 'supertrainer':
-  //         rowsArray[rowCount-1][1] = rowsArray[rowCount-1][1] + 1;
-  //         break;
-  //       default:
-  //         break;
-  //     }
-  //     rowsArray[rowCount-1][2] = rowsArray[rowCount-1][0] - rowsArray[rowCount-1][1];
-
-  //     //console.log(certificationsDataCreated[i].meta.certification)
-  //     //console.log(certificationsDataCreated[i])
-
-
-  //     if (certificationsDataCreated[i].col > currentCol) {
-  //       currentCol = certificationsDataCreated[i].col
-  //       //colCount = colsArray.push(0)
-  //       colCount = colsArray.push([certificationsDataCreated[i].skill.goal,0,0])
-  //     }
-  //     switch(certificationsDataCreated[i].meta.certification) {
-  //       case 'certified':
-  //       case 'trainer':
-  //       case 'supertrainer':
-  //         colsArray[colCount-1][1] = colsArray[colCount-1][1] + 1;
-  //         break;
-  //       default:
-  //         break;
-  //     }
-  //     colsArray[colCount-1][2] = colsArray[colCount-1][0] - colsArray[colCount-1][1];
-  //   }
-  //   console.log(rowsArray)
-  //   console.log(colsArray)
-  //   matrixState.setRowsArray(rowsArray)
-  //   var transpose = m => m[0].map((x,i) => m.map(x => x[i]))
-  //   var colsArraytransposed = transpose(colsArray)
-  //   matrixState.setColsArray(colsArraytransposed)
-  // }
-
-
-
   useEffect(() => {
     if (multiplier === '') return
-
     //var certificationsData = props.props.certificationsData;
     var certificationsDataCreated = []
     var certID = 0
@@ -108,8 +48,10 @@ const MainMatrixProvider = (props) => {
           "operator":props.props.operatorsData[o],
           "skillID": String(s+1),
           "operatorID": String(o+1),
+          "currentcertificationID": 0,
           "meta": {
             "type":"solid",
+            "currentcertificationID": 0,
             "certification":"notapplicable",
             "strokecolor":"black",
             "letter":"",
@@ -135,11 +77,7 @@ const MainMatrixProvider = (props) => {
     }
 
     //console.log(certificationsDataCreated)
-
-
     //calcTotals(certificationsDataCreated)
-
-
     // var rowsArray = []
     // var currentRow = -1;
     // var rowCount = -1;
@@ -200,7 +138,6 @@ const MainMatrixProvider = (props) => {
     matrixState.setActive(true)
 
     matrixState.setAll({
-      //'certificationsDataCreated': certificationsDataCreated,
       'first':true,
       'operatorsData':props.props.operatorsData,
       'skillsData':props.props.skillsData,
@@ -235,7 +172,8 @@ const MainMatrixProvider = (props) => {
               >
               <Row1Col2 data={matrixState.byOperator}/>
             </LoadingOverlay>
-            <Row1Col3 data={[['Goal','# Certified','Gap']]}/>
+            <div style={{width:'5px'}}></div>
+            <Row1Col3 data={[['Goal','# Certified','%','Gap']]}/>
           </div>
 
           <div className='leftrow2' style={{...styles.h,xflex:'1',height:(matrixState.dimensions.row2Orig)+'px',background:'lightgray'}}>
@@ -251,13 +189,16 @@ const MainMatrixProvider = (props) => {
               >
               <Row2Col2 data={matrixState.bySkill} cellClicked={cellClicked}/>
             </LoadingOverlay>
+            <div style={{width:'5px'}}></div>
             {matrixState.rowsArray !== null &&
               <Row2Col3 data={matrixState.rowsArray}/>
             }
           </div>
 
+          <div style={{height:'5px'}}></div>
+
           <div className='leftrow3' style={{...styles.h,height: matrixState.dimensions.row3+'px',minHeight:matrixState.dimensions.row3+'px',background:'lightgray'}}>
-            <Row3Col1 data={[['Goal'],['# Certified'],['Gap']]}/>
+            <Row3Col1 data={[['Goal'],['# Certified'],['%'],['Gap']]}/>
             <Row3Col1a/>
             {matrixState.colsArray !== null &&
               <Row3Col2 data={matrixState.colsArray}/>

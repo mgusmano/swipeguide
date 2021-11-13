@@ -9,6 +9,7 @@ export const App = (props) => {
 
   useEffect(() => {
     async function fetchData() {
+      const apiRoot = 'https://skillnetusersapi.azurewebsites.net/api/'
       const operatorsResult = await axios(`data/trainingmatrix/data/${appState.groupid}/operators.json`);
       const skillsResult = await axios(`data/trainingmatrix/data/${appState.groupid}/skills.json`);
       const certificationsResult = await axios(`data/trainingmatrix/data/${appState.groupid}/certifications.json`);
@@ -16,20 +17,14 @@ export const App = (props) => {
 
 
       //http://skillnetusersapi.azurewebsites.net//api/PortalCertificationsRating?groupid=34750
-
       //http://localhost:51186//api/PortalGroupUpdateOperatorCertification?groupid=34750&skillID=44222&operatorID=284496&certificationData=2
-
      // http://skillnetusersapi.azurewebsites.net//api/portalgroups?partnerid=448
-
      // http://skillnetusersapi.azurewebsites.net//api/PortalGroupSkills?partnerid=448&groupid=33784
 
      // http://skillnetusersapi.azurewebsites.net//api/PortalGroupOperators?groupid=33784
 
-
-
-
       // const portalGroupOperatorsResult = await axios(
-      //   'https://skillnetusersapi.azurewebsites.net//api/PortalGroupOperators?groupid=34707',
+      //   'https://skillnetusersapi.azurewebsites.net/api/PortalGroupOperators?groupid=34707',
       //   {
       //     auth: {username: 'skillnet',password: 'demo'}
       //   }
@@ -48,12 +43,7 @@ export const App = (props) => {
       //console.log(JSON.parse(portalGroupSkillsResult.data))
 
 
-      const portalGroupsResult = await axios(
-        'https://skillnetusersapi.azurewebsites.net//api/portalgroups?partnerid=448',
-        {
-          auth: {username: 'skillnet',password: 'demo'}
-        }
-      );
+      const portalGroupsResult = await axios(apiRoot + 'portalgroups?partnerid=448',{auth:{username:'skillnet',password:'demo'}});
       //console.log('portalGroupsResult')
       //console.log(portalGroupsResult)
 
@@ -78,7 +68,7 @@ export const App = (props) => {
 
     if (window.innerWidth < 1200) { appState.setMultiplier(4) } else
     if (window.innerWidth < 1500) { appState.setMultiplier(5) } else
-    { appState.setMultiplier(7) }
+    { appState.setMultiplier(6) }
   },[appState.groupid])
 
   const cellClicked = (data) => {

@@ -23,8 +23,6 @@ export const Diamond = ({meta, data, boxSize, padding}) => {
   useEffect(() => {
     if (meta.certification !== undefined) {
       var c = getTheColor(meta.certification)
-      //console.log(meta.certification)
-      //console.log(c)
       setSolidColor(c)
     }
   },[meta])

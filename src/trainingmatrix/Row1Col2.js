@@ -25,7 +25,7 @@ export const Row1Col2 = (props) => {
     //matrixState.setSpecific(<div style={{display:'flex', flexDirection:'row'}}><Operator data={data}/><Main data={data}/></div>)
 
     matrixState.setCellData(data)
-    
+
     matrixState.showMainDialog('none')
     matrixState.showSkillDialog('none')
     matrixState.showOperatorDialog('block')

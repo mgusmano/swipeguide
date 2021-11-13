@@ -7,6 +7,7 @@ import ReactList from 'react-list';
 
 export const Operator = React.memo((props) => {
   const {data} = props
+  console.log(data)
   const matrixState = useMatrixState();
   const [goal, setGoal] = useState(0);
   const [oldtarget, setOldTarget] = useState(null);
@@ -49,7 +50,7 @@ export const Operator = React.memo((props) => {
     )
   }
 
-  console.log(data.data)
+
   return (
     <div style={{display:'flex',flexDirection:'column',padding:'0px',xwidth:'100%',height:'100%'}}>
       {/* <div style={{height:'30px',fontSize:'18px'}}>

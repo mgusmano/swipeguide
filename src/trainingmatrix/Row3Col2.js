@@ -20,7 +20,12 @@ export const Row3Col2 = (props) => {
         y={bandY-(bandY/2)+(sTop)}
         className="text"
         style={{fontSize:(fontsize-4)+'px'}}>
-          {col}
+        {r === 2 &&
+          col*100 + '%'
+        }
+        {r !== 2 &&
+          col
+        }
       </text>
     )
   }
