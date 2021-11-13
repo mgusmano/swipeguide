@@ -5,7 +5,7 @@ import { getTheColor } from './state/Util';
 export const Diamond = ({meta, data, boxSize, padding}) => {
   const [solidcolor, setSolidColor] = useState(null)
   var type = meta.type
-  var strokecolor = 'black'; //meta.strokecolor
+  var strokecolor = meta.strokecolor; //'black';
   if (meta.certification === "notapplicable") {
     strokecolor = "linen"
   }
