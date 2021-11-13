@@ -78,67 +78,7 @@ const MainMatrixProvider = (props) => {
       found.data = certificationsData[o].data
     }
 
-    //console.log(certificationsDataCreated)
-    //calcTotals(certificationsDataCreated)
-    // var rowsArray = []
-    // var currentRow = -1;
-    // var rowCount = -1;
-
-    // var colsArray = []
-    // var currentCol = -1;
-    // var colCount = -1;
-
-    // for (let i = 0; i < certificationsDataCreated.length; i++) {
-
-    //   if (certificationsDataCreated[i].row > currentRow) {
-    //     currentRow = certificationsDataCreated[i].row
-    //     //console.log('currentRow: ',currentRow)
-    //     rowCount = rowsArray.push([certificationsDataCreated[i].operator.goal,0,0])
-    //     //console.log('count: ',rowCount)
-    //     //console.log(rowsArray)
-    //   }
-    //   switch(certificationsDataCreated[i].meta.certification) {
-    //     case 'certified':
-    //     case 'trainer':
-    //     case 'supertrainer':
-    //       rowsArray[rowCount-1][1] = rowsArray[rowCount-1][1] + 1;
-    //       break;
-    //     default:
-    //       break;
-    //   }
-    //   rowsArray[rowCount-1][2] = rowsArray[rowCount-1][0] - rowsArray[rowCount-1][1];
-
-    //   //console.log(certificationsDataCreated[i].meta.certification)
-    //   //console.log(certificationsDataCreated[i])
-
-
-    //   if (certificationsDataCreated[i].col > currentCol) {
-    //     currentCol = certificationsDataCreated[i].col
-    //     //colCount = colsArray.push(0)
-    //     colCount = colsArray.push([certificationsDataCreated[i].skill.goal,0,0])
-    //   }
-    //   switch(certificationsDataCreated[i].meta.certification) {
-    //     case 'certified':
-    //     case 'trainer':
-    //     case 'supertrainer':
-    //       colsArray[colCount-1][1] = colsArray[colCount-1][1] + 1;
-    //       break;
-    //     default:
-    //       break;
-    //   }
-    //   colsArray[colCount-1][2] = colsArray[colCount-1][0] - colsArray[colCount-1][1];
-    // }
-    // console.log(rowsArray)
-    // console.log(colsArray)
-    // matrixState.setRowsArray(rowsArray)
-    // var transpose = m => m[0].map((x,i) => m.map(x => x[i]))
-    // var colsArraytransposed = transpose(colsArray)
-    // matrixState.setColsArray(colsArraytransposed)
-
-
-
     matrixState.setActive(true)
-
     matrixState.setAll({
       'first':true,
       'operatorsData':props.props.operatorsData,
@@ -228,7 +168,6 @@ const MainMatrixProvider = (props) => {
         {/* right area - details - end */}
 
         {/* right area - details - start */}
-
         <div className='right' style={{display:'flex',flexDirection:'column',overflow: 'hidden',padding:'0px', background:'white', boxSizing:'border-box',boxShadow: '0 10px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19)'}}>
 
           <div style={{height:'200px',display: matrixState.topDialog}}>
@@ -236,20 +175,18 @@ const MainMatrixProvider = (props) => {
           </div>
 
           <div className='right' style={{flex: '1',display:'flex',flexDirection:'row',overflow: 'hidden',padding:'0px', background:'white', boxSizing:'border-box',xboxShadow: '0 10px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19)'}}>
-            <div style={{display: matrixState.skillDialog, width:'350px', height:'100%', boxSizing:'border-box', xpadding:'10px', xboxShadow: '0 10px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19)'}}>
+            <div style={{display: matrixState.skillDialog, width:'350px', height:'90%', boxSizing:'border-box', xpadding:'10px', xboxShadow: '0 10px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19)'}}>
               {matrixState.specific}
             </div>
-            <div style={{display: matrixState.operatorDialog, width:'350px', height:'100%', boxSizing:'border-box', xpadding:'10px', xboxShadow: '0 10px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19)'}}>
+            <div style={{display: matrixState.operatorDialog, width:'350px', height:'90%', boxSizing:'border-box', xpadding:'10px', xboxShadow: '0 10px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19)'}}>
               {matrixState.specific}
             </div>
-            <div style={{display: matrixState.mainDialog, width:'350px', height:'100%', boxSizing:'border-box', xpadding:'10px', xboxShadow: '0 10px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19)'}}>
+            <div style={{display: matrixState.mainDialog, width:'350px', height:'90%', boxSizing:'border-box', xpadding:'10px', xboxShadow: '0 10px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19)'}}>
               {matrixState.main}
             </div>
           </div>
 
         </div>
-
-
         {/* right area - details - end */}
 
       </div>
