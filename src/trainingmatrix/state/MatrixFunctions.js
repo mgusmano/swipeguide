@@ -72,15 +72,26 @@ const calcTotals = (certificationsDataCreated, dispatch) => {
       //console.log('count: ',rowCount)
       //console.log(rowsArray)
     }
-    switch(certificationsDataCreated[i].meta.certification) {
-      case 'certified':
-      case 'trainer':
-      case 'supertrainer':
+    // switch(certificationsDataCreated[i].meta.certification) {
+    //   case 'certified':
+    //   case 'trainer':
+    //   case 'mastertrainer':
+    //     rowsArray[rowCount-1][1] = rowsArray[rowCount-1][1] + 1;
+    //     break;
+    //   default:
+    //     break;
+    // }
+
+    switch(certificationsDataCreated[i].meta.currcertID) {
+      case 3:
+      case 4:
+      case 5:
         rowsArray[rowCount-1][1] = rowsArray[rowCount-1][1] + 1;
         break;
       default:
         break;
     }
+
     rowsArray[rowCount-1][3] = rowsArray[rowCount-1][0] - rowsArray[rowCount-1][1];
     rowsArray[rowCount-1][2] = rowsArray[rowCount-1][1] / rowsArray[rowCount-1][0];
 

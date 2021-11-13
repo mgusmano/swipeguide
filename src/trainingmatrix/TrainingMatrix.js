@@ -41,17 +41,17 @@ const MainMatrixProvider = (props) => {
         //console.log(props.props.skillsData[s])
         certID++
         certificationsDataCreated.push({
-          "id": String(certID),
+          "id": certID,
           "row":s,
           "col":o,
           "skill":props.props.skillsData[s],
           "operator":props.props.operatorsData[o],
-          "skillID": String(s+1),
-          "operatorID": String(o+1),
-          "currentcertificationID": 0,
+          "skillID": props.props.skillsData[s].id, //s+1,
+          "operatorID": props.props.operatorsData[o].id, //o+1,
+          "currcertID": 0,
           "meta": {
             "type":"solid",
-            "currentcertificationID": 0,
+            "currcertID": 0,
             "certification":"notapplicable",
             "strokecolor":"black",
             "letter":"",
@@ -62,6 +62,7 @@ const MainMatrixProvider = (props) => {
         })
       }
     }
+    //console.log(certificationsData)
     //console.log(certificationsDataCreated)
 
     for (let o = 0; o < certificationsData.length; o++) {
@@ -72,6 +73,7 @@ const MainMatrixProvider = (props) => {
         }
         return c
       });
+      //console.log(found)
       found.meta = certificationsData[o].meta
       found.data = certificationsData[o].data
     }

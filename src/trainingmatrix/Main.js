@@ -56,9 +56,8 @@ export const Main = (props) => {
         "certstate":matrixState.celldata.meta.certstate
       }
       var newCerts = matrixState.certifications.slice();
-      var certString = certificationID.toString()
       const lastCertIndex = newCerts.findIndex(
-        (cert) => cert.id === certString
+        (cert) => cert.id === certificationID
       )
       if (lastCertIndex !== -1) {
         newCerts[lastCertIndex] = {
