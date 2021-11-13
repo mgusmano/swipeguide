@@ -68,6 +68,7 @@ export const Main = (props) => {
           "operator": operator,
           "skillID": skill.id,
           "operatorID": operator.id,
+          "currcertID":parseInt(event.target.value),
           "meta": metaval,
           "data": []
         }
@@ -119,7 +120,7 @@ export const Main = (props) => {
           <div style={{display:'flex',flexDirection:'row'}}>
             <div style={{marginTop:'15px',marginLeft:'30px',display:'flex',flexDirection:'column'}}>
               Certification:
-              <div><input value="0" title='notapplicable' checked={certification === 0} onChange={onCertificationChange} style={{marginLeft:'20px'}} type="radio" name="percent2" /> 0 Not Applicable</div>
+              <div><input value="0" title="notapplicable" checked={certification === 0} onChange={onCertificationChange} style={{marginLeft:'20px'}} type="radio" name="percent2" /> 0 Not Applicable</div>
               <div><input value="1" title="intraining" checked={certification === 1} onChange={onCertificationChange} style={{marginLeft:'20px'}} type="radio" name="percent2" /> 1 In Training</div>
               <div><input value="2" title="developing" checked={certification === 2} onChange={onCertificationChange} style={{marginLeft:'20px'}} type="radio" name="percent2" /> 2 Developing</div>
 {certstate === '' &&

@@ -61,28 +61,24 @@ const calcTotals = (certificationsDataCreated, dispatch) => {
   var currentCol = -1;
   var colCount = -1;
 
-  for (let i = 0; i < certificationsDataCreated.length; i++) {
-    //console.log('row: ',certificationsDataCreated[i].row)
-    //console.log('col: ',certificationsDataCreated[i].col)
+  //console.log(certificationsDataCreated)
 
-    if (certificationsDataCreated[i].row > currentRow) {
-      currentRow = certificationsDataCreated[i].row
-      //console.log('currentRow: ',currentRow)
-      rowCount = rowsArray.push([certificationsDataCreated[i].operator.goal,0,0,0])
-      //console.log('count: ',rowCount)
-      //console.log(rowsArray)
+  var certByRow = Array.from(certificationsDataCreated);
+  certByRow.sort(function (x, y) {
+    var n = x.row - y.row;
+    if (n !== 0) {
+        return n;
     }
-    // switch(certificationsDataCreated[i].meta.certification) {
-    //   case 'certified':
-    //   case 'trainer':
-    //   case 'mastertrainer':
-    //     rowsArray[rowCount-1][1] = rowsArray[rowCount-1][1] + 1;
-    //     break;
-    //   default:
-    //     break;
-    // }
+    return x.col - y.col;
+  });
+  console.log(certByRow)
 
-    switch(certificationsDataCreated[i].meta.currcertID) {
+  for (let i = 0; i < certByRow.length; i++) {
+    if (certByRow[i].row > currentRow) {
+      currentRow = certByRow[i].row
+      rowCount = rowsArray.push([certByRow[i].skill.goal,0,0,0])
+    }
+    switch(certByRow[i].meta.currcertID) {
       case 3:
       case 4:
       case 5:
@@ -91,23 +87,29 @@ const calcTotals = (certificationsDataCreated, dispatch) => {
       default:
         break;
     }
-
     rowsArray[rowCount-1][3] = rowsArray[rowCount-1][0] - rowsArray[rowCount-1][1];
     rowsArray[rowCount-1][2] = rowsArray[rowCount-1][1] / rowsArray[rowCount-1][0];
+  }
 
-    //console.log(certificationsDataCreated[i].meta.certification)
-    //console.log(certificationsDataCreated[i])
-
-
-    if (certificationsDataCreated[i].col > currentCol) {
-      currentCol = certificationsDataCreated[i].col
-      //colCount = colsArray.push(0)
-      colCount = colsArray.push([certificationsDataCreated[i].skill.goal,0,0,0])
+  var certByCol = Array.from(certificationsDataCreated);
+  certByCol.sort(function (x, y) {
+    var n = x.col - y.col;
+    if (n !== 0) {
+        return n;
     }
-    switch(certificationsDataCreated[i].meta.certification) {
-      case 'certified':
-      case 'trainer':
-      case 'supertrainer':
+    return x.row - y.row;
+  });
+  console.log(certByCol);
+
+  for (let i = 0; i < certByCol.length; i++) {
+    if (certByCol[i].col > currentCol) {
+      currentCol = certByCol[i].col
+      colCount = colsArray.push([certByCol[i].operator.goal,0,0,0])
+    }
+    switch(certByCol[i].meta.currcertID) {
+      case 3:
+      case 4:
+      case 5:
         colsArray[colCount-1][1] = colsArray[colCount-1][1] + 1;
         break;
       default:
@@ -116,6 +118,8 @@ const calcTotals = (certificationsDataCreated, dispatch) => {
     colsArray[colCount-1][3] = colsArray[colCount-1][0] - colsArray[colCount-1][1];
     colsArray[colCount-1][2] = colsArray[colCount-1][1] / colsArray[colCount-1][0];
   }
+
+
   //console.log(rowsArray)
   //console.log(JSON.stringify(colsArray))
   //matrixState.setRowsArray(rowsArray)

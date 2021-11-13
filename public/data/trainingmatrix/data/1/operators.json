@@ -1,7 +1,7 @@
 [
-  {"id": 1,"groupID":1,"operatorName": "Aaron Cariaga","picture": "AaronCariaga.jpg","goal": 4},
-  {"id": 2,"groupID":1,"operatorName": "Ahmed Al Talabani","picture": "Ahmed Al Talabani.jpg","goal": 4},
-  {"id": 3,"groupID":1,"operatorName": "Baltazar Garcia","picture": "Baltazar Garcia.jpg","goal": 4},
+  {"id": 1,"groupID":1,"operatorName": "Aaron Cariaga","picture": "AaronCariaga.jpg","goal": 5},
+  {"id": 2,"groupID":1,"operatorName": "Ahmed Al Talabani","picture": "Ahmed Al Talabani.jpg","goal": 2},
+  {"id": 3,"groupID":1,"operatorName": "Baltazar Garcia","picture": "Baltazar Garcia.jpg","goal": 3},
   {"id": 4,"groupID":1,"operatorName": "Blaise Chancellor Podehole","picture": "Blaise Chancellor Podehale.jpg","goal": 4},
   {"id": 5,"groupID":1,"operatorName": "Brian Phetnavong","picture": "Brian Phetnavong.jpg","goal": 4},
   {"id": 6,"groupID":1,"operatorName": "Christopher Corvera","picture": "Christopher Corvera.jpg","goal": 4},

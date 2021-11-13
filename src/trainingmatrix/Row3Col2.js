@@ -19,9 +19,9 @@ export const Row3Col2 = (props) => {
         x={(bandX*c)+(bandX/2)}
         y={bandY-(bandY/2)+(sTop)}
         className="text"
-        style={{fontSize:(fontsize-4)+'px'}}>
+        style={{fontSize:(fontsize-7)+'px'}}>
         {r === 2 &&
-          col*100 + '%'
+          (col*100).toFixed(0) + '%'
         }
         {r !== 2 &&
           col

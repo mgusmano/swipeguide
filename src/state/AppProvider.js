@@ -25,7 +25,7 @@ export const AppProvider = (props) => {
     certifications: null,
     groups: null,
     legend: false,
-    multiplier: 6,
+    multiplier: 5,
   }
 
 

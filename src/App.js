@@ -68,7 +68,7 @@ export const App = (props) => {
 
     if (window.innerWidth < 1200) { appState.setMultiplier(4) } else
     if (window.innerWidth < 1500) { appState.setMultiplier(5) } else
-    { appState.setMultiplier(6) }
+    { appState.setMultiplier(5) }
   },[appState.groupid])
 
   const cellClicked = (data) => {
