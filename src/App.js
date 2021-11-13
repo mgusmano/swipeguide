@@ -77,9 +77,11 @@ export const App = (props) => {
 
   return (
     <div style={{display:'flex',flexDirection:'column',height:'100%',width:'100%'}}>
-    <div style={{height:'50px'}}><img style={{margin:'10px',width:'150px'}} src="toshiba.png" alt="Toshiba"/></div>
-      <Toolstrip/>
-      <div style={{flex:'1'}}>
+      <div style={{position:'fixed',zIndex:'10000',width:'100%',background:'white'}}>
+        <div style={{height:'50px'}}><img style={{margin:'10px',width:'150px'}} src="toshiba.png" alt="Toshiba"/></div>
+        <Toolstrip/>
+      </div>
+      <div style={{marginTop:'90px',flex:'1'}}>
         {appState.certifications !== null &&
         <TrainingMatrix
           multiplier={appState.multiplier}

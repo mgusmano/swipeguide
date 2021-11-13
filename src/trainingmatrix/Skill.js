@@ -11,6 +11,18 @@ export const Skill = React.memo((props) => {
   const [goal, setGoal] = useState(0);
   const [oldtarget, setOldTarget] = useState(null);
 
+  var dataSort = Array.from(data.skill.data);
+  dataSort.sort(function (x, y) {
+    console.log(x)
+    console.log(y)
+    var n = y.meta.currcertID - x.meta.currcertID;
+    if (n !== 0) {
+        return n;
+    }
+    //return x.col - y.col;
+  });
+  console.log(dataSort)
+
   const skillID = props.data.skill.id;
   var bandX=30;
   var bandY=30;
@@ -27,8 +39,8 @@ export const Skill = React.memo((props) => {
     }
     event.target.parentNode.style.background = 'gainsboro'
     setOldTarget(event.target.parentNode)
-    var val = data.skill.data[index].certificationID
-    const found = data.skill.data.find(element => element.certificationID === val);
+    var val = dataSort[index].certificationID
+    const found = dataSort.find(element => element.certificationID === val);
     found.operatorName = found.operator.operatorName
     found.picture = found.operator.picture
     matrixState.setCellData(found)
@@ -43,9 +55,9 @@ export const Skill = React.memo((props) => {
       <div key={key} style={{display:'flex',flexDirection:'row'}} onClick={(event) => {
         clickItem(event,index)
       }}>
-        <Diamond meta={data.skill.data[index].meta} data={data.skill.data[index].data} boxSize={bandX-8} padding={20}/>
+        <Diamond meta={dataSort[index].meta} data={dataSort[index].data} boxSize={bandX-8} padding={20}/>
         <div style={{marginTop:'4px', fontSize: '10px'}}>
-          {data.skill.data[index].operator.operatorName}
+          {dataSort[index].operator.operatorName}
         </div>
       </div>
     )
@@ -61,7 +73,7 @@ export const Skill = React.memo((props) => {
         <div style={{overflow:'auto',maxHeight: 500,border:'0px solid lightgray'}}>
           <ReactList
             itemRenderer={renderItem}
-            length={data.skill.data.length}
+            length={dataSort.length}
             type='uniform'
           />
         </div>
