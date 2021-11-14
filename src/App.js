@@ -3,6 +3,7 @@ import { useAppState } from './state/AppProvider';
 import { Toolstrip } from './Toolstrip.js';
 import TrainingMatrix from './trainingmatrix/TrainingMatrix';
 import axios from "axios";
+import { Loading } from 'aws-amplify-react';
 
 export const App = (props) => {
   const appState = useAppState();
@@ -56,6 +57,9 @@ export const App = (props) => {
         <Toolstrip/>
       </div>
       <div style={{marginTop:'90px',flex:'1'}}>
+        {appState.certifications === null &&
+          <div style={{marginTop:'90px',marginLeft:'60px',fontSize:'45px'}}>Matrix is Loading...</div>
+        }
         {appState.certifications !== null &&
         <TrainingMatrix
           multiplier={appState.multiplier}

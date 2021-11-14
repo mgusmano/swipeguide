@@ -39,7 +39,7 @@ export const Toolstrip = (props) => {
       <button onClick={()=>{appState.setMultiplier(appState.multiplier+1)}}>bigger</button>
       <div style={{marginLeft:'10px',marginTop:'12px'}}>{appState.multiplier}</div>
       <button style={{marginLeft:'60px'}} onClick={()=>{ appState.setLegend(!appState.legend)}}>Toggle Legend</button>
-      <div style={{margin:'10px',marginLeft:'70px'}}>v2021-11-14-b</div>
+      <div style={{margin:'10px',marginLeft:'70px'}}>v2021-11-14-c</div>
     </div>
   )
 }
