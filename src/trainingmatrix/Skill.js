@@ -13,15 +13,13 @@ export const Skill = React.memo((props) => {
 
   var dataSort = Array.from(data.skill.data);
   dataSort.sort(function (x, y) {
-    console.log(x)
-    console.log(y)
     var n = y.meta.currcertID - x.meta.currcertID;
     if (n !== 0) {
         return n;
     }
     //return x.col - y.col;
   });
-  console.log(dataSort)
+  //console.log(dataSort)
 
   const skillID = props.data.skill.id;
   var bandX=30;
@@ -93,9 +91,18 @@ export const Skill = React.memo((props) => {
               matrixState.setActive(true)
               var payload = {
                 id: skillID,
-                goal: goal
+                goal: goal,
+                skills: matrixState.skills,
+                operators: matrixState.operators,
+                certifications: matrixState.certifications,
+                multiplier: matrixState.dimensions.multiplier
               }
               matrixState.updateSkillGoal(payload)
+              // var payload = {
+              //   id: skillID,
+              //   goal: goal
+              // }
+              // matrixState.updateSkillGoal(payload)
             }}
           >
             Update

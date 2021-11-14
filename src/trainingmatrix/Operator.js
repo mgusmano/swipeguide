@@ -7,19 +7,15 @@ import ReactList from 'react-list';
 
 export const Operator = React.memo((props) => {
   const {data} = props
-  console.log(data)
 
   var dataSort = Array.from(data.data);
   dataSort.sort(function (x, y) {
-    console.log(x)
-    console.log(y)
     var n = y.meta.currcertID - x.meta.currcertID;
     if (n !== 0) {
         return n;
     }
     //return x.col - y.col;
   });
-  console.log(dataSort)
 
   const matrixState = useMatrixState();
   const [goal, setGoal] = useState(0);
@@ -31,6 +27,10 @@ export const Operator = React.memo((props) => {
   useEffect(() => {
     setGoal(data.goal)
   },[props])
+
+  const updateGoal = (newGoal) => {
+    setGoal(newGoal)
+  }
 
   const clickItem = (event,index) => {
     //console.log(data.skill.data[index])
@@ -86,16 +86,38 @@ export const Operator = React.memo((props) => {
             type="text"
             value={goal}
             onChange={(event)=> {
-              setGoal(event.target.value)
+              updateGoal(event.target.value)
             }}
             style={{marginLeft:'10px',marginTop:5,width:'26px',height:'15px'}}
           />
           <button
             onClick={(event)=> {
               matrixState.setActive(true)
+
+              // var c = {
+              //   id: certificationID,
+              //   row: matrixState.celldata.row,
+              //   col: matrixState.celldata.col,
+              //   skill: skill,
+              //   operator: operator,
+              //   skillID: skill.id,
+              //   operatorID: operator.id,
+              //   currcertID: parseInt(event.target.value),
+              //   meta: metaval,
+              //   skills: matrixState.skills,
+              //   operators: matrixState.operators,
+              //   certifications: newCerts,
+              //   multiplier: matrixState.dimensions.multiplier
+              // }
+
+
               var payload = {
                 id: operatorID,
-                goal: goal
+                goal: goal,
+                skills: matrixState.skills,
+                operators: matrixState.operators,
+                certifications: matrixState.certifications,
+                multiplier: matrixState.dimensions.multiplier
               }
               matrixState.updateOperatorGoal(payload)
             }}

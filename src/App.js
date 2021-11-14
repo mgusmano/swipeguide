@@ -9,18 +9,19 @@ export const App = (props) => {
 
   useEffect(() => {
     async function fetchData() {
-      const apiRoot = 'https://skillnetusersapi.azurewebsites.net/api/'
-      const operatorsResult = await axios(`data/trainingmatrix/data/${appState.groupid}/operators.json`);
+      const apiRoot = 'https://skillnetusersapi.azurewebsites.net/api/';
       const skillsResult = await axios(`data/trainingmatrix/data/${appState.groupid}/skills.json`);
+      const operatorsResult = await axios(`data/trainingmatrix/data/${appState.groupid}/operators.json`);
       const certificationsResult = await axios(`data/trainingmatrix/data/${appState.groupid}/certifications.json`);
       //const groupsResult = await axios(`data/trainingmatrix/data/groups.json`);
-
+      const portalGroupsResult = await axios(apiRoot + 'portalgroups?partnerid=448',{auth:{username:'skillnet',password:'demo'}});
+      //console.log('portalGroupsResult')
+      //console.log(portalGroupsResult)
 
       //http://skillnetusersapi.azurewebsites.net//api/PortalCertificationsRating?groupid=34750
       //http://localhost:51186//api/PortalGroupUpdateOperatorCertification?groupid=34750&skillID=44222&operatorID=284496&certificationData=2
      // http://skillnetusersapi.azurewebsites.net//api/portalgroups?partnerid=448
      // http://skillnetusersapi.azurewebsites.net//api/PortalGroupSkills?partnerid=448&groupid=33784
-
      // http://skillnetusersapi.azurewebsites.net//api/PortalGroupOperators?groupid=33784
 
       // const portalGroupOperatorsResult = await axios(
@@ -42,12 +43,6 @@ export const App = (props) => {
       //console.log(portalGroupSkillsResult)
       //console.log(JSON.parse(portalGroupSkillsResult.data))
 
-
-      const portalGroupsResult = await axios(apiRoot + 'portalgroups?partnerid=448',{auth:{username:'skillnet',password:'demo'}});
-      //console.log('portalGroupsResult')
-      //console.log(portalGroupsResult)
-
-
       //https://skillnetusersapi.azurewebsites.net//api/PortalCertificationsRating?groupid=34750
       // const portalCertificationsRatingResult = await axios(
       //   'https://skillnetusersapi.azurewebsites.net/api/PortalCertificationsRating?groupid=34707',
@@ -58,17 +53,17 @@ export const App = (props) => {
       //console.log('portalCertificationsRatingResult')
       //console.log(portalCertificationsRatingResult)
 
-      appState.setOperators(operatorsResult.data)
-      appState.setSkills(skillsResult.data)
-      appState.setCertifications(certificationsResult.data)
-      //appState.setGroups(groupsResult.data)
-      appState.setGroups(portalGroupsResult.data)
+      appState.setSkills(skillsResult.data);
+      appState.setOperators(operatorsResult.data);
+      appState.setCertifications(certificationsResult.data);
+      //appState.setGroups(groupsResult.data);
+      appState.setGroups(portalGroupsResult.data);
     }
     fetchData();
 
     if (window.innerWidth < 1200) { appState.setMultiplier(4) } else
     if (window.innerWidth < 1500) { appState.setMultiplier(5) } else
-    { appState.setMultiplier(5) }
+    { appState.setMultiplier(6) }
   },[appState.groupid])
 
   const cellClicked = (data) => {
@@ -86,8 +81,8 @@ export const App = (props) => {
         <TrainingMatrix
           multiplier={appState.multiplier}
           showLegend={appState.legend}
-          operatorsData={appState.operators}
           skillsData={appState.skills}
+          operatorsData={appState.operators}
           certificationsData={appState.certifications}
           cellClicked={cellClicked}
         />

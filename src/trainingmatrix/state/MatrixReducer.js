@@ -7,6 +7,31 @@ export const MatrixReducer = (state, action) => {
   const { type, payload } = action;
   var s;
   switch (type) {
+    case types.UPDATE_CERT: return {...state,certifications:payload.certifications}
+    case types.UPDATE_SKILLGOAL: return {...state,skills:payload.skills}
+    // case types.UPDATE_SKILLGOAL:
+    //   //console.log(state.skills)
+    //   var skillsindex = state.skills.map(item => item.id).indexOf(payload.id);
+    //   s = {
+    //     ...state,
+    //     skills: state.skills.map(
+    //       (skill, i) => i === skillsindex ? {...skill, goal: parseInt(payload.goal)} : skill
+    //     )
+    //   }
+    //   console.log(s)
+    //   return s
+    case types.UPDATE_OPERATORGOAL: return {...state,operators:payload.operators}
+    // case types.UPDATE_OPERATORGOAL:
+    //   var operatorsindex = state.operators.map(item => item.id).indexOf(payload.id);
+    //   console.log(operatorsindex)
+    //   s = {
+    //     ...state,
+    //     operators: state.operators.map(
+    //       (operator, i) => i === operatorsindex ? {...operator, goal: parseInt(payload.goal)} : operator
+    //     )
+    //   }
+    //   return s
+
     case types.SET_ROWSARRAY: return {...state,rowsArray:payload}
     case types.SET_COLSARRAY: return {...state,colsArray:payload}
     case types.SET_SHOWTOPDIALOG: return {...state,topDialog:payload}
@@ -17,36 +42,11 @@ export const MatrixReducer = (state, action) => {
     case types.SET_SHOWMAINDIALOG: return {...state,mainDialog:payload}
     case types.SET_SHOWSECONDARYDIALOG: return {...state,secondaryDialog:payload}
     case types.SET_CELLDATA: return {...state,celldata:payload}
-    case types.UPDATE_CERT: return {...state,certifications:payload.certifications}
+
     case types.SET_USERNAME: return {...state,userName:payload}
     case types.SET_AUTHENTICATEDUSER: return {...state,authenticateduser:payload}
-    case types.UPDATE_OPERATORGOAL:
-      var operatorsindex = state.operators.map(item => item.id).indexOf(payload.id);
-      s = {
-        ...state,
-        operators: state.operators.map(
-          (operator, i) => i === operatorsindex ? {...operator, goal: parseInt(payload.goal)} : operator
-        )
-      }
-      return s
-    case types.UPDATE_SKILLGOAL:
-      //console.log(state.skills)
-      var skillsindex = state.skills.map(item => item.id).indexOf(payload.id);
-      s = {
-        ...state,
-        skills: state.skills.map(
-          (skill, i) => i === skillsindex ? {...skill, goal: parseInt(payload.goal)} : skill
-        )
-      }
-      console.log(s)
-      return s
-    // case types.SET_BOTTOMTOTALS:
-    //   s = {...state,bottomtotals:payload}
-    //   return s
 
-    // case types.SET_RIGHTTOTALS:
-    //   s = {...state,righttotals:payload}
-    //   return s
+
     case types.SET_CURRENT_CERTIFICATION:
       s = {...state,currentcertification:payload}
       return s

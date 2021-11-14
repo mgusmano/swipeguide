@@ -20,7 +20,6 @@ import { Row3Col3 } from './Row3Col3';
 import { styles } from './styles';
 import { useResizeEvent } from './useResizeEvent';
 
-
 export const TrainingMatrix = ((props) => {
   return(<MatrixProvider><MainMatrixProvider props={props}/></MatrixProvider>)
 })
@@ -33,57 +32,68 @@ const MainMatrixProvider = (props) => {
 
   useEffect(() => {
     if (multiplier === '') return
-    //var certificationsData = props.props.certificationsData;
-    var certificationsDataCreated = []
-    var certID = 0
-    for (let s = 0; s < props.props.skillsData.length; s++) {
-      for (let o = 0; o < props.props.operatorsData.length; o++) {
-        //console.log(props.props.skillsData[s])
-        certID++
-        certificationsDataCreated.push({
-          "id": certID,
-          "row":s,
-          "col":o,
-          "skill":props.props.skillsData[s],
-          "operator":props.props.operatorsData[o],
-          "skillID": props.props.skillsData[s].id, //s+1,
-          "operatorID": props.props.operatorsData[o].id, //o+1,
-          "currcertID": 0,
-          "meta": {
-            "type":"solid",
-            "currcertID": 0,
-            "certification":"notapplicable",
-            "strokecolor":"black",
-            "letter":"",
-            "start":"",
-            "certstate": "disabled"
-          },
-          "data": []
-        })
-      }
-    }
-    //console.log(certificationsData)
-    //console.log(certificationsDataCreated)
 
-    for (let o = 0; o < certificationsData.length; o++) {
-      var found = certificationsDataCreated.find(element => {
-        var c;
-        if (element.skillID === certificationsData[o].skillID && element.operatorID === certificationsData[o].operatorID) {
-          c = certificationsData[o]
-        }
-        return c
-      });
-      //console.log(found)
-      found.meta = certificationsData[o].meta
-      found.data = certificationsData[o].data
-    }
+
+
+
+    // const createCertifications = (skills, operators, certificationsData) => {
+    //   var certificationsDataCreated = []
+    //   var certID = 0
+    //   for (let s = 0; s < skills.length; s++) {
+    //     for (let o = 0; o < operators.length; o++) {
+    //       certID++
+    //       certificationsDataCreated.push({
+    //         "id": certID,
+    //         "row":s,
+    //         "col":o,
+    //         "skill":skills[s],
+    //         "operator":operators[o],
+    //         "skillID": skills[s].id,
+    //         "operatorID": operators[o].id,
+    //         "currcertID": 0,
+    //         "meta": {
+    //           "type":"solid",
+    //           "currcertID": 0,
+    //           "certification":"notapplicable",
+    //           "strokecolor":"black",
+    //           "letter":"",
+    //           "start":"",
+    //           "certstate": "disabled"
+    //         },
+    //         "data": []
+    //       })
+    //     }
+    //   }
+
+    //   for (let o = 0; o < certificationsData.length; o++) {
+    //     var found = certificationsDataCreated.find(element => {
+    //       var c;
+    //       if (element.skillID === certificationsData[o].skillID && element.operatorID === certificationsData[o].operatorID) {
+    //         c = certificationsData[o]
+    //       }
+    //       return c
+    //     });
+    //     //console.log(found)
+    //     found.meta = certificationsData[o].meta
+    //     found.data = certificationsData[o].data
+    //   }
+
+    //   return certificationsDataCreated;
+
+    // }
+
+  // var skillsData = props.props.skillsData;
+  // var operatorsData = props.props.operatorsData;
+  //var certificationsDataCreated = createCertifications(skillsData, operatorsData, certificationsData)
+
+
 
     matrixState.setActive(true)
     matrixState.setAll({
       'first':true,
       'operatorsData':props.props.operatorsData,
       'skillsData':props.props.skillsData,
-      'certificationsData':certificationsDataCreated,
+      'certificationsData':certificationsData,
       'multiplier':multiplier
     })
   },[certificationsData,multiplier])

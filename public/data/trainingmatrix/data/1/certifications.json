@@ -1,5 +1,5 @@
 [
-  {"operatorID": 1,"skillID": 1,"groupID": 1,"meta": {"type":"solid","currcertID": 0,"certification":"notapplicable","letter":"","start":"8/3/2021"},"data": []},
+  {"operatorID": 1,"skillID": 1,"groupID": 1,"meta": {"type":"solid","currcertID": 0,"certification":"notapplicable","letter":"","start":"8/3/2021","certstate": "disabled"},"data": []},
   {"operatorID": 2,"skillID": 1,"groupID": 1,"meta": {"type":"solid","currcertID": 1,"certification":"intraining","strokecolor":"black","letter":"?","start":"8/3/2021"},"data": []},
   {"operatorID": 3,"skillID": 1,"groupID": 1,"meta": {"type":"solid","currcertID": 2,"certification":"developing","strokecolor":"black","letter":"!","start":"8/3/2021"},"data": []},
   {"operatorID": 4,"skillID": 1,"groupID": 1,"meta": {"type":"solid","currcertID": 3,"certification":"certified","strokecolor":"black","letter":"C","start":"8/3/2021"},"data": []},
@@ -40,19 +40,19 @@
 
   {"operatorID": 19,"skillID": 9,"groupID":1,"meta": {"type":"solid","currcertID": 1,"certification":"intraining","strokecolor":"black","letter":"\uD83D\uDD14","start":"8/3/2021"},"data": []},
 
-  {"operatorID": 1,"skillID": 10,"groupID": 1,"meta": {"type":"solid","currcertID": 0,"certification":"notapplicable","letter":"","start":"8/3/2021"},"data": []},
-  {"operatorID": 2,"skillID": 10,"groupID": 1,"meta": {"type":"solid","currcertID": 1,"certification":"intraining","strokecolor":"black","letter":"","start":"8/3/2021"},"data": []},
-  {"operatorID": 3,"skillID": 10,"groupID": 1,"meta": {"type":"solid","currcertID": 2,"certification":"developing","strokecolor":"black","letter":"","start":"8/3/2021"},"data": []},
-  {"operatorID": 4,"skillID": 10,"groupID": 1,"meta": {"type":"solid","currcertID": 3,"certification":"certified","strokecolor":"black","letter":"","start":"8/3/2021"},"data": []},
-  {"operatorID": 5,"skillID": 10,"groupID": 1,"meta": {"type":"solid","currcertID": 4,"certification":"trainer","strokecolor":"black","letter":"","start":"8/3/2021"},"data": []},
-  {"operatorID": 6,"skillID": 10,"groupID": 1,"meta": {"type":"solid","currcertID": 5,"certification":"mastertrainer","strokecolor":"black","letter":"","start":"8/3/2021"},"data": []},
+  {"operatorID": 1,"skillID": 10,"groupID": 1,"meta": {"type":"solid","currcertID": 0,"certification":"notapplicable","letter":"","start":"8/3/2021","certstate": "disabled"},"data": []},
+  {"operatorID": 2,"skillID": 10,"groupID": 1,"meta": {"type":"solid","currcertID": 1,"certification":"intraining","strokecolor":"black","letter":"","start":"8/3/2021","certstate": ""},"data": []},
+  {"operatorID": 3,"skillID": 10,"groupID": 1,"meta": {"type":"solid","currcertID": 2,"certification":"developing","strokecolor":"black","letter":"","start":"8/3/2021","certstate": ""},"data": []},
+  {"operatorID": 4,"skillID": 10,"groupID": 1,"meta": {"type":"solid","currcertID": 3,"certification":"certified","strokecolor":"black","letter":"","start":"8/3/2021","certstate": ""},"data": []},
+  {"operatorID": 5,"skillID": 10,"groupID": 1,"meta": {"type":"solid","currcertID": 4,"certification":"trainer","strokecolor":"black","letter":"","start":"8/3/2021","certstate": ""},"data": []},
+  {"operatorID": 6,"skillID": 10,"groupID": 1,"meta": {"type":"solid","currcertID": 5,"certification":"mastertrainer","strokecolor":"black","letter":"","start":"8/3/2021","certstate": ""},"data": []},
 
-  {"operatorID": 1,"skillID": 12,"groupID": 1,"meta": {"type":"solid","currcertID": 0,"certification":"notapplicable","letter":"","start":"8/3/2021"},"data": []},
-  {"operatorID": 2,"skillID": 12,"groupID": 1,"meta": {"type":"solid","currcertID": 1,"certification":"intraining","strokecolor":"black","letter":"","start":"8/3/2021"},"data": []},
-  {"operatorID": 3,"skillID": 12,"groupID": 1,"meta": {"type":"solid","currcertID": 2,"certification":"developing","strokecolor":"black","letter":"","start":"8/3/2021"},"data": []},
-  {"operatorID": 4,"skillID": 12,"groupID": 1,"meta": {"type":"solid","currcertID": 3,"certification":"certified","strokecolor":"black","letter":"!","start":"8/3/2021"},"data": []},
-  {"operatorID": 5,"skillID": 12,"groupID": 1,"meta": {"type":"solid","currcertID": 4,"certification":"trainer","strokecolor":"black","letter":"!","start":"8/3/2021"},"data": []},
-  {"operatorID": 6,"skillID": 12,"groupID": 1,"meta": {"type":"solid","currcertID": 5,"certification":"mastertrainer","strokecolor":"black","letter":"!","start":"8/3/2021"},"data": []}
+  {"operatorID": 1,"skillID": 12,"groupID": 1,"meta": {"type":"solid","currcertID": 0,"certification":"notapplicable","letter":"","start":"8/3/2021","certstate": "disabled"},"data": []},
+  {"operatorID": 2,"skillID": 12,"groupID": 1,"meta": {"type":"solid","currcertID": 1,"certification":"intraining","strokecolor":"black","letter":"","start":"8/3/2021","certstate": ""},"data": []},
+  {"operatorID": 3,"skillID": 12,"groupID": 1,"meta": {"type":"solid","currcertID": 2,"certification":"developing","strokecolor":"black","letter":"","start":"8/3/2021","certstate": ""},"data": []},
+  {"operatorID": 4,"skillID": 12,"groupID": 1,"meta": {"type":"solid","currcertID": 3,"certification":"certified","strokecolor":"black","letter":"!","start":"8/3/2021","certstate": ""},"data": []},
+  {"operatorID": 5,"skillID": 12,"groupID": 1,"meta": {"type":"solid","currcertID": 4,"certification":"trainer","strokecolor":"black","letter":"!","start":"8/3/2021","certstate": ""},"data": []},
+  {"operatorID": 6,"skillID": 12,"groupID": 1,"meta": {"type":"solid","currcertID": 5,"certification":"mastertrainer","strokecolor":"black","letter":"!","start":"8/3/2021","certstate": ""},"data": []}
 
 
 ]

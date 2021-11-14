@@ -3,146 +3,124 @@ import * as types from './MatrixTypes';
 import { API, graphqlOperation } from 'aws-amplify'
 import { updateSkill, updateOperator } from '../graphql/mutations'
 
-export const setRowsArray = (dispatch, payload) => {
-  dispatch({type: types.SET_ROWSARRAY, payload: payload});
-}
-export const setColsArray = (dispatch, payload) => {
-  dispatch({type: types.SET_COLSARRAY, payload: payload});
-}
+export const setAll = (dispatch, payload) => {
 
-export const showTopDialog = (dispatch, payload) => {
-  dispatch({type: types.SET_SHOWTOPDIALOG, payload: payload});
-}
-export const setTop = (dispatch, payload) => {
-  dispatch({type: types.SET_TOP, payload: payload});
-}
-
-export const setMain = (dispatch, payload) => {
-  dispatch({type: types.SET_MAIN, payload: payload});
-}
-export const showSkillDialog = (dispatch, payload) => {
-  dispatch({type: types.SET_SHOWSKILLDIALOG, payload: payload});
-}
-
-export const showOperatorDialog = (dispatch, payload) => {
-  dispatch({type: types.SET_SHOWOPERATORDIALOG, payload: payload});
-}
-
-export const showMainDialog = (dispatch, payload) => {
-  dispatch({type: types.SET_SHOWMAINDIALOG, payload: payload});
-}
-export const showSecondaryDialog = (dispatch, payload) => {
-  dispatch({type: types.SET_SHOWSECONDARYDIALOG, payload: payload});
-}
-export const setCellData = (dispatch, payload) => {
-  dispatch({type: types.SET_CELLDATA, payload: payload});
-}
-export const setUserName = (dispatch, payload) => {
-  dispatch({type: types.SET_USERNAME, payload: payload});
-}
-export const updateOperatorGoal = (dispatch,payload) => {
-  API.graphql(graphqlOperation(updateOperator, { input: payload } ))
-  .then(() => {
-    dispatch({type: types.UPDATE_OPERATORGOAL, payload: payload});
-    setAll(dispatch,false)
-  })
-}
-
-const calcTotals = (certificationsDataCreated, dispatch) => {
-  var rowsArray = []
-  var currentRow = -1;
-  var rowCount = -1;
-
-  var colsArray = []
-  var currentCol = -1;
-  var colCount = -1;
-
-  var certByRow = Array.from(certificationsDataCreated);
-  certByRow.sort(function (x, y) {
-    var n = x.row - y.row;
-    if (n !== 0) {
-        return n;
+  const createCertifications = (skills, operators, certificationsData) => {
+    var certificationsDataCreated = []
+    var certID = 0
+    for (let s = 0; s < skills.length; s++) {
+      for (let o = 0; o < operators.length; o++) {
+        certID++
+        certificationsDataCreated.push({
+          "id": certID,
+          "row":s,
+          "col":o,
+          "skill":skills[s],
+          "operator":operators[o],
+          "skillID": skills[s].id,
+          "operatorID": operators[o].id,
+          "currcertID": 0,
+          "meta": {
+            "type":"solid",
+            "currcertID": 0,
+            "certification":"notapplicable",
+            "strokecolor":"black",
+            "letter":"",
+            "start":"",
+            "certstate": "disabled"
+          },
+          "data": []
+        })
+      }
     }
-    return x.col - y.col;
-  });
 
-  for (let i = 0; i < certByRow.length; i++) {
-    if (certByRow[i].row > currentRow) {
-      currentRow = certByRow[i].row
-      rowCount = rowsArray.push([certByRow[i].skill.goal,0,0,0])
+    for (let o = 0; o < certificationsData.length; o++) {
+      var found = certificationsDataCreated.find(element => {
+        var c;
+        if (element.skillID === certificationsData[o].skillID && element.operatorID === certificationsData[o].operatorID) {
+          c = certificationsData[o]
+        }
+        return c
+      });
+      //console.log(found)
+      found.meta = certificationsData[o].meta
+      found.data = certificationsData[o].data
     }
-    switch(certByRow[i].meta.currcertID) {
-      case 3:
-      case 4:
-      case 5:
-        rowsArray[rowCount-1][1] = rowsArray[rowCount-1][1] + 1;
-        break;
-      default:
-        break;
-    }
-    rowsArray[rowCount-1][3] = rowsArray[rowCount-1][0] - rowsArray[rowCount-1][1];
-    rowsArray[rowCount-1][2] = rowsArray[rowCount-1][1] / rowsArray[rowCount-1][0];
+
+    return certificationsDataCreated;
+
   }
 
-  var certByCol = Array.from(certificationsDataCreated);
-  certByCol.sort(function (x, y) {
-    var n = x.col - y.col;
-    if (n !== 0) {
-        return n;
-    }
-    return x.row - y.row;
-  });
+  const calcTotals = (certificationsDataCreated, dispatch) => {
+    var rowsArray = []
+    var currentRow = -1;
+    var rowCount = -1;
 
-  for (let i = 0; i < certByCol.length; i++) {
-    if (certByCol[i].col > currentCol) {
-      currentCol = certByCol[i].col
-      colCount = colsArray.push([certByCol[i].operator.goal,0,0,0])
+    var colsArray = []
+    var currentCol = -1;
+    var colCount = -1;
+
+    var certByRow = Array.from(certificationsDataCreated);
+    certByRow.sort(function (x, y) {
+      var n = x.row - y.row;
+      if (n !== 0) {
+          return n;
+      }
+      return x.col - y.col;
+    });
+
+    for (let i = 0; i < certByRow.length; i++) {
+      if (certByRow[i].row > currentRow) {
+        currentRow = certByRow[i].row
+        rowCount = rowsArray.push([certByRow[i].skill.goal,0,0,0])
+      }
+      switch(certByRow[i].meta.currcertID) {
+        case 3:
+        case 4:
+        case 5:
+          rowsArray[rowCount-1][1] = rowsArray[rowCount-1][1] + 1;
+          break;
+        default:
+          break;
+      }
+      rowsArray[rowCount-1][3] = rowsArray[rowCount-1][0] - rowsArray[rowCount-1][1];
+      rowsArray[rowCount-1][2] = rowsArray[rowCount-1][1] / rowsArray[rowCount-1][0];
     }
-    switch(certByCol[i].meta.currcertID) {
-      case 3:
-      case 4:
-      case 5:
-        colsArray[colCount-1][1] = colsArray[colCount-1][1] + 1;
-        break;
-      default:
-        break;
+
+    var certByCol = Array.from(certificationsDataCreated);
+    certByCol.sort(function (x, y) {
+      var n = x.col - y.col;
+      if (n !== 0) {
+          return n;
+      }
+      return x.row - y.row;
+    });
+
+    for (let i = 0; i < certByCol.length; i++) {
+      if (certByCol[i].col > currentCol) {
+        currentCol = certByCol[i].col
+        colCount = colsArray.push([certByCol[i].operator.goal,0,0,0])
+      }
+      switch(certByCol[i].meta.currcertID) {
+        case 3:
+        case 4:
+        case 5:
+          colsArray[colCount-1][1] = colsArray[colCount-1][1] + 1;
+          break;
+        default:
+          break;
+      }
+      colsArray[colCount-1][3] = colsArray[colCount-1][0] - colsArray[colCount-1][1];
+      colsArray[colCount-1][2] = colsArray[colCount-1][1] / colsArray[colCount-1][0];
     }
-    colsArray[colCount-1][3] = colsArray[colCount-1][0] - colsArray[colCount-1][1];
-    colsArray[colCount-1][2] = colsArray[colCount-1][1] / colsArray[colCount-1][0];
+
+    dispatch({type: types.SET_ROWSARRAY, payload: rowsArray});
+    var transpose = m => m[0].map((x,i) => m.map(x => x[i]))
+    var colsArraytransposed = transpose(colsArray)
+    dispatch({type: types.SET_COLSARRAY, payload: colsArraytransposed});
   }
 
-  dispatch({type: types.SET_ROWSARRAY, payload: rowsArray});
-  var transpose = m => m[0].map((x,i) => m.map(x => x[i]))
-  var colsArraytransposed = transpose(colsArray)
-  dispatch({type: types.SET_COLSARRAY, payload: colsArraytransposed});
-}
-
-export const setAll = (dispatch, theData) => {
-
-  const doByOperator = (operators, skills, certifications, dispatch) => {
-    var byOperator = []
-    operators.map((operator,o) => {
-      o = operator
-      o.meta = operator
-      o.data = []
-      const filteredcertifications = certifications.filter(item => item.operatorID === operator.id);
-      filteredcertifications.map((fc,i) => {
-        var skill  = skills.find(item => item.id === fc.skillID);
-        o.data[i] = {};
-        o.data[i].certificationID = fc.id
-        o.data[i].operator = operator
-        o.data[i].skill = skill
-        o.data[i].meta = fc.meta
-        o.data[i].data = fc.data
-        return null
-      })
-      byOperator.push(o)
-      return null
-    })
-    return byOperator
-  }
-
-  const doBySkill = (operators, skills, certifications, dispatch) => {
+  const doBySkill = (operators, skills, certifications) => {
     var bySkill = []
     skills.map((skill,s) => {
       var o = {}
@@ -164,6 +142,29 @@ export const setAll = (dispatch, theData) => {
       return null
     })
     return bySkill
+  }
+
+  const doByOperator = (operators, skills, certifications) => {
+    var byOperator = []
+    operators.map((operator,o) => {
+      o = operator
+      o.meta = operator
+      o.data = []
+      const filteredcertifications = certifications.filter(item => item.operatorID === operator.id);
+      filteredcertifications.map((fc,i) => {
+        var skill  = skills.find(item => item.id === fc.skillID);
+        o.data[i] = {};
+        o.data[i].certificationID = fc.id
+        o.data[i].operator = operator
+        o.data[i].skill = skill
+        o.data[i].meta = fc.meta
+        o.data[i].data = fc.data
+        return null
+      })
+      byOperator.push(o)
+      return null
+    })
+    return byOperator
   }
 
   const setInit = (o) => {
@@ -219,25 +220,33 @@ export const setAll = (dispatch, theData) => {
 
   const callAll = async (dispatch,payload2) => {
     var first = payload2.first
-    var operators = payload2.operatorsData
     var skills = payload2.skillsData
-    var certifications = payload2.certificationsData
+    var operators = payload2.operatorsData
+    var certificationsInit = payload2.certificationsData
     var multiplier = payload2.multiplier
 
-    calcTotals(payload2.certificationsData, dispatch)
+    var certifications
+    if (first === true) {
+      certifications = createCertifications(skills, operators, certificationsInit)
+    }
+    else {
+      certifications = certificationsInit
+    }
 
-    var byOperator = []
+    calcTotals(certifications, dispatch)
+
     var bySkill = []
+    var byOperator = []
 
-    if (operators.length !== 0 && skills.length !== 0) {
-      byOperator = doByOperator(operators,skills,certifications,dispatch)
-      bySkill = doBySkill(operators,skills,certifications,dispatch)
+    if (skills.length !== 0 && operators.length !== 0) {
+      bySkill = doBySkill(operators,skills,certifications)
+      byOperator = doByOperator(operators,skills,certifications)
     }
 
     if (first === true) {
-      var oLen = operators.length
       var sLen = skills.length
-      setInit({oLen,sLen,multiplier})
+      var oLen = operators.length
+      setInit({sLen,oLen,multiplier})
     }
 
     var payload = {
@@ -251,71 +260,7 @@ export const setAll = (dispatch, theData) => {
     dispatch({type: types.SET_ACTIVE, payload: false});
   }
 
-  callAll(dispatch, theData)
-}
-
-export const setActive = (dispatch, payload) => {
-  dispatch({type: types.SET_ACTIVE, payload: payload});
-}
-
-export const setAuthenticatedUser = (dispatch, payload) => {
-  dispatch({type: types.SET_AUTHENTICATEDUSER, payload: payload});
-}
-
-export const updateSkillGoal = (dispatch, payload) => {
-  API.graphql(graphqlOperation(updateSkill, { input: payload } ))
-  .then(() => {
-    dispatch({type: types.UPDATE_SKILLGOAL, payload: payload});
-    setAll(dispatch,false)
-  })
-}
-
-export const setRightTotals = (dispatch, payload) => {
-  dispatch({type: types.SET_RIGHTTOTALS, payload: payload});
-}
-
-export const setBottomTotals = (dispatch, payload) => {
-  dispatch({type: types.SET_BOTTOMTOTALS, payload: payload});
-}
-
-export const setCurrentCertification = (dispatch, payload) => {
-  dispatch({type: types.SET_CURRENT_CERTIFICATION, payload: payload});
-}
-
-export const setOperators = (dispatch, payload) => {
-  dispatch({type: types.SET_OPERATORS, payload: payload});
-}
-
-export const setSkills = (dispatch, payload) => {
-  dispatch({type: types.SET_SKILLS, payload: payload});
-}
-
-export const setCertifications = (dispatch, payload) => {
-  dispatch({type: types.SET_CERTIFICATIONS, payload: payload});
-}
-
-export const setBySkill = (dispatch, payload) => {
-  dispatch({type: types.SET_BYSKILL, payload: payload});
-}
-
-export const setByOperator = (dispatch, payload) => {
-  dispatch({type: types.SET_BYOPERATOR, payload: payload});
-}
-
-export const setSpecific = (dispatch, payload) => {
-  dispatch({type: types.SET_SPECIFIC, payload: payload});
-}
-
-export const setDimensions = (dispatch, payload) => {
-  dispatch({type: types.SET_DIMENSIONS, payload: payload});
-}
-
-export const setOriginal = (dispatch, payload) => {
-  dispatch({type: types.SET_ORIGINAL, payload: payload});
-}
-
-export const toggleLegend = (dispatch, payload) => {
-  dispatch({type: types.TOGGLE_LEGEND, payload: payload});
+  callAll(dispatch, payload)
 }
 
 export const updateCert = async (dispatch, payload) => {
@@ -323,10 +268,153 @@ export const updateCert = async (dispatch, payload) => {
   console.log('updateCert: ' + JSON.stringify(j))
   dispatch({type: types.UPDATE_CERT, payload: payload});
   setAll(dispatch,{
-    'first':true,
+    'first':false,
     'operatorsData':payload.operators,
     'skillsData':payload.skills,
     'certificationsData':payload.certifications,
     'multiplier': payload.multiplier
   })
+}
+
+export const updateSkillGoal = (dispatch, payload) => {
+  var newSkills = payload.skills.slice();
+  const lastSkillIndex = newSkills.findIndex(
+    (skill) => skill.id === payload.id
+  )
+  var oldSkill = payload.skills[lastSkillIndex]
+  if (lastSkillIndex !== -1) {
+    newSkills[lastSkillIndex] = {
+      "id": oldSkill.id,
+      "groupID": oldSkill.groupID,
+      "skillName": oldSkill.skillName,
+      "goal": parseInt(payload.goal)
+    }
+  }
+  var j = {'skillID':payload.id,'goal':parseInt(payload.goal)}
+  console.log('updateSkillGoal: ' + JSON.stringify(j))
+  //console.log(newSkills)
+  dispatch({type: types.UPDATE_SKILLGOAL, payload: {skills:newSkills}});
+  setAll(dispatch,{
+    'first':true,
+    'skillsData':newSkills,
+    'operatorsData':payload.operators,
+    'certificationsData':payload.certifications,
+    'multiplier': payload.multiplier
+  })
+
+  // API.graphql(graphqlOperation(updateSkill, { input: payload } ))
+  // .then(() => {
+  //   dispatch({type: types.UPDATE_SKILLGOAL, payload: payload});
+  //   setAll(dispatch,false)
+  // })
+}
+
+export const updateOperatorGoal = (dispatch,payload) => {
+  var newOperators = payload.operators.slice();
+  const lastOperatorIndex = newOperators.findIndex(
+    (operator) => operator.id === payload.id
+  )
+  var oldOperator = payload.operators[lastOperatorIndex]
+  if (lastOperatorIndex !== -1) {
+    newOperators[lastOperatorIndex] = {
+      "id": oldOperator.id,
+      "groupID": oldOperator.groupID,
+      "operatorName": oldOperator.operatorName,
+      "picture": oldOperator.picture,
+      "goal": parseInt(payload.goal)
+    }
+  }
+  var j = {'operatorID':payload.id,'goal':parseInt(payload.goal)}
+  console.log('updateOperatorGoal: ' + JSON.stringify(j))
+  //console.log(newOperators)
+  dispatch({type: types.UPDATE_OPERATORGOAL, payload: {operators:newOperators}});
+  setAll(dispatch,{
+    'first':true,
+    'skillsData':payload.skills,
+    'operatorsData':newOperators,
+    'certificationsData':payload.certifications,
+    'multiplier': payload.multiplier
+  })
+
+  // API.graphql(graphqlOperation(updateOperator, { input: payload } ))
+  // .then(() => {
+  //   dispatch({type: types.UPDATE_OPERATORGOAL, payload: payload});
+  //   setAll(dispatch,false)
+  // })
+}
+
+export const setRowsArray = (dispatch, payload) => {
+  dispatch({type: types.SET_ROWSARRAY, payload: payload});
+}
+export const setColsArray = (dispatch, payload) => {
+  dispatch({type: types.SET_COLSARRAY, payload: payload});
+}
+export const showTopDialog = (dispatch, payload) => {
+  dispatch({type: types.SET_SHOWTOPDIALOG, payload: payload});
+}
+export const setTop = (dispatch, payload) => {
+  dispatch({type: types.SET_TOP, payload: payload});
+}
+export const setMain = (dispatch, payload) => {
+  dispatch({type: types.SET_MAIN, payload: payload});
+}
+export const showSkillDialog = (dispatch, payload) => {
+  dispatch({type: types.SET_SHOWSKILLDIALOG, payload: payload});
+}
+export const showOperatorDialog = (dispatch, payload) => {
+  dispatch({type: types.SET_SHOWOPERATORDIALOG, payload: payload});
+}
+export const showMainDialog = (dispatch, payload) => {
+  dispatch({type: types.SET_SHOWMAINDIALOG, payload: payload});
+}
+export const showSecondaryDialog = (dispatch, payload) => {
+  dispatch({type: types.SET_SHOWSECONDARYDIALOG, payload: payload});
+}
+export const setCellData = (dispatch, payload) => {
+  dispatch({type: types.SET_CELLDATA, payload: payload});
+}
+export const setUserName = (dispatch, payload) => {
+  dispatch({type: types.SET_USERNAME, payload: payload});
+}
+export const setActive = (dispatch, payload) => {
+  dispatch({type: types.SET_ACTIVE, payload: payload});
+}
+export const setAuthenticatedUser = (dispatch, payload) => {
+  dispatch({type: types.SET_AUTHENTICATEDUSER, payload: payload});
+}
+export const setRightTotals = (dispatch, payload) => {
+  dispatch({type: types.SET_RIGHTTOTALS, payload: payload});
+}
+export const setBottomTotals = (dispatch, payload) => {
+  dispatch({type: types.SET_BOTTOMTOTALS, payload: payload});
+}
+export const setCurrentCertification = (dispatch, payload) => {
+  dispatch({type: types.SET_CURRENT_CERTIFICATION, payload: payload});
+}
+export const setOperators = (dispatch, payload) => {
+  dispatch({type: types.SET_OPERATORS, payload: payload});
+}
+export const setSkills = (dispatch, payload) => {
+  dispatch({type: types.SET_SKILLS, payload: payload});
+}
+export const setCertifications = (dispatch, payload) => {
+  dispatch({type: types.SET_CERTIFICATIONS, payload: payload});
+}
+export const setBySkill = (dispatch, payload) => {
+  dispatch({type: types.SET_BYSKILL, payload: payload});
+}
+export const setByOperator = (dispatch, payload) => {
+  dispatch({type: types.SET_BYOPERATOR, payload: payload});
+}
+export const setSpecific = (dispatch, payload) => {
+  dispatch({type: types.SET_SPECIFIC, payload: payload});
+}
+export const setDimensions = (dispatch, payload) => {
+  dispatch({type: types.SET_DIMENSIONS, payload: payload});
+}
+export const setOriginal = (dispatch, payload) => {
+  dispatch({type: types.SET_ORIGINAL, payload: payload});
+}
+export const toggleLegend = (dispatch, payload) => {
+  dispatch({type: types.TOGGLE_LEGEND, payload: payload});
 }

@@ -50,7 +50,7 @@ export const Main = (props) => {
         "type":"solid",
         "currcertID":parseInt(event.target.value),
         "certification":event.target.title,
-        "strokecolor":"black",
+        "strokecolor":matrixState.celldata.meta.strokecolor,
         "letter":"",
         "start":matrixState.celldata.meta.start,
         "certstate":matrixState.celldata.meta.certstate
