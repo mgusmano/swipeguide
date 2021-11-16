@@ -1,12 +1,12 @@
 import React, { useState, useEffect} from 'react';
 import {SvgX, PathX, TextX, CircleX} from './SvgStuff';
-import { getTheColor } from './state/Util';
+import { getTheColor, getTheColor2 } from './state/Util';
 
 export const Diamond = ({meta, data, boxSize, padding}) => {
   const [solidcolor, setSolidColor] = useState(null)
   var type = meta.type
-  var strokecolor = meta.strokecolor; //'black';
-  if (meta.certification === "notapplicable") {
+  var strokecolor =  'black'; //meta.strokecolor;
+  if (meta.currcertID === 0) {
     strokecolor = "linen"
   }
   var letter = meta.letter
@@ -21,8 +21,9 @@ export const Diamond = ({meta, data, boxSize, padding}) => {
   var status = meta.status;
 
   useEffect(() => {
-    if (meta.certification !== undefined) {
-      var c = getTheColor(meta.certification)
+    if (meta.currcertID !== undefined) {
+      //var c = getTheColor(meta.certification)
+      var c = getTheColor2(meta.currcertID)
       setSolidColor(c)
     }
   },[meta])

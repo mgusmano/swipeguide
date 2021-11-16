@@ -3,7 +3,11 @@ import { useAppState } from './state/AppProvider';
 import { Toolstrip } from './Toolstrip.js';
 import TrainingMatrix from './trainingmatrix/TrainingMatrix';
 import axios from "axios";
-import { Loading } from 'aws-amplify-react';
+//import { Loading } from 'aws-amplify-react';
+
+//import { join, dirname } from 'path'
+//import { Low, JSONFile } from 'lowdb'
+//import { fileURLToPath } from 'url'
 
 export const App = (props) => {
   const appState = useAppState();
@@ -11,20 +15,34 @@ export const App = (props) => {
   useEffect(() => {
     async function fetchData() {
       const apiRoot = 'https://skillnetusersapi.azurewebsites.net/api/';
-      const skillsResult = await axios(`data/trainingmatrix/data/${appState.groupid}/skills.json`);
-      const operatorsResult = await axios(`data/trainingmatrix/data/${appState.groupid}/operators.json`);
-      const certificationsResult = await axios(`data/trainingmatrix/data/${appState.groupid}/certifications.json`);
+      const auth = {auth:{username:'skillnet',password:'demo'}};
+      // const skillsResult = await axios(`data/trainingmatrix/data/${appState.groupid}/skills.json`);
+      // const operatorsResult = await axios(`data/trainingmatrix/data/${appState.groupid}/operators.json`);
+      // const certificationsResult = await axios(`data/trainingmatrix/data/${appState.groupid}/certifications.json`);
+
+
+
+
+
       //const groupsResult = await axios(`data/trainingmatrix/data/groups.json`);
 
-      const portalGroupSkillsResult = await axios(apiRoot + 'PortalGroupSkills?partnerid=448&groupid=33784',{auth:{username:'skillnet',password:'demo'}});
-      console.log('portalGroupSkillsResult')
-      console.log(portalGroupSkillsResult)
-      console.log(JSON.parse(portalGroupSkillsResult.data))
-      const portalGroupOperatorsResult = await axios(apiRoot + 'PortalGroupOperators?groupid=33784',{auth:{username:'skillnet',password:'demo'}});
-      console.log('portalGroupOperatorsResult')
-      console.log(portalGroupOperatorsResult)
+      //const __dirname = dirname(`data/trainingmatrix/data/1}/`);
+      //console.log(__dirname)
+      // const file = join(__dirname, 'db.json')
+      // const adapter = new JSONFile(file)
+      // const db = new Low(adapter)
+      // await db.read()
+      // console.log(db)
 
-      const portalGroupsResult = await axios(apiRoot + 'portalgroups?partnerid=448',{auth:{username:'skillnet',password:'demo'}});
+      // const portalGroupSkillsResult = await axios(apiRoot + 'PortalGroupSkills?partnerid=448&groupid=33784',{auth:{username:'skillnet',password:'demo'}});
+      // console.log('portalGroupSkillsResult')
+      // console.log(portalGroupSkillsResult)
+      // console.log(JSON.parse(portalGroupSkillsResult.data))
+      // const portalGroupOperatorsResult = await axios(apiRoot + 'PortalGroupOperators?groupid=33784',{auth:{username:'skillnet',password:'demo'}});
+      // console.log('portalGroupOperatorsResult')
+      // console.log(portalGroupOperatorsResult)
+
+      const portalGroupsResult = await axios(apiRoot + 'portalgroups?partnerid=448', auth);
       //console.log('portalGroupsResult')
       //console.log(portalGroupsResult)
 
@@ -33,10 +51,13 @@ export const App = (props) => {
       //https://skillnetusersapi.azurewebsites.net//api/PortalCertificationsRating?groupid=34750
       //https://skillnetusersapi.azurewebsites.net/api/PortalCertificationsRating?groupid=34707'
 
-      appState.setSkills(skillsResult.data);
-      appState.setOperators(operatorsResult.data);
-      appState.setCertifications(certificationsResult.data);
-      //appState.setGroups(groupsResult.data);
+      // appState.setSkills(skillsResult.data);
+      // appState.setOperators(operatorsResult.data);
+      // appState.setCertifications(certificationsResult.data);
+
+
+
+      // //appState.setGroups(groupsResult.data);
       appState.setGroups(portalGroupsResult.data);
     }
     fetchData();
@@ -57,16 +78,17 @@ export const App = (props) => {
         <Toolstrip/>
       </div>
       <div style={{marginTop:'90px',flex:'1'}}>
-        {appState.certifications === null &&
+        {appState.groups === null &&
           <div style={{marginTop:'90px',marginLeft:'60px',fontSize:'45px'}}>Matrix is Loading...</div>
         }
-        {appState.certifications !== null &&
+        {appState.groups !== null &&
         <TrainingMatrix
           multiplier={appState.multiplier}
           showLegend={appState.legend}
-          skillsData={appState.skills}
-          operatorsData={appState.operators}
-          certificationsData={appState.certifications}
+          groupID={appState.groupID}
+          //skillsData={appState.skills}
+          //operatorsData={appState.operators}
+          //certificationsData={appState.certifications}
           cellClicked={cellClicked}
         />
         }

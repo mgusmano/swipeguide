@@ -1,0 +1,80 @@
+{
+  "skills": [
+    {"id": 708,"groupID": 34708,"skillName": "Core Loading","goal": 1},
+    {"id": 709,"groupID": 34709,"skillName": "Core Loading","goal": 1},
+    {"id": 710,"groupID": 34710,"skillName": "Core Loading","goal": 1},
+    {"id": 711,"groupID": 34711,"skillName": "Core Loading","goal": 1},
+    {"id": 712,"groupID": 34712,"skillName": "Core Loading","goal": 1},
+    {"id": 713,"groupID": 34713,"skillName": "Core Loading","goal": 1},
+    {"id": 714,"groupID": 34714,"skillName": "Core Loading","goal": 1},
+    {"id": 715,"groupID": 34715,"skillName": "Core Loading","goal": 1},
+    {"id": 720,"groupID": 34720,"skillName": "Core Loading","goal": 1},
+    {"id": 721,"groupID": 34721,"skillName": "Core Loading","goal": 1},
+    {"id": 750,"groupID": 34750,"skillName": "Core Loading","goal": 1},
+    {"id": 751,"groupID": 34751,"skillName": "Core Loading","goal": 1},
+    {
+      "id": 1,
+      "groupID": 34707,
+      "skillName": "Core Loading",
+      "goal": 1
+    },
+    {
+      "id": 2,
+      "groupID": 34707,
+      "skillName": "Phase Paper Insertion (VW)",
+      "goal": 2
+    },
+    {
+      "id": 3,
+      "groupID": 34707,
+      "skillName": "Phase Paper Insertion (UV)",
+      "goal": 3
+    }
+  ],
+  "operators": [
+    {"id": 708,"groupID": 34708,"operatorName": "Aaron Cariaga","picture": "AaronCariaga.jpg","goal": 1},
+    {"id": 709,"groupID": 34709,"operatorName": "Aaron Cariaga","picture": "AaronCariaga.jpg","goal": 1},
+    {"id": 710,"groupID": 34710,"operatorName": "Aaron Cariaga","picture": "AaronCariaga.jpg","goal": 1},
+    {"id": 711,"groupID": 34711,"operatorName": "Aaron Cariaga","picture": "AaronCariaga.jpg","goal": 1},
+    {"id": 712,"groupID": 34712,"operatorName": "Aaron Cariaga","picture": "AaronCariaga.jpg","goal": 1},
+    {"id": 713,"groupID": 34713,"operatorName": "Aaron Cariaga","picture": "AaronCariaga.jpg","goal": 1},
+    {"id": 714,"groupID": 34714,"operatorName": "Aaron Cariaga","picture": "AaronCariaga.jpg","goal": 1},
+    {"id": 715,"groupID": 34715,"operatorName": "Aaron Cariaga","picture": "AaronCariaga.jpg","goal": 1},
+    {"id": 720,"groupID": 34720,"operatorName": "Aaron Cariaga","picture": "AaronCariaga.jpg","goal": 1},
+    {"id": 721,"groupID": 34721,"operatorName": "Aaron Cariaga","picture": "AaronCariaga.jpg","goal": 1},
+    {"id": 750,"groupID": 34750,"operatorName": "Aaron Cariaga","picture": "AaronCariaga.jpg","goal": 1},
+    {"id": 751,"groupID": 34751,"operatorName": "Aaron Cariaga","picture": "AaronCariaga.jpg","goal": 1},
+
+    {
+      "id": 1,
+      "groupID": 34707,
+      "operatorName": "Aaron Cariaga",
+      "picture": "AaronCariaga.jpg",
+      "goal": 1
+    },
+    {
+      "id": 2,
+      "groupID": 34707,
+      "operatorName": "Ahmed Al Talabani",
+      "picture": "Ahmed Al Talabani.jpg",
+      "goal": 2
+    },
+    {
+      "id": 3,
+      "groupID": 34707,
+      "operatorName": "Baltazar Garcia",
+      "picture": "Baltazar Garcia.jpg",
+      "goal": 3
+    },
+    {
+      "id": 4,
+      "groupID": 34707,
+      "operatorName": "Blaise Chancellor Podehole",
+      "picture": "Blaise Chancellor Podehale.jpg",
+      "goal": 4
+    }
+  ],
+  "certifications": [
+
+  ]
+}

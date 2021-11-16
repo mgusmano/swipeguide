@@ -51,44 +51,46 @@ export const Main = (props) => {
         "currcertID":parseInt(event.target.value),
         "certification":event.target.title,
         "strokecolor":matrixState.celldata.meta.strokecolor,
-        "letter":"",
+        "letter":matrixState.celldata.meta.letter,
         "start":matrixState.celldata.meta.start,
         "certstate":matrixState.celldata.meta.certstate
       }
-      var newCerts = matrixState.certifications.slice();
-      const lastCertIndex = newCerts.findIndex(
-        (cert) => cert.id === certificationID
-      )
-      if (lastCertIndex !== -1) {
-        newCerts[lastCertIndex] = {
-          "id": certificationID,
-          "row": matrixState.celldata.row,
-          "col": matrixState.celldata.col,
-          "skill": skill,
-          "operator": operator,
-          "skillID": skill.id,
-          "operatorID": operator.id,
-          "currcertID":parseInt(event.target.value),
-          "meta": metaval,
-          "data": []
-        }
-      }
+
+      // var newCerts = matrixState.certifications.slice();
+      // const lastCertIndex = newCerts.findIndex(
+      //   (cert) => cert.id === certificationID
+      // )
+      // if (lastCertIndex !== -1) {
+      //   newCerts[lastCertIndex] = {
+      //     "id": certificationID,
+      //     "row": matrixState.celldata.row,
+      //     "col": matrixState.celldata.col,
+      //     "skill": skill,
+      //     "operator": operator,
+      //     "skillID": skill.id,
+      //     "operatorID": operator.id,
+      //     "currcertID":parseInt(event.target.value),
+      //     "meta": metaval,
+      //     "data": []
+      //   }
+      // }
 
       setMetaData(metaval)
       setCertification(parseInt(event.target.value))
       var c = {
-        id: certificationID,
-        row: matrixState.celldata.row,
-        col: matrixState.celldata.col,
-        skill: skill,
-        operator: operator,
-        skillID: skill.id,
-        operatorID: operator.id,
+        //id: certificationID,
+        //row: matrixState.celldata.row,
+        //col: matrixState.celldata.col,
+        //skill: skill,
+        //operator: operator,
+        skillID: skill.skillID,
+        operatorID: operator.operatorID,
         currcertID: parseInt(event.target.value),
-        meta: metaval,
-        skills: matrixState.skills,
-        operators: matrixState.operators,
-        certifications: newCerts,
+        //meta: metaval,
+        // skills: matrixState.skills,
+        // operators: matrixState.operators,
+        // certifications: newCerts,
+        groupID: matrixState.groupID,
         multiplier: matrixState.dimensions.multiplier
       }
       matrixState.updateCert(c)

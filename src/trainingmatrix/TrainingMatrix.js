@@ -28,13 +28,11 @@ const MainMatrixProvider = (props) => {
   const matrixState = useMatrixState();
   var certificationsData = props.props.certificationsData
   var multiplier = props.props.multiplier
+  var groupID = props.props.groupID
   useResizeEvent()
 
   useEffect(() => {
     if (multiplier === '') return
-
-
-
 
     // const createCertifications = (skills, operators, certificationsData) => {
     //   var certificationsDataCreated = []
@@ -91,12 +89,13 @@ const MainMatrixProvider = (props) => {
     matrixState.setActive(true)
     matrixState.setAll({
       'first':true,
-      'operatorsData':props.props.operatorsData,
-      'skillsData':props.props.skillsData,
-      'certificationsData':certificationsData,
+      'groupID': groupID,
+      //'operatorsData':props.props.operatorsData,
+      //'skillsData':props.props.skillsData,
+      //'certificationsData':certificationsData,
       'multiplier':multiplier
     })
-  },[certificationsData,multiplier])
+  },[certificationsData,multiplier,groupID])
 
   const cellClicked = (id) => {
     props.props.cellClicked(id)

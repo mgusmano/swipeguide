@@ -9619,6 +9619,13 @@
   dependencies:
     "js-tokens" "^3.0.0 || ^4.0.0"
 
+"lowdb@^3.0.0":
+  "integrity" "sha512-9KZRulmIcU8fZuWiaM0d5e2/nPnrFyXkeXVpqT+MJS+vgbgOf1EbtvgQmba8HwUFgDl1oeZR6XqEJnkJmQdKmg=="
+  "resolved" "https://registry.npmjs.org/lowdb/-/lowdb-3.0.0.tgz"
+  "version" "3.0.0"
+  dependencies:
+    "steno" "^2.1.0"
+
 "lower-case@^2.0.2":
   "integrity" "sha512-7fm3l3NAF9WfN6W3JOmf5drwpVqX78JtoGJ3A6W0a6ZnldM41w2fV5D490psKFTpMds8TJse/eHLFFsNHHjHgg=="
   "resolved" "https://registry.yarnpkg.com/lower-case/-/lower-case-2.0.2.tgz"
@@ -13158,6 +13165,11 @@
   "integrity" "sha1-NbCYdbT/SfJqd35QmzCQoyJr8ks="
   "resolved" "https://registry.yarnpkg.com/stealthy-require/-/stealthy-require-1.1.1.tgz"
   "version" "1.1.1"
+
+"steno@^2.1.0":
+  "integrity" "sha512-mauOsiaqTNGFkWqIfwcm3y/fq+qKKaIWf1vf3ocOuTdco9XoHCO2AGF1gFYXuZFSWuP38Q8LBHBGJv2KnJSXyA=="
+  "resolved" "https://registry.npmjs.org/steno/-/steno-2.1.0.tgz"
+  "version" "2.1.0"
 
 "stream-browserify@^2.0.1":
   "integrity" "sha512-nX6hmklHs/gr2FuxYDltq8fJA1GDlxKQCz8O/IM4atRqBH8OORmBNgfvW5gG10GT/qQ9u0CzIvr2X5Pkt6ntqg=="

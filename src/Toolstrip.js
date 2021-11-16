@@ -24,13 +24,17 @@ export const Toolstrip = (props) => {
         onChange={()=>{}}
       /> */}
       <div style={{marginLeft:'120px',marginTop:'10px'}}>groups:</div>
-      <select style={{width:'100px'}}
+      <select style={{width:'250px'}}
         onChange={(event) => {
           appState.setGroupID(event.target.value)
         }}>
         {appState.groups !== null &&
           appState.groups.map((group,i) => {
-            return <option key={i} value={group.groupID}>{group.groupName}</option>
+            var selected = ''
+            if (group.groupID === 34751) {
+              selected = 'selected'
+            }
+            return <option selected={selected} key={i} value={group.groupID}>{group.groupID}-{group.groupName}</option>
           })
         }
       </select>
@@ -39,7 +43,7 @@ export const Toolstrip = (props) => {
       <button onClick={()=>{appState.setMultiplier(appState.multiplier+1)}}>bigger</button>
       <div style={{marginLeft:'10px',marginTop:'12px'}}>{appState.multiplier}</div>
       <button style={{marginLeft:'60px'}} onClick={()=>{ appState.setLegend(!appState.legend)}}>Toggle Legend</button>
-      <div style={{margin:'10px',marginLeft:'70px'}}>v2021-11-14-c</div>
+      <div style={{margin:'10px',marginLeft:'70px'}}>v2021-11-16-b</div>
     </div>
   )
 }

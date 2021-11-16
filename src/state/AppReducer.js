@@ -3,7 +3,7 @@ import * as types from './AppTypes';
 export const AppReducer = (state, action) => {
   const { type, payload } = action;
   switch (type) {
-    case types.SET_GROUPID: return {...state,groupid:payload}
+    case types.SET_GROUPID: return {...state,groupID:payload}
     case types.SET_OPERATORS: return {...state,operators:payload}
     case types.SET_SKILLS: return {...state,skills:payload}
     case types.SET_CERTIFICATIONS: return {...state,certifications:payload}

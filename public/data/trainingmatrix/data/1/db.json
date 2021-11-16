@@ -1,0 +1,20 @@
+{
+  "skills": [
+    {"id": 1,"groupID":1,"skillName": "Core Loading","goal": 1},
+    {"id": 2,"groupID":1,"skillName": "Phase Paper Insertion (VW)","goal": 2},
+    {"id": 3,"groupID":1,"skillName": "Phase Paper Insertion (UV)","goal": 3}
+  ],
+  "operators": [
+    {"id": 1,"groupID":1,"operatorName": "Aaron Cariaga","picture": "AaronCariaga.jpg","goal": 1},
+    {"id": 2,"groupID":1,"operatorName": "Ahmed Al Talabani","picture": "Ahmed Al Talabani.jpg","goal": 2},
+    {"id": 3,"groupID":1,"operatorName": "Baltazar Garcia","picture": "Baltazar Garcia.jpg","goal": 3},
+    {"id": 4,"groupID":1,"operatorName": "Blaise Chancellor Podehole","picture": "Blaise Chancellor Podehale.jpg","goal": 4}
+  ],
+  "certifications": [
+    {"operatorID": 1,"skillID": 1,"groupID": 1,"meta": {"type":"solid","currcertID": 0,"certification":"notapplicable","letter":"","start":"8/3/2021","certstate": "disabled"},"data": []},
+    {"operatorID": 2,"skillID": 1,"groupID": 1,"meta": {"type":"solid","currcertID": 1,"certification":"intraining","strokecolor":"black","letter":"","start":"8/3/2021"},"data": []},
+    {"operatorID": 3,"skillID": 1,"groupID": 1,"meta": {"type":"solid","currcertID": 2,"certification":"developing","strokecolor":"black","letter":"","start":"8/3/2021"},"data": []},
+  ]
+
+
+}

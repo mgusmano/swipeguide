@@ -1,3 +1,4 @@
+export const SET_GROUPID = 'SET_GROUPID';
 export const SET_ROWSARRAY = 'SET_ROWSARRAY';
 export const SET_COLSARRAY = 'SET_COLSARRAY';
 export const SET_USERNAME = 'SET_USERNAME';

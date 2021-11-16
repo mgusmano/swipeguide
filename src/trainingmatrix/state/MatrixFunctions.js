@@ -1,13 +1,107 @@
 import * as types from './MatrixTypes';
+import axios from "axios";
 
-import { API, graphqlOperation } from 'aws-amplify'
-import { updateSkill, updateOperator } from '../graphql/mutations'
+export const setAll = async (dispatch, payload) => {
 
-export const setAll = (dispatch, payload) => {
+  const callAll = async (dispatch,payload2) => {
+    var groupID = payload2.groupID
+    var multiplier = payload2.multiplier
+
+    var data = await getData(groupID)
+    var skills = data.skills
+    var operators = data.operators
+    var certificationsInit = data.certifications
+
+    //console.log(skills)
+
+    //var certifications
+    //if (first === true) {
+      var certifications = createCertifications(skills, operators, certificationsInit)
+    //}
+    //else {
+    //  certifications = certificationsInit
+    //}
+
+    calcTotals(certifications, dispatch)
+
+    var bySkill = []
+    var byOperator = []
+
+    if (skills.length !== 0 && operators.length !== 0) {
+      bySkill = doBySkill(operators,skills,certifications)
+      byOperator = doByOperator(operators,skills,certifications)
+    }
+
+    //if (first === true) {
+      var sLen = skills.length
+      var oLen = operators.length
+      setInit({sLen,oLen,multiplier})
+    //}
+
+    var payload = {
+      bySkill: bySkill,
+      byOperator: byOperator,
+      operators: operators,
+      skills: skills,
+      certifications: certifications
+    }
+    dispatch({type: types.SET_GROUPID, payload: payload2.groupID});
+    dispatch({type: types.SET_ALL, payload: payload});
+    dispatch({type: types.SET_ACTIVE, payload: false});
+  }
+
+  const getData = async (groupID) => {
+    const apiRoot = 'https://skillnetusersapi.azurewebsites.net/api';
+    const localRoot = 'https://my-json-server.typicode.com/mgusmano/toshibaserver';
+    //const localRoot = 'http://localhost:3005';
+    const auth = {auth:{username:'skillnet',password:'demo'}};
+
+    // const skillsResult = await axios(`data/trainingmatrix/data/${groupID}/skills.json`);
+    // const operatorsResult = await axios(`data/trainingmatrix/data/${groupID}/operators.json`);
+    // const certificationsResult = await axios(`data/trainingmatrix/data/${groupID}/certifications.json`);
+
+    const skillsResult = await axios(`${localRoot}/skills?groupID=${groupID}`);
+    //const operatorsResult = await axios(`${localRoot}/operators?groupID=${groupID}`);
+    const certificationsResult = await axios(`${localRoot}/certifications?groupID=${groupID}`);
+
+    //const skillsResult = await axios(`${apiRoot}/PortalGroupSkills?partnerid=448&groupid=${groupID}`,auth);
+      // console.log('portalGroupSkillsResult')
+      // console.log(portalGroupSkillsResult)
+      // console.log(JSON.parse(portalGroupSkillsResult.data))
+    const operatorsResult = await axios(`${apiRoot}/PortalGroupOperators?groupid=${groupID}`,auth);
+      // console.log('portalGroupOperatorsResult')
+      // console.log(portalGroupOperatorsResult)
+
+    //just for the webAPI data while it is broken
+    var operatorsResultdata = []
+    operatorsResult.data.map((operator,i) => {
+      var o = {}
+      o.operatorID = operator.operatorID;
+      o.operatorName = operator.operatorName;
+      o.groupID = groupID;
+      o.picture = "AaronCariaga.jpg";
+      o.goal = 4;
+      operatorsResultdata.push(o)
+
+      return null
+    })
+
+    //console.log(operatorsResult.data)
+    //console.log(operatorsResultdata)
+    var r = {
+      skills: skillsResult.data,
+      operators: operatorsResultdata,
+      certifications: certificationsResult.data
+    }
+    console.log(r)
+
+    return r
+  }
 
   const createCertifications = (skills, operators, certificationsData) => {
     var certificationsDataCreated = []
     var certID = 0
+
     for (let s = 0; s < skills.length; s++) {
       for (let o = 0; o < operators.length; o++) {
         certID++
@@ -17,8 +111,8 @@ export const setAll = (dispatch, payload) => {
           "col":o,
           "skill":skills[s],
           "operator":operators[o],
-          "skillID": skills[s].id,
-          "operatorID": operators[o].id,
+          "skillID": skills[s].skillID,
+          "operatorID": operators[o].operatorID,
           "currcertID": 0,
           "meta": {
             "type":"solid",
@@ -46,7 +140,6 @@ export const setAll = (dispatch, payload) => {
       found.meta = certificationsData[o].meta
       found.data = certificationsData[o].data
     }
-
     return certificationsDataCreated;
 
   }
@@ -127,9 +220,9 @@ export const setAll = (dispatch, payload) => {
       o = skill
       o.meta = skill
       o.data = []
-      const filteredcertifications = certifications.filter(item => item.skillID === skill.id);
+      const filteredcertifications = certifications.filter(item => item.skillID === skill.skillID);
       filteredcertifications.map((fc,i) => {
-        var operator  = operators.find(item => item.id === fc.operatorID);
+        var operator  = operators.find(item => item.operatorID === fc.operatorID);
         o.data[i] = {};
         o.data[i].certificationID = fc.id
         o.data[i].operator = operator
@@ -150,9 +243,9 @@ export const setAll = (dispatch, payload) => {
       o = operator
       o.meta = operator
       o.data = []
-      const filteredcertifications = certifications.filter(item => item.operatorID === operator.id);
+      const filteredcertifications = certifications.filter(item => item.operatorID === operator.operatorID);
       filteredcertifications.map((fc,i) => {
-        var skill  = skills.find(item => item.id === fc.skillID);
+        var skill  = skills.find(item => item.skillID === fc.skillID);
         o.data[i] = {};
         o.data[i].certificationID = fc.id
         o.data[i].operator = operator
@@ -218,60 +311,57 @@ export const setAll = (dispatch, payload) => {
     dispatch({type: types.SET_DIMENSIONS, payload: d});
   }
 
-  const callAll = async (dispatch,payload2) => {
-    var first = payload2.first
-    var skills = payload2.skillsData
-    var operators = payload2.operatorsData
-    var certificationsInit = payload2.certificationsData
-    var multiplier = payload2.multiplier
-
-    var certifications
-    if (first === true) {
-      certifications = createCertifications(skills, operators, certificationsInit)
-    }
-    else {
-      certifications = certificationsInit
-    }
-
-    calcTotals(certifications, dispatch)
-
-    var bySkill = []
-    var byOperator = []
-
-    if (skills.length !== 0 && operators.length !== 0) {
-      bySkill = doBySkill(operators,skills,certifications)
-      byOperator = doByOperator(operators,skills,certifications)
-    }
-
-    if (first === true) {
-      var sLen = skills.length
-      var oLen = operators.length
-      setInit({sLen,oLen,multiplier})
-    }
-
-    var payload = {
-      bySkill: bySkill,
-      byOperator: byOperator,
-      operators: operators,
-      skills: skills,
-      certifications: certifications
-    }
-    dispatch({type: types.SET_ALL, payload: payload});
-    dispatch({type: types.SET_ACTIVE, payload: false});
-  }
-
   callAll(dispatch, payload)
 }
 
+export const doDBCert = async (payload) => {
+  var url = 'http://localhost:3005'
+  var headers = {headers: {'content-type': 'application/json'}};
+  var p = {
+    "skillID": parseInt(payload.skillID),
+    "operatorID": parseInt(payload.operatorID),
+    "groupID": payload.groupID,
+    "meta": {
+      "type": "solid",
+      "currcertID": payload.currcertID,
+      "letter": "",
+      "start": "8/3/2021"
+    },
+    "data": []
+  }
+  //console.log('updateCert: ' + JSON.stringify(p))
+  console.log('updateCert: ')
+  console.log(p)
+  var id = (payload.skillID*10)+payload.operatorID
+
+  try {
+    await axios.put(`${url}/certifications/${id}`,p,headers);
+    console.log('update successful')
+  }
+  catch(error) {
+    //console.dir(error)
+    try {
+      p.id = id
+      await axios.post(`${url}/certifications/`,p,headers);
+      console.log('add successful')
+    }
+    catch(error) {
+      //console.log('second error')
+      console.dir(error)
+    }
+  }
+
+}
+
 export const updateCert = async (dispatch, payload) => {
-  var j = {'skillID':parseInt(payload.skillID),'operatorID':parseInt(payload.operatorID),'currcertID':payload.currcertID}
-  console.log('updateCert: ' + JSON.stringify(j))
-  dispatch({type: types.UPDATE_CERT, payload: payload});
+  doDBCert(payload);
+  //dispatch({type: types.UPDATE_CERT, payload: payload});
   setAll(dispatch,{
-    'first':false,
-    'operatorsData':payload.operators,
-    'skillsData':payload.skills,
-    'certificationsData':payload.certifications,
+    'first':true,
+    //'operatorsData':payload.operators,
+    //'skillsData':payload.skills,
+    //'certificationsData':payload.certifications,
+    'groupID': payload.groupID,
     'multiplier': payload.multiplier
   })
 }
@@ -309,25 +399,40 @@ export const updateSkillGoal = (dispatch, payload) => {
   // })
 }
 
-export const updateOperatorGoal = (dispatch,payload) => {
-  var newOperators = payload.operators.slice();
-  const lastOperatorIndex = newOperators.findIndex(
-    (operator) => operator.id === payload.id
-  )
-  var oldOperator = payload.operators[lastOperatorIndex]
-  if (lastOperatorIndex !== -1) {
-    newOperators[lastOperatorIndex] = {
-      "id": oldOperator.id,
-      "groupID": oldOperator.groupID,
-      "operatorName": oldOperator.operatorName,
-      "picture": oldOperator.picture,
-      "goal": parseInt(payload.goal)
-    }
-  }
+export const updateOperatorGoal = async (dispatch,payload) => {
+
   var j = {'operatorID':payload.id,'goal':parseInt(payload.goal)}
   console.log('updateOperatorGoal: ' + JSON.stringify(j))
-  //console.log(newOperators)
-  dispatch({type: types.UPDATE_OPERATORGOAL, payload: {operators:newOperators}});
+
+  var groupID = 1
+  const operatorsResult = await axios(`data/trainingmatrix/data/${groupID}/operators.json`);
+  var newOperators = operatorsResult.data;
+
+  // const apiRoot = 'https://skillnetusersapi.azurewebsites.net/api/';
+  // const updateOperatorGoalResult = await axios.post(
+  //   apiRoot + 'UpdateOperatorGoal?partnerid=448',
+  //   {'operatorID':payload.id,'goal':parseInt(payload.goal)},
+  //   {auth:{username:'skillnet',password:'demo'}}
+  // );
+  // var newOperators = updateOperatorGoalResult.data;
+
+  // var newOperators = payload.operators.slice();
+  // const lastOperatorIndex = newOperators.findIndex(
+  //   (operator) => operator.id === payload.id
+  // )
+  // var oldOperator = payload.operators[lastOperatorIndex]
+  // if (lastOperatorIndex !== -1) {
+  //   newOperators[lastOperatorIndex] = {
+  //     "id": oldOperator.id,
+  //     "groupID": oldOperator.groupID,
+  //     "operatorName": oldOperator.operatorName,
+  //     "picture": oldOperator.picture,
+  //     "goal": parseInt(payload.goal)
+  //   }
+  // }
+  // //console.log(newOperators)
+  // dispatch({type: types.UPDATE_OPERATORGOAL, payload: {operators:newOperators}});
+
   setAll(dispatch,{
     'first':true,
     'skillsData':payload.skills,
@@ -343,6 +448,9 @@ export const updateOperatorGoal = (dispatch,payload) => {
   // })
 }
 
+export const setGroupID = (dispatch, payload) => {
+  dispatch({type: types.SET_GROUPID, payload: payload});
+}
 export const setRowsArray = (dispatch, payload) => {
   dispatch({type: types.SET_ROWSARRAY, payload: payload});
 }
