@@ -52,8 +52,9 @@ export const setAll = async (dispatch, payload) => {
 
   const getData = async (groupID) => {
     const apiRoot = 'https://skillnetusersapi.azurewebsites.net/api';
-    const localRoot = 'https://my-json-server.typicode.com/mgusmano/toshibaserver';
     //const localRoot = 'http://localhost:3005';
+    const localRoot = 'https://my-json-server.typicode.com/mgusmano/toshibaserver';
+
     const auth = {auth:{username:'skillnet',password:'demo'}};
 
     // const skillsResult = await axios(`data/trainingmatrix/data/${groupID}/skills.json`);
@@ -315,7 +316,8 @@ export const setAll = async (dispatch, payload) => {
 }
 
 export const doDBCert = async (payload) => {
-  var url = 'http://localhost:3005'
+  //const localRoot = 'http://localhost:3005'
+  const localRoot = 'https://my-json-server.typicode.com/mgusmano/toshibaserver';
   var headers = {headers: {'content-type': 'application/json'}};
   var p = {
     "skillID": parseInt(payload.skillID),
@@ -335,14 +337,16 @@ export const doDBCert = async (payload) => {
   var id = (payload.skillID*10)+payload.operatorID
 
   try {
-    await axios.put(`${url}/certifications/${id}`,p,headers);
+    await axios.put(`${localRoot}/certifications/${id}`,p,headers);
+    //`${localRoot}/certifications?skillID=${payload.skillID}&operatorID=${payload.operatorID}&groupID=${payload.groupID}`
+    //await axios.put(`${localRoot}/certifications`,p,headers);
     console.log('update successful')
   }
   catch(error) {
     //console.dir(error)
     try {
       p.id = id
-      await axios.post(`${url}/certifications/`,p,headers);
+      await axios.post(`${localRoot}/certifications/`,p,headers);
       console.log('add successful')
     }
     catch(error) {
