@@ -12,7 +12,9 @@ export const Legend = React.memo((props) => {
   const [greendate] = getDates();
   var dates = [greendate];
   var levels = ['0 Not Applicable','1 In Training','2 Developing','3 Certified','4 Trainer','5 Master Trainer'];
-  var levelsval = ['notapplicable','intraining','developing','certified','trainer','mastertrainer'];
+  //var levelsval = ['notapplicable','intraining','developing','certified','trainer','mastertrainer'];
+  var levelsval = [0,1,2,3,4,5];
+
 
   return (
     <Rnd
@@ -71,6 +73,7 @@ export const Legend = React.memo((props) => {
 
 
 
+            //                      meta={{id:i,"type":"solid","certification":levelsval[l],start:dates[i]}}
 
             return (
               <g key={l} transform={translateLevel} className='ball'>
@@ -81,7 +84,7 @@ export const Legend = React.memo((props) => {
                 return (
                   <g key={i} transform={translate} className='ball'>
                     <Diamond
-                      meta={{id:i,"type":"solid","certification":levelsval[l],start:dates[i]}}
+                      meta={{id:i,"type":"solid","currcertID":levelsval[l],start:dates[i]}}
                       data={[]}
                       boxSize={30} padding={15}/>
 

@@ -9,6 +9,7 @@ export const Skill = React.memo((props) => {
   const {data} = props;
   const matrixState = useMatrixState();
   const [goal, setGoal] = useState(0);
+  const [rev, setRev] = useState(0);
   const [oldtarget, setOldTarget] = useState(null);
 
   var dataSort = Array.from(data.skill.data);
@@ -108,6 +109,35 @@ export const Skill = React.memo((props) => {
             Update
           </button>
         </div>
+
+
+        <div style={{marginTop:'10px'}}>
+        Rev#:
+        <input
+          type="text"
+          value={rev}
+          onChange={(event)=> {
+            setRev(event.target.value)
+          }}
+          style={{marginLeft:'10px',marginTop:5,width:'26px',height:'15px'}}
+        />
+        <button
+          onClick={(event)=> {
+            matrixState.setActive(true)
+            var payload = {
+              id: skillID,
+              goal: goal,
+              skills: matrixState.skills,
+              operators: matrixState.operators,
+              certifications: matrixState.certifications,
+              multiplier: matrixState.dimensions.multiplier
+            }
+            matrixState.updateSkillRev(payload)
+          }}
+        >
+          Update
+        </button>
+      </div>
 
 
 
